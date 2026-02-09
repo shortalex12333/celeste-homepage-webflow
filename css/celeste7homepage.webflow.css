@@ -3706,3 +3706,29 @@ blockquote {
   .oc-copy, .oc-visual { position: relative; min-height: auto; }
   .oc-panel, .oc-image { position: relative; opacity: 1 !important; transform: none !important; }
 }
+/* OC spec: track + sticky stage + grid */
+.oc-track { height: 220vh; position: relative; }
+.oc-stage { position: sticky; top: 0; height: 100vh; width: 100%; display: flex; align-items: center; }
+.oc-inner { width: 100%; }
+.oc-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 6vw; height: 100%; align-items: center; }
+.oc-copy { position: relative; min-height: 280px; }
+.oc-visual { position: relative; }
+.oc-frame { position: relative; width: 100%; aspect-ratio: 3 / 2; overflow: hidden; border-radius: 12px; }
+.oc-image { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 300ms ease; }
+.oc-panel { position: absolute; inset: 0; opacity: 0; transition: opacity 250ms ease; }
+/* default visible */
+.oc-panel--ledger { opacity: 1; }
+.oc-image--ledger { opacity: 1; }
+#operational-context.is-related .oc-panel--ledger { opacity: 0; }
+#operational-context.is-related .oc-image--ledger { opacity: 0; }
+#operational-context.is-related .oc-panel--related { opacity: 1; }
+#operational-context.is-related .oc-image--related { opacity: 1; }
+
+@media (max-width: 767px) {
+  .oc-track { height: auto; }
+  .oc-stage { position: relative; height: auto; }
+  .oc-grid { grid-template-columns: 1fr; }
+  .oc-panel { position: relative; inset: auto; opacity: 1; }
+  .oc-frame { aspect-ratio: 16 / 10; }
+  .oc-image { position: relative; inset: auto; opacity: 1; height: auto; }
+}
