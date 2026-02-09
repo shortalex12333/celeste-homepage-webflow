@@ -1,36 +1,44 @@
 (function () {
-  var section = document.getElementById('operational-context');
+  const section = document.getElementById('operational-context');
   if (!section) return;
 
-  var track = section.querySelector('.oc-track');
-  var start = 0, end = 0;
+  const panelA = section.querySelector('.oc-panel--ledger');
+  const panelB = section.querySelector('.oc-panel--related');
+  if (!panelA || !panelB) return;
 
-  function clamp(v, min, max) { return Math.max(min, Math.min(max, v)); }
+  // Default state: show A
+  panelA.classList.add('is-active');
+  panelB.classList.remove('is-active');
 
-  function recalc() {
-    // Start when the track enters the viewport region
-    start = section.offsetTop; // top of section
-    end = start + Math.max(1, track.offsetHeight - window.innerHeight);
-  }
+  const clamp01 = (v) => Math.min(1, Math.max(0, v));
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const isMobile = window.matchMedia('(max-width: 767px)').matches;
+  if (reduce || isMobile) return; // stacked fallback renders both
 
-  function update() {
-    var y = window.pageYOffset || document.documentElement.scrollTop || 0;
-    var progress = clamp((y - start) / (end - start), 0, 1);
-    if (progress >= 0.5) section.classList.add('is-related');
-    else section.classList.remove('is-related');
-  }
-
-  var ticking = false;
   function onScroll() {
+    const top = section.offsetTop;
+    const height = section.offsetHeight;
+    const viewport = window.innerHeight;
+    const raw = (window.scrollY - top) / (height - viewport);
+    const p = clamp01(raw);
+    if (p < 0.5) {
+      panelA.classList.add('is-active');
+      panelB.classList.remove('is-active');
+    } else {
+      panelA.classList.remove('is-active');
+      panelB.classList.add('is-active');
+    }
+  }
+
+  let ticking = false;
+  function onScrollTick() {
     if (!ticking) {
-      window.requestAnimationFrame(function(){ update(); ticking = false; });
+      window.requestAnimationFrame(() => { onScroll(); ticking = false; });
       ticking = true;
     }
   }
 
-  window.addEventListener('scroll', onScroll, { passive: true });
-  window.addEventListener('resize', function(){ recalc(); onScroll(); });
-  document.addEventListener('DOMContentLoaded', function(){ recalc(); update(); });
-  recalc();
-  update();
+  window.addEventListener('scroll', onScrollTick, { passive: true });
+  window.addEventListener('resize', onScrollTick);
+  onScroll();
 })();
