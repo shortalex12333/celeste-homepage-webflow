@@ -20,3 +20,8 @@ This repo is ready for a static deploy on Vercel.
 Notes:
 - Webflow CMS/E‑commerce/Search and native Webflow forms are not included in code exports. If you need forms, connect a provider (Formspree/Basin) or add a Vercel serverless function.
 - `404.html` and `401.html` are included and will be served automatically.
+
+
+Redeploy
+
+Last redeploy trigger: 2026-02-09T21:48:43Z
