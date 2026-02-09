@@ -3711,8 +3711,8 @@ blockquote {
 .oc-stage { position: sticky; top: 0; height: 100vh; width: 100%; display: flex; align-items: center; }
 .oc-inner { width: 100%; }
 .oc-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 6vw; height: 100%; align-items: center; }
-.oc-copy { position: relative; min-height: 280px; }
-.oc-visual { position: relative; }
+.oc-copy { position: relative; min-height: 280px; grid-column: 1; }
+.oc-visual { position: relative; grid-column: 2; }
 .oc-frame { position: relative; width: 100%; aspect-ratio: 3 / 2; overflow: hidden; border-radius: 12px; }
 .oc-image { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 300ms ease; }
 .oc-panel { position: absolute; inset: 0; opacity: 0; transition: opacity 250ms ease; }
@@ -3723,6 +3723,15 @@ blockquote {
 #operational-context.is-related .oc-image--ledger { opacity: 0; }
 #operational-context.is-related .oc-panel--related { opacity: 1; }
 #operational-context.is-related .oc-image--related { opacity: 1; }
+
+/* Swap columns for Related state (copy right, image left) */
+#operational-context.is-related .oc-copy { grid-column: 2; }
+#operational-context.is-related .oc-visual { grid-column: 1; }
+
+/* Contrast: ensure OC text uses primary text color */
+#operational-context .single-item-title,
+#operational-context .single-item-client,
+#operational-context .single-item-desc { color: var(--_colors---text-color); }
 
 @media (max-width: 767px) {
   .oc-track { height: auto; }
