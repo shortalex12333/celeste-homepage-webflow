@@ -2501,6 +2501,13 @@ blockquote {
   position: relative;
 }
 
+/* Celeste overrides: improve contrast in Scenarios section */
+.portofolio-section .single-item-title,
+.portofolio-section .single-item-desc,
+.portofolio-section .single-item-client {
+  color: var(--_colors---text-color);
+}
+
 .about-subtext {
   opacity: .6;
   color: var(--_colors---color-1);
@@ -3669,5 +3676,4 @@ blockquote {
 #w-node-_9a8ecae0-0308-f09f-ecd9-3c72666535b6-0851e0d1, #w-node-f4d573c8-721f-7e9e-3e63-5d4359e93ca2-0851e140 {
   grid-area: span 1 / span 1 / span 1 / span 1;
 }
-
 
