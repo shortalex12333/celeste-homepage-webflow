@@ -21,13 +21,15 @@
     const viewport = window.innerHeight;
     const raw = (window.scrollY - top) / (height - viewport);
     const p = clamp01(raw);
-    if (p < 0.5) {
+    // Soft handover window: 0.48-0.52 for smoother transition perception
+    if (p < 0.48) {
       panelA.classList.add('is-active');
       panelB.classList.remove('is-active');
-    } else {
+    } else if (p > 0.52) {
       panelA.classList.remove('is-active');
       panelB.classList.add('is-active');
     }
+    // Between 0.48-0.52: maintain current state (no change)
   }
 
   let ticking = false;
