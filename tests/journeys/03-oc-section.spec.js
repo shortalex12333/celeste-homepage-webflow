@@ -13,6 +13,11 @@ import { test, expect } from '@playwright/test';
  */
 
 test.describe('OC Section: Text-Lock-For-Image Behavior', () => {
+  // Skip on mobile - sticky is intentionally disabled on small viewports
+  test.beforeEach(async ({ page }) => {
+    const viewport = page.viewportSize();
+    test.skip(viewport?.width && viewport.width < 768, 'Sticky disabled on mobile');
+  });
 
   test('Pair 1: Ledger text locks while image scrolls in', async ({ page }) => {
     await page.goto('/', { waitUntil: 'networkidle' });
@@ -177,6 +182,8 @@ test.describe('OC Section: Text-Lock-For-Image Behavior', () => {
 test.describe('OC Section: Cross-Browser', () => {
   test('Safari sticky works correctly', async ({ page, browserName }) => {
     test.skip(browserName !== 'webkit', 'Safari-specific test');
+    const viewport = page.viewportSize();
+    test.skip(viewport?.width && viewport.width < 768, 'Sticky disabled on mobile');
 
     await page.goto('/', { waitUntil: 'networkidle' });
 
