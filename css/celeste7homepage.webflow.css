@@ -3707,6 +3707,8 @@ blockquote {
   height: 100vh;
   width: 100%;
   overflow: hidden;
+  display: flex;
+  align-items: flex-start; /* Anchor content to top */
 }
 
 .oc-scroll {
@@ -3715,6 +3717,7 @@ blockquote {
   margin: 0 auto;
   padding: 0 48px;
   will-change: transform;
+  transform: translateY(0); /* Explicit initial state */
 }
 
 /* Each item: full viewport height, flexbox for vertical centering */
