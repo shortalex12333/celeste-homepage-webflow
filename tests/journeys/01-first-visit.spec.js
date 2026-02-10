@@ -62,15 +62,16 @@ test.describe('Journey 1: First-Time Desktop Visitor', () => {
       }
     }
 
-    // Step 4: Check for broken images (only visible/loaded ones, not lazy-loaded)
+    // Step 4: Check for broken images (only eager-loaded images in viewport)
     const brokenImages = await page.evaluate(() => {
       const images = Array.from(document.querySelectorAll('img'));
       return images
         .filter(img => {
-          // Skip lazy-loaded images that haven't loaded yet
-          if (img.loading === 'lazy' && !img.complete) return false;
-          // Check if loaded image has valid dimensions
-          if (img.complete && img.naturalWidth === 0) return true;
+          // Only check non-lazy images (eager loading)
+          if (img.loading === 'lazy') return false;
+          // Check if image failed to load
+          if (!img.complete) return true;
+          if (img.naturalWidth === 0 && img.naturalHeight === 0) return true;
           return false;
         })
         .map(img => img.src);

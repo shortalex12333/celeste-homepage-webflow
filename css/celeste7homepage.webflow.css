@@ -306,6 +306,8 @@ blockquote {
   display: flex;
   position: relative;
   overflow: hidden;
+  min-height: 44px;
+  padding: 10px 0;
 }
 
 .hero-button.white {
