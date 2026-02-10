@@ -1,4 +1,5 @@
 :root {
+  --_colors---accent: #3A7C9D;
   --_colors---surface: #fafafa;
   --_size---font-family: "Inter Tight", sans-serif;
   --_colors---text-color: #0a0a0a;
@@ -308,10 +309,31 @@ blockquote {
   overflow: hidden;
   min-height: 44px;
   padding: 10px 0;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.2s ease;
+}
+
+.hero-button:hover {
+  border-bottom-color: var(--_colors---accent);
+}
+
+/* Primary CTA - first hero button */
+.hero-button[data-mailto="pilot"] {
+  color: var(--_colors---accent);
+  border-bottom-color: var(--_colors---accent);
 }
 
 .hero-button.white {
   color: var(--_colors---color-1);
+  background-color: var(--_colors---accent);
+  padding: 12px 24px;
+  border-radius: 6px;
+  border-bottom: none;
+}
+
+.hero-button.white:hover {
+  background-color: #2d6580;
+  border-bottom: none;
 }
 
 .text-hero2 {
@@ -1050,6 +1072,12 @@ blockquote {
   text-align: center;
   margin-top: 0;
   margin-bottom: 0;
+  color: var(--_colors---accent);
+  transition: opacity 0.2s ease;
+}
+
+.footer-heading:hover {
+  opacity: 0.8;
 }
 
 .email {
@@ -1424,6 +1452,7 @@ blockquote {
 .number-benefits {
   line-height: var(--_size---line-height2);
   display: block;
+  color: var(--_colors---accent);
 }
 
 .benefits-heading {
@@ -1557,11 +1586,11 @@ blockquote {
 }
 
 .number-impact {
-  color: var(--_colors---color-6);
+  color: var(--_colors---accent);
 }
 
 .number-service {
-  color: var(--_colors---color-6);
+  color: var(--_colors---accent);
   line-height: var(--_size---line-height2);
 }
 
@@ -2511,15 +2540,15 @@ blockquote {
 }
 
 .about-subtext {
-  opacity: .6;
-  color: var(--_colors---color-1);
+  opacity: 1;
+  color: var(--_colors---accent);
   font-size: var(--_size---bodytext-4);
   line-height: var(--_size---line-height);
 }
 
 .hero-vertical-line {
   pointer-events: none;
-  border-right: 1px dashed #a1a1a199;
+  border-right: 1px dashed rgba(58, 124, 157, 0.4);
   width: 0;
   height: 100%;
   position: absolute;
@@ -2528,7 +2557,7 @@ blockquote {
 
 .hero-circle {
   pointer-events: none;
-  border: 1px dashed #a1a1a199;
+  border: 1px dashed rgba(58, 124, 157, 0.4);
   border-radius: 100%;
   width: 1200px;
   height: 1200px;
@@ -2539,7 +2568,7 @@ blockquote {
 
 .benefit-circle {
   pointer-events: none;
-  border: 1px dashed #a1a1a199;
+  border: 1px dashed rgba(58, 124, 157, 0.4);
   border-radius: 100%;
   width: 1200px;
   height: 1200px;
@@ -2550,7 +2579,7 @@ blockquote {
 
 .benefit-vertical-line {
   pointer-events: none;
-  border-right: 1px dashed #a1a1a199;
+  border-right: 1px dashed rgba(58, 124, 157, 0.4);
   width: 0;
   height: 100%;
   position: absolute;
@@ -2563,7 +2592,7 @@ blockquote {
 }
 
 .testimonial-line {
-  border-bottom: 1px dashed var(--_colors---color-2);
+  border-bottom: 1px dashed rgba(58, 124, 157, 0.3);
   pointer-events: none;
   width: 92%;
   height: 1px;
@@ -2573,7 +2602,7 @@ blockquote {
 
 .testimonial-circle {
   pointer-events: none;
-  border: 1px dashed #a1a1a199;
+  border: 1px dashed rgba(58, 124, 157, 0.4);
   border-radius: 100%;
   width: 1200px;
   height: 1200px;
@@ -2584,7 +2613,7 @@ blockquote {
 
 .footer-vertical-line {
   pointer-events: none;
-  border-right: 1px dashed #a1a1a199;
+  border-right: 1px dashed rgba(58, 124, 157, 0.4);
   width: 0;
   height: 100%;
   position: absolute;
@@ -2593,7 +2622,7 @@ blockquote {
 
 .footer-circle {
   pointer-events: none;
-  border: 1px dashed #a1a1a199;
+  border: 1px dashed rgba(58, 124, 157, 0.4);
   border-radius: 100%;
   width: 1200px;
   height: 1200px;
@@ -3777,6 +3806,7 @@ blockquote {
 /* Text styling */
 .oc-text .single-item-client {
   margin-bottom: 8px;
+  color: var(--_colors---accent);
 }
 .oc-text .single-item-title {
   margin-bottom: 16px;
