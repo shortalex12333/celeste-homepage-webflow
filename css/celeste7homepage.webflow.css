@@ -3689,60 +3689,12 @@ blockquote {
   display: flex;
   align-items: center;
 }
-.oc-inner { display: flex; gap: 40px; align-items: center; height: 100%; }
-.oc-copy { position: relative; flex: 1 1 50%; min-height: 60vh; }
-.oc-visual { position: relative; flex: 1 1 50%; min-height: 60vh; }
-.oc-panel { position: absolute; inset: 0; opacity: 1; transform: translateY(0); transition: opacity .25s ease, transform .25s ease; }
-.oc-image { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 1; transition: opacity .25s ease, transform .25s ease; border-radius: 12px; }
-/* default state = ledger visible */
-.oc-panel--related, .oc-image--related { opacity: 0; transform: translateY(8px); }
-#operational-context.is-related .oc-panel--ledger, #operational-context.is-related .oc-image--ledger { opacity: 0; transform: translateY(-8px); }
-#operational-context.is-related .oc-panel--related, #operational-context.is-related .oc-image--related { opacity: 1; transform: translateY(0); }
-
-@media (max-width: 767px) {
-  .oc-section { min-height: auto; }
-  .oc-stage { position: relative; height: auto; }
-  .oc-inner { flex-direction: column; gap: 24px; }
-  .oc-copy, .oc-visual { position: relative; min-height: auto; }
-  .oc-panel, .oc-image { position: relative; opacity: 1 !important; transform: none !important; }
-}
-/* OC spec: track + sticky stage + grid */
-.oc-track { height: 220vh; position: relative; }
-.oc-stage { position: sticky; top: 0; height: 100vh; width: 100%; display: flex; align-items: center; }
-.oc-inner { width: 100%; }
-.oc-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 6vw; height: 100%; align-items: center; }
-.oc-copy { position: relative; min-height: 280px; }
-.oc-visual { position: relative; }
-.oc-copy--left { grid-column: 1; }
-.oc-visual--right { grid-column: 2; }
-.oc-copy--right { grid-column: 2; }
-.oc-visual--left { grid-column: 1; }
-.oc-frame { position: relative; width: 100%; aspect-ratio: 3 / 2; overflow: hidden; border-radius: 12px; }
-.oc-image { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 300ms ease; }
-.oc-panel { position: relative; opacity: 0; transition: opacity 250ms ease; }
-/* default visible */
-.oc-panel--ledger { opacity: 1; }
-.oc-image--ledger { opacity: 1; }
-#operational-context.is-related .oc-panel--ledger { opacity: 0; }
-#operational-context.is-related .oc-image--ledger { opacity: 0; }
-#operational-context.is-related .oc-panel--related { opacity: 1; }
-#operational-context.is-related .oc-image--related { opacity: 1; }
-
-/* Columns remain fixed; we only toggle which side is visible */
 
 /* Contrast: ensure OC text uses primary text color */
 #operational-context .single-item-title,
 #operational-context .single-item-client,
 #operational-context .single-item-desc { color: var(--_colors---text-color); }
 
-@media (max-width: 767px) {
-  .oc-track { height: auto; }
-  .oc-stage { position: relative; height: auto; }
-  .oc-grid { grid-template-columns: 1fr; }
-  .oc-panel { position: relative; inset: auto; opacity: 1; }
-  .oc-frame { aspect-ratio: 16 / 10; }
-  .oc-image { position: relative; inset: auto; opacity: 1; height: auto; }
-}
 /* Operational context (05) pinned swap */
 .oc-section { position: relative; height: 320vh; }
 .oc-stage { position: sticky; top: 0; height: 100vh; width: 100%; display: flex; align-items: center; justify-content: center; }
@@ -3778,9 +3730,9 @@ blockquote {
 .oc-panel--ledger .oc-text { grid-column: 1; }
 .oc-panel--ledger .oc-image { grid-column: 2; justify-self: end; }
 
-/* Related: image LEFT (col 1), text RIGHT (col 2) */
-.oc-panel--related .oc-image { grid-column: 1; justify-self: start; }
-.oc-panel--related .oc-text { grid-column: 2; }
+/* Related: image LEFT (col 1), text RIGHT (col 2) — force same row */
+.oc-panel--related .oc-image { grid-column: 1; grid-row: 1; justify-self: start; }
+.oc-panel--related .oc-text { grid-column: 2; grid-row: 1; }
 
 @media (max-width: 767px) {
   .oc-section { height: auto; }
