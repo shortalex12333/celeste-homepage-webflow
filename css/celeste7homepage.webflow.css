@@ -3695,66 +3695,61 @@ blockquote {
 #operational-context .single-item-client,
 #operational-context .single-item-desc { color: var(--_colors---text-color); }
 
-/* Operational context (05) — vertical cascade scroll-lock */
+/* Operational context (05) — paired lock scroll */
 .oc-section {
   position: relative;
-  height: 400vh; /* 4 items × 100vh each */
 }
 
-.oc-stage {
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  width: 100%;
-  overflow: hidden;
-  display: flex;
-  align-items: flex-start; /* Anchor content to top */
-}
-
-.oc-scroll {
-  width: 100%;
+/* Each pair: tall enough for text-lock + image-scroll-in + exit-together */
+.oc-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  min-height: 150vh;
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 48px;
-  will-change: transform;
-  transform: translateY(0); /* Explicit initial state */
 }
 
-/* Each item: full viewport height, flexbox for vertical centering */
-.oc-item {
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  padding: 60px 0;
-  box-sizing: border-box;
+/* Columns */
+.oc-col {
+  position: relative;
 }
 
-/* Left-aligned items (Ledger text, Related image) */
-.oc-item--left {
-  justify-content: flex-start;
-}
-.oc-item--left .oc-text {
-  max-width: 480px;
-  padding-right: 40px;
-}
-.oc-item--left .oc-image {
-  margin-left: 0;
+/* Sticky text: locks at vertical center while scrolling */
+.oc-sticky {
+  position: sticky;
+  top: 50vh;
+  transform: translateY(-50%);
 }
 
-/* Right-aligned items (Ledger image, Related text) */
-.oc-item--right {
-  justify-content: flex-end;
+/* Text styling */
+.oc-text {
+  max-width: 420px;
 }
-.oc-item--right .oc-text {
-  max-width: 480px;
-  padding-left: 40px;
+.oc-col--left .oc-text {
+  /* Left column text: align left */
+}
+.oc-col--right .oc-text {
+  margin-left: auto;
   text-align: right;
 }
-.oc-item--right .oc-image {
-  margin-right: 0;
+
+/* Image wrapper: positions image to scroll into alignment */
+.oc-image-wrap {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 25vh 0; /* Space for scroll-in effect */
+}
+.oc-col--left .oc-image-wrap {
+  justify-content: flex-start;
+}
+.oc-col--right .oc-image-wrap {
+  justify-content: flex-end;
 }
 
-/* Image: 16:9 aspect ratio, medium size */
+/* Image: 16:9 aspect ratio */
 .oc-image {
   width: 480px;
   aspect-ratio: 16 / 9;
@@ -3782,21 +3777,26 @@ blockquote {
   line-height: 1.6;
 }
 
-/* Mobile: no scroll-lock, stack naturally */
+/* Mobile: stack columns, no sticky */
 @media (max-width: 767px) {
-  .oc-section { height: auto; }
-  .oc-stage { position: static; height: auto; overflow: visible; }
-  .oc-scroll { padding: 0 24px; }
-  .oc-item {
-    height: auto;
-    padding: 40px 0;
-    justify-content: center !important;
+  .oc-pair {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    min-height: auto;
+    padding: 40px 24px;
   }
-  .oc-item--left .oc-text,
-  .oc-item--right .oc-text {
+  .oc-sticky {
+    position: static;
+    transform: none;
+  }
+  .oc-text {
     max-width: 100%;
+    text-align: left !important;
+    margin: 0 !important;
+  }
+  .oc-image-wrap {
     padding: 0;
-    text-align: left;
+    justify-content: center !important;
   }
   .oc-image {
     width: 100%;
