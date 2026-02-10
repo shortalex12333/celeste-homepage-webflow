@@ -2,3 +2,9 @@
 .DS_Store
 # Archives
 *.zip
+# Test artifacts
+screenshots/
+test-results/
+playwright-report/
+# Node
+node_modules/
