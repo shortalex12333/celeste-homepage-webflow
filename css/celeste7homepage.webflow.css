@@ -3695,53 +3695,108 @@ blockquote {
 #operational-context .single-item-client,
 #operational-context .single-item-desc { color: var(--_colors---text-color); }
 
-/* Operational context (05) — pinned crossfade */
-.oc-section { position: relative; height: 320vh; }
-.oc-stage { position: sticky; top: 0; height: 100vh; width: 100%; display: flex; align-items: center; justify-content: center; }
-.oc-inner { width: 100%; max-width: 1200px; padding: 0 32px; position: relative; min-height: 250px; }
+/* Operational context (05) — vertical cascade scroll-lock */
+.oc-section {
+  position: relative;
+  height: 400vh; /* 4 items × 100vh each */
+}
 
-/* Panels: both in DOM, absolute overlapping, opacity crossfade */
-.oc-panel {
-  position: absolute;
-  inset: 0;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 48px;
+.oc-stage {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+}
+
+.oc-scroll {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 48px;
+  will-change: transform;
+}
+
+/* Each item: full viewport height, flexbox for vertical centering */
+.oc-item {
+  height: 100vh;
+  display: flex;
   align-items: center;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 400ms ease;
-}
-.oc-panel.is-active {
-  opacity: 1;
-  pointer-events: auto;
+  padding: 60px 0;
+  box-sizing: border-box;
 }
 
-/* Image: 16:9, iPhone medium size */
+/* Left-aligned items (Ledger text, Related image) */
+.oc-item--left {
+  justify-content: flex-start;
+}
+.oc-item--left .oc-text {
+  max-width: 480px;
+  padding-right: 40px;
+}
+.oc-item--left .oc-image {
+  margin-left: 0;
+}
+
+/* Right-aligned items (Ledger image, Related text) */
+.oc-item--right {
+  justify-content: flex-end;
+}
+.oc-item--right .oc-text {
+  max-width: 480px;
+  padding-left: 40px;
+  text-align: right;
+}
+.oc-item--right .oc-image {
+  margin-right: 0;
+}
+
+/* Image: 16:9 aspect ratio, medium size */
 .oc-image {
-  width: 320px;
-  height: 180px;
-  border-radius: 12px;
+  width: 480px;
+  aspect-ratio: 16 / 9;
+  border-radius: 16px;
   overflow: hidden;
   background: #eaeaea;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.1);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+  flex-shrink: 0;
 }
-.oc-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.oc-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
 
-/* Ledger: text LEFT (col 1), image RIGHT (col 2) */
-.oc-panel--ledger .oc-text { grid-column: 1; grid-row: 1; }
-.oc-panel--ledger .oc-image { grid-column: 2; grid-row: 1; justify-self: end; }
+/* Text styling */
+.oc-text .single-item-client {
+  margin-bottom: 8px;
+}
+.oc-text .single-item-title {
+  margin-bottom: 16px;
+}
+.oc-text .single-item-desc {
+  line-height: 1.6;
+}
 
-/* Related: image LEFT (col 1), text RIGHT (col 2) */
-.oc-panel--related .oc-image { grid-column: 1; grid-row: 1; justify-self: start; }
-.oc-panel--related .oc-text { grid-column: 2; grid-row: 1; }
-
+/* Mobile: no scroll-lock, stack naturally */
 @media (max-width: 767px) {
   .oc-section { height: auto; }
-  .oc-stage { position: static; height: auto; }
-  .oc-inner { min-height: auto; }
-  .oc-panel { position: static; opacity: 1; pointer-events: auto; grid-template-columns: 1fr; gap: 24px; margin: 40px 0; }
-  .oc-panel--ledger .oc-text, .oc-panel--ledger .oc-image,
-  .oc-panel--related .oc-text, .oc-panel--related .oc-image { grid-column: 1; grid-row: auto; justify-self: center; }
-  .oc-image { width: 280px; height: 158px; }
+  .oc-stage { position: static; height: auto; overflow: visible; }
+  .oc-scroll { padding: 0 24px; }
+  .oc-item {
+    height: auto;
+    padding: 40px 0;
+    justify-content: center !important;
+  }
+  .oc-item--left .oc-text,
+  .oc-item--right .oc-text {
+    max-width: 100%;
+    padding: 0;
+    text-align: left;
+  }
+  .oc-image {
+    width: 100%;
+    max-width: 400px;
+  }
 }
