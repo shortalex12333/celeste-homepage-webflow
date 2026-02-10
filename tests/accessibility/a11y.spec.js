@@ -13,7 +13,13 @@ test.describe('Accessibility: Basic Checks', () => {
     const imagesWithoutAlt = await page.evaluate(() => {
       const images = Array.from(document.querySelectorAll('img'));
       return images
-        .filter(img => !img.alt || img.alt.trim() === '')
+        .filter(img => {
+          // Skip decorative images (role="presentation" or role="none")
+          const role = img.getAttribute('role');
+          if (role === 'presentation' || role === 'none') return false;
+          // Check for missing or empty alt
+          return !img.alt || img.alt.trim() === '';
+        })
         .map(img => img.src);
     });
 
@@ -141,16 +147,20 @@ test.describe('Accessibility: Basic Checks', () => {
         const el = document.activeElement;
         return {
           tag: el?.tagName,
-          text: el?.textContent?.substring(0, 20),
+          text: el?.textContent?.substring(0, 20)?.trim(),
           href: el?.getAttribute('href'),
         };
       });
       focusedElements.push(focused);
     }
 
-    // Should have focused on multiple different elements
-    const uniqueTags = new Set(focusedElements.map(el => el.tag));
-    expect(uniqueTags.size).toBeGreaterThan(1);
+    // Should have focused on multiple different elements (by text/href, not just tag)
+    const uniqueElements = new Set(focusedElements.map(el => `${el.tag}:${el.href || el.text}`));
+    expect(uniqueElements.size).toBeGreaterThan(3);
+
+    // Verify focus is not stuck on BODY
+    const bodyCount = focusedElements.filter(el => el.tag === 'BODY').length;
+    expect(bodyCount).toBeLessThan(5);
 
     console.log('Tab order:', focusedElements.slice(0, 5));
   });

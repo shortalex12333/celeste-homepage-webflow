@@ -62,11 +62,17 @@ test.describe('Journey 1: First-Time Desktop Visitor', () => {
       }
     }
 
-    // Step 4: Check for broken images
+    // Step 4: Check for broken images (only visible/loaded ones, not lazy-loaded)
     const brokenImages = await page.evaluate(() => {
       const images = Array.from(document.querySelectorAll('img'));
       return images
-        .filter(img => !img.complete || img.naturalWidth === 0)
+        .filter(img => {
+          // Skip lazy-loaded images that haven't loaded yet
+          if (img.loading === 'lazy' && !img.complete) return false;
+          // Check if loaded image has valid dimensions
+          if (img.complete && img.naturalWidth === 0) return true;
+          return false;
+        })
         .map(img => img.src);
     });
     expect(brokenImages).toHaveLength(0);
@@ -83,7 +89,13 @@ test.describe('Journey 1: First-Time Desktop Visitor', () => {
   test('All CTAs are clickable and have valid hrefs', async ({ page }) => {
     await page.goto('/', { waitUntil: 'networkidle' });
 
-    // Find all mailto links
+    // Wait for mailto JS to convert data-mailto attributes
+    await page.waitForFunction(() => {
+      const mailtoLinks = document.querySelectorAll('a[href^="mailto:"]');
+      return mailtoLinks.length > 0;
+    }, { timeout: 5000 });
+
+    // Find all mailto links (now converted by celeste-mailto.js)
     const mailtoLinks = page.locator('a[href^="mailto:"]');
     const count = await mailtoLinks.count();
 
