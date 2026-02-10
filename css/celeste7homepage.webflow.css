@@ -3704,11 +3704,11 @@ blockquote {
 .oc-pair {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 48px;
+  gap: 80px;
   min-height: 150vh;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 48px;
+  padding: 0 80px;
 }
 
 /* Columns */
@@ -3727,13 +3727,6 @@ blockquote {
 .oc-text {
   max-width: 420px;
 }
-.oc-col--left .oc-text {
-  /* Left column text: align left */
-}
-.oc-col--right .oc-text {
-  margin-left: auto;
-  text-align: right;
-}
 
 /* Image wrapper: positions image to scroll into alignment */
 .oc-image-wrap {
@@ -3742,11 +3735,24 @@ blockquote {
   align-items: center;
   padding: 25vh 0; /* Space for scroll-in effect */
 }
+
+/* Left column: content aligned to LEFT (start of column) */
+.oc-col--left .oc-sticky {
+  margin-right: auto; /* push to left within column */
+}
 .oc-col--left .oc-image-wrap {
-  justify-content: flex-start;
+  justify-content: flex-start; /* image on left of column */
+}
+
+/* Right column: content aligned to RIGHT (end of column) */
+.oc-col--right .oc-sticky {
+  margin-left: auto; /* push to right within column */
 }
 .oc-col--right .oc-image-wrap {
-  justify-content: flex-end;
+  justify-content: flex-end; /* image on right of column */
+}
+.oc-col--right .oc-text {
+  text-align: right;
 }
 
 /* Image: 16:9 aspect ratio */
