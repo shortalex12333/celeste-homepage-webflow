@@ -1003,10 +1003,6 @@ blockquote {
   padding-left: var(--_size---padding-cta);
   grid-column-gap: 16px;
   grid-row-gap: 16px;
-  background-image: url('../images/superyacht-stern-wake-luxury-motor-yacht.png');
-  background-position: 50%;
-  background-size: cover;
-  background-attachment: fixed;
   grid-template-rows: auto auto;
   grid-template-columns: 1fr 1fr;
   grid-auto-columns: 1fr;
@@ -1018,6 +1014,18 @@ blockquote {
   max-height: none;
   display: flex;
   position: relative;
+  overflow: hidden;
+}
+
+.cta-background-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: 0;
 }
 
 .cta-text {
@@ -1031,6 +1039,8 @@ blockquote {
   max-width: 1200px;
   display: grid;
   overflow: hidden;
+  position: relative;
+  z-index: 1;
 }
 
 .cta-text1 {
