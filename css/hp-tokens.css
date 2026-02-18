@@ -1,150 +1,187 @@
 /**
- * Celeste Homepage — Minimal Refinements
- * ONLY: teal accents, grey hierarchy, screenshot borders, nav blur, subtle scroll fade
+ * HP-TOKENS.CSS
+ * Apple-tier refinements for light mode homepage
+ *
+ * PRINCIPLES (from VISUAL_REFERENCE.md):
+ * - Shadows are nearly invisible in light mode
+ * - Depth from luminance steps, not heavy shadows
+ * - One accent color (teal) for interactive elements
+ * - Weight + color create hierarchy, not size
+ * - Tight luminance ranges like ChatGPT
  */
 
-:root {
-  /* Brand — the ONLY saturated colour on the entire page */
-  --hp-brand: #3A7C9D;
-  --hp-brand-interactive: #2B8FB3;
-  --hp-brand-hover: #239AB8;
+/* =============================================================================
+   PRODUCT SCREENSHOTS - Subtle depth (Apple-level restraint)
+   Per UI_SPEC: "Shadows are RARE. In light mode, shadows are the primary depth
+   cue but kept extremely subtle (Apple-level restraint)"
+   ============================================================================= */
 
-  /* Grey hierarchy — this creates ALL the depth */
-  --hp-bg: #0A0A0A;
-  --hp-text-white: #EDEDED;      /* Headlines */
-  --hp-text-light: #B0B0B0;      /* Primary body text */
-  --hp-text-mid: #777777;        /* Secondary descriptions */
-  --hp-text-dim: #444444;        /* Section numbers, labels */
-  --hp-text-faint: #2A2A2A;      /* Borders, dividers */
-
-  /* Surfaces */
-  --hp-surface: #111111;
-  --hp-surface-raised: #161616;
-  --hp-border: #1E1E1E;
-}
-
-/* ═══ DARK MODE BODY ═══ */
-body {
-  background-color: var(--hp-bg);
-  color: var(--hp-text-light);
-}
-
-/* ═══ OVERRIDE WEBFLOW VARIABLES ═══ */
-:root {
-  --_colors---surface: var(--hp-bg);
-  --_colors---text-color: var(--hp-text-light);
-  --_colors---color-1: var(--hp-surface);
-  --_colors---color-6: var(--hp-text-mid);
-}
-
-/* ═══ GREY HIERARCHY ═══ */
-
-/* Headlines — brightest */
-.heading,
-.about-heading,
-.heading--benefits,
-.heading-service,
-.impact-heading,
-.cta-heading,
-.footer-heading,
-h1, h2, h3 {
-  color: var(--hp-text-white);
-  font-weight: 500;
-}
-
-/* Body text — mid */
-.text-hero1,
-.about-text1,
-.text-benefits,
-.pre-about-text,
-p {
-  color: var(--hp-text-light);
-  font-weight: 400;
-}
-
-/* Descriptions — dimmer */
-.text-block-36,
-.text-block-37,
-.text-block-38,
-.text-block-39 {
-  color: var(--hp-text-mid);
-  font-weight: 400;
-}
-
-/* ═══ TEAL ACCENTS — ONLY section numbers and CTAs ═══ */
-
-/* Section numbers */
-.about-subtext,
-.number-benefits,
-.number-service,
-.number-impact,
-.service-item1-number,
-.service-item2-number,
-.text-block-40,
-.text-block-41 {
-  color: var(--hp-brand);
-  font-weight: 500;
-}
-
-/* CTA buttons */
-.hero-button,
-.button-2 {
-  background: var(--hp-brand-interactive);
-  color: white;
-  border-radius: 9999px;
-  padding: 12px 28px;
-  font-weight: 500;
-  font-size: 14px;
-  transition: background 200ms ease;
-  text-decoration: none;
-}
-
-.hero-button:hover,
-.button-2:hover {
-  background: var(--hp-brand-hover);
-}
-
-/* ═══ SCREENSHOT BORDERS ═══ */
-.hero-image,
-.benefits-img-1,
-.benefits-img-2,
-.benefits-img-3,
-.benefits-img-4,
 .service-item1-img,
 .service-item2-img,
 .image-9,
 .image-10,
 .ts-img1,
 .ts-img2,
-.oc-image img,
-img[alt*="screenshot"],
-img[alt*="interface"],
-img[alt*="Image"] {
-  border: 1px solid rgba(255,255,255,0.05);
+.oc-image img {
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);  /* Apple-level subtle */
+  border: 1px solid rgba(0, 0, 0, 0.06);       /* Barely visible definition */
+  border-radius: 12px;                          /* Consistent with --radius-md */
+}
+
+/* Hero images - slightly more presence */
+.hero-image,
+.benefits-img-1,
+.benefits-img-2,
+.benefits-img-3,
+.benefits-img-4 {
   border-radius: 12px;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.3);
 }
 
-/* ═══ SECTION BACKGROUNDS ═══ */
-.hero-section,
-.about-section,
-.benefits-section,
-.services-section,
-.impact-section,
-.oc-section,
-.testimonial-section,
-.cta-section,
-.footer-section,
-section {
-  background-color: var(--hp-bg);
+/* =============================================================================
+   TYPOGRAPHY HIERARCHY - Weight + Color (not size)
+   Per VISUAL_REFERENCE: "Weight creates hierarchy, not size.
+   The delta between sizes is small. The delta between weights and colors is large."
+
+   Grey scale from Webflow:
+   - #0a0a0a (text-color) - Headlines, primary
+   - #262626 (color-8) - Strong emphasis
+   - #404040 (color-7) - Secondary headings
+   - #525252 (color-6) - Body text
+   - #737373 (color-5) - Descriptions
+   - #a1a1a1 (color-4) - Tertiary/hints
+   ============================================================================= */
+
+/* Headlines - darkest, weight 500 (already set in Webflow) */
+h1, h2, h3 {
+  color: var(--_colors---text-color);  /* #0a0a0a */
+  font-weight: 500;
 }
 
-/* ═══ NAV LINKS ═══ */
-.nav-link {
-  color: var(--hp-text-light);
+/* Body text - mid grey */
+.text-hero1,
+.pre-about-text,
+.text-benefits,
+.text-services-item1,
+.txt-service-item2,
+.text-block-91,
+.text-block-92,
+.cta-text1 {
+  color: var(--_colors---color-6);  /* #525252 */
   font-weight: 400;
 }
 
-.nav-link:hover {
-  color: var(--hp-brand-interactive);
+/* Descriptions / secondary text - lighter grey */
+.about-text1,
+.about-text2,
+.bnf-text1,
+.bnf-text2,
+.bnf-text3,
+.bnf-text4,
+.single-item-desc {
+  color: var(--_colors---color-5);  /* #737373 */
+  font-weight: 400;
+}
+
+/* Section subheadings - between headline and body */
+.srv-text,
+.txt-heading-srv2,
+.text-block-39,
+.text-block-43 {
+  color: var(--_colors---color-5);  /* #737373 */
+  font-weight: 400;
+}
+
+/* Feature titles in cards */
+.heading-item1-srv,
+.heading-srv2,
+.text-block-38,
+.text-block-42,
+.single-item-title {
+  color: var(--_colors---text-color);  /* #0a0a0a */
+  font-weight: 500;
+}
+
+/* Section labels (Ledger, Related context) */
+.single-item-client {
+  color: var(--_colors---accent);  /* Teal for labels */
+  font-weight: 500;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* =============================================================================
+   SECTION NUMBERS - Already teal in Webflow, ensure consistency
+   ============================================================================= */
+
+.about-subtext,
+.number-benefits,
+.number-service,
+.number-impact {
+  color: var(--_colors---accent);  /* #3A7C9D */
+  font-weight: 500;
+}
+
+/* =============================================================================
+   CTA BUTTONS - Teal interactive, proper hover states
+   ============================================================================= */
+
+.hero-button {
+  transition: background-color 120ms ease-out, transform 120ms ease-out;
+}
+
+.hero-button:hover {
+  background-color: rgba(58, 124, 157, 0.08);  /* Subtle teal tint on hover */
+}
+
+.hero-button.white:hover {
+  background-color: rgba(255, 255, 255, 0.95);
+}
+
+/* =============================================================================
+   SPACING REFINEMENTS - Generous whitespace (ChatGPT principle)
+   Per VISUAL_REFERENCE: "There is MORE empty space than content on desktop"
+   ============================================================================= */
+
+/* Ensure sections have breathing room */
+.services-section,
+.impact-section,
+.oc-section,
+.testimonial-section {
+  padding-top: 100px;
+  padding-bottom: 100px;
+}
+
+/* =============================================================================
+   BORDERS - Structural, not decorative
+   Per UI_SPEC: "Borders are structural, never decorative"
+   ============================================================================= */
+
+/* Service items - subtle separator */
+.service-item1,
+.service-item2,
+.div-block-63,
+.div-block-64 {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  padding-bottom: 48px;
+  margin-bottom: 48px;
+}
+
+.service-item1:last-child,
+.service-item2:last-child,
+.div-block-63:last-child,
+.div-block-64:last-child {
+  border-bottom: none;
+}
+
+/* =============================================================================
+   ACCESSIBILITY - Reduced motion
+   ============================================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-button,
+  .service-item1-img,
+  .service-item2-img {
+    transition: none;
+  }
 }
