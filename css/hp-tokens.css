@@ -1,113 +1,79 @@
 /**
- * Celeste Homepage Design Tokens
- * Dark mode overrides for Webflow export
- * Reference: docs/CELESTE_HOMEPAGE/CLAUDE.md
+ * Celeste Homepage — Minimal Refinements
+ * ONLY: teal accents, grey hierarchy, screenshot borders, nav blur, subtle scroll fade
  */
 
 :root {
-  /* ═══ SURFACES ═══ */
-  --hp-bg: #0A0A0A;                  /* Darker than app — more dramatic */
-  --hp-surface: #111111;             /* Card/section backgrounds */
-  --hp-surface-elevated: #1A1A1A;    /* Feature cards, elevated panels */
-  --hp-border: #222222;              /* Subtle borders */
+  /* Brand — the ONLY saturated colour on the entire page */
+  --hp-brand: #3A7C9D;
+  --hp-brand-interactive: #2B8FB3;
+  --hp-brand-hover: #239AB8;
 
-  /* ═══ TEXT ═══ */
-  --hp-text-hero: #FFFFFF;           /* Hero headline — pure white for maximum contrast */
-  --hp-text-primary: #ECECEC;        /* Body text */
-  --hp-text-secondary: #888888;      /* Descriptions, metadata */
-  --hp-text-muted: #555555;          /* Section numbers, labels */
+  /* Grey hierarchy — this creates ALL the depth */
+  --hp-bg: #0A0A0A;
+  --hp-text-white: #EDEDED;      /* Headlines */
+  --hp-text-light: #B0B0B0;      /* Primary body text */
+  --hp-text-mid: #777777;        /* Secondary descriptions */
+  --hp-text-dim: #444444;        /* Section numbers, labels */
+  --hp-text-faint: #2A2A2A;      /* Borders, dividers */
 
-  /* ═══ BRAND ═══ */
-  --hp-brand: #3A7C9D;               /* Teal ambient — section accents, logo, number highlights */
-  --hp-brand-interactive: #2B8FB3;   /* CTA buttons, links, hover states */
-  --hp-brand-hover: #239AB8;         /* Button hover */
-  --hp-brand-glow: rgba(58,124,157,0.15); /* Subtle glow behind hero elements */
-
-  /* ═══ GRADIENTS ═══ */
-  --hp-gradient-hero: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(58,124,157,0.08) 0%, transparent 70%);
-  --hp-gradient-section: linear-gradient(180deg, transparent 0%, rgba(58,124,157,0.03) 50%, transparent 100%);
-  --hp-gradient-card: linear-gradient(135deg, rgba(255,255,255,0.02) 0%, transparent 100%);
-
-  /* ═══ TYPOGRAPHY (homepage scale — larger than app) ═══ */
-  --hp-font: 'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif;
-
-  /* Hero */
-  --hp-hero-size: clamp(48px, 6vw, 80px);
-  --hp-hero-weight: 700;
-  --hp-hero-tracking: -0.03em;
-  --hp-hero-line-height: 1.05;
-
-  /* Section headlines */
-  --hp-h2-size: clamp(32px, 4vw, 56px);
-  --hp-h2-weight: 600;
-  --hp-h2-tracking: -0.02em;
-  --hp-h2-line-height: 1.1;
-
-  /* Sub-headlines */
-  --hp-h3-size: clamp(20px, 2.5vw, 28px);
-  --hp-h3-weight: 600;
-  --hp-h3-line-height: 1.2;
-
-  /* Body */
-  --hp-body-size: clamp(16px, 1.2vw, 18px);
-  --hp-body-weight: 400;
-  --hp-body-line-height: 1.7;
-
-  /* Labels / Section numbers */
-  --hp-label-size: 13px;
-  --hp-label-weight: 500;
-  --hp-label-tracking: 0.08em;
-
-  /* Nav */
-  --hp-nav-size: 14px;
-  --hp-nav-weight: 400;
-
-  /* ═══ SPACING ═══ */
-  --hp-section-gap: clamp(120px, 15vw, 200px);  /* Between major sections */
-  --hp-content-max: 1200px;                      /* Content max-width */
-  --hp-content-narrow: 800px;                    /* Narrow text column */
-  --hp-padding-x: clamp(24px, 5vw, 80px);       /* Horizontal page padding */
-
-  /* ═══ RADIUS ═══ */
-  --hp-radius-sm: 8px;
-  --hp-radius-md: 12px;
-  --hp-radius-lg: 16px;
-  --hp-radius-xl: 24px;
-  --hp-radius-full: 9999px;
-
-  /* ═══ SHADOWS ═══ */
-  --hp-shadow-card: 0 4px 24px rgba(0,0,0,0.3);
-  --hp-shadow-screenshot: 0 8px 40px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.05);
-  --hp-shadow-cta: 0 0 24px rgba(43,143,179,0.2);
-
-  /* ═══ TRANSITIONS ═══ */
-  --hp-ease: cubic-bezier(0.16, 1, 0.3, 1);
-  --hp-duration-fast: 150ms;
-  --hp-duration-normal: 300ms;
-  --hp-duration-slow: 600ms;
-  --hp-duration-scroll: 800ms;
-
-  /* ═══ Z-INDEX ═══ */
-  --hp-z-nav: 100;
-  --hp-z-hero: 1;
-  --hp-z-content: 10;
+  /* Surfaces */
+  --hp-surface: #111111;
+  --hp-surface-raised: #161616;
+  --hp-border: #1E1E1E;
 }
 
-/* ═══ DARK MODE BODY OVERRIDE ═══ */
+/* ═══ DARK MODE BODY ═══ */
 body {
   background-color: var(--hp-bg);
-  color: var(--hp-text-primary);
+  color: var(--hp-text-light);
 }
 
-/* ═══ OVERRIDE WEBFLOW LIGHT MODE VARIABLES ═══ */
+/* ═══ OVERRIDE WEBFLOW VARIABLES ═══ */
 :root {
   --_colors---surface: var(--hp-bg);
-  --_colors---text-color: var(--hp-text-primary);
+  --_colors---text-color: var(--hp-text-light);
   --_colors---color-1: var(--hp-surface);
-  --_colors---color-6: var(--hp-text-secondary);
+  --_colors---color-6: var(--hp-text-mid);
 }
 
-/* ═══ SECTION NUMBER STYLING ═══ */
+/* ═══ GREY HIERARCHY ═══ */
+
+/* Headlines — brightest */
+.heading,
+.about-heading,
+.heading--benefits,
+.heading-service,
+.impact-heading,
+.cta-heading,
+.footer-heading,
+h1, h2, h3 {
+  color: var(--hp-text-white);
+  font-weight: 500;
+}
+
+/* Body text — mid */
+.text-hero1,
+.about-text1,
+.text-benefits,
+.pre-about-text,
+p {
+  color: var(--hp-text-light);
+  font-weight: 400;
+}
+
+/* Descriptions — dimmer */
+.text-block-36,
+.text-block-37,
+.text-block-38,
+.text-block-39 {
+  color: var(--hp-text-mid);
+  font-weight: 400;
+}
+
+/* ═══ TEAL ACCENTS — ONLY section numbers and CTAs ═══ */
+
+/* Section numbers */
 .about-subtext,
 .number-benefits,
 .number-service,
@@ -117,59 +83,28 @@ body {
 .text-block-40,
 .text-block-41 {
   color: var(--hp-brand);
+  font-weight: 500;
 }
 
-/* ═══ HERO TYPOGRAPHY ═══ */
-.heading {
-  font-size: var(--hp-hero-size);
-  font-weight: var(--hp-hero-weight);
-  letter-spacing: var(--hp-hero-tracking);
-  line-height: var(--hp-hero-line-height);
-  color: var(--hp-text-hero);
-}
-
-/* ═══ SECTION HEADINGS ═══ */
-.about-heading,
-.heading--benefits,
-.heading-service,
-.impact-heading,
-.cta-heading,
-.footer-heading {
-  font-size: var(--hp-h2-size);
-  font-weight: var(--hp-h2-weight);
-  letter-spacing: var(--hp-h2-tracking);
-  line-height: var(--hp-h2-line-height);
-  color: var(--hp-text-hero);
-}
-
-/* ═══ BODY TEXT ═══ */
-.text-hero1,
-.about-text1,
-.text-benefits,
-.pre-about-text {
-  font-size: var(--hp-body-size);
-  line-height: var(--hp-body-line-height);
-  color: var(--hp-text-secondary);
-}
-
-/* ═══ CTA BUTTONS ═══ */
-.hero-button {
+/* CTA buttons */
+.hero-button,
+.button-2 {
   background: var(--hp-brand-interactive);
   color: white;
-  border-radius: var(--hp-radius-full);
-  padding: 14px 32px;
-  box-shadow: var(--hp-shadow-cta);
-  transition: all var(--hp-duration-normal) var(--hp-ease);
+  border-radius: 9999px;
+  padding: 12px 28px;
+  font-weight: 500;
+  font-size: 14px;
+  transition: background 200ms ease;
   text-decoration: none;
 }
 
-.hero-button:hover {
+.hero-button:hover,
+.button-2:hover {
   background: var(--hp-brand-hover);
-  box-shadow: 0 0 32px rgba(43,143,179,0.3);
-  transform: translateY(-1px);
 }
 
-/* ═══ SCREENSHOT/IMAGE STYLING ═══ */
+/* ═══ SCREENSHOT BORDERS ═══ */
 .hero-image,
 .benefits-img-1,
 .benefits-img-2,
@@ -181,25 +116,13 @@ body {
 .image-10,
 .ts-img1,
 .ts-img2,
-.oc-image img {
-  border-radius: var(--hp-radius-lg);
-  border: 1px solid rgba(255,255,255,0.06);
-  box-shadow: var(--hp-shadow-screenshot);
-}
-
-/* ═══ CARDS ═══ */
-.benefits-item1,
-.benefits-item2,
-.benefits-item3,
-.benefits-item4,
-.service-item1,
-.service-item2,
-.div-block-63,
-.div-block-64 {
-  background: var(--hp-surface);
-  background-image: var(--hp-gradient-card);
-  border: 1px solid var(--hp-border);
-  border-radius: var(--hp-radius-lg);
+.oc-image img,
+img[alt*="screenshot"],
+img[alt*="interface"],
+img[alt*="Image"] {
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.3);
 }
 
 /* ═══ SECTION BACKGROUNDS ═══ */
@@ -211,28 +134,17 @@ body {
 .oc-section,
 .testimonial-section,
 .cta-section,
-.footer-section {
+.footer-section,
+section {
   background-color: var(--hp-bg);
 }
 
-/* ═══ HERO GRADIENT OVERLAY ═══ */
-.hero-section::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 100vh;
-  background: var(--hp-gradient-hero);
-  pointer-events: none;
-  z-index: 0;
+/* ═══ NAV LINKS ═══ */
+.nav-link {
+  color: var(--hp-text-light);
+  font-weight: 400;
 }
 
-.hero-section {
-  position: relative;
-}
-
-.hero-container {
-  position: relative;
-  z-index: 1;
+.nav-link:hover {
+  color: var(--hp-brand-interactive);
 }
