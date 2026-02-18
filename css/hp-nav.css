@@ -1,0 +1,180 @@
+/**
+ * Celeste Homepage Navigation
+ * Fixed nav with blur-on-scroll and mobile menu
+ * Reference: docs/CELESTE_HOMEPAGE/HOMEPAGE_SPEC.md
+ */
+
+/* ═══ NAV BASE STYLES ═══ */
+.navbar-section {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--hp-z-nav);
+  height: 64px;
+  background: transparent;
+  transition:
+    background var(--hp-duration-normal) var(--hp-ease),
+    border-color var(--hp-duration-normal) var(--hp-ease),
+    backdrop-filter var(--hp-duration-normal) var(--hp-ease);
+  border-bottom: 1px solid transparent;
+}
+
+/* ═══ NAV SCROLLED STATE ═══ */
+.navbar-section.scrolled {
+  background: rgba(10, 10, 10, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom-color: var(--hp-border);
+}
+
+/* ═══ NAV CONTAINER ═══ */
+.navbar-container {
+  max-width: var(--hp-content-max);
+  height: 100%;
+  padding: 0 var(--hp-padding-x);
+  margin: 0 auto;
+}
+
+.navbar-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+}
+
+/* ═══ LOGO ═══ */
+.logo-link {
+  text-decoration: none;
+}
+
+.text-block-19 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--hp-text-primary);
+  letter-spacing: -0.01em;
+}
+
+/* ═══ NAV LINKS ═══ */
+.menu {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.menu-nav1 {
+  font-size: var(--hp-nav-size);
+  font-weight: var(--hp-nav-weight);
+  color: var(--hp-text-secondary);
+  text-decoration: none;
+  transition: color var(--hp-duration-fast) ease-out;
+}
+
+.menu-nav1:hover {
+  color: var(--hp-text-primary);
+}
+
+/* ═══ NAV CTA BUTTON ═══ */
+.nav-cta {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 20px;
+  border: 1px solid var(--hp-border);
+  border-radius: var(--hp-radius-full);
+  color: var(--hp-text-primary);
+  font-size: var(--hp-nav-size);
+  font-weight: 500;
+  text-decoration: none;
+  transition: all var(--hp-duration-normal) var(--hp-ease);
+}
+
+.nav-cta:hover {
+  background: var(--hp-brand-interactive);
+  border-color: var(--hp-brand-interactive);
+  color: white;
+}
+
+/* ═══ HAMBURGER BUTTON ═══ */
+.menu-button {
+  display: none;
+  padding: 8px;
+  cursor: pointer;
+}
+
+.menu-icon {
+  width: 24px;
+  height: 24px;
+  filter: brightness(0) invert(1);
+}
+
+/* ═══ MOBILE MENU OVERLAY ═══ */
+.mobile-menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--hp-bg);
+  z-index: calc(var(--hp-z-nav) + 1);
+  display: flex;
+  flex-direction: column;
+  padding: 80px var(--hp-padding-x) 40px;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity var(--hp-duration-normal) var(--hp-ease),
+    visibility var(--hp-duration-normal) var(--hp-ease);
+}
+
+.mobile-menu-overlay.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.mobile-menu-overlay .menu-nav1 {
+  display: block;
+  padding: 16px 0;
+  font-size: 18px;
+  color: var(--hp-text-primary);
+  border-bottom: 1px solid var(--hp-border);
+}
+
+.mobile-menu-overlay .menu-nav1:last-child {
+  border-bottom: none;
+}
+
+/* ═══ MOBILE CLOSE BUTTON ═══ */
+.mobile-close {
+  position: absolute;
+  top: 20px;
+  right: var(--hp-padding-x);
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--hp-text-primary);
+  font-size: 24px;
+}
+
+/* ═══ MOBILE BREAKPOINT ═══ */
+@media screen and (max-width: 991px) {
+  .menu {
+    display: none;
+  }
+
+  .menu-button {
+    display: flex;
+  }
+}
+
+/* ═══ BODY SCROLL LOCK ═══ */
+body.mobile-menu-open {
+  overflow: hidden;
+}
+
+/* ═══ ADD PADDING TO BODY FOR FIXED NAV ═══ */
+.hero-section {
+  padding-top: 64px;
+}

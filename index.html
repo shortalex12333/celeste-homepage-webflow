@@ -2,12 +2,12 @@
 <html data-wf-page="6989f9a579d759cf0851e0d1" data-wf-site="6989f9a479d759cf0851e04c" lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Celeste — Operate your yacht from intent, not navigation</title>
-  <meta content="One operating surface. Manuals, work orders, faults, inventory, receiving and email — resolved by what you mean, not where you click." name="description">
-  <meta content="Celeste — Operate your yacht from intent, not navigation" property="og:title">
-  <meta content="One operating surface. Manuals, work orders, faults, inventory, receiving and email — resolved by what you mean, not where you click." property="og:description">
-  <meta content="Celeste — Operate your yacht from intent, not navigation" property="twitter:title">
-  <meta content="One operating surface. Manuals, work orders, faults, inventory, receiving and email — resolved by what you mean, not where you click." property="twitter:description">
+  <title>Celeste — Run the yacht from one place</title>
+  <meta content="Celeste replaces folders, inboxes, handover notes, and crew memory with a single search interface. If it exists onboard, you can find it in seconds." name="description">
+  <meta content="Celeste — Run the yacht from one place" property="og:title">
+  <meta content="Celeste replaces folders, inboxes, handover notes, and crew memory with a single search interface. If it exists onboard, you can find it in seconds." property="og:description">
+  <meta content="Celeste — Run the yacht from one place" property="twitter:title">
+  <meta content="Celeste replaces folders, inboxes, handover notes, and crew memory with a single search interface. If it exists onboard, you can find it in seconds." property="twitter:description">
   <meta property="og:type" content="website">
   <meta content="summary_large_image" name="twitter:card">
   <meta content="width=device-width, initial-scale=1" name="viewport">
@@ -15,6 +15,12 @@
   <link href="css/normalize.css" rel="stylesheet" type="text/css">
   <link href="css/webflow.css" rel="stylesheet" type="text/css">
   <link href="css/celeste7homepage.webflow.css" rel="stylesheet" type="text/css">
+  <!-- Homepage Enhancement Layer -->
+  <link href="css/hp-tokens.css" rel="stylesheet" type="text/css">
+  <link href="css/hp-animations.css" rel="stylesheet" type="text/css">
+  <link href="css/hp-nav.css" rel="stylesheet" type="text/css">
+  <link href="css/hp-hero.css" rel="stylesheet" type="text/css">
+  <link href="css/hp-sections.css" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com" rel="preconnect">
   <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous">
   <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script>
@@ -43,10 +49,10 @@
         </div>
         <div class="menu">
           <a href="#Hero" class="menu-nav1 first">Home</a>
-          <a href="#how" class="menu-nav1">How It Works</a>
-          <a href="#product" class="menu-nav1">Features</a>
-          <a href="#metrics" class="menu-nav1">Built For</a>
-          <a href="#pricing" class="menu-nav1 last">Access</a>
+          <a href="#product" class="menu-nav1">Product</a>
+          <a href="#how" class="menu-nav1">How it works</a>
+          <a href="#security" class="menu-nav1">Security</a>
+          <a href="#pricing" class="menu-nav1 last">Pricing</a>
         </div>
         <a href="#" class="menu-button w-inline-block"><img src="images/menu-1.svg" loading="lazy" data-w-id="9c2b409c-12e0-43df-292b-5c49cab290a8" alt="Menu" class="menu-icon"></a>
       </div>
@@ -62,12 +68,15 @@
       <div class="hero-wrapper">
         <div style="-webkit-transform:translate3d(0, -100%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, -100%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, -100%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, -100%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="hero-text">
           <div class="hero-heading">
-            <h1 class="heading">Operate your yacht from intent, not navigation.</h1>
+            <h1 class="heading">Operate from evidence. Not recollection.</h1>
           </div>
           <div class="hero-texr">
-            <div class="text-hero1">One operating surface. Manuals, work orders, faults, inventory, receiving and email — resolved by what you mean, not where you click.</div>
+            <div class="text-hero1">Crew rotate. Watches change. The vessel’s record must not.</div>
             <a data-mailto="pilot" data-w-id="9041fea4-c3b7-f647-e68b-df0294772729" href="#" class="hero-button w-inline-block"><img src="images/Frame-5_1Frame-5.png" loading="lazy" alt="" role="presentation" class="hero-button-icon _2">
-              <div class="text-hero2">Request Private Demo</div><img src="images/Frame-4_2Frame-4.png" loading="lazy" alt="" role="presentation" class="hero-button-icon _1">
+              <div class="text-hero2">Request pilot access</div><img src="images/Frame-4_2Frame-4.png" loading="lazy" alt="" role="presentation" class="hero-button-icon _1">
+            </a>
+            <a href="#how" class="hero-button w-inline-block"><img src="images/Frame-5_1Frame-5.png" loading="lazy" alt="" role="presentation" class="hero-button-icon _2">
+              <div class="text-hero2">See how it works</div><img src="images/Frame-4_2Frame-4.png" loading="lazy" alt="" role="presentation" class="hero-button-icon _1">
             </a>
           </div>
         </div>
@@ -75,11 +84,11 @@
     </div>
   </section>
   <div class="sticky-hero-about">
-    <div style="opacity:0;-webkit-transform:translate3d(0, 20%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 20%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 20%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 20%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)" class="hero-image-wrapper"><img src="images/superyacht-aerial-30m-luxury-vessel.webp" loading="lazy" alt="Aerial view of 30-40m luxury superyacht - CelesteOS PMS software for yacht captains, owners and management companies" class="hero-image"></div>
+    <div style="opacity:0;-webkit-transform:translate3d(0, 20%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 20%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 20%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 20%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)" class="hero-image-wrapper"><img src="images/Gemini_Generated_Image_94ivb094ivb094iv.webp" loading="lazy" alt="Generated Hero Image" class="hero-image"></div>
     <section style="-webkit-transform:translate3d(0, 100%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 100%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 100%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 100%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="pre-about-section">
       <div class="w-layout-blockcontainer pre-about-container w-container">
         <div class="pre-about-block">
-          <div class="pre-about-text">Type: "DG1 overheating" — Celeste opens the correct manual section, previous related faults, work orders, inventory context, receiving records, handover notes. All inside one operating surface.</div>
+          <div class="pre-about-text">Operating Rules — Search is the interface. There are no dashboards. Nothing changes without review, signature, and record. Celeste does not execute actions. Humans do. There is nothing to learn. If you can type, you can use it. Celeste makes your yacht’s manuals, emails, work orders, and notes directly searchable as one system. If it exists onboard, you can retrieve it in seconds.</div>
         </div>
       </div>
     </section>
@@ -87,12 +96,12 @@
       <div class="w-layout-blockcontainer about-container w-container">
         <div data-w-id="48d40f3b-2d5f-b2b2-5b5e-0187a9b2faab" class="about-wrapper">
           <div class="heading-about">
-            <h2 style="-webkit-transform:translate3d(0, 20vh, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 20vh, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 20vh, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 20vh, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)" class="about-heading">Traditional Software Assumes Navigation</h2>
+            <h2 style="-webkit-transform:translate3d(0, 20vh, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 20vh, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 20vh, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 20vh, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)" class="about-heading">Philosophy</h2>
             <div class="about-subtext">(01)</div>
           </div>
           <div class="about-text">
-            <div style="-webkit-transform:translate3d(0, 20vh, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 20vh, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 20vh, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 20vh, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)" class="about-text1">Operators don't want to go somewhere. They want to resolve something. Celeste does not open pages. It resolves situations.</div>
-            <div style="-webkit-transform:translate3d(0, 20vh, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 20vh, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 20vh, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 20vh, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);color:rgb(212,212,212)" class="about-text2">No navigation trees. No module switching. No guesswork.</div>
+            <div style="-webkit-transform:translate3d(0, 20vh, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 20vh, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 20vh, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 20vh, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)" class="about-text1">Most systems expect crews to remember where things live. That fails under pressure, fatigue, and rotation. Celeste removes location entirely. Your manuals, emails, work orders, and notes remain as they are — but become directly searchable as a single operational record.</div>
+            <div style="-webkit-transform:translate3d(0, 20vh, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 20vh, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 20vh, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 20vh, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);color:rgb(212,212,212)" class="about-text2">Stop navigating files. Start asking questions.</div>
           </div>
         </div>
       </div>
@@ -105,46 +114,46 @@
       <div data-w-id="6b53e8cb-16f0-2eb3-9684-2cb7c78e05b9" class="w-layout-blockcontainer benefits-container w-container">
         <div class="benefits-wrapper">
           <div class="benefits-heading">
-            <h2 class="heading--benefits">Deterministic, Not Suggestive</h2>
+            <h2 class="heading--benefits">Information. Continuity. Accountability.</h2>
             <div class="number-benefits">(02)</div>
           </div>
-          <div class="text-benefits">Celeste does not "advise". It renders state. The database is truth. The ledger is permanent.</div>
+          <div class="text-benefits">Your materials remain as they are — but become searchable as a single operational record. Ask. Review the source. Act. The record updates itself.</div>
         </div>
         <div class="benefits-sticky">
           <div class="wrapper-benefits-item">
             <div id="w-node-ca7e175e-9ec1-37be-6940-9add9fb15574-0851e0d1" class="benefits-item1">
               <div class="benefits-item1-text">
-                <div class="bnf-i1-text">Read</div>
-              </div><img src="images/superyacht-pms-unified-search.png" loading="lazy" alt="Superyacht PMS unified search interface - instant access to maintenance records, manuals and work orders for 30-40m yachts" class="benefits-img-1">
+                <div class="bnf-i1-text">Information without navigation</div>
+              </div><img src="images/Gemini_Generated_Image_dc2aeadc2aeadc2a.webp" loading="lazy" alt="Information without navigation Image" class="benefits-img-1">
             </div>
             <div id="w-node-_74598e68-4139-623d-2ffc-50be0a09c183-0851e0d1" class="benefits-item2">
               <div class="benefits-item2-text">
-                <div class="bnf-i2-text">Mutate</div>
-              </div><img src="images/yacht-crew-handover-management.png" loading="lazy" alt="Yacht crew handover management system - seamless operational continuity for captains and rotating crew on superyachts" class="benefits-img-2">
+                <div class="bnf-i2-text">Continuity without reconstruction</div>
+              </div><img src="images/Gemini_Generated_Image_rzzqcqrzzqcqrzzq.webp" loading="lazy" alt="Continuity without reconstruction Image" class="benefits-img-2">
             </div>
             <div id="w-node-dbfb85b3-fbc4-8829-f48d-9d7dbc8a423a-0851e0d1" class="benefits-item3">
               <div class="benefits-item3-text">
-                <div class="bnf-i3-text">Sign</div>
-              </div><img src="images/superyacht-maintenance-audit-compliance.png" loading="lazy" alt="Superyacht maintenance audit and compliance tracking - documented accountability for yacht managers and owners" class="benefits-img-3">
+                <div class="bnf-i3-text">Accountability without dispute</div>
+              </div><img src="images/Gemini_Generated_Image_ierz2vierz2vierz.webp" loading="lazy" alt="Accountability without dispute Image" class="benefits-img-3">
             </div>
             <div id="w-node-ccd324b3-964a-bd77-df16-b42fd4d3ace2-0851e0d1" class="benefits-item4">
               <div class="benefits-item4-text">
-                <div class="bnf-i4-text">Record</div>
-              </div><img src="images/yacht-management-document-verification.png" loading="lazy" alt="Yacht management document verification - original source records for flag state compliance and insurance requirements" class="benefits-img-4">
+                <div class="bnf-i4-text">Sources, not summaries</div>
+              </div><img src="images/Gemini_Generated_Image_oayes4oayes4oaye.webp" loading="lazy" alt="Sources, not summaries Image" class="benefits-img-4">
             </div>
           </div>
           <div class="wrapper-benefits-text">
             <div class="benefits-text1">
-              <div class="bnf-text1">Every interaction is a micro-action.</div>
+              <div class="bnf-text1">You do not move through folder trees or modules. You search. Results return the manual page, recent work, and associated parts — together, with provenance.</div>
             </div>
             <div class="benefits-text2">
-              <div class="bnf-text2">If something changes, it is previewed.</div>
+              <div class="bnf-text2">Actions, notes, and decisions accumulate automatically as a record of reality. At rotation, nothing is rewritten — it is already assembled.</div>
             </div>
             <div class="benefits-text3">
-              <div class="bnf-text3">Signed. Logged. Immutable.</div>
+              <div class="bnf-text3">Review precedes execution. Completion requires a signature. Sources remain attached.</div>
             </div>
             <div class="benefits-text4">
-              <div class="bnf-text4">Nothing auto-executes. Nothing hides state.</div>
+              <div class="bnf-text4">Nothing is generated or guessed. Sources, not summaries.</div>
             </div>
           </div>
         </div>
@@ -155,7 +164,7 @@
     <div class="w-layout-blockcontainer services-container w-container">
       <div class="services-wrapper">
         <div data-w-id="1200b7ab-09a6-3267-e3b2-7c40c9653f6c" class="service-heading">
-          <h2 style="-webkit-transform:translate3d(0, 100%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 100%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 100%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="heading-service">Show Related</h2>
+          <h2 style="-webkit-transform:translate3d(0, 100%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 100%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 100%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="heading-service">What it delivers</h2>
           <div style="-webkit-transform:translate3d(0, 100%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 100%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 100%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 100%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="number-service">(03)</div>
         </div>
         <div class="service-item-wrapper">
@@ -165,13 +174,13 @@
               <div class="service-item1-heading">
                 <div class="service-item1-number">(01)</div>
                 <div class="heading-service-item1">
-                  <div class="heading-item1-srv">Records as Relationships</div>
-                  <div class="srv-text">Not isolated nouns</div>
+                  <div class="heading-item1-srv">One bar. One view.</div>
+                  <div class="srv-text">Search replaces orientation</div>
                 </div>
               </div>
               <div class="service-item1-text-wrapper">
                 <div class="margin-srv"></div>
-                <div class="text-services-item1">Open a generator manual and see: associated inventory parts, active work orders, historical faults, receiving shipments, related handover notes.</div>
+                <div class="text-services-item1">Crew don’t learn software structures or legacy DB quirks. Ask; review the source; move on.</div>
               </div>
             </div>
           </div>
@@ -181,13 +190,13 @@
               <div class="service-item2-heading">
                 <div class="service-item2-number">(02)</div>
                 <div class="heading-service-item2">
-                  <div class="heading-srv2">Full-Screen Lenses</div>
-                  <div class="txt-heading-srv2">No side cards pretending to be systems</div>
+                  <div class="heading-srv2">Search every domain</div>
+                  <div class="txt-heading-srv2">No matter the source, we’ll find it</div>
                 </div>
               </div>
               <div class="text-service-item2">
                 <div class="margin-srv2-text"></div>
-                <div class="txt-service-item2">Inventory. Receiving. Work Order. Fault. Document. Equipment. Each lens renders only relevant data, respects RLS, enforces signature where required.</div>
+                <div class="txt-service-item2">Manuals &amp; drawings (with revision/page), work orders &amp; faults, parts &amp; inventory, notes &amp; handovers, and email — in one interface.</div>
               </div>
             </div>
           </div>
@@ -197,14 +206,14 @@
               <div class="div-block-74">
                 <div class="text-block-40">(03)</div>
                 <div class="div-block-172">
-                  <div class="text-block-38">One URL</div>
-                  <div class="text-block-39">Navigation memory persists</div>
+                  <div class="text-block-38">Handover without gaps</div>
+                  <div class="text-block-39">You review, we create</div>
                 </div>
               </div>
               <div class="div-block-76">
                 <div class="div-block-77"></div>
                 <div>
-                  <div class="text-block-91">Back. Forward. The system remembers the originating intent for any mutation executed downstream. It keeps vessel knowledge onboard — not inside crew memory.</div>
+                  <div class="text-block-91">Handover drafts link the exact manual pages, work orders, and parts used — assembled automatically from real work. Data continuity.</div>
                 </div>
               </div>
             </div>
@@ -215,14 +224,14 @@
               <div class="div-block-78">
                 <div class="text-block-41">(04)</div>
                 <div class="div-block-173">
-                  <div class="text-block-42">Security & Role Integrity</div>
-                  <div class="text-block-43">Per vessel isolation</div>
+                  <div class="text-block-42">Email that knows the work</div>
+                  <div class="text-block-43">no side channel</div>
                 </div>
               </div>
               <div class="div-block-80">
                 <div class="div-block-81"></div>
                 <div>
-                  <div class="text-block-92">RLS enforced at every query. Crew see their department. HOD and Captain see full scope. Ledger logs every access. No bypassing. No assumption.</div>
+                  <div class="text-block-92">Celeste links emails to the right artifacts. Open a warranty email and see the related work order and parts in the sidebar — no tool switching.</div>
                 </div>
               </div>
             </div>
@@ -236,27 +245,27 @@
       <div class="impact-wrapper">
         <div class="list-impact">
           <div class="heading-impact">
-            <h2 class="impact-heading">Built for Pressure</h2>
+            <h2 class="impact-heading">Measured.</h2>
             <div class="number-impact">(04)</div>
           </div>
           <div class="impact-item">
             <div class="left-item">
               <div class="left-wrap">
-                <h2 class="_92">Faults</h2>
-                <h2 class="percent"></h2>
+                <h2 class="_92">99.99</h2>
+                <h2 class="percent">%</h2>
               </div>
-              <div class="left-text">& inspections</div>
+              <div class="left-text">SLA uptime target</div>
             </div>
             <div class="center-item">
-              <h2 class="boosted">Handovers</h2>
-              <div class="mid-text">& disputes</div>
+              <h2 class="boosted">0</h2>
+              <div class="mid-text">knowledge lost by crew change</div>
             </div>
             <div class="right-item">
               <div class="right-wrap">
-                <h2 class="_3x">02:00</h2>
+                <h2 class="_3x">0</h2>
                 <h2 class="x"></h2>
               </div>
-              <div class="right-text">alarms</div>
+              <div class="right-text">shared tenancy</div>
             </div>
           </div>
         </div>
@@ -269,9 +278,9 @@
     <div class="oc-pair">
       <div class="oc-col oc-col--left">
         <div class="oc-text oc-sticky">
-          <div class="single-item-client">Receiving Done Correctly</div>
-          <div class="single-item-title">Operational reality, not a checkbox</div>
-          <div class="single-item-desc">OCR ingestion, value correction, partial shipments, quantity mismatch, damaged goods, wrong items. Anyone may raise a discrepancy. Rejection requires signature. Ledger logs who, what, when, why.</div>
+          <div class="single-item-client">Ledger</div>
+          <div class="single-item-title">See your recent work. Instantly.</div>
+          <div class="single-item-desc">Every manual page, work order, email, and note you touched is recorded. Jump back to the exact point you left off — without re‑searching or retracing steps.</div>
         </div>
       </div>
       <div class="oc-col oc-col--right">
@@ -290,9 +299,9 @@
       </div>
       <div class="oc-col oc-col--right">
         <div class="oc-text oc-sticky">
-          <div class="single-item-client">Day One</div>
-          <div class="single-item-title">Sync PMS. Index manuals, faults, inventory. Enable receiving. Enable email linking.</div>
-          <div class="single-item-desc">From that point: Crew type what they mean. The system resolves context.</div>
+          <div class="single-item-client">Related context</div>
+          <div class="single-item-title">See what's connected. Immediately.</div>
+          <div class="single-item-desc">Open any document and Celeste surfaces what's related — work orders, parts, equipment, handovers, and correspondence. Stay oriented without leaving the page.</div>
         </div>
       </div>
     </div>
@@ -322,7 +331,7 @@
               <div class="ts-img-1"><img src="images/Frame-6.png" loading="lazy" alt="Quick onboarding interface" class="ts-img1"></div>
             </div>
             <div data-w-id="85e13070-322f-e3c5-6ef8-f94138ca6a1e" class="ts-text-wrap1">
-              <div class="ts-text1">Sync PMS</div>
+              <div class="ts-text1">Onboard in hours. Not weeks.</div>
               <div class="ts-list-name">
                 <div class="line1">
                   <div class="ts-item1-name">—</div>
@@ -338,7 +347,7 @@
               <div class="ts-img-2"><img src="images/Frame-7.png" loading="lazy" alt="Document indexing view" class="ts-img2"></div>
             </div>
             <div class="ts-text-wrap2">
-              <div class="ts-text2">Index manuals and faults</div>
+              <div class="ts-text2">Your existing manuals, PDFs, scans, exports, and emails are indexed as they are.</div>
               <div class="ts-list-item2">
                 <div class="ts-line-item2">
                   <div class="ts-item2-name">—</div>
@@ -354,7 +363,7 @@
               <div class="ts-img3"><img src="images/Frame-8.png" loading="lazy" alt="No migration required interface" class="ts-img1"></div>
             </div>
             <div class="ts-text-wrap-3">
-              <div class="ts-text1">Enable receiving</div>
+              <div class="ts-text1">No migration projects. No reformatting exercises.</div>
               <div class="ts-list-name">
                 <div class="line1">
                   <div class="ts-item1-name">—</div>
@@ -370,7 +379,7 @@
               <div class="ts-img4"><img src="images/Image-22_1Image-22.webp" loading="lazy" alt="Searchable records view" class="ts-img2"></div>
             </div>
             <div class="ts-text-wrap-4">
-              <div class="ts-text2">Enable email linking</div>
+              <div class="ts-text2">The vessel’s record becomes searchable immediately.</div>
               <div class="ts-list-item2">
                 <div class="ts-line-item2">
                   <div class="ts-item2-name">—</div>
@@ -389,13 +398,12 @@
     <div class="w-layout-blockcontainer cta-container w-container">
       <div class="cta-wrapper">
         <div class="cta-image">
-          <img src="images/superyacht-stern-wake-luxury-motor-yacht.png" alt="Luxury 30-40m motor yacht underway - CelesteOS superyacht PMS software for captains, owners and yacht management companies" class="cta-background-img">
           <div data-w-id="79de7aa3-7a98-0ebc-6d60-150d14b02321" class="cta-text">
-            <h2 class="cta-heading">Celeste is not decorative software.</h2>
+            <h2 class="cta-heading">Pilot access is limited.</h2>
             <div class="cta-text-wrap">
-              <div class="cta-text1">A deterministic operating surface for vessels that expect traceability, accountability, precision, reduced cognitive overhead. Private onboarding. Annual vessel license. Limited capacity.</div>
+              <div class="cta-text1">Onboarded in hours, not weeks. One vessel at a time. For teams who intend to use Celeste as the work surface.</div>
               <a data-mailto="pilot" href="#" class="hero-button white w-inline-block"><img src="images/arrow-right.svg" loading="lazy" alt="" role="presentation" class="hero-button-icon _2">
-                <div class="text-hero2">Request Access</div><img src="images/arrow-right.svg" loading="lazy" alt="" role="presentation" class="hero-button-icon _1">
+                <div class="text-hero2">Request pilot access</div><img src="images/arrow-right.svg" loading="lazy" alt="" role="presentation" class="hero-button-icon _1">
               </a>
             </div>
           </div>
@@ -439,5 +447,8 @@
   <script src="js/celeste-mailto.js" type="text/javascript"></script>
   <script src="js/celeste-oc.js" type="text/javascript"></script>
   <script src="js/webflow.js" type="text/javascript"></script>
+  <!-- Homepage Enhancement Scripts -->
+  <script src="js/hp-scroll.js" type="text/javascript"></script>
+  <script src="js/hp-nav.js" type="text/javascript"></script>
 </body>
 </html>
