@@ -193,4 +193,126 @@ test.describe('Accessibility: Basic Checks', () => {
     // Log but don't fail - focus indicators vary by browser
     console.log('Focus indicator present:', hasFocusIndicator);
   });
+
+  test('Theme toggle button is accessible', async ({ page }) => {
+    await page.goto('/', { waitUntil: 'networkidle' });
+
+    const toggle = page.locator('#theme-toggle');
+    const toggleExists = await toggle.count() > 0;
+
+    // Skip if toggle not deployed yet
+    test.skip(!toggleExists, 'Theme toggle not yet deployed');
+
+    // Button exists and is visible
+    await expect(toggle).toBeVisible();
+
+    // Has accessible label
+    const ariaLabel = await toggle.getAttribute('aria-label');
+    expect(ariaLabel).toBeTruthy();
+    expect(ariaLabel).toMatch(/toggle|switch|dark|light|mode/i);
+
+    // Has aria-pressed attribute
+    const ariaPressed = await toggle.getAttribute('aria-pressed');
+    expect(ariaPressed).toBeTruthy();
+    expect(['true', 'false']).toContain(ariaPressed);
+
+    // Meets minimum touch target size (40x40)
+    const box = await toggle.boundingBox();
+    expect(box.width).toBeGreaterThanOrEqual(40);
+    expect(box.height).toBeGreaterThanOrEqual(40);
+
+    console.log('Theme toggle:', {
+      ariaLabel,
+      ariaPressed,
+      size: `${box.width}x${box.height}`,
+    });
+  });
+
+  test('Theme toggle switches between light and dark mode', async ({ page }) => {
+    await page.goto('/', { waitUntil: 'networkidle' });
+
+    const toggle = page.locator('#theme-toggle');
+    const toggleExists = await toggle.count() > 0;
+
+    // Skip if toggle not deployed yet
+    test.skip(!toggleExists, 'Theme toggle not yet deployed');
+
+    const html = page.locator('html');
+
+    // Get initial state
+    const initialClass = await html.getAttribute('class');
+    const initialPressed = await toggle.getAttribute('aria-pressed');
+
+    // Click toggle
+    await toggle.click();
+    await page.waitForTimeout(100);
+
+    // Verify state changed
+    const newClass = await html.getAttribute('class');
+    const newPressed = await toggle.getAttribute('aria-pressed');
+
+    expect(newClass).not.toBe(initialClass);
+    expect(newPressed).not.toBe(initialPressed);
+
+    // Verify one of light-mode or dark-mode class is present
+    expect(newClass).toMatch(/light-mode|dark-mode/);
+
+    // Click again to toggle back
+    await toggle.click();
+    await page.waitForTimeout(100);
+
+    const finalClass = await html.getAttribute('class');
+    expect(finalClass).toBe(initialClass);
+
+    console.log('Theme toggle test:', {
+      initial: initialClass,
+      afterToggle: newClass,
+      afterSecondToggle: finalClass,
+    });
+  });
+
+  test('Theme toggle is keyboard accessible', async ({ page, browserName }) => {
+    // Skip on WebKit due to Tab behavior differences
+    test.skip(browserName === 'webkit', 'Safari has different Tab default behavior');
+
+    await page.goto('/', { waitUntil: 'networkidle' });
+
+    const toggle = page.locator('#theme-toggle');
+    const toggleExists = await toggle.count() > 0;
+
+    // Skip if toggle not deployed yet
+    test.skip(!toggleExists, 'Theme toggle not yet deployed');
+
+    const html = page.locator('html');
+    const initialClass = await html.getAttribute('class');
+
+    // Tab to the toggle button
+    let foundToggle = false;
+    for (let i = 0; i < 15; i++) {
+      await page.keyboard.press('Tab');
+      const activeId = await page.evaluate(() => document.activeElement?.id);
+      if (activeId === 'theme-toggle') {
+        foundToggle = true;
+        break;
+      }
+    }
+
+    expect(foundToggle).toBe(true);
+
+    // Press Enter to toggle
+    await page.keyboard.press('Enter');
+    await page.waitForTimeout(100);
+
+    const newClass = await html.getAttribute('class');
+    expect(newClass).not.toBe(initialClass);
+
+    // Press Space to toggle back
+    await page.keyboard.press('Space');
+    await page.waitForTimeout(100);
+
+    const finalClass = await html.getAttribute('class');
+    expect(finalClass).toBe(initialClass);
+
+    console.log('Keyboard toggle test passed');
+  });
 });

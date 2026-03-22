@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Celeste PMS · Search Results</title>
+<link rel="stylesheet" href="prototype-tokens.css">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --surface-active: #2e2e2e;
+  --gold:           #B8935A;
+  --font-serif:     Georgia, 'Times New Roman', serif;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--bg);
+  color: var(--txt-primary);
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  font-size: 13px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── LENS BACKDROP ─── */
+.lens-backdrop {
+  position: fixed; inset: 0; z-index: 0;
+  pointer-events: none; overflow: hidden;
+  background: var(--bg);
+}
+.orb {
+  position: absolute; border-radius: 50%;
+  filter: blur(90px); opacity: 0.5;
+}
+.orb-1 { width: 60vw; height: 60vw; top: -20vw; left: -8vw;
+  background: radial-gradient(circle, rgba(58,124,157,0.50) 0%, transparent 70%); }
+.orb-2 { width: 45vw; height: 45vw; bottom: -12vw; right: -5vw;
+  background: radial-gradient(circle, rgba(30,90,130,0.38) 0%, transparent 70%); }
+.orb-3 { width: 35vw; height: 35vw; top: 45%; left: 50%; transform: translate(-50%,-50%);
+  background: radial-gradient(circle, rgba(20,60,100,0.22) 0%, transparent 70%); }
+
+/* ─── APP SHELL ─── */
+.app { position: relative; z-index: 1; display: flex; flex-direction: column; height: 100vh; }
+
+/* ─── TOP BAR ─── */
+.topbar {
+  height: 40px; flex-shrink: 0;
+  display: flex; align-items: center; padding: 0 20px; gap: 8px;
+  border-bottom: 1px solid var(--border-subtle);
+  background: rgba(12,11,10,0.70);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+}
+.topbar-brand { font-size: 10px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: #4A9EC0; }
+.topbar-sep   { width: 1px; height: 12px; background: var(--border); margin: 0 4px; }
+.topbar-vessel { font-size: 11px; color: var(--txt-tertiary); }
+.topbar-vessel em { font-style: normal; color: rgba(74,158,192,0.80); }
+.topbar-spacer { flex: 1; }
+.topbar-role {
+  font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--txt-ghost);
+  background: var(--surface-elevated);
+  border: 1px solid var(--border);
+  border-radius: 3px; padding: 2px 7px;
+}
+
+/* ─── MAIN STAGE ─── */
+.stage {
+  flex: 1; display: flex; flex-direction: column;
+  align-items: center; justify-content: flex-start;
+  padding-top: 14vh;
+  overflow-y: auto;
+}
+
+/* ─── SEARCH PANEL ─── */
+.search-wrap { width: 100%; max-width: 600px; padding: 0 20px; }
+
+.search-panel {
+  width: 100%;
+  background: rgba(14,12,10,0.72);
+  backdrop-filter: blur(28px); -webkit-backdrop-filter: blur(28px);
+  border-top:    1px solid rgba(255,255,255,0.13);
+  border-right:  1px solid rgba(255,255,255,0.06);
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+  border-left:   1px solid rgba(255,255,255,0.06);
+  border-radius: 4px;
+  box-shadow: 0 20px 80px rgba(0,0,0,0.60), 0 4px 20px rgba(0,0,0,0.40),
+              inset 0 1px 0 rgba(255,255,255,0.05);
+  overflow: hidden;
+}
+
+.search-input-row {
+  display: flex; align-items: center; gap: 10px;
+  padding: 0 14px; height: 50px;
+}
+.search-icon { color: var(--txt-ghost); flex-shrink: 0; }
+.search-icon svg { width: 16px; height: 16px; }
+.search-input {
+  flex: 1; background: none; border: none; outline: none;
+  font-family: var(--font-sans); font-size: 15px;
+  color: var(--txt-primary); caret-color: var(--teal);
+}
+.search-input::placeholder { color: var(--txt-ghost); }
+
+.search-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--teal) 20%, var(--teal) 80%, transparent);
+  opacity: 0.50;
+}
+
+/* ─── QUERY INTERPRETATION PANEL ─── */
+.query-understood {
+  width: 100%; max-width: 600px; padding: 0 20px;
+  margin-top: 6px; margin-bottom: 2px;
+}
+.query-understood-inner {
+  display: flex; align-items: baseline; flex-wrap: wrap; gap: 2px;
+  padding: 5px 10px;
+  border-left: 2px solid var(--teal);
+  opacity: 0.88;
+}
+.understood-label {
+  font-size: 10px; font-style: italic;
+  color: var(--txt-tertiary); margin-right: 6px; flex-shrink: 0;
+}
+.understood-term {
+  font-size: 11px; font-family: var(--font-mono); font-weight: 500;
+  color: var(--mark-colour);
+}
+.understood-sep {
+  font-size: 10px; color: var(--txt-ghost);
+  user-select: none; padding: 0 2px;
+}
+
+/* ─── RESULTS ─── */
+.results-wrap {
+  width: 100%; max-width: 600px; padding: 0 20px;
+  margin-top: 0;
+}
+
+.results-container {
+  background: var(--surface-primary);
+  border-top:    1px solid rgba(255,255,255,0.09);
+  border-right:  1px solid rgba(255,255,255,0.05);
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+  border-left:   1px solid rgba(255,255,255,0.05);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 6px;
+}
+
+.result-group-label {
+  font-size: 9px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--txt-primary);
+  padding: 8px 12px 4px;
+}
+
+.result-row {
+  display: flex; align-items: center; gap: 10px;
+  padding: 8px 12px;
+  cursor: pointer; min-height: 44px;
+  transition: background 60ms;
+  border-top: 1px solid var(--border-subtle);
+}
+.result-row:first-of-type { border-top: none; }
+.result-row:hover { background: rgba(255,255,255,0.04); }
+
+.result-icon { width: 14px; height: 14px; color: var(--txt-tertiary); flex-shrink: 0; }
+.result-text { flex: 1; min-width: 0; }
+.result-title { font-size: 13px; font-weight: 500; color: var(--txt-primary); }
+.result-title mark {
+  background: none; color: var(--mark-colour); font-weight: 600;
+}
+.result-sub {
+  font-size: 10.5px; color: var(--txt-secondary);
+  font-family: var(--font-mono); letter-spacing: 0.03em; margin-top: 1px;
+}
+
+.result-enter { font-size: 10px; color: var(--txt-ghost); opacity: 0; flex-shrink: 0; }
+.result-enter kbd {
+  background: var(--surface-elevated); border-radius: 3px;
+  padding: 1px 5px; font-size: 10px; color: var(--txt-tertiary); font-family: var(--font-mono);
+}
+
+/* ─── SEARCH FOOTER ─── */
+.results-footer-hints {
+  display:flex; align-items:center; gap:4px; padding: 4px 2px;
+}
+.footer-hint { display: flex; align-items: center; gap: 4px; font-size: 10px; color: var(--txt-ghost); }
+.footer-hint kbd {
+  background: var(--surface-elevated); border-radius: 3px;
+  padding: 1px 4px; font-size: 10px; color: rgba(255,255,255,0.30);
+  font-family: var(--font-mono); min-width: 18px; text-align: center;
+}
+.footer-sep { width: 1px; height: 10px; background: var(--border); margin: 0 8px; }
+</style>
+</head>
+<body>
+
+<div class="lens-backdrop">
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+</div>
+
+<div class="app">
+
+  <header class="topbar">
+    <div class="topbar-brand">Celeste</div>
+    <div class="topbar-sep"></div>
+    <div class="topbar-vessel"><em>SY Andromeda</em></div>
+    <div class="topbar-spacer"></div>
+    <div class="topbar-role">Chief Engineer</div>
+  </header>
+
+  <div class="stage">
+
+    <div style="display: flex; flex-direction: column; align-items: center; width: 100%;">
+
+      <div class="search-wrap">
+        <div class="search-panel">
+          <div class="search-input-row">
+            <div class="search-icon">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8">
+                <circle cx="6.5" cy="6.5" r="4.5"/><path d="M10 10l3 3"/>
+              </svg>
+            </div>
+            <input class="search-input" value="oil" readonly />
+          </div>
+          <div class="search-divider"></div>
+        </div>
+      </div>
+
+      <div class="query-understood">
+        <div class="query-understood-inner">
+          <span class="understood-label">Understood</span>
+          <span class="understood-term">oil filter</span>
+          <span class="understood-sep">·</span>
+          <span class="understood-term">main engine</span>
+          <span class="understood-sep">·</span>
+          <span class="understood-term">location</span>
+        </div>
+      </div>
+
+      <div class="results-wrap">
+
+        <div class="results-container">
+          <div class="result-group-label">Faults</div>
+          <div class="result-row">
+            <svg class="result-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6">
+              <path d="M8 3L14 13H2L8 3Z"/><path d="M8 7v3M8 11.5v.5"/>
+            </svg>
+            <div class="result-text">
+              <div class="result-title">Engine Room — <mark>Oil</mark> Leak</div>
+              <div class="result-sub">FAULT · WO·1234 · CRITICAL · 2 DAYS OPEN</div>
+            </div>
+            <div class="result-enter"><kbd>↵</kbd></div>
+          </div>
+          <div class="result-row">
+            <svg class="result-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6">
+              <circle cx="8" cy="8" r="5.5"/><path d="M8 5v3M8 9.5v.5"/>
+            </svg>
+            <div class="result-text">
+              <div class="result-title">Stabiliser Port — <mark>Oil</mark> Contamination</div>
+              <div class="result-sub">FAULT · WO·1156 · HIGH · 1 DAY OPEN</div>
+            </div>
+            <div class="result-enter"><kbd>↵</kbd></div>
+          </div>
+        </div>
+
+        <div class="results-container">
+          <div class="result-group-label">Inventory</div>
+          <div class="result-row">
+            <svg class="result-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6">
+              <rect x="2" y="6" width="12" height="8" rx="1"/><path d="M5 6V4.5a3 3 0 016 0V6"/>
+            </svg>
+            <div class="result-text">
+              <div class="result-title"><mark>Oil</mark> Filter 5W-40</div>
+              <div class="result-sub">INVENTORY · 2 REMAINING OF 10 · CRITICAL STOCK</div>
+            </div>
+            <div class="result-enter"><kbd>↵</kbd></div>
+          </div>
+          <div class="result-row">
+            <svg class="result-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6">
+              <rect x="2" y="6" width="12" height="8" rx="1"/><path d="M5 6V4.5a3 3 0 016 0V6"/>
+            </svg>
+            <div class="result-text">
+              <div class="result-title">Hydraulic <mark>Oil</mark> — ISO 46</div>
+              <div class="result-sub">INVENTORY · 8 REMAINING · OK</div>
+            </div>
+            <div class="result-enter"><kbd>↵</kbd></div>
+          </div>
+        </div>
+
+        <div class="results-container">
+          <div class="result-group-label">Documents</div>
+          <div class="result-row">
+            <svg class="result-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6">
+              <rect x="3" y="2" width="10" height="12" rx="1.5"/><path d="M6 6h4M6 9h2.5"/>
+            </svg>
+            <div class="result-text">
+              <div class="result-title">Engine <mark>Oil</mark> Change Procedure</div>
+              <div class="result-sub">DOCUMENT · MACHINERY MANUAL · PAGE 42</div>
+            </div>
+            <div class="result-enter"><kbd>↵</kbd></div>
+          </div>
+        </div>
+
+        <div style="height: 6px;"></div>
+        <div class="results-footer-hints">
+          <span style="font-size:10px; color: var(--txt-tertiary); font-family: var(--font-mono);">5 results for "oil"</span>
+          <span style="flex:1"></span>
+          <div class="footer-hint"><kbd>↑</kbd><kbd>↓</kbd> Navigate</div>
+          <div class="footer-sep"></div>
+          <div class="footer-hint"><kbd>↵</kbd> Open</div>
+          <div class="footer-sep"></div>
+          <div class="footer-hint"><kbd>Esc</kbd> Clear</div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Celeste PMS · Email Lens</title>
+<link rel="stylesheet" href="lens-base.css">
+<style>
+/* ─── EMAIL-SPECIFIC STYLES ─── */
+.email-body {
+  padding: 24px 0;
+}
+.email-text {
+  font-size: 14px;
+  color: var(--txt2);
+  line-height: 1.65;
+  max-width: 600px;
+}
+.email-text p {
+  margin-bottom: 12px;
+}
+.email-text p:last-child { margin-bottom: 0; }
+
+.email-quoted {
+  border-left: 2px solid var(--border-sub);
+  padding-left: 16px;
+  margin-top: 16px;
+  color: var(--txt3);
+}
+.email-quoted .quoted-header {
+  font-size: 11px;
+  font-family: var(--font-mono);
+  color: var(--txt-ghost);
+  margin-bottom: 8px;
+}
+.email-quoted p {
+  font-size: 13px;
+  color: var(--txt3);
+  line-height: 1.6;
+}
+
+.thread-count {
+  font-size: 11px;
+  font-family: var(--font-mono);
+  color: var(--txt3);
+  background: var(--neutral-bg);
+  padding: 2px 8px;
+  border-radius: 3px;
+  border: 1px solid var(--border-faint);
+}
+
+/* Related entity rows (reuse doc-row pattern from lens-base) */
+.related-row {
+  display: flex; align-items: center; gap: 12px;
+  padding: 10px 14px; border-radius: 6px;
+  cursor: pointer; transition: background 60ms; min-height: 44px;
+}
+.related-row:hover { background: var(--surface-hover); }
+.related-icon {
+  width: 28px; height: 28px; border-radius: 6px;
+  background: var(--teal-bg);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.related-icon svg { width: 14px; height: 14px; color: var(--mark); }
+.related-info { flex: 1; }
+.related-name { font-size: 13px; font-weight: 500; color: var(--txt); }
+.related-meta { font-size: 11px; color: var(--txt3); margin-top: 1px; }
+.related-chevron { color: var(--txt-ghost); }
+</style>
+</head>
+<body>
+<div class="panel">
+
+  <!-- ─── HEADER ─── -->
+  <div class="lens-hdr">
+    <button class="hdr-back">
+      <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6">
+        <path d="M10 3L5 8l5 5"/>
+      </svg>
+    </button>
+    <span class="hdr-type">Email</span>
+    <div class="hdr-actions">
+      <button class="hdr-btn">
+        <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6">
+          <path d="M14 2L7 9M14 2l-5 12-2-5-5-2 12-5z"/>
+        </svg>
+        Reply
+      </button>
+    </div>
+    <button class="hdr-close">
+      <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6">
+        <path d="M4 4l8 8M12 4l-8 8"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- ─── BODY ─── -->
+  <div class="lens-body">
+
+    <!-- Identity Strip -->
+    <div class="identity">
+      <div class="identity-title">Re: Engine Parts Order — Delivery Confirmation</div>
+      <div class="detail-lines">
+        <div class="detail-line">
+          <span class="detail-label">From</span>
+          <span class="detail-val">parts@marinespares.com</span>
+        </div>
+        <div class="detail-line">
+          <span class="detail-label">To</span>
+          <span class="detail-val"><span class="crew-link">R. Chen</span> · chief-eng@sy-andromeda.com</span>
+        </div>
+        <div class="detail-line">
+          <span class="detail-label">Date</span>
+          <span class="detail-val mono">03 Feb 2026 · 14:22 UTC</span>
+        </div>
+        <div class="detail-line">
+          <span class="detail-label">Thread</span>
+          <span class="thread-count">3 messages</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Email Body -->
+    <div class="email-body">
+      <div class="email-text">
+        <p>Hi Richard,</p>
+        <p>Confirming your order has shipped. Tracking attached. Expected delivery to <strong>Palma de Mallorca</strong> port agent on <strong>5 Feb 2026</strong>.</p>
+        <p>Items shipped:<br>
+        — Oil Filter 5W-40 × 6 (Part# OFM-5W40-CAT)<br>
+        — Fuel Filter Element × 4 (Part# FF-CAT-001)<br>
+        — Coolant Hose Clip P3 × 2 (Part# CHC-P3-SS)</p>
+        <p>Please confirm receipt once delivered.</p>
+        <p>Regards,<br>Marine Spares International</p>
+      </div>
+
+      <div class="email-quoted">
+        <div class="quoted-header">On 01 Feb 2026, R. Chen wrote:</div>
+        <p>Please process attached PO for the following items. Delivery to Palma port agent (STP Mallorca). Urgent — generator service overdue.</p>
+      </div>
+    </div>
+
+    <!-- ─── RELATED ENTITIES ─── -->
+    <div class="section">
+      <div class="sec-hdr">
+        <svg class="sec-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6">
+          <circle cx="8" cy="8" r="2.5"/><path d="M8 2v3M8 11v3M2 8h3M11 8h3"/>
+        </svg>
+        <span class="sec-title">Related</span>
+        <span class="sec-count">3</span>
+        <svg class="sec-chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6">
+          <path d="M4 6l4 4 4-4"/>
+        </svg>
+      </div>
+      <div class="sec-body">
+        <div class="related-row">
+          <div class="related-icon">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6">
+              <rect x="4" y="2" width="8" height="2" rx="1"/><rect x="3" y="3.5" width="10" height="10.5" rx="1.5"/><path d="M6 8h4M6 10.5h2.5"/>
+            </svg>
+          </div>
+          <div class="related-info">
+            <div class="related-name">WO-0892 · Main Generator Service</div>
+            <div class="related-meta">Work Order · In Progress · 5d overdue</div>
+          </div>
+          <svg class="related-chevron" viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6">
+            <path d="M6 3l5 5-5 5"/>
+          </svg>
+        </div>
+        <div class="related-row">
+          <div class="related-icon">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6">
+              <rect x="2" y="6" width="12" height="8" rx="1"/><path d="M5 6V4.5a3 3 0 016 0V6"/><path d="M2 9.5h12"/>
+            </svg>
+          </div>
+          <div class="related-info">
+            <div class="related-name">Oil Filter 5W-40</div>
+            <div class="related-meta">Inventory · 2 remaining · Critical stock</div>
+          </div>
+          <svg class="related-chevron" viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6">
+            <path d="M6 3l5 5-5 5"/>
+          </svg>
+        </div>
+        <div class="related-row">
+          <div class="related-icon">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6">
+              <rect x="3" y="2" width="10" height="12" rx="1.5"/><path d="M6 6h4M6 9h2.5"/>
+            </svg>
+          </div>
+          <div class="related-info">
+            <div class="related-name">Main Generator</div>
+            <div class="related-meta">Equipment · MTU 12V 2000 · 8,234 hrs</div>
+          </div>
+          <svg class="related-chevron" viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6">
+            <path d="M6 3l5 5-5 5"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script src="lens-base.js"></script>
+</body>
+</html>
