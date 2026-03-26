@@ -1,15 +1,17 @@
 /**
  * HP-NAV.CSS
- * Nav blur on scroll - LIGHT MODE ONLY
- *
- * This is the ONLY enhancement: a subtle blur when scrolled.
- * DO NOT change colors. DO NOT add dark mode.
+ * Nav blur on scroll — respects light/dark mode
  */
 
 .navbar-section.scrolled {
-  background: rgba(250, 250, 250, 0.85);  /* Light mode - matches #fafafa */
+  background: rgba(250, 250, 250, 0.85);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.06);  /* Subtle, Apple-level */
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
   transition: background 200ms ease, border-color 200ms ease;
+}
+
+.dark-mode .navbar-section.scrolled {
+  background: rgba(12, 11, 10, 0.85);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }

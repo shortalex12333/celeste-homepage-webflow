@@ -10,8 +10,9 @@
   --_colors---border: rgba(0, 0, 0, 0.08);
   --_colors---card-bg: #ffffff;
   --_size---font-family: 'DM Sans', sans-serif;
+  --_size---font-family-display: 'Eloquia Display', system-ui, -apple-system, sans-serif;
+  --_size---font-family-accent: 'Cormorant Garamond', Georgia, serif;
   --_size---font-family-mono: 'IBM Plex Mono', monospace;
-  --_size---font-family-serif: 'Cormorant Garamond', serif;
   --_size---bodytext-3: 16px;
   --_size---line-height2: 1.2em;
   --_size---font-weight-body: 400;
@@ -424,12 +425,13 @@ blockquote {
 }
 
 .about-section {
-  z-index: 2;
+  z-index: 4;
   padding: 60px var(--padding-v2);
   width: 100%;
   height: 100vh;
   position: relative;
   top: auto;
+  background: var(--_colors---surface);
 }
 
 .about-wrapper {
@@ -3951,11 +3953,30 @@ blockquote {
    All contrast ratios verified for accessibility
    ========================================================================== */
 
-/* Font family assignments */
+/* Font family assignments — Eloquia Display for all headings */
+.heading,
+.cta-heading,
+.about-heading,
+.heading-service,
+.heading--benefits,
+.impact-heading,
+.footer-heading {
+  font-family: var(--_size---font-family-display);
+}
+
+/* Large headings (≥48px) — Light weight for elegance */
 .heading,
 .cta-heading {
-  font-family: var(--_size---font-family-serif);
   font-weight: 300;
+}
+
+/* Mid headings (36–48px) — Regular weight for authority */
+.about-heading,
+.heading-service,
+.heading--benefits,
+.impact-heading,
+.footer-heading {
+  font-weight: 400;
 }
 
 .about-subtext,
@@ -4632,7 +4653,7 @@ html.dark-mode {
 }
 
 .cta-heading {
-  font-family: var(--_size---font-family-serif);
+  font-family: var(--_size---font-family-display);
   font-size: 28px;
   font-weight: 300;
   color: var(--_colors---text-color);
@@ -4640,7 +4661,12 @@ html.dark-mode {
   line-height: 1.3;
 }
 
-.cta-heading em { font-style: italic; color: var(--_colors---accent); }
+.cta-heading em {
+  font-family: var(--_size---font-family-accent);
+  font-style: italic;
+  font-weight: 300;
+  color: var(--_colors---accent);
+}
 
 .cta-body {
   font-size: 13px;
