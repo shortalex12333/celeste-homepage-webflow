@@ -106,19 +106,47 @@
 
       <p>The value of maintenance data is not in the records. It is in the connections between them. Seven specific connections determine whether a system produces operational <span class="accent-word">intelligence</span> or stores isolated records.</p>
 
-      <p><strong>1. Fault to equipment to warranty period.</strong> When a fault is logged against a piece of equipment, the system should immediately show whether that equipment is under warranty and what documentation the manufacturer requires to support a claim. An engineer should not need to check the warranty tracker separately to discover, after completing a repair at the vessel's expense, that the component was covered. <a href="/blogs/warranty-claim-documentation">The cost of missing this connection is a denied claim worth EUR 20,000 to EUR 100,000</a>.</p>
+      <div class="connection-card">
+        <div class="connection-card__number">01</div>
+        <div class="connection-card__title">Fault to equipment to warranty period</div>
+        <p class="connection-card__body">When a fault is logged against a piece of equipment, the system should immediately show whether that equipment is under warranty and what documentation the manufacturer requires to support a claim. An engineer should not need to check the warranty tracker separately to discover, after completing a repair at the vessel's expense, that the component was covered. <a href="/blogs/warranty-claim-documentation">The cost of missing this connection is a denied claim worth EUR 20,000 to EUR 100,000</a>.</p>
+      </div>
 
-      <p><strong>2. Work order to parts used to inventory level.</strong> When a work order is completed and parts are consumed, the inventory should update automatically. If the part used was the last in stock, a reorder alert should trigger. If the part is on backorder, the next work order requiring it should reflect that. An engineer should never discover mid-repair that a critical component is out of stock because the work order system did not check.</p>
+      <div class="connection-card">
+        <div class="connection-card__number">02</div>
+        <div class="connection-card__title">Work order to parts used to inventory level</div>
+        <p class="connection-card__body">When a work order is completed and parts are consumed, the inventory should update automatically. If the part used was the last in stock, a reorder alert should trigger. If the part is on backorder, the next work order requiring it should reflect that. An engineer should never discover mid-repair that a critical component is out of stock because the work order system did not check.</p>
+      </div>
 
-      <p><strong>3. Fault to previous faults on the same equipment.</strong> When a fault is logged, the system should surface all previous fault records for the same equipment — not as a separate search, but as context presented alongside the current defect. <a href="/blogs/fault-patterns-superyachts">A recurring failure that has been logged three times by three different engineers across two crew rotations should be visible as a pattern</a>, not hidden as three isolated entries.</p>
+      <div class="connection-card">
+        <div class="connection-card__number">03</div>
+        <div class="connection-card__title">Fault to previous faults on the same equipment</div>
+        <p class="connection-card__body">When a fault is logged, the system should surface all previous fault records for the same equipment — not as a separate search, but as context presented alongside the current defect. <a href="/blogs/fault-patterns-superyachts">A recurring failure that has been logged three times by three different engineers across two crew rotations should be visible as a pattern</a>, not hidden as three isolated entries.</p>
+      </div>
 
-      <p><strong>4. Equipment to all maintenance history to all associated costs.</strong> One view from a piece of equipment to every work order performed on it, every part consumed, every hour of labour logged, and the total cost of ownership over time. The maintenance schedule should know about the budget. An engineer who is about to authorise a EUR 4,000 repair should see that the quarterly maintenance budget has EUR 1,200 remaining — not discover it when the purchase order is rejected.</p>
+      <div class="connection-card">
+        <div class="connection-card__number">04</div>
+        <div class="connection-card__title">Equipment to all maintenance history to all associated costs</div>
+        <p class="connection-card__body">One view from a piece of equipment to every work order performed on it, every part consumed, every hour of labour logged, and the total cost of ownership over time. The maintenance schedule should know about the budget. An engineer who is about to authorise a EUR 4,000 repair should see that the quarterly maintenance budget has EUR 1,200 remaining — not discover it when the purchase order is rejected.</p>
+      </div>
 
-      <p><strong>5. Email to work order or fault it relates to.</strong> Supplier correspondence — technical advisories, quote confirmations, warranty terms, delivery schedules — is operational data. On most vessels, it lives in an email inbox that belongs to an individual crew member. When that crew member rotates off, the correspondence leaves with them. Email that relates to a work order or fault should be linked to that record, searchable by the next engineer, and preserved independently of any individual's account.</p>
+      <div class="connection-card">
+        <div class="connection-card__number">05</div>
+        <div class="connection-card__title">Email to work order or fault it relates to</div>
+        <p class="connection-card__body">Supplier correspondence — technical advisories, quote confirmations, warranty terms, delivery schedules — is operational data. On most vessels, it lives in an email inbox that belongs to an individual crew member. When that crew member rotates off, the correspondence leaves with them. Email that relates to a work order or fault should be linked to that record, searchable by the next engineer, and preserved independently of any individual's account.</p>
+      </div>
 
-      <p><strong>6. Certificate to equipment to compliance deadline.</strong> An expiring certificate should surface the equipment it relates to, any pending maintenance that must be completed before renewal, and the compliance deadline that drives the timeline. A certificate that expires in 45 days while a required maintenance task is scheduled for day 60 is a compliance failure waiting to happen — but only visible if the certificate, the equipment, and the maintenance schedule are connected.</p>
+      <div class="connection-card">
+        <div class="connection-card__number">06</div>
+        <div class="connection-card__title">Certificate to equipment to compliance deadline</div>
+        <p class="connection-card__body">An expiring certificate should surface the equipment it relates to, any pending maintenance that must be completed before renewal, and the compliance deadline that drives the timeline. A certificate that expires in 45 days while a required maintenance task is scheduled for day 60 is a compliance failure waiting to happen — but only visible if the certificate, the equipment, and the maintenance schedule are connected.</p>
+      </div>
 
-      <p><strong>7. <a href="/blogs/engineering-handover-superyacht">Handover</a> to all active faults, open work orders, pending parts, and upcoming deadlines.</strong> The engineering handover should not be a document that the departing engineer assembles manually from memory and scattered records. It should be a compiled report generated from every domain — current equipment status, outstanding defects, parts on order, certificate expiry dates, budget status, and operational notes — automatically reflecting the actual state of <span class="accent-word">the vessel</span> at the moment of crew transition.</p>
+      <div class="connection-card">
+        <div class="connection-card__number">07</div>
+        <div class="connection-card__title"><a href="/blogs/engineering-handover-superyacht">Handover</a> to all active faults, open work orders, pending parts, and upcoming deadlines</div>
+        <p class="connection-card__body">The engineering handover should not be a document that the departing engineer assembles manually from memory and scattered records. It should be a compiled report generated from every domain — current equipment status, outstanding defects, parts on order, certificate expiry dates, budget status, and operational notes — automatically reflecting the actual state of <span class="accent-word">the vessel</span> at the moment of crew transition.</p>
+      </div>
 
       <h2>Why feature lists are misleading when comparing yacht maintenance systems</h2>
 
@@ -155,6 +183,8 @@
       <p>If any of those answers require navigating to a different part of the system, the system has the features but not the connections. It is storing data, not creating intelligence.</p>
 
       <p>Do not ask what features it has. Ask what it connects. The answer will tell you more than any feature list.</p>
+
+      <div class="pull-quote">Do not ask what features it has. Ask what it connects.</div>
 
       <h2>Summary</h2>
 
