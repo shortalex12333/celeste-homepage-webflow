@@ -1,0 +1,29 @@
+# CelesteOS
+> Search-first engineering intelligence for superyachts (30-70m).
+
+CelesteOS is a vessel knowledge management system that connects maintenance records, fault history, parts, certificates, and compliance into a single searchable interface.
+
+## Core Capabilities
+- NLP search across all vessel knowledge — manuals, faults, work orders, parts, history, handovers
+- Auto-generated engineering handover documents pulling from every operational domain
+- Signed immutable audit trail — every action recorded, attributable, append-only
+- Cross-domain actions — fault to work order to parts to purchase order, all connected
+- Email integration — Microsoft Exchange correspondence searchable alongside vessel records
+
+## Who Uses It
+- Chief Engineers — primary user
+- ETOs (Electronics/Technical Officers)
+- Captains
+- Fleet Technical Managers (shore-based)
+
+## Target Vessels
+Private and charter superyachts, 30-70m.
+
+## Links
+- Website: https://celeste7.ai
+- Product: https://app.celeste7.ai
+- LinkedIn: https://www.linkedin.com/company/celesteos/
+- Blog: https://celeste7.ai/blogs
+
+## Contact
+contact@celeste7.ai
