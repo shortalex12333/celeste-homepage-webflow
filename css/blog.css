@@ -1,9 +1,10 @@
 /**
  * BLOG.CSS — Blog section styles for celeste7.ai
  * Extends existing site tokens. Matches homepage feel.
+ * Reference: Linear.app blog, Vercel blog, OpenAI blog
  *
  * Font system: Eloquia Display (headlines), DM Sans (body),
- * IBM Plex Mono (metadata), Cormorant Garamond (accent)
+ * IBM Plex Mono (metadata), Cormorant Garamond (accent/pull quotes)
  */
 
 /* =============================================================================
@@ -28,9 +29,6 @@
 
 /* =============================================================================
    TEAL OVERRIDE — Brand-spec teal for blog pages
-   Upstream celeste7homepage.webflow.css sets --_colors---accent: #3A7C9D (off-spec).
-   Correct value per brand guidelines for light backgrounds: #2B7BA3.
-   This override will become redundant when AUDIT-001 fixes the global variable.
    ============================================================================= */
 
 .blog-page {
@@ -42,13 +40,13 @@
    ============================================================================= */
 
 .blog-container {
-  max-width: 940px;
+  max-width: 1000px;
   margin: 0 auto;
   padding: 0 clamp(24px, 5vw, 80px);
 }
 
 .blog-container--narrow {
-  max-width: 720px;
+  max-width: 800px;
   margin: 0 auto;
   padding: 0 clamp(24px, 5vw, 80px);
 }
@@ -131,7 +129,7 @@
   line-height: 1.6;
   color: var(--_colors---color-5);
   margin: 0 0 16px 0;
-  max-width: 640px;
+  max-width: 700px;
 }
 
 .blog-card__link {
@@ -195,23 +193,35 @@
   font-size: clamp(18px, 2vw, 20px);
   font-weight: 400;
   line-height: 1.6;
-  color: var(--_colors---color-6);
+  color: var(--_colors---color-7);
   margin: 0;
   font-style: italic;
 }
 
-/* Article body */
+/* =============================================================================
+   ARTICLE BODY — Enhanced contrast + visual variety
+   ============================================================================= */
+
 .article-body {
   margin-bottom: 80px;
 }
 
+/* Section headings — stronger visual weight with spacing */
 .article-body h2 {
   font-family: 'Eloquia Display', 'Inter Tight', sans-serif;
   font-size: clamp(24px, 3vw, 32px);
   font-weight: 400;
   line-height: 1.2;
   color: var(--_colors---text-color);
-  margin: 56px 0 24px 0;
+  margin: 80px 0 28px 0;
+  padding-top: 40px;
+  border-top: 2px solid rgba(0, 0, 0, 0.08);
+}
+
+.article-body h2:first-child {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: none;
 }
 
 .article-body h3 {
@@ -223,24 +233,25 @@
   margin: 40px 0 16px 0;
 }
 
+/* Body text — STRONGER CONTRAST: #262626 instead of #525252 */
 .article-body p {
   font-family: 'DM Sans', sans-serif;
   font-size: 18px;
   font-weight: 400;
-  line-height: 1.7;
-  color: var(--_colors---color-6);
+  line-height: 1.8;
+  color: var(--_colors---color-8);
   margin: 0 0 24px 0;
 }
 
 .article-body strong {
   font-weight: 500;
-  color: var(--_colors---color-8);
+  color: var(--_colors---text-color);
 }
 
 .article-body a {
   color: var(--_colors---accent);
   text-decoration: none;
-  border-bottom: 1px solid transparent;
+  border-bottom: 1px solid rgba(43, 123, 163, 0.3);
   transition: border-color 150ms ease-out;
 }
 
@@ -248,32 +259,134 @@
   border-bottom-color: var(--_colors---accent);
 }
 
+/* =============================================================================
+   PULL QUOTES — Cormorant Garamond for key statements
+   Break up walls of text with editorial authority
+   ============================================================================= */
+
+.pull-quote {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(24px, 3vw, 32px);
+  line-height: 1.4;
+  color: var(--_colors---accent);
+  margin: 56px 0;
+  padding: 32px 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  text-align: center;
+  max-width: 680px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* =============================================================================
+   STAT CALLOUTS — Large typographic treatment for key figures
+   Eloquia Display for numbers, IBM Plex Mono for labels
+   ============================================================================= */
+
+.stat-callout {
+  margin: 56px 0;
+  padding: 48px 0;
+  text-align: center;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.stat-callout__number {
+  font-family: 'Eloquia Display', 'Inter Tight', sans-serif;
+  font-size: clamp(48px, 6vw, 72px);
+  font-weight: 300;
+  line-height: 1;
+  color: var(--_colors---text-color);
+  margin-bottom: 12px;
+}
+
+.stat-callout__label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--_colors---color-5);
+}
+
+/* =============================================================================
+   CONNECTION CARDS — For Article #6's 7 connections
+   Visually distinct blocks, not plain numbered lists
+   ============================================================================= */
+
+.connection-card {
+  background: rgba(0, 0, 0, 0.02);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 12px;
+  padding: 28px 32px;
+  margin: 24px 0;
+}
+
+.connection-card__number {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--_colors---accent);
+  letter-spacing: 0.05em;
+  margin-bottom: 8px;
+}
+
+.connection-card__title {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--_colors---text-color);
+  margin-bottom: 10px;
+  line-height: 1.3;
+}
+
+.connection-card__body {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.7;
+  color: var(--_colors---color-7);
+  margin: 0;
+}
+
+/* =============================================================================
+   BLOCKQUOTES — Editorial weight
+   ============================================================================= */
+
 .article-body blockquote {
-  margin: 32px 0;
-  padding: 0 0 0 24px;
+  margin: 40px 0;
+  padding: 0 0 0 28px;
   border-left: 3px solid var(--_colors---accent);
 }
 
 .article-body blockquote p {
   font-style: italic;
-  color: var(--_colors---color-5);
+  color: var(--_colors---color-7);
+  font-size: 18px;
 }
+
+/* =============================================================================
+   LISTS — Stronger contrast
+   ============================================================================= */
 
 .article-body ul,
 .article-body ol {
   font-family: 'DM Sans', sans-serif;
   font-size: 18px;
   font-weight: 400;
-  line-height: 1.7;
-  color: var(--_colors---color-6);
+  line-height: 1.8;
+  color: var(--_colors---color-8);
   margin: 0 0 24px 0;
   padding-left: 24px;
 }
 
 .article-body li {
-  margin-bottom: 8px;
-  color: var(--_colors---color-6);
-  line-height: 1.7;
+  margin-bottom: 10px;
+  color: var(--_colors---color-8);
+  line-height: 1.8;
 }
 
 .article-body code {
@@ -281,14 +394,17 @@
   font-size: 15px;
   font-weight: 400;
   color: var(--_colors---color-7);
-  background: rgba(0, 0, 0, 0.03);
+  background: rgba(0, 0, 0, 0.04);
   padding: 2px 6px;
   border-radius: 4px;
 }
 
-/* Article images */
+/* =============================================================================
+   ARTICLE IMAGES — Integrated into reading flow
+   ============================================================================= */
+
 .article-body figure {
-  margin: 40px 0;
+  margin: 48px -40px;
 }
 
 .article-body figure img {
@@ -305,10 +421,14 @@
   font-weight: 400;
   color: var(--_colors---color-4);
   margin-top: 12px;
+  padding: 0 40px;
   line-height: 1.5;
 }
 
-/* Cormorant accent — use sparingly */
+/* =============================================================================
+   CORMORANT ACCENT — Scalpel rule
+   ============================================================================= */
+
 .accent-word {
   font-family: 'Cormorant Garamond', serif;
   font-style: italic;
@@ -316,23 +436,59 @@
   color: #2B7BA3;
 }
 
-/* Summary list */
+/* =============================================================================
+   SUMMARY LIST — Stronger presence
+   ============================================================================= */
+
 .article-body .summary-list {
-  background: rgba(0, 0, 0, 0.02);
+  background: rgba(0, 0, 0, 0.03);
+  border: 1px solid rgba(0, 0, 0, 0.06);
   border-radius: 12px;
-  padding: 32px;
-  margin: 40px 0;
+  padding: 36px;
+  margin: 48px 0;
+  list-style: none;
 }
 
 .article-body .summary-list li {
-  margin-bottom: 12px;
+  margin-bottom: 16px;
+  padding-left: 20px;
+  position: relative;
+  color: var(--_colors---color-8);
 }
 
-/* Sources */
+.article-body .summary-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 10px;
+  width: 6px;
+  height: 6px;
+  background: var(--_colors---accent);
+  border-radius: 50%;
+}
+
+.article-body .summary-list li:last-child {
+  margin-bottom: 0;
+}
+
+/* =============================================================================
+   SOURCES — Inline credibility
+   ============================================================================= */
+
 .article-sources {
-  border-top: 1px solid rgba(0, 0, 0, 0.06);
-  padding-top: 32px;
-  margin-top: 48px;
+  border-top: 2px solid rgba(0, 0, 0, 0.08);
+  padding-top: 40px;
+  margin-top: 64px;
+}
+
+.article-sources__heading {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--_colors---color-4);
+  margin-bottom: 20px;
 }
 
 .article-sources p {
@@ -340,27 +496,29 @@
   font-size: 14px;
   font-weight: 400;
   line-height: 1.6;
-  color: var(--_colors---color-4);
-  margin: 0 0 8px 0;
+  color: var(--_colors---color-5);
+  margin: 0 0 10px 0;
 }
 
 .article-sources a {
-  color: var(--_colors---color-4);
+  color: var(--_colors---accent);
   text-decoration: none;
-  border-bottom: 1px solid transparent;
-  transition: border-color 150ms ease-out, color 150ms ease-out;
+  border-bottom: 1px solid rgba(43, 123, 163, 0.3);
+  transition: border-color 150ms ease-out;
   word-break: break-all;
 }
 
 .article-sources a:hover {
-  color: var(--_colors---accent);
   border-bottom-color: var(--_colors---accent);
 }
 
-/* Article footer — CTA */
+/* =============================================================================
+   ARTICLE CTA — Footer
+   ============================================================================= */
+
 .article-cta {
-  border-top: 1px solid rgba(0, 0, 0, 0.06);
-  padding: 64px 0;
+  border-top: 2px solid rgba(0, 0, 0, 0.08);
+  padding: 80px 0;
   text-align: center;
 }
 
@@ -381,7 +539,7 @@
   font-weight: 500;
   color: var(--_colors---text-color);
   text-decoration: none;
-  padding: 12px 24px;
+  padding: 14px 28px;
   border: 1px solid rgba(0, 0, 0, 0.12);
   border-radius: 9999px;
   transition: background-color 120ms ease-out, transform 120ms ease-out;
@@ -392,7 +550,7 @@
 }
 
 /* =============================================================================
-   SCROLL ANIMATIONS — Same pattern as homepage
+   SCROLL ANIMATIONS — Header and index cards only
    ============================================================================= */
 
 .blog-reveal {
@@ -406,7 +564,6 @@
   transform: translateY(0);
 }
 
-/* Stagger children */
 .blog-reveal.visible .blog-stagger:nth-child(1) { transition-delay: 0ms; }
 .blog-reveal.visible .blog-stagger:nth-child(2) { transition-delay: 80ms; }
 .blog-reveal.visible .blog-stagger:nth-child(3) { transition-delay: 160ms; }
@@ -429,9 +586,11 @@
    ============================================================================= */
 
 @media screen and (max-width: 991px) {
-  .blog-container,
-  .blog-container--narrow {
+  .blog-container {
     max-width: 728px;
+  }
+  .blog-container--narrow {
+    max-width: 680px;
   }
 }
 
@@ -456,15 +615,35 @@
   }
 
   .article-body h2 {
-    margin-top: 40px;
+    margin-top: 56px;
+    padding-top: 28px;
   }
 
   .article-body figure {
-    margin: 24px -16px;
+    margin: 32px -16px;
   }
 
   .article-body figure img {
     border-radius: 8px;
+  }
+
+  .pull-quote {
+    font-size: 22px;
+    margin: 40px 0;
+    padding: 24px 0;
+  }
+
+  .stat-callout {
+    margin: 40px 0;
+    padding: 36px 0;
+  }
+
+  .stat-callout__number {
+    font-size: 48px;
+  }
+
+  .connection-card {
+    padding: 20px 24px;
   }
 }
 
