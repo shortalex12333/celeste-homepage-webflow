@@ -29,10 +29,159 @@
 
 /* =============================================================================
    TEAL OVERRIDE — Brand-spec teal for blog pages
+   Light mode: #2B7BA3, Dark mode: #5AABCC
    ============================================================================= */
 
 .blog-page {
   --_colors---accent: #2B7BA3;
+}
+
+/* =============================================================================
+   DARK MODE — Ensure blog content is readable on dark backgrounds
+   The main CSS (celeste7homepage.webflow.css) overrides CSS variables for
+   dark mode, but blog-specific classes need explicit dark mode handling
+   for any hardcoded colours or overrides.
+   ============================================================================= */
+
+.dark-mode .blog-page {
+  --_colors---accent: #5AABCC;
+}
+
+.dark-mode .article-body p,
+.dark-mode .article-body li {
+  color: var(--_colors---color-8);
+}
+
+.dark-mode .article-body strong {
+  color: var(--_colors---text-color);
+}
+
+.dark-mode .article-body h2 {
+  color: var(--_colors---text-color);
+  border-top-color: rgba(255, 255, 255, 0.08);
+}
+
+.dark-mode .article-body h3 {
+  color: var(--_colors---color-8);
+}
+
+.dark-mode .article-header__lede {
+  color: var(--_colors---color-7);
+}
+
+.dark-mode .article-body a {
+  color: var(--_colors---accent);
+  border-bottom-color: rgba(90, 171, 204, 0.3);
+}
+
+.dark-mode .pull-quote {
+  color: var(--_colors---color-7);
+  border-top-color: rgba(255, 255, 255, 0.06);
+  border-bottom-color: rgba(255, 255, 255, 0.06);
+}
+
+.dark-mode .stat-callout {
+  border-top-color: rgba(255, 255, 255, 0.06);
+  border-bottom-color: rgba(255, 255, 255, 0.06);
+}
+
+.dark-mode .stat-callout__number {
+  color: var(--_colors---text-color);
+}
+
+.dark-mode .stat-callout__label {
+  color: var(--_colors---color-5);
+}
+
+.dark-mode .connection-card {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.06);
+}
+
+.dark-mode .connection-card__title {
+  color: var(--_colors---text-color);
+}
+
+.dark-mode .connection-card__body {
+  color: var(--_colors---color-7);
+}
+
+.dark-mode .article-body .summary-list {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.06);
+}
+
+.dark-mode .article-body .summary-list li {
+  color: var(--_colors---color-8);
+}
+
+.dark-mode .article-sources {
+  border-top-color: rgba(255, 255, 255, 0.08);
+}
+
+.dark-mode .article-sources p {
+  color: var(--_colors---color-5);
+}
+
+.dark-mode .article-cta {
+  border-top-color: rgba(255, 255, 255, 0.08);
+}
+
+.dark-mode .article-cta__button {
+  color: var(--_colors---text-color);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.dark-mode .article-cta__button:hover {
+  background-color: rgba(90, 171, 204, 0.08);
+}
+
+.dark-mode .blog-card {
+  border-bottom-color: rgba(255, 255, 255, 0.06);
+}
+
+.dark-mode .blog-card:first-child {
+  border-top-color: rgba(255, 255, 255, 0.06);
+}
+
+.dark-mode .blog-card__title {
+  color: var(--_colors---text-color);
+}
+
+.dark-mode .blog-card__excerpt {
+  color: var(--_colors---color-5);
+}
+
+.dark-mode .accent-word {
+  color: #5AABCC;
+}
+
+.dark-mode .article-body figure img {
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.40);
+  border-color: rgba(255, 255, 255, 0.06);
+}
+
+.dark-mode .article-body code {
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--_colors---color-7);
+}
+
+/* prefers-color-scheme fallback (no JS) */
+@media (prefers-color-scheme: dark) {
+  html:not(.light-mode):not(.dark-mode) .blog-page {
+    --_colors---accent: #5AABCC;
+  }
+  html:not(.light-mode):not(.dark-mode) .article-body p,
+  html:not(.light-mode):not(.dark-mode) .article-body li {
+    color: #ddd8d3;
+  }
+  html:not(.light-mode):not(.dark-mode) .article-body strong,
+  html:not(.light-mode):not(.dark-mode) .article-body h2 {
+    color: rgba(255, 255, 255, 0.92);
+  }
+  html:not(.light-mode):not(.dark-mode) .accent-word {
+    color: #5AABCC;
+  }
 }
 
 /* =============================================================================
