@@ -90,8 +90,8 @@
       <p class="article-header__lede blog-stagger">Every crew rotation on a superyacht is a controlled loss of operational intelligence. The question is how much disappears — and whether anyone notices before it costs money.</p>
     </header>
 
-    <figure class="article-hero" style="margin: 0 -40px 64px; border-radius: 12px; overflow: hidden;">
-      <img src="/images/blog/header-knowledge-crisis.png" alt="When the Chief Engineer Leaves — blog header illustration" loading="eager" width="1600" height="900" style="width: 100%; height: auto; border-radius: 12px; box-shadow: 0 4px 24px rgba(0,0,0,0.08); border: 1px solid rgba(0,0,0,0.06);">
+    <figure class="article-hero">
+      <img src="/images/blog/header-knowledge-crisis.png" alt="CelesteOS vessel knowledge interface — glass card showing connected maintenance records, fault history, and operational notes" loading="eager" width="1600" height="900">
     </figure>
 
     <div class="article-body">
@@ -102,9 +102,9 @@
 
       <p>None of this is written down. Not in the planned maintenance system. Not in the equipment manuals. Not in any handover document — because in most cases, no structured handover document exists.</p>
 
-      <p>When that engineer leaves, the <span class="accent-word">knowledge</span> leaves with them.</p>
+      <p>When that engineer leaves, the knowledge leaves with them.</p>
 
-      <div class="pull-quote">When that engineer leaves, the knowledge leaves with them.</div>
+      <div class="accent-callout">The knowledge leaves with them.</div>
 
       <p>The incoming engineer arrives, often with as little as a week of overlap. A Seahub industry survey found that 66% of engineering handovers last one week or less, with the outgoing engineer frequently departing before the overlap period concludes <a href="#ref-1">[1]</a>. What transfers in that window is mechanical: where the tools are, how to start the generators, which valves are normally open. What does not transfer is context — the operational memory that distinguishes competent vessel management from reactive troubleshooting.</p>
 
@@ -117,13 +117,17 @@
 
       <p>The loss is not abstract. It is specific, measurable, and expensive.</p>
 
-      <p><strong>Fault history context.</strong> The previous engineer diagnosed a vibration issue in the port engine 14 months ago. It was a coupling alignment problem, resolved in four hours with a specific procedure. Without that record, the next engineer calls a marine technician. The callout costs between EUR 2,000 and EUR 5,000, depending on location and urgency, for a fault that was already solved once before <a href="#ref-2">[2]</a>.</p>
+      <span class="topic-label">Fault history context</span>
+      <p>The previous engineer diagnosed a vibration issue in the port engine 14 months ago. It was a coupling alignment problem, resolved in four hours with a specific procedure. Without that record, the next engineer calls a marine technician. The callout costs between EUR 2,000 and EUR 5,000, depending on location and urgency, for a fault that was already solved once before <a href="#ref-2">[2]</a>.</p>
 
-      <p><strong>Supplier intelligence.</strong> Which chandlery stocks the correct oil filters without a six-week lead time. Which shore-based electrician understands the vessel's Victron inverter setup. Which service agent actually responds on weekends. This knowledge sits in the engineer's phone contacts and personal notes. It walks off the boat in a duffel bag.</p>
+      <span class="topic-label">Supplier intelligence</span>
+      <p>Which chandlery stocks the correct oil filters without a six-week lead time. Which shore-based electrician understands the vessel's Victron inverter setup. Which service agent actually responds on weekends. This knowledge sits in the engineer's phone contacts and personal notes. It walks off the boat in a duffel bag.</p>
 
-      <p><strong>Maintenance nuance.</strong> Planned maintenance systems record that a task was completed. They do not record that the task required a workaround because the original part is discontinued, or that the manufacturer's torque specification causes the gasket to fail on this specific installation. The difference between a maintenance log and operational memory is the difference between a record and an <span class="accent-word">understanding</span>.</p>
+      <span class="topic-label">Maintenance nuance</span>
+      <p>Planned maintenance systems record that a task was completed. They do not record that the task required a workaround because the original part is discontinued, or that the manufacturer's torque specification causes the gasket to fail on this specific installation. The difference between a maintenance log and operational memory is the difference between a record and an understanding.</p>
 
-      <p><strong>Warranty documentation.</strong> Equipment manufacturers require documented evidence of regular maintenance performed to specification. A denied warranty claim on a single piece of marine equipment can cost between EUR 20,000 and EUR 100,000 <a href="#ref-3">[3]</a>. When the engineer who performed the maintenance is no longer aboard and the records are incomplete, the vessel owner absorbs that cost.</p>
+      <span class="topic-label">Warranty documentation</span>
+      <p>Equipment manufacturers require documented evidence of regular maintenance performed to specification. A denied warranty claim on a single piece of marine equipment can cost between EUR 20,000 and EUR 100,000 <a href="#ref-3">[3]</a>. When the engineer who performed the maintenance is no longer aboard and the records are incomplete, the vessel owner absorbs that cost.</p>
 
       <figure>
         <img src="/images/blog/fault-history-full.png" alt="CelesteOS fault history showing corrective action, root cause analysis, and linked work orders on a superyacht maintenance system" loading="lazy" width="720">
@@ -153,13 +157,17 @@
 
       <p>The financial argument is straightforward. A single denied warranty claim can exceed the annual cost of structured knowledge management. A single unnecessary vendor callout for a previously diagnosed fault is a direct cost that proper documentation would have prevented. Multiply these incidents across a vessel's annual operating cycle and the numbers compound.</p>
 
-      <p>But the less visible cost is reputational. A vessel that cannot produce complete maintenance records during a flag state inspection faces potential deficiencies. A vessel that cannot demonstrate a structured handover process during a management audit signals operational risk. A vessel whose engineering history resets every 18 months is, from an insurance underwriter's perspective, a vessel without <span class="accent-word">institutional memory</span>.</p>
+      <p>But the less visible cost is reputational. A vessel that cannot produce complete maintenance records during a flag state inspection faces potential deficiencies. A vessel that cannot demonstrate a structured handover process during a management audit signals operational risk. A vessel whose engineering history resets every 18 months is, from an insurance underwriter's perspective, a vessel without institutional memory.</p>
+
+      <div class="accent-callout">A vessel without institutional memory.</div>
 
       <p>Hill Robinson, one of the largest yacht management companies, has identified the crew skills shortage and high turnover as a systemic industry challenge, noting that experienced professionals transition ashore often without structured pathways that recognise and retain their expertise <a href="#ref-9">[9]</a>. The problem is acknowledged at the management level. The solutions, in most cases, have not kept pace.</p>
 
       <h2>What a proper engineering handover on a superyacht requires</h2>
 
-      <p>Solving the knowledge crisis on superyachts is not a technology problem. It is a design problem. The information exists — in maintenance logs, in fault reports, in parts invoices, in email threads with manufacturers. The failure is that it exists in fragments, distributed across systems that do not communicate with each other, locked in formats that are not searchable, and tied to individuals rather than to <span class="accent-word">the vessel</span>.</p>
+      <p>Solving the knowledge crisis on superyachts is not a technology problem. It is a design problem. The information exists — in maintenance logs, in fault reports, in parts invoices, in email threads with manufacturers. The failure is that it exists in fragments, distributed across systems that do not communicate with each other, locked in formats that are not searchable, and tied to individuals rather than to the vessel.</p>
+
+      <div class="accent-callout">Tied to individuals, not the vessel.</div>
 
       <p>A system that captures operational knowledge must do several things that current tools do not. It must connect maintenance records to fault history, fault history to parts, parts to suppliers, and all of it to the vessel's compliance timeline. It must make that information searchable by the next engineer — not navigable through a menu tree, but findable through the language an engineer actually uses. And it must produce, automatically, a structured handover document that pulls from every domain: equipment status, outstanding defects, parts on order, certificate expiry dates, and operational notes.</p>
 
