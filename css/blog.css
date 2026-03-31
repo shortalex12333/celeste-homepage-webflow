@@ -200,6 +200,23 @@
   color: var(--_colors---color-7);
 }
 
+/* Footer — fix white-on-white in light mode blog pages */
+.blog-page .footer-heading {
+  color: var(--_colors---text-color);
+}
+
+.blog-page .footer-text {
+  color: var(--_colors---color-5);
+}
+
+.blog-page .footer-link {
+  color: var(--_colors---color-4);
+}
+
+.blog-page .footer-section {
+  background: var(--_colors---surface);
+}
+
 /* prefers-color-scheme fallback (no JS) */
 @media (prefers-color-scheme: dark) {
   html:not(.light-mode):not(.dark-mode) .blog-page {
