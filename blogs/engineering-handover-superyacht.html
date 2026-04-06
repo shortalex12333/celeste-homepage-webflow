@@ -90,8 +90,8 @@
       <p class="article-header__lede blog-stagger">The engineering handover is the single most important knowledge transfer event on a superyacht. It is also the one with the least standardisation, the shortest time allocation, and the highest cost when it fails.</p>
     </header>
 
-    <figure class="article-hero" style="margin: 0 -40px 64px; border-radius: 12px; overflow: hidden;">
-      <img src="/images/blog/header-engineering-handover.png" alt="Engineering Handover on Superyachts — blog header illustration" loading="eager" width="1600" height="900" style="width: 100%; height: auto; border-radius: 12px; box-shadow: 0 4px 24px rgba(0,0,0,0.08); border: 1px solid rgba(0,0,0,0.06);">
+    <figure class="article-hero">
+      <img src="/images/blog/header-engineering-handover.png" alt="Engineering Handover on Superyachts — blog header illustration" loading="eager" width="1600" height="900">
     </figure>
 
     <div class="article-body">
@@ -110,13 +110,28 @@
 
       <p>When the handover is verbal and unstructured, specific categories of knowledge disappear.</p>
 
-      <p><strong>Equipment-specific operating <span class="accent-word">knowledge</span>.</strong> Every yacht has mechanical personality. The port engine that runs hot above 1,800 RPM under certain ambient conditions. The watermaker that cavitates unless the membrane is flushed in a specific sequence. The stabiliser system that throws a false alarm after extended idle periods. None of this is in the manufacturer's manual. It lives in the engineer's experience.</p>
+      <span class="topic-label">Equipment-specific operating knowledge</span>
+      <p>Every yacht has mechanical personality. The port engine that runs hot above 1,800 RPM under certain ambient conditions. The watermaker that cavitates unless the membrane is flushed in a specific sequence. The stabiliser system that throws a false alarm after extended idle periods. None of this is in the manufacturer's manual. It lives in the engineer's experience.</p>
 
-      <p><strong>Ongoing defect context.</strong> A fault was diagnosed six months ago. The root cause was identified. A temporary fix was applied while parts were on order. The parts arrived but have not been fitted because the next yard period is scheduled for October. Without this context, the new engineer sees a pending work order with no background — or worse, does not see it at all because it was tracked in the previous engineer's personal notes.</p>
+      <div class="accent-callout">Lives in the engineer's experience.</div>
 
-      <p><strong>Supplier and service agent intelligence.</strong> Which chandlery delivers to the vessel's regular ports. Which shore-based technician understands the specific HVAC installation. Which manufacturer's warranty department requires a particular documentation format. This knowledge exists in phone contacts, email threads, and memory. It walks off the vessel in a duffel bag.</p>
+      <span class="topic-label">Ongoing defect context</span>
+      <p>A fault was diagnosed six months ago. The root cause was identified. A temporary fix was applied while parts were on order. The parts arrived but have not been fitted because the next yard period is scheduled for October. Without this context, the new engineer sees a pending work order with no background — or worse, does not see it at all because it was tracked in the previous engineer's personal notes.</p>
 
-      <p><strong>Warranty <span class="accent-word">evidence</span> trail.</strong> Equipment manufacturers require documented proof of maintenance performed to specification. When the engineer who performed the maintenance is no longer aboard and the records are incomplete or scattered across multiple systems, a <a href="/blogs/warranty-claim-documentation">warranty claim that should be straightforward becomes indefensible</a>. A single denied claim on marine equipment can cost between EUR 20,000 and EUR 100,000 <a href="#ref-2">[2]</a>.</p>
+      <span class="topic-label">Supplier and service agent intelligence</span>
+      <p>Which chandlery delivers to the vessel's regular ports. Which shore-based technician understands the specific HVAC installation. Which manufacturer's warranty department requires a particular documentation format. This knowledge exists in phone contacts, email threads, and memory. It walks off the vessel in a duffel bag.</p>
+
+      <span class="topic-label">Warranty evidence trail</span>
+      <p>Equipment manufacturers require documented proof of maintenance performed to specification. When the engineer who performed the maintenance is no longer aboard and the records are incomplete or scattered across multiple systems, a <a href="/blogs/warranty-claim-documentation">warranty claim that should be straightforward becomes indefensible</a>. A single denied claim on marine equipment can cost between EUR 20,000 and EUR 100,000 <a href="#ref-2">[2]</a>.</p>
+
+      <div class="article-split">
+        <div class="article-split__text">
+          <p>A signed handover document with green verification marks across every section — machinery status, outstanding defects, parts on order, and compliance deadlines. This is what a structured, system-generated handover looks like when it does not depend on individual effort.</p>
+        </div>
+        <div class="article-split__media">
+          <img src="/images/blog/art2-handover-signatures.png" alt="CelesteOS engineering handover document with signed verification sections showing machinery status and outstanding defects" loading="lazy">
+        </div>
+      </div>
 
       <h2>What a proper chief engineer handover checklist should contain</h2>
 
@@ -138,6 +153,11 @@
 
       <p><strong>7. Operational notes.</strong> The undocumented knowledge. Which system behaviours are normal for this vessel. Which alarm thresholds have been adjusted and why. Which equipment requires monitoring beyond standard maintenance intervals. This is the category that verbal handovers attempt to cover in a walk-around and almost always fail to transfer completely.</p>
 
+      <figure class="article-full-bleed">
+        <img src="/images/blog/art2-fault-entities.png" alt="CelesteOS fault record showing related entities — linked work orders, parts, equipment, and warranty status in a connected view" loading="lazy">
+        <figcaption>A fault record with every related entity visible — work orders, parts, equipment history, and warranty status connected in a single view.</figcaption>
+      </figure>
+
       <h2>Why the ISM Code does not solve the engineering handover problem</h2>
 
       <p>The International Safety Management Code addresses crew transitions in two sections. Section 6 requires that new personnel and personnel transferred to new assignments be given proper familiarisation with their duties <a href="#ref-4">[4]</a>. Section 10 requires that the company establish procedures to ensure that the ship is maintained in conformity with relevant rules and regulations, and that inspections, non-conformities, and corrective actions are recorded <a href="#ref-4">[4]</a>.</p>
@@ -156,13 +176,26 @@
 
       <div class="pull-quote">The engineering handover should not depend on whether the outgoing engineer is diligent, or available, or willing to be honest about outstanding problems.</div>
 
-      <p>A handover that works is one generated from the vessel's operational data — automatically pulling from maintenance history, fault records, parts inventory, certificate status, and operational notes into a single structured document. Not a blank template that requires manual completion, but a compiled report that reflects the actual state of <span class="accent-word">the vessel</span> at the moment of transition.</p>
+      <p>A handover that works is one generated from the vessel's operational data — automatically pulling from maintenance history, fault records, parts inventory, certificate status, and operational notes into a single structured document. Not a blank template that requires manual completion, but a compiled report that reflects the actual state of the vessel at the moment of transition.</p>
+
+      <div class="accent-callout">The actual state of the vessel.</div>
 
       <p>That document should be searchable by the incoming engineer. Not through a folder structure or a menu tree, but through the language an engineer actually uses when diagnosing a problem: "vibration port engine" should surface the fault record, the corrective action, the parts that were used, and the work order that documented the repair.</p>
 
-      <p>And it should be <span class="accent-word">immutable</span>. A signed record that cannot be altered after the fact — so that what was handed over is what was handed over, verifiable by the incoming engineer, the captain, and the management company.</p>
+      <p>And it should be immutable. A signed record that cannot be altered after the fact — so that what was handed over is what was handed over, verifiable by the incoming engineer, the captain, and the management company.</p>
+
+      <div class="accent-callout">Immutable.</div>
 
       <p>The standard the industry needs is not more checklists. It is a system where the handover is a product of how the vessel is managed, not an additional task performed under time pressure during a <a href="/blogs/knowledge-crisis-superyachts">crew rotation where knowledge would otherwise walk off the vessel</a>.</p>
+
+      <div class="article-split article-split--reverse">
+        <div class="article-split__media">
+          <img src="/images/blog/art2-handover-defects.png" alt="CelesteOS handover defects list showing outstanding issues with severity, status, and linked work orders for incoming engineer review" loading="lazy">
+        </div>
+        <div class="article-split__text">
+          <p>Outstanding defects surfaced automatically in the handover document — severity, status, and linked work orders visible to the incoming engineer without manual assembly.</p>
+        </div>
+      </div>
 
       <h2>Summary</h2>
 

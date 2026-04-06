@@ -90,8 +90,8 @@
       <p class="article-header__lede blog-stagger">Consider a common scenario: the port fuel isolation valve on a 42-metre motor yacht is repaired three times in 18 months. Each repair is logged as a separate defect. Each is handled by a different engineer. The root cause — a material defect in a specific supplier batch — is visible in the data the entire time. Nobody sees it because the system treats each instance as an isolated event.</p>
     </header>
 
-    <figure class="article-hero" style="margin: 0 -40px 64px; border-radius: 12px; overflow: hidden;">
-      <img src="/images/blog/header-fault-patterns.png" alt="Fault Patterns on Superyachts — blog header illustration" loading="eager" width="1600" height="900" style="width: 100%; height: auto; border-radius: 12px; box-shadow: 0 4px 24px rgba(0,0,0,0.08); border: 1px solid rgba(0,0,0,0.06);">
+    <figure class="article-hero">
+      <img src="/images/blog/header-fault-patterns.png" alt="Fault Patterns on Superyachts — blog header illustration" loading="eager" width="1600" height="900">
     </figure>
 
     <div class="article-body">
@@ -107,7 +107,9 @@
         <div class="stat-callout__label">one pattern nobody saw</div>
       </div>
 
-      <p>The <span class="accent-word">pattern</span> — a material defect in the valve seat supplied by a specific chandlery — was present in the data from the second occurrence. But the data lived in three separate defect records, created by three different engineers, across <a href="/blogs/knowledge-crisis-superyachts">two crew rotations</a>, in a system that stores faults as individual events rather than connected sequences.</p>
+      <p>The pattern — a material defect in the valve seat supplied by a specific chandlery — was present in the data from the second occurrence. But the data lived in three separate defect records, created by three different engineers, across <a href="/blogs/knowledge-crisis-superyachts">two crew rotations</a>, in a system that stores faults as individual events rather than connected sequences.</p>
+
+      <div class="accent-callout">The pattern was there.</div>
 
       <h2>The difference between a fault log and a fault pattern</h2>
 
@@ -117,31 +119,50 @@
 
       <p>Every yacht planned maintenance system on the market offers a defect log. The engineer reports a fault, describes the symptoms, documents the repair, and closes the record. The Nautical Institute's marine accident reporting system documents cases where undetected pre-existing flaws — such as fatigue cracking in engine components — caused cascading failures precisely because the pattern of degradation was not visible in isolated maintenance records <a href="#ref-1">[1]</a>.</p>
 
-      <p>The distinction matters because a defect log answers the question the engineer asks today: "What is wrong and how do I fix it?" A fault pattern answers the question <span class="accent-word">the vessel</span> needs answered: "Why does this keep happening and <span class="accent-word">what will happen next</span>?"</p>
+      <p>The distinction matters because a defect log answers the question the engineer asks today: "What is wrong and how do I fix it?" A fault pattern answers the question the vessel needs answered: "Why does this keep happening and what will happen next?"</p>
+
+      <div class="accent-callout">What will happen next.</div>
 
       <h2>Four reasons fault patterns stay invisible on superyachts</h2>
 
       <p>Fault patterns are not invisible because engineers are inattentive. They are invisible because of structural conditions that exist on every superyacht with crew rotation and a conventional maintenance system.</p>
 
-      <p><strong>Crew rotation breaks continuity.</strong> The engineer who handled the first repair is not aboard for the second. The context they built — the troubleshooting steps they tried, the components they inspected, the suspicions they formed — left when they did. The relief engineer approaches the fault with no history, no prior context, and no awareness that it has occurred before. Consistent records help spot trends in fuel use, engine performance, and recurring defects — but only if the records are connected and the person reading them can see the full sequence <a href="#ref-2">[2]</a>.</p>
+      <span class="topic-label">Crew rotation breaks continuity</span>
+      <p>The engineer who handled the first repair is not aboard for the second. The context they built — the troubleshooting steps they tried, the components they inspected, the suspicions they formed — left when they did. The relief engineer approaches the fault with no history, no prior context, and no awareness that it has occurred before. Consistent records help spot trends in fuel use, engine performance, and recurring defects — but only if the records are connected and the person reading them can see the full sequence <a href="#ref-2">[2]</a>.</p>
 
-      <p><strong>Siloed systems hide <span class="accent-word">connections</span>.</strong> The fault record exists in the defect log. The parts used in the repair exist in the inventory system. The supplier who provided the valve seat exists in the purchasing records. The warranty status of the equipment exists in the certificate tracker. Each system stores its own data. None of them cross-reference the others. The pattern that connects a specific supplier's component to a recurring fault on specific equipment requires information from <a href="/blogs/siloed-maintenance-systems">all four systems — and no single system provides it</a>.</p>
+      <span class="topic-label">Siloed systems hide connections</span>
+      <p>The fault record exists in the defect log. The parts used in the repair exist in the inventory system. The supplier who provided the valve seat exists in the purchasing records. The warranty status of the equipment exists in the certificate tracker. Each system stores its own data. None of them cross-reference the others. The pattern that connects a specific supplier's component to a recurring fault on specific equipment requires information from <a href="/blogs/siloed-maintenance-systems">all four systems — and no single system provides it</a>.</p>
 
-      <p><strong>Time gaps exceed human memory.</strong> Five months between the first and second occurrence. Four months between the second and third. Each gap is long enough that the current engineer has handled dozens of other tasks in between. Without a system that flags the recurrence, the connection between events depends on individual recall — which is unreliable across months and impossible across crew changes.</p>
+      <span class="topic-label">Time gaps exceed human memory</span>
+      <p>Five months between the first and second occurrence. Four months between the second and third. Each gap is long enough that the current engineer has handled dozens of other tasks in between. Without a system that flags the recurrence, the connection between events depends on individual recall — which is unreliable across months and impossible across crew changes.</p>
 
-      <p><strong>Record format prevents analysis.</strong> Most defect logs store fault descriptions as free text. "Valve leaking, replaced seat." "Gasket failure, replaced gasket." "Valve assembly unreliable, replaced unit." These entries are readable by a human reviewing them one at a time. They are not structured in a way that allows a system to recognise that three entries describe the same recurring failure on the same equipment. The information exists. The format buries it.</p>
+      <span class="topic-label">Record format prevents analysis</span>
+      <p>Most defect logs store fault descriptions as free text. "Valve leaking, replaced seat." "Gasket failure, replaced gasket." "Valve assembly unreliable, replaced unit." These entries are readable by a human reviewing them one at a time. They are not structured in a way that allows a system to recognise that three entries describe the same recurring failure on the same equipment. The information exists. The format buries it.</p>
+
+      <div class="article-split">
+        <div class="article-split__text">
+          <p>A recurring fault pattern surfaced across crew rotations — three separate defect records connected to the same equipment, revealing a systemic root cause that individual log entries could not show.</p>
+        </div>
+        <div class="article-split__media">
+          <img src="/images/blog/art5-fault-pattern.png" alt="CelesteOS fault pattern view showing three connected defect records on the same equipment revealing a recurring root cause" loading="lazy">
+        </div>
+      </div>
 
       <h2>What fault patterns reveal that individual logs never will</h2>
 
       <p>When faults are connected across time and context rather than stored as isolated records, four categories of insight emerge that are invisible in individual defect entries.</p>
 
-      <p><strong>Same equipment, different symptoms — systemic root cause.</strong> A watermaker that fails for three apparently different reasons over 12 months may have a single underlying cause: a degraded membrane that manifests differently depending on operating conditions. The individual logs show three different faults. The pattern shows one root cause.</p>
+      <span class="topic-label">Same equipment, different symptoms — systemic root cause</span>
+      <p>A watermaker that fails for three apparently different reasons over 12 months may have a single underlying cause: a degraded membrane that manifests differently depending on operating conditions. The individual logs show three different faults. The pattern shows one root cause.</p>
 
-      <p><strong>Same part failing across multiple equipment — supplier or batch issue.</strong> If three different systems aboard the same vessel experience failures involving components from the same supplier or the same manufacturing batch, the individual defect logs show three unrelated equipment failures. The pattern reveals a procurement problem.</p>
+      <span class="topic-label">Same part failing across multiple equipment — supplier or batch issue</span>
+      <p>If three different systems aboard the same vessel experience failures involving components from the same supplier or the same manufacturing batch, the individual defect logs show three unrelated equipment failures. The pattern reveals a procurement problem.</p>
 
-      <p><strong>Faults clustering after specific maintenance events — procedural error.</strong> If a particular type of fault tends to occur within two weeks of a specific maintenance procedure, the pattern suggests the procedure itself is introducing the problem. Individual logs show post-maintenance failures. The pattern shows a systematic process error that will recur until the procedure is corrected.</p>
+      <span class="topic-label">Faults clustering after specific maintenance events — procedural error</span>
+      <p>If a particular type of fault tends to occur within two weeks of a specific maintenance procedure, the pattern suggests the procedure itself is introducing the problem. Individual logs show post-maintenance failures. The pattern shows a systematic process error that will recur until the procedure is corrected.</p>
 
-      <p><strong>Seasonal patterns — environmental factors.</strong> Equipment that fails reliably during Mediterranean summer operations or North Sea winter passages may be responding to environmental conditions that the maintenance schedule does not account for. Individual logs show seasonal breakdowns. The pattern reveals that the maintenance interval needs to be adjusted for operating conditions, not calendar time.</p>
+      <span class="topic-label">Seasonal patterns — environmental factors</span>
+      <p>Equipment that fails reliably during Mediterranean summer operations or North Sea winter passages may be responding to environmental conditions that the maintenance schedule does not account for. Individual logs show seasonal breakdowns. The pattern reveals that the maintenance interval needs to be adjusted for operating conditions, not calendar time.</p>
 
       <h2>The cost of pattern blindness on a superyacht</h2>
 
@@ -154,6 +175,11 @@
       <p>A fault log answers "what happened." A fault pattern answers "what will happen next." The difference between the two is whether the system records events or reveals connections.</p>
 
       <div class="pull-quote">A fault log answers 'what happened.' A fault pattern answers 'what will happen next.'</div>
+
+      <figure class="article-full-bleed">
+        <img src="/images/blog/art5-fault-timeline.png" alt="CelesteOS fault timeline showing connected repair events across 18 months, revealing the recurring pattern and root cause" loading="lazy">
+        <figcaption>A fault timeline connecting three repair events across 18 months — the recurring pattern and its root cause visible in a single view.</figcaption>
+      </figure>
 
       <h2>Summary</h2>
 
