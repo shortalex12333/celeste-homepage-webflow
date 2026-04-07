@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Celeste — From the Bridge</title>
+    <link>https://celeste7.ai/blogs</link>
+    <description>Operational thinking for vessel management. Articles on yacht knowledge retention, engineering handovers, and superyacht maintenance intelligence.</description>
+    <language>en</language>
+    <atom:link href="https://celeste7.ai/blogs/feed.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title>If the System Cannot Compete with WhatsApp, the System Is the Problem</title>
+      <link>https://celeste7.ai/blogs/software-bypass-superyachts</link>
+      <description>Yacht crews bypass their maintenance software because it adds friction instead of removing it. Five design failures that cause PMS adoption to collapse on superyachts.</description>
+      <pubDate>Sun, 06 Apr 2026 00:00:00 GMT</pubDate>
+      <guid>https://celeste7.ai/blogs/software-bypass-superyachts</guid>
+    </item>
+
+    <item>
+      <title>Seven Connections Every Yacht Maintenance System Should Make (and Almost None Do)</title>
+      <link>https://celeste7.ai/blogs/seven-connections-yacht-pms</link>
+      <description>When evaluating yacht maintenance software, most people check a feature list. But nobody asks the question that actually determines whether the system works: when you open a fault record, what else does the system show you?</description>
+      <pubDate>Mon, 31 Mar 2026 00:00:00 GMT</pubDate>
+      <guid>https://celeste7.ai/blogs/seven-connections-yacht-pms</guid>
+    </item>
+
+    <item>
+      <title>Three Repairs, Three Engineers, One Pattern Nobody Saw</title>
+      <link>https://celeste7.ai/blogs/fault-patterns-superyachts</link>
+      <description>Superyacht recurring faults stay invisible because crew rotation, siloed systems, and unstructured records prevent fault pattern recognition across time.</description>
+      <pubDate>Mon, 31 Mar 2026 00:00:00 GMT</pubDate>
+      <guid>https://celeste7.ai/blogs/fault-patterns-superyachts</guid>
+    </item>
+
+    <item>
+      <title>Why Superyacht Maintenance Systems Create the Problems They Claim to Solve</title>
+      <link>https://celeste7.ai/blogs/siloed-maintenance-systems</link>
+      <description>Siloed yacht maintenance systems store data in parallel but never connect it. Five data silos that cost superyachts money — and why integration is not the same as cross-domain.</description>
+      <pubDate>Mon, 31 Mar 2026 00:00:00 GMT</pubDate>
+      <guid>https://celeste7.ai/blogs/siloed-maintenance-systems</guid>
+    </item>
+
+    <item>
+      <title>Why Your Warranty Claim Was Denied (and What Documentation Would Have Saved It)</title>
+      <link>https://celeste7.ai/blogs/warranty-claim-documentation</link>
+      <description>Most denials are not caused by defective equipment or bad engineering. They are caused by documentation that does not meet the standard the manufacturer requires.</description>
+      <pubDate>Mon, 31 Mar 2026 00:00:00 GMT</pubDate>
+      <guid>https://celeste7.ai/blogs/warranty-claim-documentation</guid>
+    </item>
+
+    <item>
+      <title>What a Proper Engineering Handover Looks Like (and Why Most Yachts Don't Have One)</title>
+      <link>https://celeste7.ai/blogs/engineering-handover-superyacht</link>
+      <description>The engineering handover is the single most important knowledge transfer event on a superyacht. It is also the one with the least standardisation, the shortest time allocation, and the highest cost when it fails.</description>
+      <pubDate>Mon, 31 Mar 2026 00:00:00 GMT</pubDate>
+      <guid>https://celeste7.ai/blogs/engineering-handover-superyacht</guid>
+    </item>
+
+    <item>
+      <title>When the Chief Engineer Leaves: The Knowledge Crisis on Superyachts</title>
+      <link>https://celeste7.ai/blogs/knowledge-crisis-superyachts</link>
+      <description>Every crew rotation on a superyacht is a controlled loss of operational intelligence. How yacht knowledge management fails at crew change, and what proper engineering handover requires.</description>
+      <pubDate>Sun, 30 Mar 2026 00:00:00 GMT</pubDate>
+      <guid>https://celeste7.ai/blogs/knowledge-crisis-superyachts</guid>
+    </item>
+
+  </channel>
+</rss>
