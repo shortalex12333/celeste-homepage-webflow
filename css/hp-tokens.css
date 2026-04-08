@@ -123,6 +123,43 @@ h1, h2, h3 {
 }
 
 /* =============================================================================
+   CTA SECTION - Atmospheric dark background, no image
+   Replaces the 6MB yacht photo with CSS-only teal glow.
+   Per IMAGE_DOCTRINE: "UI floating in intentional darkness"
+   ============================================================================= */
+
+.cta-section {
+  background: #0A0A0A !important;
+}
+
+.cta-image {
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 55%, rgba(58,124,157,0.12) 0%, rgba(30,90,130,0.05) 40%, rgba(10,10,10,1) 75%) !important;
+}
+
+.cta-heading {
+  color: rgba(255,255,255,0.92) !important;
+  position: relative;
+  z-index: 1;
+}
+
+.cta-text1 {
+  color: rgba(255,255,255,0.55) !important;
+  position: relative;
+  z-index: 1;
+}
+
+.cta-section .hero-button.white {
+  color: #0A0A0A !important;
+  background: rgba(255,255,255,0.92) !important;
+  border-color: rgba(255,255,255,0.92) !important;
+}
+
+.cta-section .hero-button.white:hover {
+  background: #fff !important;
+}
+
+/* =============================================================================
    CTA BUTTONS - Teal interactive, proper hover states
    ============================================================================= */
 
