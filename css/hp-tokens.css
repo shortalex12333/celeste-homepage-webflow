@@ -149,14 +149,27 @@ h1, h2, h3 {
   z-index: 1;
 }
 
-.cta-section .hero-button.white {
+.cta-section .hero-button.white,
+.dark-mode .cta-section .hero-button.white {
   color: #0A0A0A !important;
-  background: rgba(255,255,255,0.92) !important;
+  background-color: rgba(255,255,255,0.92) !important;
   border-color: rgba(255,255,255,0.92) !important;
 }
 
-.cta-section .hero-button.white:hover {
-  background: #fff !important;
+.cta-section .hero-button.white:hover,
+.dark-mode .cta-section .hero-button.white:hover {
+  background-color: #FFFFFF !important;
+  color: #0A0A0A !important;
+}
+
+/* Arrow icons inside CTA button — dark to match button text */
+.cta-section .hero-button.white .hero-button-icon {
+  filter: brightness(0) !important;
+}
+
+/* CTA button text colour override */
+.cta-section .hero-button.white .text-hero2 {
+  color: #0A0A0A !important;
 }
 
 /* =============================================================================
