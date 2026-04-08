@@ -1,4 +1,16 @@
 {
   "cleanUrls": true,
-  "trailingSlash": false
+  "trailingSlash": false,
+  "redirects": [
+    { "source": "/faq", "destination": "/410.html", "statusCode": 410 },
+    { "source": "/testimonials", "destination": "/410.html", "statusCode": 410 },
+    { "source": "/user-settings", "destination": "/410.html", "statusCode": 410 },
+    { "source": "/a-b-testing-start", "destination": "/410.html", "statusCode": 410 },
+    { "source": "/pricing", "destination": "/410.html", "statusCode": 410 },
+    { "source": "/basic-pricing", "destination": "/410.html", "statusCode": 410 },
+    { "source": "/evolve-pricing", "destination": "/410.html", "statusCode": 410 },
+    { "source": "/competitor-playbook-step-1", "destination": "/410.html", "statusCode": 410 },
+    { "source": "/bio-optimiser", "destination": "/410.html", "statusCode": 410 },
+    { "source": "/e-learning", "destination": "/410.html", "statusCode": 410 }
+  ]
 }
