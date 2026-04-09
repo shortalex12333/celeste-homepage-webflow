@@ -1,6 +1,23 @@
 {
   "cleanUrls": true,
   "trailingSlash": false,
+  "headers": [
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "celeste-homepage-webflow.vercel.app"
+        }
+      ],
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex"
+        }
+      ]
+    }
+  ],
   "redirects": [
     { "source": "/faq", "destination": "/410.html", "statusCode": 410 },
     { "source": "/testimonials", "destination": "/410.html", "statusCode": 410 },
