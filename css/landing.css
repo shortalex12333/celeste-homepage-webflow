@@ -199,12 +199,12 @@
    ============================================================================= */
 
 .landing-body .accent-callout {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'DM Sans', sans-serif;
   font-style: italic;
-  font-weight: 300;
-  font-size: clamp(28px, 3vw, 36px);
-  line-height: 1.3;
-  color: #2B7BA3;
+  font-weight: 400;
+  font-size: clamp(24px, 2.5vw, 30px);
+  line-height: 1.45;
+  color: var(--_colors---color-7);
   margin: 56px 0;
   padding-left: 24px;
   border-left: 2px solid rgba(43, 123, 163, 0.25);
