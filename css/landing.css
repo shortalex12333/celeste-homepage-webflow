@@ -1,0 +1,396 @@
+/**
+ * LANDING.CSS — USP landing page styles for celeste7.ai
+ * Editorial-argument pages for outreach. NOT blog articles. NOT product pages.
+ * "Reading an industry article that happens to be on your website."
+ *
+ * Font system: Eloquia Display (headlines), DM Sans (body),
+ * IBM Plex Mono (metadata/evidence), Cormorant Garamond (accent)
+ */
+
+/* =============================================================================
+   FONT LOADING (same as blog.css)
+   ============================================================================= */
+
+@font-face {
+  font-family: 'Eloquia Display';
+  src: url('/fonts/Eloquia-Display-Light.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Eloquia Display';
+  src: url('/fonts/Eloquia-Display-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* =============================================================================
+   TEAL OVERRIDE
+   ============================================================================= */
+
+.landing-page {
+  --_colors---accent: #2B7BA3;
+}
+
+/* =============================================================================
+   LANDING PAGE LAYOUT — Wider than blog, editorial authority
+   ============================================================================= */
+
+.landing-page {
+  background-color: var(--_colors---surface);
+  min-height: 100vh;
+}
+
+.landing-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 clamp(24px, 5vw, 80px);
+}
+
+.landing-container--wide {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 clamp(24px, 5vw, 80px);
+}
+
+/* =============================================================================
+   LANDING HERO — Wider, more dramatic than blog header
+   ============================================================================= */
+
+.landing-hero {
+  padding-top: clamp(140px, 18vw, 220px);
+  padding-bottom: 64px;
+  max-width: 800px;
+}
+
+.landing-hero__label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--_colors---accent);
+  margin-bottom: 20px;
+}
+
+.landing-hero__title {
+  font-family: 'Eloquia Display', 'Inter Tight', sans-serif;
+  font-size: clamp(36px, 5vw, 56px);
+  font-weight: 300;
+  line-height: 1.08;
+  color: var(--_colors---text-color);
+  margin: 0 0 28px 0;
+  letter-spacing: -0.5px;
+}
+
+.landing-hero__lede {
+  font-family: 'DM Sans', sans-serif;
+  font-size: clamp(18px, 2vw, 22px);
+  font-weight: 400;
+  line-height: 1.65;
+  color: var(--_colors---color-7);
+  max-width: 680px;
+}
+
+/* =============================================================================
+   LANDING BODY — Editorial text with generous whitespace
+   ============================================================================= */
+
+.landing-body {
+  margin-bottom: 80px;
+}
+
+.landing-body h2 {
+  font-family: 'Eloquia Display', 'Inter Tight', sans-serif;
+  font-size: clamp(26px, 3vw, 36px);
+  font-weight: 400;
+  line-height: 1.15;
+  color: var(--_colors---text-color);
+  margin: 96px 0 32px 0;
+  padding-top: 48px;
+  border-top: 2px solid rgba(0, 0, 0, 0.08);
+}
+
+.landing-body h2:first-child {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: none;
+}
+
+.landing-body h3 {
+  font-family: 'DM Sans', sans-serif;
+  font-size: clamp(18px, 2vw, 24px);
+  font-weight: 500;
+  line-height: 1.3;
+  color: var(--_colors---color-8);
+  margin: 48px 0 16px 0;
+}
+
+.landing-body p {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 19px;
+  font-weight: 400;
+  line-height: 1.8;
+  color: var(--_colors---color-8);
+  margin: 0 0 28px 0;
+}
+
+.landing-body strong {
+  font-weight: 500;
+  color: var(--_colors---text-color);
+}
+
+.landing-body a {
+  color: var(--_colors---accent);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(43, 123, 163, 0.3);
+  transition: border-color 150ms ease-out;
+}
+
+.landing-body a:hover {
+  border-bottom-color: var(--_colors---accent);
+}
+
+/* =============================================================================
+   CENTREPIECE VISUAL — The product evidence
+   Full-width, elevated, the anchor of the page
+   ============================================================================= */
+
+.centrepiece {
+  margin: 72px -100px;
+  padding: 48px;
+  background: rgba(0, 0, 0, 0.02);
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  border-radius: 20px;
+}
+
+.centrepiece__label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--_colors---accent);
+  margin-bottom: 20px;
+}
+
+.centrepiece img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.10);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.centrepiece__caption {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--_colors---color-4);
+  margin-top: 16px;
+  line-height: 1.6;
+}
+
+/* =============================================================================
+   ACCENT CALLOUT — Same as blog, Cormorant standalone
+   ============================================================================= */
+
+.landing-body .accent-callout {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(28px, 3vw, 36px);
+  line-height: 1.3;
+  color: #2B7BA3;
+  margin: 56px 0;
+  padding-left: 24px;
+  border-left: 2px solid rgba(43, 123, 163, 0.25);
+}
+
+/* =============================================================================
+   PULL QUOTE — DM Sans italic
+   ============================================================================= */
+
+.landing-body .pull-quote {
+  font-family: 'DM Sans', sans-serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(22px, 2.5vw, 28px);
+  line-height: 1.5;
+  color: var(--_colors---color-7);
+  margin: 64px 0;
+  padding: 36px 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  text-align: center;
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* =============================================================================
+   SPLIT LAYOUT — Text + image side by side
+   ============================================================================= */
+
+.landing-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px;
+  align-items: start;
+  margin: 64px 0;
+}
+
+.landing-split--reverse {
+  direction: rtl;
+}
+
+.landing-split--reverse > * {
+  direction: ltr;
+}
+
+.landing-split__text {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.75;
+  color: var(--_colors---color-8);
+}
+
+.landing-split__text p {
+  font-size: 17px;
+  margin-bottom: 16px;
+}
+
+.landing-split__media img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+/* =============================================================================
+   CTA — Pilot programme, not "sign up"
+   ============================================================================= */
+
+.landing-cta {
+  margin: 96px 0 80px;
+  padding: 64px 0;
+  border-top: 2px solid rgba(0, 0, 0, 0.08);
+  text-align: center;
+}
+
+.landing-cta__heading {
+  font-family: 'Eloquia Display', 'Inter Tight', sans-serif;
+  font-size: clamp(24px, 3vw, 32px);
+  font-weight: 300;
+  color: var(--_colors---text-color);
+  margin-bottom: 16px;
+}
+
+.landing-cta__text {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 17px;
+  font-weight: 400;
+  color: var(--_colors---color-5);
+  margin-bottom: 28px;
+  max-width: 520px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.65;
+}
+
+.landing-cta__button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--_colors---text-color);
+  text-decoration: none;
+  padding: 14px 28px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 9999px;
+  transition: background-color 120ms ease-out;
+}
+
+.landing-cta__button:hover {
+  background-color: rgba(58, 124, 157, 0.08);
+}
+
+/* =============================================================================
+   DARK MODE
+   ============================================================================= */
+
+.dark-mode .landing-page {
+  --_colors---accent: #5AABCC;
+}
+
+.dark-mode .landing-body p,
+.dark-mode .landing-body li,
+.dark-mode .landing-split__text {
+  color: var(--_colors---color-8);
+}
+
+.dark-mode .landing-body strong,
+.dark-mode .landing-body h2 {
+  color: var(--_colors---text-color);
+}
+
+.dark-mode .landing-body h2 {
+  border-top-color: rgba(255, 255, 255, 0.08);
+}
+
+.dark-mode .centrepiece {
+  background: rgba(255, 255, 255, 0.02);
+  border-color: rgba(255, 255, 255, 0.04);
+}
+
+.dark-mode .centrepiece img {
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.40);
+  border-color: rgba(255, 255, 255, 0.06);
+}
+
+.dark-mode .landing-cta {
+  border-top-color: rgba(255, 255, 255, 0.08);
+}
+
+.dark-mode .landing-cta__button {
+  color: var(--_colors---text-color);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.dark-mode .accent-callout {
+  color: #5AABCC;
+  border-left-color: rgba(90, 171, 204, 0.25);
+}
+
+/* =============================================================================
+   RESPONSIVE
+   ============================================================================= */
+
+@media screen and (max-width: 991px) {
+  .landing-container { max-width: 728px; }
+  .landing-container--wide { max-width: 900px; }
+  .centrepiece { margin: 48px -40px; padding: 32px; }
+}
+
+@media screen and (max-width: 767px) {
+  .landing-container,
+  .landing-container--wide { max-width: none; }
+  .landing-hero { padding-top: 120px; }
+  .landing-split { grid-template-columns: 1fr; gap: 24px; }
+  .landing-split--reverse { direction: ltr; }
+  .centrepiece { margin: 32px -16px; padding: 20px; }
+  .landing-body p { font-size: 16px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .landing-page * {
+    transition: none !important;
+  }
+}
