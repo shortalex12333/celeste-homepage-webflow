@@ -211,16 +211,18 @@
   color: var(--_colors---text-color) !important;
 }
 
+.blog-page .footer-section .link-block,
+.blog-page .footer-section .link-block .footer-heading,
+.blog-page .footer-section a.link-block h2 {
+  color: var(--_colors---text-color) !important;
+}
+
 .blog-page .footer-text {
-  color: var(--_colors---color-5);
+  color: var(--_colors---color-5) !important;
 }
 
 .blog-page .footer-link {
-  color: var(--_colors---color-4);
-}
-
-.blog-page .footer-section a {
-  color: var(--_colors---text-color);
+  color: var(--_colors---color-4) !important;
 }
 
 .blog-page .footer-section .footer-icon-block a,
