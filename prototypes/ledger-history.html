@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ledger · History · Celeste Design Prototype</title>
+<link rel="stylesheet" href="lens-base.css">
+<style>
+/* ═══════════════════════════════════════════════════════
+   LEDGER HISTORY — receipt-style activity feed
+   Shows the user's recent reads, edits, signs, opens
+   across the vessel. Acts as a "history" / back-button.
+   ═══════════════════════════════════════════════════════ */
+
+body {
+  padding: 24px 16px 48px;
+}
+
+/* ─── Section header inside lens body ─── */
+.ledger-meta {
+  padding-top: 20px;
+  padding-bottom: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border-faint);
+}
+.ledger-meta-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--txt3);
+}
+.ledger-meta-count {
+  font-size: 11px;
+  color: var(--txt-ghost);
+  font-family: var(--font-mono);
+}
+
+/* ─── Date group label ─── */
+.day-label {
+  padding: 18px 0 8px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: var(--txt-ghost);
+}
+.day-label:first-of-type { padding-top: 12px; }
+
+/* ─── Receipt row ─── */
+.ledger-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 14px 12px;
+  margin: 0 -12px;
+  border-radius: 6px;
+  border-bottom: 1px solid var(--border-faint);
+  cursor: pointer;
+  transition: background 80ms;
+  position: relative;
+}
+.ledger-row:hover {
+  background: var(--surface-hover);
+}
+.ledger-row:last-child {
+  border-bottom: none;
+}
+
+/* ─── Action tag (READ / EDIT / SIGN / OPEN) ─── */
+.ledger-action {
+  flex-shrink: 0;
+  width: 56px;
+  padding: 4px 0;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--txt3);
+  border: 1px solid var(--border-sub);
+  border-radius: 3px;
+  background: var(--neutral-bg);
+  margin-top: 1px;
+}
+.ledger-action.read   { color: var(--mark); border-color: var(--teal-bd); background: var(--teal-bg); }
+.ledger-action.edit   { color: var(--txt2); }
+.ledger-action.sign   { color: var(--green); border-color: rgba(74, 148, 104, 0.32); }
+.ledger-action.open   { color: var(--txt2); }
+.ledger-action.create { color: var(--txt2); }
+
+/* ─── Row content ─── */
+.ledger-content {
+  flex: 1;
+  min-width: 0;
+}
+.ledger-title {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--txt);
+  line-height: 1.4;
+  margin-bottom: 4px;
+}
+.ledger-title .ref {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--txt3);
+  margin-right: 6px;
+}
+.ledger-title .pg {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--txt-ghost);
+  margin-left: 6px;
+}
+.ledger-meta-line {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+  color: var(--txt3);
+}
+.ledger-meta-line .dot { color: var(--txt-ghost); }
+.ledger-meta-line .ts {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--txt-ghost);
+}
+
+/* ─── Right-side reopen affordance ─── */
+.ledger-reopen {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  color: var(--txt-ghost);
+  opacity: 0;
+  transition: opacity 80ms, color 80ms;
+}
+.ledger-row:hover .ledger-reopen {
+  opacity: 1;
+  color: var(--mark);
+}
+
+/* ─── SELECTED ROW — the highlighted "previous manual read" ─── */
+.ledger-row.selected {
+  background: var(--teal-bg);
+  border-color: var(--teal-bd);
+  box-shadow: inset 2px 0 0 var(--mark);
+}
+.ledger-row.selected .ledger-action {
+  color: var(--mark);
+  border-color: var(--teal-bd);
+  background: rgba(90, 171, 204, 0.18);
+}
+.ledger-row.selected .ledger-title {
+  color: var(--txt);
+}
+.ledger-row.selected .ledger-reopen {
+  opacity: 1;
+  color: var(--mark);
+}
+
+/* ─── Inline preview attached to selected row ─── */
+.ledger-preview {
+  margin: 8px -12px 6px;
+  padding: 14px 16px;
+  background: var(--surface-el);
+  border: 1px solid var(--border-sub);
+  border-left: 2px solid var(--mark);
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--txt2);
+  line-height: 1.55;
+  position: relative;
+}
+.ledger-preview-label {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: var(--mark);
+  margin-bottom: 8px;
+}
+.ledger-preview-snippet {
+  font-style: italic;
+  color: var(--txt2);
+}
+.ledger-preview-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 12px;
+  padding: 6px 12px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--mark);
+  background: rgba(90, 171, 204, 0.10);
+  border: 1px solid var(--teal-bd);
+  border-radius: 3px;
+  cursor: pointer;
+}
+.ledger-preview-cta svg {
+  width: 11px; height: 11px;
+}
+
+</style>
+</head>
+<body>
+
+<div class="panel">
+
+  <!-- ═══ LENS HEADER ═══ -->
+  <div class="lens-hdr">
+    <button class="hdr-back">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+    </button>
+    <span class="hdr-type">Ledger · History</span>
+    <div class="hdr-actions">
+      <button class="hdr-btn">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        Filter
+      </button>
+      <button class="hdr-close">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- ═══ LENS BODY ═══ -->
+  <div class="lens-body">
+
+    <!-- Meta strip -->
+    <div class="ledger-meta">
+      <div class="ledger-meta-label">Recent activity · You</div>
+      <div class="ledger-meta-count">42 entries · last 7 days</div>
+    </div>
+
+    <!-- ─── TODAY ─── -->
+    <div class="day-label">Today</div>
+
+    <div class="ledger-row">
+      <div class="ledger-action read">READ</div>
+      <div class="ledger-content">
+        <div class="ledger-title"><span class="ref">DOC-3344</span>Caterpillar C32 Service Manual<span class="pg">pg. 247</span></div>
+        <div class="ledger-meta-line">
+          <span>Section 4.7 — Fuel injection pressure check</span>
+        </div>
+      </div>
+      <div class="ledger-reopen">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg>
+      </div>
+    </div>
+
+    <div class="ledger-row">
+      <div class="ledger-action edit">EDIT</div>
+      <div class="ledger-content">
+        <div class="ledger-title"><span class="ref">WO-1042</span>Emergency Valve Replacement</div>
+        <div class="ledger-meta-line">
+          <span>Status updated · Critical → In Progress</span>
+        </div>
+      </div>
+      <div class="ledger-reopen">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg>
+      </div>
+    </div>
+
+    <div class="ledger-row">
+      <div class="ledger-action sign">SIGN</div>
+      <div class="ledger-content">
+        <div class="ledger-title"><span class="ref">HND-0205</span>Engineering Department Handover</div>
+        <div class="ledger-meta-line">
+          <span>Signed off — handover acknowledged</span>
+        </div>
+      </div>
+      <div class="ledger-reopen">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg>
+      </div>
+    </div>
+
+    <!-- ─── YESTERDAY ─── -->
+    <div class="day-label">Yesterday</div>
+
+    <!-- THE SELECTED ROW — previous manual the user read -->
+    <div class="ledger-row selected">
+      <div class="ledger-action read">READ</div>
+      <div class="ledger-content">
+        <div class="ledger-title"><span class="ref">DOC-2188</span>MAN B&amp;W Auxiliary Engine Manual<span class="pg">pg. 112</span></div>
+        <div class="ledger-meta-line">
+          <span>Section 8.3 — Cooling water specifications</span>
+        </div>
+        <div class="ledger-preview">
+          <div class="ledger-preview-label">Last read — pick up where you left off</div>
+          <div class="ledger-preview-snippet">"Cooling water shall be pre-treated to maintain a pH between 8.5 and 10.0. The use of nitrite-based corrosion inhibitor is mandatory for all freshwater jacket circuits..."</div>
+          <button class="ledger-preview-cta">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/></svg>
+            Reopen at pg. 112
+          </button>
+        </div>
+      </div>
+      <div class="ledger-reopen">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg>
+      </div>
+    </div>
+
+    <div class="ledger-row">
+      <div class="ledger-action open">OPEN</div>
+      <div class="ledger-content">
+        <div class="ledger-title"><span class="ref">FLT-0042</span>Starboard Engine Vibration</div>
+        <div class="ledger-meta-line">
+          <span>Fault — REPORTED 12 MAR · OPEN</span>
+        </div>
+      </div>
+      <div class="ledger-reopen">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg>
+      </div>
+    </div>
+
+    <div class="ledger-row">
+      <div class="ledger-action read">READ</div>
+      <div class="ledger-content">
+        <div class="ledger-title"><span class="ref">DOC-1809</span>Onboard Fuel Oil Analysis Report<span class="pg">pg. 4</span></div>
+        <div class="ledger-meta-line">
+          <span>Lab results — sample taken 11 Mar</span>
+        </div>
+      </div>
+      <div class="ledger-reopen">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg>
+      </div>
+    </div>
+
+    <!-- ─── 2 DAYS AGO ─── -->
+    <div class="day-label">2 days ago</div>
+
+    <div class="ledger-row">
+      <div class="ledger-action edit">EDIT</div>
+      <div class="ledger-content">
+        <div class="ledger-title"><span class="ref">WO-1018</span>500-Hour Preventive Maintenance</div>
+        <div class="ledger-meta-line">
+          <span>Checklist updated · 4 of 12 items complete</span>
+        </div>
+      </div>
+      <div class="ledger-reopen">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg>
+      </div>
+    </div>
+
+    <div class="ledger-row">
+      <div class="ledger-action read">READ</div>
+      <div class="ledger-content">
+        <div class="ledger-title"><span class="ref">DOC-0976</span>SOLAS Chapter II-2 — Fire Safety<span class="pg">pg. 38</span></div>
+        <div class="ledger-meta-line">
+          <span>Regulation 10 — Firefighting equipment</span>
+        </div>
+      </div>
+      <div class="ledger-reopen">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg>
+      </div>
+    </div>
+
+    <div class="ledger-row">
+      <div class="ledger-action create">CREATE</div>
+      <div class="ledger-content">
+        <div class="ledger-title"><span class="ref">FLT-0044</span>Bilge Pump Intermittent Failure</div>
+        <div class="ledger-meta-line">
+          <span>New fault logged · Engine room</span>
+        </div>
+      </div>
+      <div class="ledger-reopen">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg>
+      </div>
+    </div>
+
+  </div><!-- /lens-body -->
+</div><!-- /panel -->
+
+<script src="lens-base.js"></script>
+</body>
+</html>

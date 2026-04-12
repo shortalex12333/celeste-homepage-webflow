@@ -4097,7 +4097,9 @@ html.dark-mode {
 }
 
 /* Section backgrounds */
-.dark-mode .about-section,
+.dark-mode .about-section {
+  background: var(--_colors---surface);
+}
 .dark-mode .benefits-section,
 .dark-mode .service-section,
 .dark-mode .pricing-section,
@@ -4725,6 +4727,14 @@ html.dark-mode {
   z-index: 1;
 }
 
+/* Scrollable variant — user can scroll inside the iframe (handover preview) */
+.iframe-product-wrap.iframe-scrollable::after {
+  display: none;
+}
+.iframe-product-wrap.iframe-scrollable iframe {
+  pointer-events: auto !important;
+}
+
 /* ── Crop size variants ── */
 
 /* Services — default (590×540) */
@@ -4757,6 +4767,15 @@ html.dark-mode {
 .iframe-crop--oc-portrait {
   width: 360px;
   height: 920px;
+}
+
+/* OC section — related drawer variant (610×1200) — wide + content-fitted to show full drawer */
+.iframe-crop--oc-related {
+  width: 610px;
+  height: 1200px;
+}
+.iframe-crop--oc-related iframe {
+  margin-left: -86px;
 }
 
 /* Testimonial — branded SVG icons (no iframes) */
