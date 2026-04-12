@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Editorial · Ledger</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 100%; height: 100%; }
+
+:root {
+  --bg: linear-gradient(160deg, #181614 0%, #14110F 50%, #0C0B0A 100%);
+  --bg-glow: radial-gradient(circle at 20% 15%, rgba(90,171,204,0.04), transparent 55%);
+  --row-bg: rgba(30, 27, 24, 0.85);
+  --row-border: rgba(255,255,255,0.06);
+  --row-border-top: rgba(255,255,255,0.10);
+  --row-shadow: 0 1px 0 rgba(0,0,0,0.40), 0 8px 24px rgba(0,0,0,0.30);
+  --txt: rgba(255,255,255,0.92);
+  --mono-dim: rgba(255,255,255,0.40);
+  --green: #4A9468;
+  --green-bg: rgba(74,148,104,0.08);
+  --green-border: rgba(74,148,104,0.32);
+  --green-txt: #6BB885;
+}
+[data-theme="light"] {
+  --bg: linear-gradient(160deg, #FEFEFE 0%, #F5F6F8 30%, #ECEEF2 65%, #E4E6EC 100%);
+  --bg-glow: none;
+  --row-bg: #FFFFFF;
+  --row-border: rgba(0,0,0,0.05);
+  --row-border-top: rgba(0,0,0,0.05);
+  --row-shadow: 0 1px 2px rgba(0,0,0,0.03), 0 4px 16px rgba(0,0,0,0.04);
+  --txt: #1a1a1a;
+  --mono-dim: #aaa;
+  --green: #3A7A55;
+  --green-bg: rgba(74,148,104,0.08);
+  --green-border: transparent;
+  --green-txt: #3A7A55;
+}
+
+body {
+  background: var(--bg);
+  font-family: 'DM Sans', -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+  padding: 16px;
+  width: 400px;
+  height: 250px;
+  overflow: hidden;
+  position: relative;
+}
+body::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--bg-glow);
+  pointer-events: none;
+}
+
+.ledger-row {
+  background: var(--row-bg);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid var(--row-border);
+  border-top-color: var(--row-border-top);
+  border-radius: 6px;
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: var(--row-shadow);
+  position: relative;
+  z-index: 1;
+}
+
+.l-content { flex: 1; min-width: 0; }
+.l-name { font-size: 12px; font-weight: 500; color: var(--txt); margin-bottom: 3px; }
+.l-meta {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 9.5px; color: var(--mono-dim);
+  letter-spacing: 0.02em;
+}
+.l-badge {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 9px; font-weight: 600;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  padding: 4px 8px;
+  border: 1px solid var(--green-border);
+  border-radius: 3px;
+  color: var(--green-txt);
+  background: var(--green-bg);
+  flex-shrink: 0;
+}
+</style>
+</head>
+<body>
+<div class="ledger-row">
+  <div class="l-content">
+    <div class="l-name">Signed by R. Chen · Chief Engineer</div>
+    <div class="l-meta">2026-04-06T08:42:16Z</div>
+  </div>
+  <div class="l-badge">Immutable</div>
+</div>
+<div class="ledger-row">
+  <div class="l-content">
+    <div class="l-name">Reviewed by Capt. J. Andersson</div>
+    <div class="l-meta">2026-04-06T09:15:03Z</div>
+  </div>
+  <div class="l-badge">Immutable</div>
+</div>
+<div class="ledger-row">
+  <div class="l-content">
+    <div class="l-name">Added to handover · HND-0205</div>
+    <div class="l-meta">2026-04-06T09:15:04Z</div>
+  </div>
+  <div class="l-badge">Immutable</div>
+</div>
+</body>
+</html>

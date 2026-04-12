@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Editorial · Handover</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 100%; height: 100%; }
+
+:root {
+  --bg: linear-gradient(160deg, #181614 0%, #14110F 50%, #0C0B0A 100%);
+  --bg-glow: radial-gradient(circle at 25% 20%, rgba(90,171,204,0.04), transparent 55%);
+  --card-bg: rgba(30, 27, 24, 0.85);
+  --card-border: rgba(255,255,255,0.06);
+  --card-border-top: rgba(255,255,255,0.10);
+  --card-shadow: 0 1px 0 rgba(0,0,0,0.40), 0 8px 24px rgba(0,0,0,0.30);
+  --card-radius: 8px;
+  --row-border: rgba(255,255,255,0.04);
+  --txt: rgba(255,255,255,0.92);
+  --txt-dim: rgba(255,255,255,0.55);
+  --txt-ghost: rgba(255,255,255,0.35);
+  --mono-dim: rgba(255,255,255,0.40);
+  --green: #4A9468;
+  --green-bg: rgba(74,148,104,0.12);
+  --green-border: rgba(74,148,104,0.32);
+  --green-txt: #6BB885;
+}
+[data-theme="light"] {
+  --bg: linear-gradient(160deg, #FEFEFE 0%, #FAF8F5 25%, #F2EDE7 65%, #EBE5DE 100%);
+  --bg-glow: none;
+  --card-bg: #FFFFFF;
+  --card-border: rgba(0,0,0,0.05);
+  --card-border-top: rgba(0,0,0,0.05);
+  --card-shadow: 0 1px 2px rgba(0,0,0,0.03), 0 8px 24px rgba(0,0,0,0.05), 0 24px 64px rgba(0,0,0,0.04);
+  --card-radius: 10px;
+  --row-border: rgba(0,0,0,0.025);
+  --txt: #1a1a1a;
+  --txt-dim: #777;
+  --txt-ghost: #999;
+  --mono-dim: #aaa;
+  --green: #3A7A55;
+  --green-bg: rgba(74,148,104,0.10);
+  --green-border: transparent;
+  --green-txt: #3A7A55;
+}
+
+body {
+  background: var(--bg);
+  font-family: 'DM Sans', -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  display: flex;
+  align-items: stretch;
+  justify-content: stretch;
+  padding: 16px;
+  width: 400px;
+  height: 250px;
+  overflow: hidden;
+  position: relative;
+}
+body::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--bg-glow);
+  pointer-events: none;
+}
+
+.card {
+  width: 100%;
+  flex: 1;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-top-color: var(--card-border-top);
+  border-radius: var(--card-radius);
+  box-shadow: var(--card-shadow);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 1;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.c-head {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--row-border);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.c-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); }
+.c-title { font-size: 13px; font-weight: 500; color: var(--txt); }
+.c-badge {
+  margin-left: auto;
+  font-size: 9px; font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 3px 9px;
+  border-radius: 3px;
+  background: var(--green-bg);
+  border: 1px solid var(--green-border);
+  color: var(--green-txt);
+}
+
+.c-row {
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--row-border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  flex: 1;
+}
+.c-row:last-child { border-bottom: none; }
+.c-label { color: var(--txt-dim); }
+.c-label .arrow { color: var(--txt-ghost); margin: 0 6px; }
+.c-value {
+  font-family: 'IBM Plex Mono', monospace;
+  color: var(--mono-dim);
+  font-size: 11px;
+}
+.c-value.ok { color: var(--green-txt); }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="c-head">
+    <div class="c-dot"></div>
+    <div class="c-title">Handover · Engineering</div>
+    <div class="c-badge">Signed</div>
+  </div>
+  <div class="c-row">
+    <span class="c-label">R. Chen <span class="arrow">→</span> S. Park</span>
+  </div>
+  <div class="c-row">
+    <span class="c-label">Sections</span>
+    <span class="c-value ok">12 / 12</span>
+  </div>
+  <div class="c-row">
+    <span class="c-label">Captain countersigned</span>
+    <span class="c-value">06 Apr 2026</span>
+  </div>
+</div>
+</body>
+</html>

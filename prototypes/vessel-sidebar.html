@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vessel Sidebar · Celeste Design Prototype</title>
+<link rel="stylesheet" href="lens-base.css">
+<style>
+/* ═══════════════════════════════════════════════════════
+   VESSEL SIDEBAR — focused crop of the vessel navigation.
+   Shows: brand, vessel selector, primary nav, operations.
+   Used as the "Comprehensive Fleet" media on the homepage.
+   ═══════════════════════════════════════════════════════ */
+
+body {
+  padding: 0;
+  margin: 0;
+  background: var(--surface-base, #0c0b0a);
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: 340px;
+  background: var(--surface, #181614);
+  border-right: 1px solid var(--border-sub, rgba(255,255,255,0.08));
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  font-family: var(--font-sans, 'Inter', -apple-system, sans-serif);
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+/* ─── Brand row ─── */
+.sb-brand {
+  display: flex;
+  align-items: center;
+  padding: 22px 24px 22px 24px;
+  border-bottom: 1px solid var(--border-faint, rgba(255,255,255,0.04));
+  gap: 14px;
+}
+.sb-brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--txt, rgba(255,255,255,0.92));
+}
+.sb-brand-sep {
+  width: 1px;
+  height: 14px;
+  background: var(--border-sub, rgba(255,255,255,0.10));
+}
+.sb-brand-vessel {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--txt2, rgba(255,255,255,0.62));
+  letter-spacing: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.sb-brand-vessel svg {
+  width: 11px; height: 11px;
+  color: var(--txt-ghost, rgba(255,255,255,0.32));
+}
+
+/* ─── Primary nav ─── */
+.sb-nav {
+  padding: 16px 0 8px;
+}
+.sb-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 24px;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--txt2, rgba(255,255,255,0.62));
+  cursor: pointer;
+  position: relative;
+  transition: background 80ms;
+}
+.sb-nav-item:hover {
+  background: var(--surface-hover, rgba(255,255,255,0.04));
+  color: var(--txt, rgba(255,255,255,0.92));
+}
+.sb-nav-item svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+/* ─── Active state — Vessel Surface ─── */
+.sb-nav-item.active {
+  background: rgba(90, 171, 204, 0.08);
+  color: var(--mark, #5AABCC);
+}
+.sb-nav-item.active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--mark, #5AABCC);
+}
+
+/* ─── Section label ─── */
+.sb-section-label {
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--txt-ghost, rgba(255,255,255,0.32));
+  padding: 22px 24px 8px;
+}
+
+/* ─── Sub nav (operations) ─── */
+.sb-sub {
+  padding: 0 0 24px;
+}
+.sb-sub-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 24px;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--txt2, rgba(255,255,255,0.62));
+  cursor: pointer;
+  transition: background 80ms, color 80ms;
+}
+.sb-sub-item:hover {
+  background: var(--surface-hover, rgba(255,255,255,0.04));
+  color: var(--txt, rgba(255,255,255,0.92));
+}
+.sb-sub-item svg {
+  width: 16px;
+  height: 16px;
+  color: var(--txt-ghost, rgba(255,255,255,0.40));
+  flex-shrink: 0;
+}
+.sb-sub-item-label {
+  flex: 1;
+}
+.sb-sub-item-count {
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--txt-ghost, rgba(255,255,255,0.40));
+}
+
+/* ─── Divider ─── */
+.sb-divider {
+  height: 1px;
+  background: var(--border-faint, rgba(255,255,255,0.04));
+  margin: 0 24px;
+}
+
+/* ─── Bottom area: vessel switcher hint ─── */
+.sb-fleet-hint {
+  margin-top: auto;
+  padding: 18px 24px 24px;
+  border-top: 1px solid var(--border-faint, rgba(255,255,255,0.04));
+}
+.sb-fleet-hint-label {
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--txt-ghost, rgba(255,255,255,0.32));
+  margin-bottom: 10px;
+}
+.sb-fleet-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.sb-fleet-vessel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--txt2, rgba(255,255,255,0.62));
+  cursor: pointer;
+  transition: background 80ms;
+}
+.sb-fleet-vessel:hover {
+  background: var(--surface-hover, rgba(255,255,255,0.04));
+  color: var(--txt, rgba(255,255,255,0.92));
+}
+.sb-fleet-vessel.current {
+  background: rgba(90, 171, 204, 0.06);
+  color: var(--txt, rgba(255,255,255,0.92));
+}
+.sb-fleet-vessel-name {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.sb-fleet-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--green, #4A9468);
+  flex-shrink: 0;
+}
+.sb-fleet-dot.amber { background: #C4893B; }
+.sb-fleet-dot.red { background: #C0503A; }
+.sb-fleet-vessel-status {
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 10px;
+  color: var(--txt-ghost, rgba(255,255,255,0.40));
+}
+
+</style>
+</head>
+<body>
+
+<aside class="sidebar">
+
+  <!-- ═══ BRAND + VESSEL ═══ -->
+  <div class="sb-brand">
+    <div class="sb-brand-name">CELESTE</div>
+    <div class="sb-brand-sep"></div>
+    <div class="sb-brand-vessel">
+      M/Y Test Vessel
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+    </div>
+  </div>
+
+  <!-- ═══ PRIMARY NAV ═══ -->
+  <div class="sb-nav">
+    <div class="sb-nav-item active">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+      <span>Vessel Surface</span>
+    </div>
+  </div>
+
+  <!-- ═══ OPERATIONS SECTION ═══ -->
+  <div class="sb-section-label">Operations</div>
+  <div class="sb-sub">
+    <div class="sb-sub-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/></svg>
+      <span class="sb-sub-item-label">Work Orders</span>
+      <span class="sb-sub-item-count">11</span>
+    </div>
+    <div class="sb-sub-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      <span class="sb-sub-item-label">Faults</span>
+      <span class="sb-sub-item-count">4</span>
+    </div>
+    <div class="sb-sub-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      <span class="sb-sub-item-label">Hours of Rest</span>
+      <span class="sb-sub-item-count">7</span>
+    </div>
+    <div class="sb-sub-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+      <span class="sb-sub-item-label">Certificates</span>
+      <span class="sb-sub-item-count">23</span>
+    </div>
+  </div>
+
+  <div class="sb-divider"></div>
+
+  <!-- ═══ FLEET SWITCHER (the key fleet-view hint) ═══ -->
+  <div class="sb-fleet-hint">
+    <div class="sb-fleet-hint-label">Your fleet · 4 vessels</div>
+    <div class="sb-fleet-list">
+      <div class="sb-fleet-vessel current">
+        <div class="sb-fleet-vessel-name"><span class="sb-fleet-dot"></span>M/Y Test Vessel</div>
+        <div class="sb-fleet-vessel-status">42m</div>
+      </div>
+      <div class="sb-fleet-vessel">
+        <div class="sb-fleet-vessel-name"><span class="sb-fleet-dot"></span>M/Y Andromeda</div>
+        <div class="sb-fleet-vessel-status">60m</div>
+      </div>
+      <div class="sb-fleet-vessel">
+        <div class="sb-fleet-vessel-name"><span class="sb-fleet-dot amber"></span>S/Y Northern Star</div>
+        <div class="sb-fleet-vessel-status">38m</div>
+      </div>
+      <div class="sb-fleet-vessel">
+        <div class="sb-fleet-vessel-name"><span class="sb-fleet-dot red"></span>M/Y Helios</div>
+        <div class="sb-fleet-vessel-status">52m</div>
+      </div>
+    </div>
+  </div>
+
+</aside>
+
+</body>
+</html>
