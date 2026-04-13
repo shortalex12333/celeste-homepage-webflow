@@ -1,0 +1,92 @@
+CelesteOS Evidence Export — Verification Policy
+================================================
+Published:  2026-04-13
+Maintained: verify@celeste7.ai
+
+WHAT THIS DOCUMENT IS
+---------------------
+This file records the cryptographic commitments CelesteOS makes about
+its evidence export system. It is published here so that any third party
+— an insurer, a lawyer, a court-appointed expert, a port state control
+officer — can independently determine whether a CelesteOS export PDF is
+authentic without contacting CelesteOS.
+
+The companion signing certificate is at:
+  https://celeste7.ai/.well-known/verify.pem
+
+PUBLIC SIGNING CERTIFICATE
+---------------------------
+Algorithm:   RSA-4096
+Digest:      SHA-256
+Subject:     CN=CelesteOS Evidence Signing, O=CelesteOS Ltd, C=GB
+Certificate: https://celeste7.ai/.well-known/verify.pem
+Status:      Self-signed (v0.1 staging). CA-issued certificate to follow.
+
+EXPORT FORMAT
+-------------
+Format:        PDF with embedded JSON attachment (ledger_events.json)
+Target:        PDF/A-3 (ISO 19005-3) — implementation in progress
+Attachment:    ledger_events.json — raw ledger events, deterministic
+               JSON, sorted keys, UTF-8, SHA-256 masked actor_ref /
+               vessel_ref (raw user_id / yacht_id not embedded)
+Cover hash:    proof_hash field on cover page matches SHA-256 of
+               requester context at export time
+
+ID MASKING
+----------
+No raw database identifiers (user_id, yacht_id) appear in any exported
+document. All actor and vessel references are SHA-256 hashes of the
+underlying identifiers. Cross-event correlation is preserved: the same
+actor produces the same actor_ref across all events. CelesteOS can
+verify internally that a given hash corresponds to a known identity.
+
+SIGNATURE (CURRENT STATUS)
+---------------------------
+v0.1 (staging): Embedded proof_hash chain only. PAdES-B-LT digital
+signature and RFC 3161 trusted timestamp are planned for v1.0.
+
+SIGNATURE (TARGET — v1.0)
+--------------------------
+Standard:    PAdES-B-LT (ETSI EN 319 102-1)
+Signing key: Held in hardware security module
+Timestamp:   RFC 3161 token from a qualified TSA
+Scope:       Entire PDF including embedded attachments
+
+STORAGE
+-------
+v0.1 (staging): Private Supabase storage bucket, access-controlled,
+no public URLs, signed time-limited download URLs only.
+v1.0 (planned): WORM storage (S3 Object Lock, Compliance mode).
+Immutable once sealed.
+
+VERIFICATION
+------------
+The public verifier at https://verify.celeste7.ai accepts any
+CelesteOS export PDF and performs the following checks client-side
+(nothing is uploaded to CelesteOS servers):
+
+  1. Embedded JSON attachment present (ledger_events.json)
+  2. Required fields on all events (actor_ref, vessel_ref, action, proof_hash)
+  3. Chronological order (event_timestamp ASC)
+  4. Single-vessel scope (all events share one vessel_ref)
+  5. Proof hash coverage (100% of events)
+  6. Cryptographic signature (PAdES) — v1.0
+  7. RFC 3161 trusted timestamp — v1.0
+
+WHAT TO DO IF VERIFICATION FAILS
+---------------------------------
+1. Confirm you are using the original PDF as received — not a
+   re-saved, printed, or re-exported copy.
+2. Visit https://verify.celeste7.ai and drag the original file.
+3. If the result shows "Verification failed", contact the issuing
+   vessel operator. CelesteOS does not store or have access to
+   third-party copies of exported documents.
+4. For legal disputes, contact: verify@celeste7.ai
+
+REVOCATION
+----------
+If a signing certificate is compromised, CelesteOS will publish a
+revocation notice at https://celeste7.ai/.well-known/revocation.txt
+and notify registered vessel operators directly.
+
+END OF POLICY

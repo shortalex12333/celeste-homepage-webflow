@@ -3,6 +3,20 @@
   "trailingSlash": false,
   "headers": [
     {
+      "source": "/.well-known/verify.pem",
+      "headers": [
+        { "key": "Content-Type",  "value": "application/x-pem-file" },
+        { "key": "Cache-Control", "value": "public, max-age=86400" }
+      ]
+    },
+    {
+      "source": "/.well-known/verification-policy.txt",
+      "headers": [
+        { "key": "Content-Type",  "value": "text/plain; charset=utf-8" },
+        { "key": "Cache-Control", "value": "public, max-age=86400" }
+      ]
+    },
+    {
       "source": "/(.*)",
       "has": [
         {
