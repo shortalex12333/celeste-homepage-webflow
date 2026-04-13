@@ -34,11 +34,23 @@ Cover hash:    proof_hash field on cover page matches SHA-256 of
 
 ID MASKING
 ----------
-No raw database identifiers (user_id, yacht_id) appear in any exported
-document. All actor and vessel references are SHA-256 hashes of the
-underlying identifiers. Cross-event correlation is preserved: the same
-actor produces the same actor_ref across all events. CelesteOS can
-verify internally that a given hash corresponds to a known identity.
+No raw database identifiers (user_id, yacht_id, entity_id) appear in any
+exported document. All references are HMAC-SHA256 of the underlying
+identifier keyed with a server-side secret (EXPORT_HMAC_SECRET, never
+exposed). Unlike plain SHA-256, the masking is not reversible by an
+attacker who obtains raw UUIDs — the server key is required to reproduce
+any ref. Three masked fields appear in every event:
+  actor_ref  = HMAC-SHA256(user_id,   EXPORT_HMAC_SECRET)
+  vessel_ref = HMAC-SHA256(yacht_id,  EXPORT_HMAC_SECRET)
+  entity_ref = HMAC-SHA256(entity_id, EXPORT_HMAC_SECRET)
+Cross-event correlation is preserved: the same actor produces the same
+actor_ref across all events in all exports. CelesteOS can verify
+internally that a given ref corresponds to a known identity.
+
+DISCLOSURE: Actor names and email addresses appear in the embedded JSON
+and on the cover page in readable form. This is by design — evidence
+without attribution is not evidence. The HMAC scheme protects machine-
+readable database identifiers, not human-readable names.
 
 SIGNATURE (CURRENT STATUS)
 ---------------------------
