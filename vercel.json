@@ -33,6 +33,12 @@
     }
   ],
   "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "celeste-homepage-webflow.vercel.app" }],
+      "destination": "https://celeste7.ai/$1",
+      "permanent": true
+    },
     { "source": "/faq", "destination": "/410.html", "statusCode": 410 },
     { "source": "/testimonials", "destination": "/410.html", "statusCode": 410 },
     { "source": "/user-settings", "destination": "/410.html", "statusCode": 410 },
