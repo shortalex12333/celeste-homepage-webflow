@@ -412,9 +412,15 @@ blockquote {
   inset: 0 auto auto;
   overflow: visible;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
-  padding: 80px 120px;
+  padding: 320px 120px 80px;
+}
+
+@media screen and (max-width: 767px) {
+  .hero-image-wrapper {
+    padding: 240px 24px 60px;
+  }
 }
 
 .about-container {
