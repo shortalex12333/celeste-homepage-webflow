@@ -123,6 +123,20 @@ h1, h2, h3 {
   letter-spacing: inherit;
 }
 
+/* HERO SPECIFICITY OVERRIDE
+   The inline <style> in index.html at lines 117-122 sets .accent to
+   Cormorant Garamond italic 300 (intended for editorial flourishes like
+   the Philosophy "in the vessel" span). For the hero body copy we want
+   only colour to change — DM Sans normal 400 must be preserved.
+   Bumping specificity to 0,2,0 wins over the inline 0,1,0 rule. */
+.text-hero1 .accent {
+  font-family: inherit;
+  font-style: inherit;
+  font-weight: inherit;
+  font-size: inherit;
+  letter-spacing: inherit;
+}
+
 /* =============================================================================
    FOUNDER BLOCK — Philosophy section portrait
    Pairs Alex Short headshot with the "former ETO" credibility line.
