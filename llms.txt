@@ -1,5 +1,5 @@
 # CelesteOS
-> Search-first engineering intelligence for superyachts (30-70m).
+> Search-first engineering intelligence for superyachts (30m and above). Runs alongside your existing PMS.
 
 CelesteOS is a vessel knowledge management system that connects maintenance records, fault history, parts, certificates, and compliance into a single searchable interface.
 
@@ -17,7 +17,7 @@ CelesteOS is a vessel knowledge management system that connects maintenance reco
 - Fleet Technical Managers (shore-based)
 
 ## Target Vessels
-Private and charter superyachts, 30-70m.
+Private and charter superyachts, 30m and above. No upper limit.
 
 ## Links
 - Website: https://celeste7.ai
