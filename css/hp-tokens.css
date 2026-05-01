@@ -112,9 +112,15 @@ h1, h2, h3 {
 }
 
 /* Inline brand-colour accent — used to highlight key phrases in body copy.
-   Matches the existing <span class="accent"> usage in pre-about and Philosophy. */
+   Matches the existing <span class="accent"> usage in pre-about and Philosophy.
+   Explicitly inherits typography — only colour changes. */
 .accent {
   color: var(--_colors---accent);
+  font-family: inherit;
+  font-style: inherit;
+  font-weight: inherit;
+  font-size: inherit;
+  letter-spacing: inherit;
 }
 
 /* =============================================================================
