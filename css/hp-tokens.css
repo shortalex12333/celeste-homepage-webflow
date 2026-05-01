@@ -111,6 +111,12 @@ h1, h2, h3 {
   letter-spacing: 0.05em;
 }
 
+/* Inline brand-colour accent — used to highlight key phrases in body copy.
+   Matches the existing <span class="accent"> usage in pre-about and Philosophy. */
+.accent {
+  color: var(--_colors---accent);
+}
+
 /* =============================================================================
    FOUNDER BLOCK — Philosophy section portrait
    Pairs Alex Short headshot with the "former ETO" credibility line.
