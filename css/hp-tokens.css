@@ -72,7 +72,6 @@ h1, h2, h3 {
 
 /* Descriptions / secondary text - lighter grey */
 .about-text1,
-.about-text2,
 .bnf-text1,
 .bnf-text2,
 .bnf-text3,
@@ -91,13 +90,15 @@ h1, h2, h3 {
   font-weight: 400;
 }
 
-/* Feature titles in cards */
+/* Feature titles in cards + Philosophy closing maxim
+   .about-text2 is heading-4 sized — must use text-color token for AA+ contrast in both modes */
 .heading-item1-srv,
 .heading-srv2,
 .text-block-38,
 .text-block-42,
-.single-item-title {
-  color: var(--_colors---text-color);  /* #0a0a0a */
+.single-item-title,
+.about-text2 {
+  color: var(--_colors---text-color);  /* #0a0a0a light · rgba(255,255,255,0.92) dark */
   font-weight: 500;
 }
 
@@ -108,6 +109,36 @@ h1, h2, h3 {
   font-size: 13px;
   text-transform: uppercase;
   letter-spacing: 0.05em;
+}
+
+/* =============================================================================
+   FOUNDER BLOCK — Philosophy section portrait
+   Pairs Alex Short headshot with the "former ETO" credibility line.
+   ============================================================================= */
+.founder-block {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+.founder-portrait {
+  width: 64px;
+  height: 64px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid var(--_colors---border);
+  background: var(--_colors---surface);
+}
+.founder-text {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+@media (max-width: 540px) {
+  .founder-block {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
 }
 
 /* =============================================================================
