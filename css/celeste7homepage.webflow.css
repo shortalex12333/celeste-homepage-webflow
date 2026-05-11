@@ -4281,7 +4281,13 @@ html.dark-mode {
    ========================================================================== */
 
 @media (prefers-color-scheme: dark) {
-  /* Only apply if no explicit theme class is set (no-JS fallback) */
+  /* Only apply if no explicit theme class is set (no-JS fallback).
+     Mirror the full token set from html.dark-mode (lines 4008-4036) so any
+     rule using var(--_colors---color-N) resolves to its dark-mode value in
+     auto mode. Previously this block remapped only accent/surface/text/border
+     tokens, leaving color-1..9 at light-mode values — which made
+     .article-body p (color: var(--_colors---color-8)) render #262626 on a
+     dark gradient. */
   html:not(.light-mode):not(.dark-mode) {
     --_colors---accent: #5AABCC;
     --_colors---accent-hover: #7BC4DD;
@@ -4292,6 +4298,15 @@ html.dark-mode {
     --_colors---text-color: rgba(255, 255, 255, 0.92);
     --_colors---text-muted: rgba(255, 255, 255, 0.55);
     --_colors---border: rgba(255, 255, 255, 0.07);
+    --_colors---color-1: #1e1b18;
+    --_colors---color-2: #2a2723;
+    --_colors---color-3: #3a3632;
+    --_colors---color-4: #5a5550;
+    --_colors---color-5: #8b8580;
+    --_colors---color-6: #a8a29d;
+    --_colors---color-7: #c5bfba;
+    --_colors---color-8: #ddd8d3;
+    --_colors---color-9: rgba(255, 255, 255, 0.92);
   }
 
   html:not(.light-mode):not(.dark-mode) body {
