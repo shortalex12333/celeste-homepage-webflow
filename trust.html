@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Trust · CelesteOS</title>
+<meta name="description" content="Cryptographic proof, maritime regulatory mapping, and positioning vs class society Type Approval. How CelesteOS earns trust at audit.">
+<meta name="robots" content="index, follow">
+<meta content="width=device-width, initial-scale=1" name="viewport">
+<link rel="canonical" href="https://celeste7.ai/trust">
+<link href="css/normalize.css" rel="stylesheet" type="text/css">
+<link href="css/webflow.css" rel="stylesheet" type="text/css">
+<link href="css/celeste7homepage.webflow.css" rel="stylesheet" type="text/css">
+<link href="css/hp-tokens.css" rel="stylesheet" type="text/css">
+<link rel="icon" href="favicon.png" type="image/png">
+<style>
+  body { font-family: 'Inter', -apple-system, system-ui, sans-serif; max-width: 880px; margin: 0 auto; padding: 4rem 2rem 6rem; line-height: 1.65; }
+  h1 { font-size: clamp(2.2rem, 4.4vw, 3rem); font-weight: 500; letter-spacing: -0.012em; margin: 0 0 0.6rem; }
+  .lede { opacity: 0.72; font-size: 1.05rem; margin: 0 0 3rem; max-width: 720px; }
+  section { margin-bottom: 3.5rem; }
+  h2 { font-size: 1.45rem; font-weight: 500; letter-spacing: -0.005em; margin: 0 0 1rem; }
+  .eyebrow { font-family: 'IBM Plex Mono', monospace; font-size: 0.74rem; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.6; margin-bottom: 0.7rem; }
+  p { margin: 0.5rem 0 1rem; opacity: 0.88; }
+  ul { padding-left: 1.3rem; }
+  li { margin-bottom: 0.6rem; opacity: 0.88; }
+  blockquote { margin: 1.5rem 0; padding-left: 1rem; border-left: 2px solid currentColor; opacity: 0.82; font-style: normal; }
+  a { color: inherit; }
+  .cta-button { display: inline-flex; align-items: center; gap: 0.5rem; margin-top: 1rem; padding: 0.7rem 1.1rem; border: 1px solid currentColor; border-radius: 2px; font-family: 'IBM Plex Mono', monospace; font-size: 0.82rem; letter-spacing: 0.04em; text-transform: uppercase; text-decoration: none; color: inherit; }
+  nav.top { margin-bottom: 3rem; font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem; letter-spacing: 0.04em; text-transform: uppercase; opacity: 0.6; }
+  nav.top a { color: inherit; text-decoration: none; margin-right: 1.2rem; }
+  nav.top a:hover { opacity: 1; text-decoration: underline; }
+  .reg-block { font-family: 'IBM Plex Mono', monospace; font-size: 0.88rem; line-height: 1.55; background: rgba(127,127,127,0.06); border-left: 2px solid currentColor; padding: 1.1rem 1.2rem; margin: 1rem 0; opacity: 0.92; }
+  .reg-block strong { display: block; margin-bottom: 0.3rem; }
+</style>
+</head>
+<body>
+
+<nav class="top">
+  <a href="/">CelesteOS</a>
+  <a href="/trust" style="opacity:1;">Trust</a>
+  <a href="/sources">Sources</a>
+</nav>
+
+<h1>Trust</h1>
+<p class="lede">Credibility belongs in verifiable proof, not claims. This page maps how CelesteOS earns trust at audit, where data lives, and why the product sits alongside your class-approved PMS rather than replacing it.</p>
+
+<!-- (a) Cryptographic proof : primary USP -->
+<section id="proof">
+  <div class="eyebrow">(a) Cryptographic proof</div>
+  <h2>Every PMS produces records. Few produce proof.</h2>
+  <p>CelesteOS seals every action, every fault, every handover, every signature into a cryptographic receipt. The receipt is independently verifiable by anyone, anywhere, without trusting us. The verifier is open at <a href="https://verifier.celeste7.ai" target="_blank" rel="noopener">verifier.celeste7.ai</a>.</p>
+  <p>Why this matters: ISM Code external audits require objective evidence that the safety management system actually works on board (IMO MSC-MEPC.4/Circ.4). PSC inspectors check planned maintenance records during inspection. Records that can be independently proven authentic remove the question of whether logs were assembled under pressure.</p>
+  <a href="https://verifier.celeste7.ai/?sample=1" target="_blank" rel="noopener" class="cta-button">Verify a sample receipt ↗</a>
+</section>
+
+<!--
+  (b) SOC-2 attestation: deliberately omitted until an audit is in progress or completed.
+  Per editorial discipline, hedge phrasing ("we follow SOC-2 compliance") reads worse
+  than silence. When attestation begins with a named auditor and target date, add this
+  section back with one of the three Option templates in /Users/celeste7/Desktop/celeste_site.md.
+-->
+
+<!--
+  (c) GDPR + data residency: deliberately omitted until concrete answers exist for:
+    - data storage region(s)
+    - backup location and retention period
+    - EU residency option
+  Generic GDPR copy without these specifics violates the same hedge rule as (b).
+  Restore when factual answers are confirmed.
+-->
+
+<!-- (d) Maritime regulatory mapping -->
+<section id="regulatory">
+  <div class="eyebrow">(d) Maritime regulatory mapping</div>
+  <h2>What CelesteOS provides audit evidence for.</h2>
+  <p>CelesteOS produces audit evidence aligned with the following codes and resolutions:</p>
+
+  <div class="reg-block">
+    <strong>ISM Code, Section 10 (Maintenance of the Ship and Equipment).</strong>
+    Every maintenance record, work order, and defect log is timestamped, attributable, and cryptographically sealed.
+  </div>
+
+  <div class="reg-block">
+    <strong>ISM Code, Section 11 (Documentation).</strong>
+    Append-only ledger means no record can be silently modified after the fact.
+  </div>
+
+  <div class="reg-block">
+    <strong>MLC 2006, Regulation 2.3 (Hours of Rest).</strong>
+    Where hours of rest are recorded in CelesteOS, the receipt provides tamper-evident proof of when entries were made.
+  </div>
+
+  <div class="reg-block">
+    <strong>IMO Resolution MSC.428(98) (Maritime Cyber Risk Management).</strong>
+    CelesteOS's audit trail provides objective evidence of records integrity, relevant to US Coast Guard ISM cyber-risk verification since January 2021.
+  </div>
+</section>
+
+<!-- (e) Positioning vs class society Type Approval : critical paragraph -->
+<section id="class-positioning">
+  <div class="eyebrow">(e) Positioning vs class society Type Approval</div>
+  <h2>CelesteOS is not a PMS.</h2>
+  <p>It runs alongside your existing PMS and its class approvals. We do not replace your DNV, LR, BV, or ABS Type Approved system. We index it, search it, and seal its outputs.</p>
+  <p>This is deliberate. Adding CelesteOS does not require re-certifying your PMS, re-training your engineers on a new platform, or migrating any data. Your existing approvals remain intact.</p>
+</section>
+
+<section style="margin-top:4rem;padding-top:2rem;border-top:1px solid rgba(127,127,127,0.18);">
+  <div class="eyebrow">Privacy</div>
+  <p>For data handling, retention, and processing details: <a href="/privacy-policy">privacy-policy</a>.</p>
+</section>
+
+</body>
+</html>

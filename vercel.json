@@ -48,6 +48,7 @@
     { "source": "/evolve-pricing", "destination": "/410.html", "statusCode": 410 },
     { "source": "/competitor-playbook-step-1", "destination": "/410.html", "statusCode": 410 },
     { "source": "/bio-optimiser", "destination": "/410.html", "statusCode": 410 },
-    { "source": "/e-learning", "destination": "/410.html", "statusCode": 410 }
+    { "source": "/e-learning", "destination": "/410.html", "statusCode": 410 },
+    { "source": "/privacy", "destination": "/privacy-policy", "permanent": true }
   ]
 }
