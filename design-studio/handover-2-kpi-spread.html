@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Handover · Design 2 — KPI Spread (Editorial Light)</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    min-height: 100vh;
+    background: linear-gradient(160deg, #FEFEFE 0%, #F5F2ED 40%, #EDE9E3 100%);
+    font-family: 'Inter', -apple-system, sans-serif;
+    display: flex; align-items: center; justify-content: center;
+    padding: 60px 40px;
+    color: #1A2332;
+  }
+  .stage-label {
+    position: fixed; top: 18px; left: 24px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: rgba(26,35,50,0.38);
+  }
+  .page {
+    width: min(760px, 100%);
+    background: #FFFFFF;
+    border-radius: 8px;
+    box-shadow:
+      0 1px 2px rgba(0,0,0,0.04),
+      0 22px 64px rgba(0,0,0,0.06),
+      0 60px 140px rgba(0,0,0,0.04);
+    padding: 40px 44px;
+  }
+  .doc-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 28px; }
+  .doc-id {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: #5AABCC;
+  }
+  .doc-date {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px; letter-spacing: 0.06em; color: #8896A6;
+  }
+
+  h1 {
+    font-size: 22px; font-weight: 600; color: #1A2332;
+    letter-spacing: -0.005em; margin-bottom: 4px;
+  }
+  .yacht { font-size: 13px; color: #4A5568; margin-bottom: 24px; }
+  hr.accent { border: none; height: 2px; background: #5AABCC; width: 56px; margin: 0 0 32px; }
+
+  .kpi-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 28px; }
+  .kpi {
+    background: linear-gradient(180deg, #F8FAFB 0%, #F0F4F6 100%);
+    border: 1px solid #E8EDF1;
+    border-radius: 8px;
+    padding: 22px 20px;
+    text-align: center;
+  }
+  .kpi .v {
+    font-size: 34px; font-weight: 600;
+    line-height: 1; color: #1A2332;
+    margin-bottom: 10px; letter-spacing: -0.01em;
+    font-feature-settings: "tnum";
+  }
+  .kpi .v.accent { color: #5AABCC; }
+  .kpi .v.critical { color: #C53030; }
+  .kpi .l {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px; font-weight: 500;
+    letter-spacing: 0.10em; text-transform: uppercase;
+    color: #8896A6;
+  }
+  .kpi .sub {
+    font-size: 10px; color: #4A5568; margin-top: 6px;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+
+  .summary {
+    background: #FAFBFC;
+    border-left: 3px solid #5AABCC;
+    padding: 16px 20px;
+    font-size: 12px; line-height: 1.7;
+    color: #4A5568;
+    font-style: italic;
+    border-radius: 0 4px 4px 0;
+    margin-bottom: 22px;
+  }
+
+  .toc-title {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px; letter-spacing: 0.10em;
+    text-transform: uppercase; color: #8896A6;
+    margin-bottom: 12px;
+  }
+  .toc-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 9px 0;
+    border-bottom: 1px solid #E8EDF1;
+    font-size: 11px;
+  }
+  .toc-row:last-child { border-bottom: none; }
+  .toc-name { color: #1A2332; font-weight: 500; }
+  .toc-count {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px; color: #8896A6;
+  }
+  .toc-count .dot { color: #5AABCC; }
+</style>
+</head>
+<body>
+<div class="stage-label">Handover · Design 2 — KPI Spread (Editorial Light)</div>
+<div class="page">
+  <div class="doc-head">
+    <span class="doc-id">CO-HND-2026-0314-AR52</span>
+    <span class="doc-date">Generated 2026-03-14 09:42 UTC</span>
+  </div>
+
+  <h1>Technical Handover Report</h1>
+  <div class="yacht">M/Y Aurora · 52m · 6-month rotation</div>
+  <hr class="accent">
+
+  <div class="kpi-row">
+    <div class="kpi">
+      <div class="v">147</div>
+      <div class="l">Linked records</div>
+      <div class="sub">6 domains</div>
+    </div>
+    <div class="kpi">
+      <div class="v accent">12 / 12</div>
+      <div class="l">Sections complete</div>
+      <div class="sub">no gaps</div>
+    </div>
+    <div class="kpi">
+      <div class="v critical">3</div>
+      <div class="l">Open critical items</div>
+      <div class="sub">flagged for incoming CE</div>
+    </div>
+  </div>
+
+  <div class="summary">
+    Six-month period covering 14 Sep 2025 to 14 Mar 2026. Three open critical items remain
+    at handover and are linked to the relevant manual pages, work orders, and parts.
+  </div>
+
+  <div class="toc-title">Section index</div>
+  <div class="toc-row"><span class="toc-name">Vessel state &amp; running hours</span><span class="toc-count">8 entries <span class="dot">·</span></span></div>
+  <div class="toc-row"><span class="toc-name">Open faults &amp; pending actions</span><span class="toc-count">14 entries <span class="dot">·</span></span></div>
+  <div class="toc-row"><span class="toc-name">Recent work orders</span><span class="toc-count">42 entries <span class="dot">·</span></span></div>
+  <div class="toc-row"><span class="toc-name">Parts ordered &amp; in transit</span><span class="toc-count">9 entries <span class="dot">·</span></span></div>
+  <div class="toc-row"><span class="toc-name">Certificates &amp; surveys</span><span class="toc-count">23 entries <span class="dot">·</span></span></div>
+  <div class="toc-row"><span class="toc-name">Outstanding correspondence</span><span class="toc-count">11 entries <span class="dot">·</span></span></div>
+</div>
+</body>
+</html>

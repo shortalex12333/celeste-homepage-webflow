@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>CelesteOS · Design Studio Index (8 variants)</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    min-height: 100vh;
+    background: #0A0A0A;
+    color: #E8E8E8;
+    font-family: 'Inter', -apple-system, sans-serif;
+    padding: 48px;
+  }
+  h1 { font-weight: 300; font-size: 28px; letter-spacing: -0.012em; margin-bottom: 6px; }
+  .lede { font-size: 13px; color: #888; font-family: 'IBM Plex Mono', monospace; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 36px; }
+  h2 { font-weight: 500; font-size: 16px; margin: 28px 0 14px; color: #BADDE9; font-family: 'IBM Plex Mono', monospace; letter-spacing: 0.10em; text-transform: uppercase; }
+  .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  a.card {
+    display: block;
+    padding: 18px 20px;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 8px;
+    background: rgba(255,255,255,0.02);
+    color: #E8E8E8;
+    text-decoration: none;
+    transition: all 160ms;
+  }
+  a.card:hover {
+    border-color: rgba(186,221,233,0.32);
+    background: rgba(186,221,233,0.04);
+  }
+  .num { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.10em; text-transform: uppercase; color: #BADDE9; margin-bottom: 6px; }
+  .name { font-size: 14px; font-weight: 500; margin-bottom: 4px; }
+  .meta { font-size: 11px; color: #888; }
+</style>
+</head>
+<body>
+<h1>CelesteOS · Design studio</h1>
+<div class="lede">8 variants · 4 handover · 4 verifier · click to open</div>
+
+<h2>"Handover without gaps" — 4 variants</h2>
+<div class="grid">
+  <a class="card" href="handover-1-cover-floating.html" target="_blank">
+    <div class="num">H · 01</div>
+    <div class="name">Cover Floating</div>
+    <div class="meta">Editorial light. A4 sheet floating on warm gradient. Signature lines, doc ID, accent rule. Investor / PDF feel.</div>
+  </a>
+  <a class="card" href="handover-2-kpi-spread.html" target="_blank">
+    <div class="num">H · 02</div>
+    <div class="name">KPI Spread</div>
+    <div class="meta">Editorial light. Three-card KPI row + summary block + section index. Density without clutter.</div>
+  </a>
+  <a class="card" href="handover-3-signature-moment.html" target="_blank">
+    <div class="num">H · 03</div>
+    <div class="name">Signature Moment</div>
+    <div class="meta">Editorial close-up. Two signature lines with handwritten names. The acceptance ritual, isolated.</div>
+  </a>
+  <a class="card" href="handover-4-dark-cinematic.html" target="_blank">
+    <div class="num">H · 04</div>
+    <div class="name">Dark Cinematic</div>
+    <div class="meta">Bridge-at-night dark. Verifier gradient bar on top. 12/12 progress, 3-stat row, section checks.</div>
+  </a>
+</div>
+
+<h2>"Proof, when proof matters" — 4 verifier variants</h2>
+<div class="grid">
+  <a class="card" href="verifier-1-drop-zone-dark.html" target="_blank">
+    <div class="num">V · 01</div>
+    <div class="name">Drop Zone (faithful)</div>
+    <div class="meta">Direct dark reproduction of the verifier home — gradient bar, hexagon ⬡, dashed drop zone. Shows what the linked site looks like.</div>
+  </a>
+  <a class="card" href="verifier-2-success-state.html" target="_blank">
+    <div class="num">V · 02</div>
+    <div class="name">Verified Receipt</div>
+    <div class="meta">Dark. Result state after verification — sealed hexagon + signer details + full SHA-256. Tells the story of what verification produces.</div>
+  </a>
+  <a class="card" href="verifier-3-hash-spotlight.html" target="_blank">
+    <div class="num">V · 03</div>
+    <div class="name">Hash Spotlight</div>
+    <div class="meta">Dark minimal heroized. The hash IS the hero. Three trust chips beneath. One idea per frame.</div>
+  </a>
+  <a class="card" href="verifier-4-light-editorial.html" target="_blank">
+    <div class="num">V · 04</div>
+    <div class="name">Light Editorial</div>
+    <div class="meta">Airy frosted-glass light. Same verified-receipt content as V02 but rendered for investor decks / print / blog.</div>
+  </a>
+</div>
+</body>
+</html>
