@@ -622,7 +622,7 @@ blockquote {
 }
 
 .service-item1-number {
-  color: var(--_colors---color-6);
+  color: var(--_colors---accent);
   line-height: var(--_size---line-height2);
   justify-content: center;
   align-items: flex-start;
@@ -709,7 +709,7 @@ blockquote {
 }
 
 .service-item2-number {
-  color: var(--_colors---color-6);
+  color: var(--_colors---accent);
   justify-content: center;
   align-items: flex-start;
   display: flex;
@@ -768,7 +768,7 @@ blockquote {
 }
 
 .text-block-40 {
-  color: var(--_colors---color-6);
+  color: var(--_colors---accent);
   line-height: var(--_size---line-height2);
   justify-content: center;
   align-items: flex-start;
@@ -811,7 +811,7 @@ blockquote {
 }
 
 .text-block-41 {
-  color: var(--_colors---color-6);
+  color: var(--_colors---accent);
   line-height: var(--_size---line-height2);
   justify-content: center;
   align-items: flex-start;
