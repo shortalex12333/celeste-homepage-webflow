@@ -4790,10 +4790,12 @@ html.dark-mode {
   height: 920px;
 }
 
-/* OC section — related drawer variant (610×720) — content-fitted to show drawer without dead space */
+/* OC section — related drawer variant (610×1080) — taller crop to show the
+   full drawer (Equipment, Faults, Parts, Documents, Also Related), not just
+   the first result. */
 .iframe-crop--oc-related {
   width: 610px;
-  height: 720px;
+  height: 1080px;
 }
 .iframe-crop--oc-related iframe {
   margin-left: -86px;
