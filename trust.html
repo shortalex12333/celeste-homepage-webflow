@@ -52,21 +52,24 @@
   <a href="https://verifier.celeste7.ai/?sample=1" target="_blank" rel="noopener" class="cta-button">Verify a sample receipt ↗</a>
 </section>
 
-<!--
-  (b) SOC-2 attestation: deliberately omitted until an audit is in progress or completed.
-  Per editorial discipline, hedge phrasing ("we follow SOC-2 compliance") reads worse
-  than silence. When attestation begins with a named auditor and target date, add this
-  section back with one of the three Option templates in /Users/celeste7/Desktop/celeste_site.md.
--->
+<!-- (b) SOC-2 alignment -->
+<section id="soc2">
+  <div class="eyebrow">(b) SOC-2 alignment</div>
+  <h2>Controls aligned. Attestation pending.</h2>
+  <p>CelesteOS operates to SOC-2 control principles: access controls, encryption at rest and in transit, audit logging, vendor due diligence, change management, and incident response.</p>
+  <p>We have not yet engaged a Type 1 or Type 2 auditor. Independent attestation will follow once pilot operations stabilise and the customer cohort warrants the cost of audit. We do not claim certification we do not hold.</p>
+  <p>Where a buyer requires specific control evidence before pilot signature, we will share our internal control register and supporting documentation under NDA on request to <a href="mailto:contact@celeste7.ai">contact@celeste7.ai</a>.</p>
+</section>
 
-<!--
-  (c) GDPR + data residency: deliberately omitted until concrete answers exist for:
-    - data storage region(s)
-    - backup location and retention period
-    - EU residency option
-  Generic GDPR copy without these specifics violates the same hedge rule as (b).
-  Restore when factual answers are confirmed.
--->
+<!-- (c) GDPR + data residency -->
+<section id="gdpr">
+  <div class="eyebrow">(c) GDPR + data residency</div>
+  <h2>US-region processing. EU lawful transfer.</h2>
+  <p>CelesteOS data is processed by Supabase Inc. (US region). International data transfer is governed by Standard Contractual Clauses (EU SCCs for EU customers) and the UK International Data Transfer Addendum (for UK customers). All data is encrypted at rest using AES-256 and in transit using TLS 1.2 or higher.</p>
+  <p>Backups follow Supabase Pro-tier defaults: point-in-time recovery with a seven-day rolling window. Production secrets and signing keys are held outside the application database.</p>
+  <p>A signed Data Processing Agreement (DPA) listing all sub-processors is available on request to <a href="mailto:contact@celeste7.ai">contact@celeste7.ai</a> before pilot signature. EU-region residency, where data must remain inside the EU, is available on request and provisioned on a per-tenant basis (Supabase EU region).</p>
+  <p>For the full disclosure of categories processed, legal bases, retention periods, and your statutory rights, see the <a href="/privacy-policy">privacy policy</a>.</p>
+</section>
 
 <!-- (d) Maritime regulatory mapping -->
 <section id="regulatory">
@@ -101,11 +104,6 @@
   <h2>CelesteOS is not a PMS.</h2>
   <p>It runs alongside your existing PMS and its class approvals. We do not replace your DNV, LR, BV, or ABS Type Approved system. We index it, search it, and seal its outputs.</p>
   <p>This is deliberate. Adding CelesteOS does not require re-certifying your PMS, re-training your engineers on a new platform, or migrating any data. Your existing approvals remain intact.</p>
-</section>
-
-<section style="margin-top:4rem;padding-top:2rem;border-top:1px solid rgba(127,127,127,0.18);">
-  <div class="eyebrow">Privacy</div>
-  <p>For data handling, retention, and processing details: <a href="/privacy-policy">privacy-policy</a>.</p>
 </section>
 
 </body>
