@@ -1577,7 +1577,7 @@ blockquote {
 .testimonial-container {
   max-width: var(--_size---max-width);
   width: 100%;
-  height: 500vh;
+  height: 250vh;
   margin-bottom: 0;
   padding-top: 0;
   position: relative;
@@ -3747,7 +3747,7 @@ blockquote {
 /* Operational context (sticky two-panel) */
 .oc-section {
   position: relative;
-  min-height: 220vh;
+  min-height: 110vh;
 }
 .oc-stage {
   position: sticky;
@@ -4790,10 +4790,10 @@ html.dark-mode {
   height: 920px;
 }
 
-/* OC section — related drawer variant (610×1200) — wide + content-fitted to show full drawer */
+/* OC section — related drawer variant (610×720) — content-fitted to show drawer without dead space */
 .iframe-crop--oc-related {
   width: 610px;
-  height: 1200px;
+  height: 720px;
 }
 .iframe-crop--oc-related iframe {
   margin-left: -86px;
