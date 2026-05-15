@@ -7,16 +7,17 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   * { margin:0; padding:0; box-sizing:border-box; }
-  html, body { width: 720px; }
+  html, body { width: 720px; min-height: 100vh; }
   body {
     background:
       radial-gradient(ellipse 60% 40% at 50% 10%, rgba(186,221,233,0.08) 0%, rgba(0,0,0,0) 60%),
       #0A0A0A;
     font-family: 'Inter', -apple-system, sans-serif;
     color: #E8E8E8;
-    display: flex; align-items: flex-start; justify-content: center;
     padding: 24px 24px 0;
+    text-align: center;
   }
+  body > .frame { display: inline-block; text-align: left; vertical-align: top; }
   .frame {
     width: 560px;
     background: linear-gradient(180deg, #141414 0%, #0D0D0D 100%);
