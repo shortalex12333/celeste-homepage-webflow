@@ -11,6 +11,74 @@
  */
 
 /* =============================================================================
+   FONT FACES — Eloquia Display (self-hosted)
+   Body and headings use Eloquia. Mono stays IBM Plex Mono (Google Webfont).
+   font-display: swap so text renders in fallback during font fetch.
+   ============================================================================= */
+@font-face {
+  font-family: 'Eloquia Display';
+  src: url('/fonts/Eloquia-Display-Light.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Eloquia Display';
+  src: url('/fonts/Eloquia-Display-Light-Italic.woff2') format('woff2');
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Eloquia Display';
+  src: url('/fonts/Eloquia-Display-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Eloquia Display';
+  src: url('/fonts/Eloquia-Display-Italic.woff2') format('woff2');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Eloquia Display';
+  src: url('/fonts/Eloquia-Display-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Eloquia Display';
+  src: url('/fonts/Eloquia-Display-Medium-Italic.woff2') format('woff2');
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Body font swap: override Webflow's --_size---font-family token. Webflow
+   redefines this variable on `body` inside three media queries (991, 767,
+   479), so we override on `body` at every breakpoint to ensure Eloquia wins
+   at all viewports. DM Sans remains as immediate fallback if a weight is
+   missing. Mono UI uses a different token (font-family-mono) and is
+   unaffected. */
+body {
+  --_size---font-family: 'Eloquia Display', 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  font-family: 'Eloquia Display', 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+}
+@media screen and (max-width: 991px) {
+  body { --_size---font-family: 'Eloquia Display', 'DM Sans', sans-serif; }
+}
+@media screen and (max-width: 767px) {
+  body { --_size---font-family: 'Eloquia Display', 'DM Sans', sans-serif; }
+}
+@media screen and (max-width: 479px) {
+  body { --_size---font-family: 'Eloquia Display', 'DM Sans', sans-serif; }
+}
+
+/* =============================================================================
    PRODUCT SCREENSHOTS - Subtle depth (Apple-level restraint)
    Per UI_SPEC: "Shadows are RARE. In light mode, shadows are the primary depth
    cue but kept extremely subtle (Apple-level restraint)"
