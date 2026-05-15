@@ -25,31 +25,60 @@
   }
 
   // Reset wrap scrollTop so the iframe content starts at the top of its
-  // visible crop. Browser auto-scrolls overflow:hidden wraps when their
-  // child iframe content is shorter than the iframe element's forced
-  // height (e.g. 2000px), centering the iframe inside the wrap and
-  // pushing the visible artifact mostly out of view. Forcing scrollTop=0
-  // after load + on a short retry interval handles the auto-scroll race.
-  function resetWrapScroll() {
+  // visible crop. The browser auto-scrolls overflow:hidden wraps when
+  // their child iframe (forced 720x2000) is taller than the wrap (590x540),
+  // centering the iframe inside the wrap and hiding the artifact. The
+  // auto-scroll fires on load AND again when the wrap enters the viewport,
+  // so we both attach load listeners and use IntersectionObserver to keep
+  // scrollTop pinned to 0.
+  function resetWrap(wrap) {
+    if (wrap && wrap.scrollTop !== 0) wrap.scrollTop = 0;
+  }
+  function resetAllWraps() {
     var wraps = document.querySelectorAll('.iframe-product-wrap');
-    for (var i = 0; i < wraps.length; i++) {
-      if (wraps[i].scrollTop !== 0) wraps[i].scrollTop = 0;
-    }
+    for (var i = 0; i < wraps.length; i++) resetWrap(wraps[i]);
   }
 
   // Sync on load for each iframe
   function attachLoadListeners() {
     var iframes = document.querySelectorAll('.iframe-product-wrap iframe');
     for (var i = 0; i < iframes.length; i++) {
-      iframes[i].addEventListener('load', function () {
+      iframes[i].addEventListener('load', function (e) {
         syncIframeThemes();
-        // Reset scroll a few times to defeat the browser's post-load
-        // auto-centering of short content inside the wrap.
-        resetWrapScroll();
-        setTimeout(resetWrapScroll, 50);
-        setTimeout(resetWrapScroll, 200);
-        setTimeout(resetWrapScroll, 1000);
+        var wrap = e.target.parentElement;
+        resetWrap(wrap);
+        setTimeout(function () { resetWrap(wrap); }, 50);
+        setTimeout(function () { resetWrap(wrap); }, 200);
+        setTimeout(function () { resetWrap(wrap); }, 1000);
       });
+    }
+  }
+
+  // Keep scrollTop=0 on every visibility transition (browser re-centers
+  // when the wrap enters viewport).
+  function attachIntersectionObservers() {
+    if (typeof IntersectionObserver !== 'function') return;
+    var io = new IntersectionObserver(function (entries) {
+      for (var i = 0; i < entries.length; i++) {
+        if (entries[i].isIntersecting) {
+          var w = entries[i].target;
+          resetWrap(w);
+          setTimeout(function (el) { return function () { resetWrap(el); }; }(w), 50);
+          setTimeout(function (el) { return function () { resetWrap(el); }; }(w), 200);
+        }
+      }
+    }, { threshold: [0, 0.01, 0.5, 1] });
+    var wraps = document.querySelectorAll('.iframe-product-wrap');
+    for (var i = 0; i < wraps.length; i++) io.observe(wraps[i]);
+  }
+
+  // Also catch any direct scroll on the wrap (browser-initiated).
+  function attachScrollListeners() {
+    var wraps = document.querySelectorAll('.iframe-product-wrap');
+    for (var i = 0; i < wraps.length; i++) {
+      (function (w) {
+        w.addEventListener('scroll', function () { if (w.scrollTop !== 0) w.scrollTop = 0; }, { passive: true });
+      })(wraps[i]);
     }
   }
 
@@ -66,7 +95,10 @@
   function init() {
     observer.observe(document.documentElement, { attributes: true });
     attachLoadListeners();
+    attachIntersectionObservers();
+    attachScrollListeners();
     syncIframeThemes();
+    resetAllWraps();
   }
 
   if (document.readyState === 'loading') {
