@@ -183,19 +183,14 @@ body {
    Section headers match lens pattern: 10px/600/uppercase.
    Staggered fade-in on reveal.
    ═══════════════════════════════════════════════════════ */
-@keyframes fadeSlideIn {
-  from { opacity: 0; transform: translateY(6px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
+/* Stagger animation removed — the embedded-iframe use case (celeste7.ai
+   homepage) needs all five containers visible immediately. Without this
+   change only the first container landed at opacity 1, the rest stayed
+   invisible. Direct prototype view sacrifices the stagger reveal in
+   exchange. */
 .results-container {
-  opacity: 0;
-  animation: fadeSlideIn 250ms ease forwards;
+  opacity: 1;
 }
-.results-container:nth-child(1) { animation-delay: 0ms; }
-.results-container:nth-child(2) { animation-delay: 80ms; }
-.results-container:nth-child(3) { animation-delay: 160ms; }
-.results-container:nth-child(4) { animation-delay: 240ms; }
-.results-container:nth-child(5) { animation-delay: 320ms; }
 
 .group-label {
   font-size: 9px;
