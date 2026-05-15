@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Handover · Design 4 — Dark Cinematic (Bridge at Night)</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    min-height: 100vh;
+    background:
+      radial-gradient(ellipse 60% 40% at 30% 20%, rgba(90,171,204,0.06) 0%, rgba(0,0,0,0) 60%),
+      radial-gradient(ellipse 100% 80% at 50% 100%, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 60%),
+      #0A0A0A;
+    font-family: 'Inter', -apple-system, sans-serif;
+    display: flex; align-items: center; justify-content: center;
+    padding: 60px 40px;
+    color: #E8E8E8;
+  }
+  .stage-label {
+    position: fixed; top: 18px; left: 24px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: rgba(232,232,232,0.34);
+  }
+  .doc {
+    width: min(560px, 100%);
+    background:
+      linear-gradient(180deg, rgba(30,30,30,0.92) 0%, rgba(18,18,18,0.96) 100%);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-top-color: rgba(255,255,255,0.1);
+    border-radius: 10px;
+    box-shadow:
+      0 1px 0 rgba(255,255,255,0.04) inset,
+      0 24px 60px rgba(0,0,0,0.6),
+      0 60px 140px rgba(0,0,0,0.5);
+    padding: 44px 44px 36px;
+    position: relative;
+    overflow: hidden;
+  }
+  .doc::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #BADDE9 0%, #2FB9E8 50%, #3A7C9D 100%);
+    opacity: 0.85;
+  }
+  .crest {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: #5AABCC; margin-bottom: 22px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .crest .dot { width: 4px; height: 4px; border-radius: 50%; background: #5AABCC; }
+
+  h1 {
+    font-size: 26px; font-weight: 300;
+    color: #FAFAFA;
+    letter-spacing: -0.01em;
+    margin-bottom: 6px;
+  }
+  .yacht {
+    font-size: 13px; color: #888; margin-bottom: 30px;
+    font-family: 'IBM Plex Mono', monospace;
+    letter-spacing: 0.04em;
+  }
+  .progress {
+    display: flex; align-items: center; gap: 14px;
+    margin-bottom: 32px;
+  }
+  .progress-track {
+    flex: 1;
+    height: 3px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(90deg, #BADDE9 0%, #2FB9E8 50%, #3A7C9D 100%);
+  }
+  .progress-text {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px; letter-spacing: 0.08em;
+    color: #BADDE9;
+    text-transform: uppercase;
+  }
+
+  .stats-row {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 28px;
+  }
+  .stat {
+    background: rgba(0,0,0,0.4);
+    padding: 18px 14px;
+    text-align: center;
+  }
+  .stat .v {
+    font-size: 28px; font-weight: 400; color: #FAFAFA;
+    line-height: 1; margin-bottom: 8px;
+    font-feature-settings: "tnum";
+  }
+  .stat .v.accent { color: #BADDE9; }
+  .stat .l {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px; letter-spacing: 0.10em; text-transform: uppercase;
+    color: #888;
+  }
+
+  .row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    font-size: 11px;
+  }
+  .row:last-child { border-bottom: none; }
+  .row .check {
+    width: 14px; height: 14px; border-radius: 50%;
+    background: rgba(58,124,157,0.18);
+    color: #BADDE9;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 9px;
+    flex-shrink: 0;
+  }
+  .row .label { flex: 1; color: #CCC; }
+  .row .right { color: #666; font-family: 'IBM Plex Mono', monospace; font-size: 10px; }
+
+  .footer {
+    margin-top: 24px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(255,255,255,0.04);
+    display: flex; justify-content: space-between; align-items: center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px; letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #666;
+  }
+  .footer .badge {
+    color: #BADDE9;
+    display: inline-flex; align-items: center; gap: 6px;
+  }
+  .footer .badge .hex { font-size: 11px; }
+</style>
+</head>
+<body>
+<div class="stage-label">Handover · Design 4 — Dark Cinematic (Bridge at Night)</div>
+<div class="doc">
+  <div class="crest"><span class="dot"></span>CelesteOS · Handover · M/Y Aurora</div>
+  <h1>Technical Handover, complete.</h1>
+  <div class="yacht">CO-HND-2026-0314-AR52</div>
+
+  <div class="progress">
+    <div class="progress-track"><div class="progress-fill"></div></div>
+    <div class="progress-text">12 / 12</div>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat"><div class="v accent">147</div><div class="l">Linked records</div></div>
+    <div class="stat"><div class="v">6</div><div class="l">Domains</div></div>
+    <div class="stat"><div class="v">2</div><div class="l">Signatures</div></div>
+  </div>
+
+  <div class="row"><span class="check">✓</span><span class="label">Vessel state &amp; running hours</span><span class="right">8</span></div>
+  <div class="row"><span class="check">✓</span><span class="label">Open faults &amp; pending actions</span><span class="right">14</span></div>
+  <div class="row"><span class="check">✓</span><span class="label">Recent work orders</span><span class="right">42</span></div>
+  <div class="row"><span class="check">✓</span><span class="label">Parts ordered &amp; in transit</span><span class="right">9</span></div>
+  <div class="row"><span class="check">✓</span><span class="label">Certificates &amp; surveys</span><span class="right">23</span></div>
+
+  <div class="footer">
+    <span>Signed · 2026-03-14 11:08 UTC</span>
+    <span class="badge"><span class="hex">⬡</span> Verifiable</span>
+  </div>
+</div>
+</body>
+</html>

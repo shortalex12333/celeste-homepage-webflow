@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Verifier · Design 4 — Light Editorial (Investor / PDF)</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Cormorant+Garamond:ital,wght@1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    min-height: 100vh;
+    background: radial-gradient(ellipse 110% 90% at 50% 35%, #FBFAF7 0%, #F2EEE8 45%, #E6E1D9 100%);
+    font-family: 'Inter', -apple-system, sans-serif;
+    color: #1A2332;
+    display: flex; align-items: center; justify-content: center;
+    padding: 60px 40px;
+  }
+  .stage-label {
+    position: fixed; top: 18px; left: 24px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: rgba(26,35,50,0.38);
+  }
+  .frame {
+    width: min(680px, 100%);
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,0.9);
+    border-radius: 10px;
+    box-shadow:
+      0 1px 2px rgba(0,0,0,0.03),
+      0 22px 64px rgba(0,0,0,0.05),
+      0 48px 120px rgba(0,0,0,0.04);
+    padding: 44px 48px;
+  }
+
+  .ribbon { display: flex; align-items: center; gap: 12px; margin-bottom: 28px; }
+  .ribbon .line { flex: 1; height: 1px; background: linear-gradient(90deg, rgba(43,123,163,0) 0%, rgba(43,123,163,0.45) 100%); }
+  .ribbon .label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: #2B7BA3;
+  }
+
+  .verified-row {
+    display: flex; align-items: center; gap: 18px;
+    margin-bottom: 28px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+  }
+  .seal {
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, rgba(43,123,163,0.16) 0%, rgba(43,123,163,0.04) 100%);
+    border: 1px solid rgba(43,123,163,0.3);
+    display: flex; align-items: center; justify-content: center;
+    color: #2B7BA3; font-size: 22px;
+    flex-shrink: 0;
+  }
+  .verified-text h2 {
+    font-size: 22px; font-weight: 500;
+    color: #1A2332;
+    letter-spacing: -0.005em;
+    margin-bottom: 4px;
+  }
+  .verified-text h2 .accent {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic; font-weight: 400;
+    color: #2B7BA3;
+  }
+  .verified-text .m {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px; letter-spacing: 0.10em; text-transform: uppercase;
+    color: #8896A6;
+  }
+
+  .meta-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr);
+    gap: 14px 32px;
+    margin-bottom: 28px;
+  }
+  .meta-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px; font-weight: 500;
+    letter-spacing: 0.10em; text-transform: uppercase;
+    color: #8896A6; margin-bottom: 4px;
+  }
+  .meta-value { font-size: 12px; color: #1A2332; font-weight: 500; }
+  .meta-value.mono { font-family: 'IBM Plex Mono', monospace; font-weight: 400; }
+  .meta-value.accent { color: #2B7BA3; }
+
+  .hash-pane {
+    background: #F8FAFB;
+    border: 1px solid #E8EDF1;
+    border-radius: 6px;
+    padding: 16px 18px;
+    margin-bottom: 24px;
+  }
+  .hash-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px; letter-spacing: 0.10em; text-transform: uppercase;
+    color: #8896A6; margin-bottom: 6px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .hash-label .hex { color: #2B7BA3; font-size: 11px; }
+  .hash-value {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px; color: #2B7BA3;
+    word-break: break-all;
+    line-height: 1.6;
+    letter-spacing: 0.02em;
+  }
+
+  .signoff {
+    display: flex; justify-content: space-between; align-items: center;
+    padding-top: 16px;
+    border-top: 1px solid rgba(0,0,0,0.06);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px; letter-spacing: 0.10em; text-transform: uppercase;
+    color: #8896A6;
+  }
+  .signoff .left { color: #3A7A55; display: inline-flex; align-items: center; gap: 6px; }
+  .signoff .left .chk { font-size: 11px; }
+</style>
+</head>
+<body>
+<div class="stage-label">Verifier · Design 4 — Light Editorial (Investor / PDF)</div>
+<div class="frame">
+  <div class="ribbon">
+    <span class="line"></span>
+    <span class="label">CelesteOS · Evidence Verifier</span>
+    <span class="line"></span>
+  </div>
+
+  <div class="verified-row">
+    <div class="seal">⬡</div>
+    <div class="verified-text">
+      <h2>Signature chain, <span class="accent">verified.</span></h2>
+      <div class="m">CO-HND-2026-0314-AR52</div>
+    </div>
+  </div>
+
+  <div class="meta-grid">
+    <div>
+      <div class="meta-label">Vessel</div>
+      <div class="meta-value">M/Y Aurora · 52m</div>
+    </div>
+    <div>
+      <div class="meta-label">Document</div>
+      <div class="meta-value">Technical Handover Report</div>
+    </div>
+    <div>
+      <div class="meta-label">Signed by</div>
+      <div class="meta-value">M. Torres · R. Lindqvist</div>
+    </div>
+    <div>
+      <div class="meta-label">Signed at</div>
+      <div class="meta-value mono">2026-03-14 · 11:08 UTC</div>
+    </div>
+    <div>
+      <div class="meta-label">Records sealed</div>
+      <div class="meta-value accent">147 across 6 domains</div>
+    </div>
+    <div>
+      <div class="meta-label">Verifier</div>
+      <div class="meta-value mono">v1.0 · local browser</div>
+    </div>
+  </div>
+
+  <div class="hash-pane">
+    <div class="hash-label"><span class="hex">⬡</span> SHA-256 manifest</div>
+    <div class="hash-value">9c4f a1d8 b219 e077 5a82 4c39 d168 ef41 a702 7c95 fb31 0682 ad9c 138e b427 b127</div>
+  </div>
+
+  <div class="signoff">
+    <span class="left"><span class="chk">✓</span> No data left this device</span>
+    <span>verifier.celeste7.ai</span>
+  </div>
+</div>
+</body>
+</html>

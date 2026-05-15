@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Verifier · Design 1 — Drop Zone (Faithful Dark)</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    min-height: 100vh;
+    background:
+      radial-gradient(ellipse 50% 40% at 20% 0%, rgba(186,221,233,0.06) 0%, rgba(0,0,0,0) 60%),
+      #0A0A0A;
+    font-family: 'Inter', -apple-system, sans-serif;
+    color: #E8E8E8;
+    display: flex; align-items: center; justify-content: center;
+    padding: 60px 40px;
+  }
+  .stage-label {
+    position: fixed; top: 18px; left: 24px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: rgba(232,232,232,0.34);
+  }
+  .frame {
+    width: min(640px, 100%);
+    background: linear-gradient(180deg, #141414 0%, #0D0D0D 100%);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-top-color: rgba(255,255,255,0.1);
+    border-radius: 10px;
+    box-shadow:
+      0 1px 0 rgba(255,255,255,0.04) inset,
+      0 24px 60px rgba(0,0,0,0.6),
+      0 60px 140px rgba(0,0,0,0.5);
+    overflow: hidden;
+  }
+  .gradient-bar {
+    height: 3px;
+    background: linear-gradient(90deg, #BADDE9 0%, #2FB9E8 50%, #3A7C9D 100%);
+  }
+  .topbar {
+    padding: 22px 32px 0;
+    display: flex; align-items: center; gap: 14px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
+  }
+  .topbar .brand { color: #BADDE9; }
+  .topbar .sep { width: 1px; height: 14px; background: rgba(255,255,255,0.12); }
+  .topbar .sub { color: #777; letter-spacing: 0.10em; }
+
+  .body {
+    padding: 32px 32px 28px;
+  }
+  h1 {
+    font-size: 26px; font-weight: 300; color: #FAFAFA;
+    letter-spacing: -0.012em;
+    margin-bottom: 8px;
+  }
+  .sub {
+    font-size: 13px; color: #888; line-height: 1.6;
+    margin-bottom: 28px;
+  }
+
+  .drop {
+    border: 1.5px dashed rgba(186,221,233,0.28);
+    border-radius: 8px;
+    padding: 44px 28px;
+    text-align: center;
+    background: rgba(186,221,233,0.02);
+    transition: all 200ms;
+  }
+  .drop .hex {
+    font-size: 36px; color: #BADDE9; margin-bottom: 12px;
+    line-height: 1;
+    filter: drop-shadow(0 0 18px rgba(186,221,233,0.2));
+  }
+  .drop .h {
+    font-size: 15px; font-weight: 500; color: #E8E8E8;
+    margin-bottom: 6px;
+  }
+  .drop .m {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px; color: #666; letter-spacing: 0.04em;
+  }
+
+  .footer {
+    padding: 16px 32px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    display: flex; align-items: center; gap: 16px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px; letter-spacing: 0.10em; text-transform: uppercase;
+    color: #666;
+  }
+  .footer .spacer { flex: 1; }
+</style>
+</head>
+<body>
+<div class="stage-label">Verifier · Design 1 — Drop Zone (Faithful Dark)</div>
+<div class="frame">
+  <div class="gradient-bar"></div>
+  <div class="topbar">
+    <span class="brand">CelesteOS</span>
+    <span class="sep"></span>
+    <span class="sub">Evidence Verifier</span>
+  </div>
+  <div class="body">
+    <h1>Verify an evidence export</h1>
+    <div class="sub">Drop any CelesteOS ledger export PDF below. Verification runs entirely in your browser. No file is uploaded. No login required.</div>
+    <div class="drop">
+      <div class="hex">⬡</div>
+      <div class="h">Drop a CelesteOS export PDF here</div>
+      <div class="m">or click to browse · .pdf only · processed locally</div>
+    </div>
+  </div>
+  <div class="footer">
+    <span>CelesteOS · Evidence Verifier · v1.0</span>
+    <span class="spacer"></span>
+    <span>No data leaves your device · Open source</span>
+  </div>
+</div>
+</body>
+</html>

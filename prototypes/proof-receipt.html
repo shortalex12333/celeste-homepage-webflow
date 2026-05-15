@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>CelesteOS — Verified evidence receipt</title>
+<meta name="viewport" content="width=720, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html, body { width: 720px; }
+  body {
+    background:
+      radial-gradient(ellipse 60% 40% at 50% 10%, rgba(186,221,233,0.08) 0%, rgba(0,0,0,0) 60%),
+      #0A0A0A;
+    font-family: 'Inter', -apple-system, sans-serif;
+    color: #E8E8E8;
+    display: flex; align-items: flex-start; justify-content: center;
+    padding: 24px 24px 0;
+  }
+  .frame {
+    width: 560px;
+    background: linear-gradient(180deg, #141414 0%, #0D0D0D 100%);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-top-color: rgba(255,255,255,0.1);
+    border-radius: 10px;
+    box-shadow:
+      0 1px 0 rgba(255,255,255,0.04) inset,
+      0 24px 60px rgba(0,0,0,0.6),
+      0 60px 140px rgba(0,0,0,0.5);
+    overflow: hidden;
+  }
+  .gradient-bar {
+    height: 3px;
+    background: linear-gradient(90deg, #BADDE9 0%, #2FB9E8 50%, #3A7C9D 100%);
+  }
+  .topbar {
+    padding: 16px 26px;
+    display: flex; align-items: center; gap: 14px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+  .topbar .brand { color: #BADDE9; }
+  .topbar .sep { width: 1px; height: 14px; background: rgba(255,255,255,0.12); }
+  .topbar .sub { color: #777; letter-spacing: 0.10em; }
+
+  .verified {
+    padding: 28px 28px 20px;
+    text-align: center;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+  .seal {
+    width: 54px; height: 54px;
+    margin: 0 auto 12px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, rgba(186,221,233,0.18) 0%, rgba(58,124,157,0.08) 100%);
+    border: 1px solid rgba(186,221,233,0.32);
+    display: flex; align-items: center; justify-content: center;
+    color: #BADDE9; font-size: 22px;
+    box-shadow: 0 0 32px rgba(186,221,233,0.14);
+  }
+  .verified .h {
+    font-size: 20px; font-weight: 400; color: #FAFAFA;
+    letter-spacing: -0.005em;
+    margin-bottom: 4px;
+  }
+  .verified .h .accent { color: #BADDE9; font-weight: 500; }
+  .verified .m {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px; letter-spacing: 0.10em; text-transform: uppercase;
+    color: #888;
+  }
+
+  .details {
+    padding: 14px 28px 6px;
+  }
+  .row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 9px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    font-size: 12px;
+  }
+  .row:last-child { border-bottom: none; }
+  .row .l {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px; letter-spacing: 0.10em; text-transform: uppercase;
+    color: #888;
+  }
+  .row .v { color: #E8E8E8; }
+  .row .v.mono { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #BADDE9; }
+
+  .footer {
+    padding: 12px 28px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px; letter-spacing: 0.10em; text-transform: uppercase;
+    color: #666;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+<div class="frame">
+  <div class="gradient-bar"></div>
+  <div class="topbar">
+    <span class="brand">CelesteOS</span>
+    <span class="sep"></span>
+    <span class="sub">Evidence Verifier</span>
+  </div>
+
+  <div class="verified">
+    <div class="seal">⬡</div>
+    <div class="h">Signature chain <span class="accent">verified</span></div>
+    <div class="m">CO-HND-2026-0314-CL52</div>
+  </div>
+
+  <div class="details">
+    <div class="row"><span class="l">Document type</span><span class="v">Technical Handover Report</span></div>
+    <div class="row"><span class="l">Vessel</span><span class="v">M/Y Celeste · 52m</span></div>
+    <div class="row"><span class="l">Signed by</span><span class="v">M. Torres · R. Lindqvist</span></div>
+    <div class="row"><span class="l">Signed at</span><span class="v mono">2026-03-14 11:08 UTC</span></div>
+    <div class="row"><span class="l">Records sealed</span><span class="v">147 across 6 domains</span></div>
+  </div>
+
+  <div class="footer">CelesteOS verification authority</div>
+</div>
+</body>
+</html>

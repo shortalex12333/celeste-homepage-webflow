@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Handover · Design 1 — Cover Floating (Editorial Light)</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    min-height: 100vh;
+    background: radial-gradient(ellipse 110% 90% at 50% 35%, #FBFAF7 0%, #F2EEE8 45%, #E6E1D9 100%);
+    font-family: 'Inter', -apple-system, sans-serif;
+    display: flex; align-items: center; justify-content: center;
+    padding: 60px 40px;
+    color: #1A2332;
+  }
+  .stage-label {
+    position: fixed; top: 18px; left: 24px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: rgba(26,35,50,0.38);
+  }
+  .doc {
+    width: min(540px, 100%);
+    aspect-ratio: 210 / 297;
+    background: #FFFFFF;
+    border-radius: 6px;
+    box-shadow:
+      0 1px 2px rgba(0,0,0,0.04),
+      0 18px 48px rgba(0,0,0,0.06),
+      0 48px 120px rgba(0,0,0,0.05);
+    padding: 56px 52px;
+    display: flex; flex-direction: column;
+    position: relative;
+  }
+  .doc::before {
+    content: '';
+    position: absolute; left: 52px; right: 52px; top: 32px;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(90,171,204,0) 0%, rgba(90,171,204,0.5) 50%, rgba(90,171,204,0) 100%);
+  }
+  .crest {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: #5AABCC; margin-bottom: 18px;
+  }
+  h1 {
+    font-size: 28px; font-weight: 700;
+    letter-spacing: 0.04em; text-transform: uppercase;
+    line-height: 1.25;
+    color: #1A2332;
+    margin-bottom: 10px;
+  }
+  .yacht { font-size: 16px; font-weight: 400; color: #4A5568; margin-bottom: 28px; }
+  .accent-rule { height: 2px; width: 64px; background: #5AABCC; margin: 0 0 40px; }
+
+  .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px 36px; margin-bottom: auto; }
+  .meta-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px; font-weight: 500; letter-spacing: 0.10em;
+    text-transform: uppercase; color: #8896A6; margin-bottom: 4px;
+  }
+  .meta-value { font-size: 12px; font-weight: 500; color: #1A2332; }
+  .meta-value.mono { font-family: 'IBM Plex Mono', monospace; font-weight: 400; }
+
+  .signers {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
+    padding-top: 32px;
+    border-top: 1px solid rgba(0,0,0,0.06);
+  }
+  .role {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px; letter-spacing: 0.10em; text-transform: uppercase;
+    color: #5AABCC; margin-bottom: 8px;
+  }
+  .name { font-size: 12px; font-weight: 600; color: #1A2332; margin-bottom: 2px; }
+  .role-title { font-size: 10px; color: #4A5568; margin-bottom: 12px; }
+  .sigline { height: 28px; border-bottom: 1px solid rgba(0,0,0,0.18); margin-bottom: 6px; }
+  .sig-name {
+    font-family: 'Snell Roundhand', 'Apple Chancery', cursive;
+    font-size: 18px; color: #1A2332; padding: 4px 0;
+  }
+  .sig-meta {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px; color: #8896A6;
+  }
+
+  .footer-stamp {
+    position: absolute; bottom: 28px; right: 36px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 8px; letter-spacing: 0.10em; text-transform: uppercase;
+    color: #8896A6;
+  }
+</style>
+</head>
+<body>
+<div class="stage-label">Handover · Design 1 — Cover Floating (Editorial Light)</div>
+<div class="doc">
+  <div class="crest">CelesteOS · Generated Handover</div>
+  <h1>Technical Handover Report</h1>
+  <div class="yacht">M/Y Celeste · 52m</div>
+  <div class="accent-rule"></div>
+
+  <div class="meta-grid">
+    <div>
+      <div class="meta-label">Period</div>
+      <div class="meta-value">14 Sep 2025 → 14 Mar 2026</div>
+    </div>
+    <div>
+      <div class="meta-label">Document ID</div>
+      <div class="meta-value mono">CO-HND-2026-0314-AR52</div>
+    </div>
+    <div>
+      <div class="meta-label">Sections</div>
+      <div class="meta-value">12 of 12 complete</div>
+    </div>
+    <div>
+      <div class="meta-label">Linked records</div>
+      <div class="meta-value">147 across 6 domains</div>
+    </div>
+  </div>
+
+  <div class="signers">
+    <div>
+      <div class="role">Outgoing CE</div>
+      <div class="sigline"><span class="sig-name">M. Torres</span></div>
+      <div class="sig-meta">Signed · 14 Mar 2026 · 09:42 UTC</div>
+    </div>
+    <div>
+      <div class="role">Incoming CE</div>
+      <div class="sigline"><span class="sig-name">R. Lindqvist</span></div>
+      <div class="sig-meta">Counter-signed · 14 Mar 2026 · 11:08 UTC</div>
+    </div>
+  </div>
+
+  <div class="footer-stamp">CelesteOS Handover Systems</div>
+</div>
+</body>
+</html>

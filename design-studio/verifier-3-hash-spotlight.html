@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Verifier · Design 3 — Hash Spotlight (Minimal Heroized)</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    min-height: 100vh;
+    background:
+      radial-gradient(ellipse 70% 50% at 50% 50%, rgba(186,221,233,0.06) 0%, rgba(0,0,0,0) 70%),
+      #060606;
+    font-family: 'Inter', -apple-system, sans-serif;
+    color: #E8E8E8;
+    display: flex; align-items: center; justify-content: center;
+    padding: 60px 40px;
+  }
+  .stage-label {
+    position: fixed; top: 18px; left: 24px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: rgba(232,232,232,0.34);
+  }
+  .stage {
+    width: min(760px, 100%);
+    text-align: center;
+    position: relative;
+  }
+  .crest {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: #BADDE9;
+    margin-bottom: 28px;
+    display: inline-flex; align-items: center; gap: 12px;
+  }
+  .crest::before, .crest::after {
+    content:''; width: 32px; height: 1px;
+    background: linear-gradient(90deg, rgba(186,221,233,0) 0%, rgba(186,221,233,0.4) 100%);
+  }
+  .crest::after { transform: rotate(180deg); }
+
+  h1 {
+    font-size: 28px; font-weight: 300;
+    color: #FAFAFA;
+    letter-spacing: -0.012em;
+    margin-bottom: 36px;
+  }
+  h1 .accent {
+    color: #BADDE9;
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 500;
+    font-size: 24px;
+  }
+
+  .hash-card {
+    background: linear-gradient(180deg, rgba(20,20,20,0.92) 0%, rgba(10,10,10,0.98) 100%);
+    border: 1px solid rgba(186,221,233,0.16);
+    border-radius: 8px;
+    padding: 28px 32px;
+    margin-bottom: 24px;
+    position: relative;
+    overflow: hidden;
+    box-shadow:
+      0 1px 0 rgba(255,255,255,0.04) inset,
+      0 0 48px rgba(186,221,233,0.04),
+      0 20px 60px rgba(0,0,0,0.5);
+  }
+  .hash-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(186,221,233,0) 0%, rgba(186,221,233,0.6) 50%, rgba(186,221,233,0) 100%);
+  }
+  .hash-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: #777; margin-bottom: 14px;
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+  }
+  .hash-label .hex { color: #BADDE9; font-size: 11px; }
+  .hash-value {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 18px; font-weight: 400;
+    color: #BADDE9;
+    letter-spacing: 0.04em;
+    line-height: 1.4;
+    word-break: break-all;
+  }
+
+  .chips {
+    display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;
+    margin-bottom: 24px;
+  }
+  .chip {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 8px 14px;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 100px;
+    background: rgba(0,0,0,0.3);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase;
+    color: #BBB;
+  }
+  .chip .dot {
+    width: 5px; height: 5px; border-radius: 50%;
+    background: #3FB984;
+  }
+
+  .caption {
+    font-size: 12px; color: #666;
+    font-family: 'IBM Plex Mono', monospace;
+    letter-spacing: 0.06em;
+  }
+</style>
+</head>
+<body>
+<div class="stage-label">Verifier · Design 3 — Hash Spotlight (Minimal Heroized)</div>
+<div class="stage">
+  <div class="crest">⬡ Independently verified</div>
+  <h1>Every action sealed. <br>One <span class="accent">cryptographic receipt</span> per record.</h1>
+
+  <div class="hash-card">
+    <div class="hash-label"><span class="hex">⬡</span> Manifest hash · SHA-256</div>
+    <div class="hash-value">9c4f a1d8 b219 e077<br>5a82 4c39 d168 ef41<br>a702 7c95 fb31 0682<br>ad9c 138e b427 b127</div>
+  </div>
+
+  <div class="chips">
+    <span class="chip"><span class="dot"></span>Signature chain valid</span>
+    <span class="chip"><span class="dot"></span>147 records sealed</span>
+    <span class="chip"><span class="dot"></span>No server contact</span>
+  </div>
+
+  <div class="caption">verifier.celeste7.ai · runs locally in your browser</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Handover · Design 3 — Signature Moment (Editorial Close-up)</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Cormorant+Garamond:ital,wght@1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    min-height: 100vh;
+    background: radial-gradient(ellipse 100% 80% at 50% 40%, #FFFFFF 0%, #F5F2ED 50%, #E6E0D8 100%);
+    font-family: 'Inter', -apple-system, sans-serif;
+    display: flex; align-items: center; justify-content: center;
+    padding: 60px 40px;
+    color: #1A2332;
+  }
+  .stage-label {
+    position: fixed; top: 18px; left: 24px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: rgba(26,35,50,0.38);
+  }
+  .frame {
+    width: min(720px, 100%);
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,0.9);
+    border-radius: 10px;
+    box-shadow:
+      0 1px 2px rgba(0,0,0,0.03),
+      0 22px 64px rgba(0,0,0,0.05),
+      0 48px 120px rgba(0,0,0,0.04);
+    padding: 52px 56px 44px;
+  }
+
+  .crest {
+    display: flex; align-items: center; gap: 12px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: #5AABCC;
+    margin-bottom: 24px;
+  }
+  .crest::before, .crest::after {
+    content:''; flex:1; height:1px;
+    background: linear-gradient(90deg, rgba(90,171,204,0) 0%, rgba(90,171,204,0.35) 50%, rgba(90,171,204,0) 100%);
+  }
+  .crest .label { white-space: nowrap; }
+
+  h1 {
+    font-size: 24px; font-weight: 500;
+    color: #1A2332;
+    letter-spacing: 0.02em; text-transform: uppercase;
+    text-align: center; margin-bottom: 8px;
+  }
+  .yacht { text-align: center; font-size: 13px; color: #4A5568; margin-bottom: 36px; }
+
+  .signature-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 56px;
+  }
+  .sig-block {}
+  .role {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+    color: #5AABCC; margin-bottom: 16px;
+  }
+  .sigline {
+    height: 56px;
+    border-bottom: 1px solid rgba(26,35,50,0.18);
+    margin-bottom: 12px;
+    display: flex; align-items: flex-end;
+  }
+  .sig-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic; font-weight: 400;
+    font-size: 32px;
+    color: #1A2332;
+    padding-bottom: 4px;
+    line-height: 1;
+  }
+  .full-name { font-size: 13px; font-weight: 600; color: #1A2332; margin-bottom: 2px; }
+  .full-title { font-size: 11px; color: #4A5568; margin-bottom: 14px; }
+  .ts {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px; color: #8896A6;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .ts .dot { width: 4px; height: 4px; border-radius: 50%; background: #5AABCC; }
+
+  .meta-strip {
+    margin-top: 40px; padding-top: 24px;
+    border-top: 1px solid rgba(0,0,0,0.06);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 8px 14px;
+    background: rgba(58,122,85,0.06);
+    border: 1px solid rgba(58,122,85,0.18);
+    border-radius: 20px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px; letter-spacing: 0.10em; text-transform: uppercase;
+    color: #3A7A55;
+  }
+  .badge .chk { font-size: 11px; }
+  .hash {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px; color: #8896A6;
+  }
+</style>
+</head>
+<body>
+<div class="stage-label">Handover · Design 3 — Signature Moment (Editorial Close-up)</div>
+<div class="frame">
+  <div class="crest"><span class="label">CelesteOS · Section 12 / Signatures</span></div>
+  <h1>Handover Acceptance</h1>
+  <div class="yacht">M/Y Aurora · 52m · 14 March 2026</div>
+
+  <div class="signature-grid">
+    <div class="sig-block">
+      <div class="role">Outgoing Chief Engineer</div>
+      <div class="sigline"><span class="sig-name">M. Torres</span></div>
+      <div class="full-name">Miguel Torres</div>
+      <div class="full-title">Chief Engineer, Y3 unlimited</div>
+      <div class="ts"><span class="dot"></span>2026-03-14 · 09:42:11 UTC</div>
+    </div>
+    <div class="sig-block">
+      <div class="role">Incoming Chief Engineer</div>
+      <div class="sigline"><span class="sig-name">R. Lindqvist</span></div>
+      <div class="full-name">Rasmus Lindqvist</div>
+      <div class="full-title">Chief Engineer, Y3 unlimited</div>
+      <div class="ts"><span class="dot"></span>2026-03-14 · 11:08:47 UTC</div>
+    </div>
+  </div>
+
+  <div class="meta-strip">
+    <span class="badge"><span class="chk">✓</span> Sealed · Independently verifiable</span>
+    <span class="hash">SHA-256 · 9c4f a1d8 b219 e077 … b127</span>
+  </div>
+</div>
+</body>
+</html>
