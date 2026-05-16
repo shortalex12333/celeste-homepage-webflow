@@ -60,15 +60,13 @@ body {
   flex-direction: column;
   z-index: 100;
 
-  /* Hidden by default — slide in from right */
-  transform: translateX(32px);
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 200ms ease,
-              transform 280ms ease;
+  /* Drawer always rendered visible — embedded iframe use case can't rely
+     on click-driven open/close transition. Stripped opacity/transform/
+     transition initial state. */
+  opacity: 1;
+  pointer-events: auto;
 }
 .related-drawer.open {
-  transform: translateX(0);
   opacity: 1;
   pointer-events: auto;
 }
