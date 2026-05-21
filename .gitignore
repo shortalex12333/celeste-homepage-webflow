@@ -9,3 +9,4 @@ playwright-report/
 # Node
 node_modules/
 .vercel
+.planning/
