@@ -278,50 +278,609 @@
       </div>
     </section>
   </div>
-<!-- §11 B.5: "What CelesteOS searches for you" — agentic-search catalog -->
-  <section id="missions" class="impact-section" style="padding:6rem 2rem;">
-    <div class="w-layout-blockcontainer w-container" style="max-width:1100px;">
-      <div style="font-family:'IBM Plex Mono',monospace;font-size:0.74rem;letter-spacing:0.08em;text-transform:uppercase;opacity:0.6;margin-bottom:1.2rem;">What CelesteOS searches for you</div>
-      <h2 style="font-size:clamp(2rem,4vw,3.2rem);line-height:1.15;margin:0 0 1.4rem 0;font-weight:500;letter-spacing:-0.01em;">Five missions. <em>Every one cited.</em></h2>
-      <p style="font-size:1.05rem;line-height:1.65;opacity:0.78;max-width:640px;margin:0 0 3.6rem 0;">The same engine as the handover, pointed at the moments where money quietly leaves the boat.</p>
+<!-- ============= WORKERS — INTRO ============= -->
+  <style>
+    .w-section {
+      min-height: 100vh;
+      padding: 11rem 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      border-top: 1px dashed rgba(127,127,127,0.16);
+    }
+    .w-container { width: 100%; max-width: 1180px; margin: 0 auto; }
+    .w-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+      gap: 5rem;
+      align-items: center;
+    }
+    .w-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.78rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--_colors---accent);
+      margin-bottom: 2.4rem;
+    }
+    .w-label .num { opacity: 0.55; margin-right: 0.8rem; }
+    .w-h2 {
+      font-size: clamp(2.4rem, 4.8vw, 4rem);
+      font-weight: 300;
+      letter-spacing: -0.018em;
+      line-height: 1.08;
+      margin: 0 0 2rem 0;
+    }
+    .w-h2 em {
+      font-family: var(--_size---font-family-accent);
+      font-style: italic;
+      font-weight: 300;
+      color: var(--_colors---accent);
+    }
+    .w-scene {
+      font-family: var(--_size---font-family-accent);
+      font-style: italic;
+      font-size: 1.15rem;
+      line-height: 1.55;
+      color: var(--_colors---accent);
+      margin: 0 0 1.6rem 0;
+      max-width: 520px;
+    }
+    .w-body { font-size: 1.05rem; line-height: 1.7; opacity: 0.82; max-width: 540px; margin: 0 0 1.2rem 0; }
+    .w-outcome {
+      margin-top: 2.4rem;
+      padding-top: 1.4rem;
+      border-top: 1px dashed rgba(127,127,127,0.24);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.84rem;
+      letter-spacing: 0.04em;
+      opacity: 0.78;
+      max-width: 540px;
+    }
+    .w-outcome .save { color: var(--_colors---accent); font-weight: 500; }
 
-      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:2.5rem 3rem;">
+    /* ---------- Artefact base styling ---------- */
+    .artefact {
+      width: 100%;
+      max-width: 560px;
+      background: #FFFFFF;
+      color: #1A2332;
+      border-radius: 6px;
+      border: 1px solid rgba(0,0,0,0.06);
+      box-shadow:
+        0 1px 0 rgba(0,0,0,0.03),
+        0 24px 64px rgba(0,0,0,0.18);
+      overflow: hidden;
+      font-family: 'Eloquia Display', 'DM Sans', sans-serif;
+    }
+    .artefact-dark {
+      background: linear-gradient(180deg, #181614 0%, #131110 100%);
+      color: rgba(255,255,255,0.92);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-top-color: rgba(255,255,255,0.10);
+    }
+    .artefact .ah {
+      padding: 1rem 1.4rem;
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+      display: flex; align-items: center; gap: 0.8rem;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      color: #5AABCC;
+    }
+    .artefact-dark .ah { border-bottom-color: rgba(255,255,255,0.06); color: #BADDE9; }
+    .artefact .ah .spacer { flex: 1; }
+    .artefact .ah .meta { color: #8896A6; }
+    .artefact-dark .ah .meta { color: rgba(255,255,255,0.42); }
 
+    /* email artefact (warranty) */
+    .email-meta { padding: 1rem 1.4rem; border-bottom: 1px solid rgba(0,0,0,0.05); font-size: 0.8rem; }
+    .email-meta .row { display: flex; gap: 0.6rem; padding: 0.18rem 0; }
+    .email-meta .row .k { font-family: 'IBM Plex Mono', monospace; font-size: 0.66rem; letter-spacing: 0.06em; color: #8896A6; text-transform: uppercase; width: 64px; padding-top: 0.18rem; flex-shrink: 0; }
+    .email-meta .row .v { color: #1A2332; }
+    .email-meta .row .v.subj { font-weight: 500; }
+    .email-meta .row .v .tag { display: inline-block; padding: 1px 6px; background: rgba(90,171,204,0.10); border: 1px solid rgba(90,171,204,0.32); color: #2B7BA3; font-family: 'IBM Plex Mono', monospace; font-size: 0.62rem; letter-spacing: 0.06em; border-radius: 3px; margin-left: 0.4rem; vertical-align: 1px; }
+    .email-body { padding: 1.2rem 1.4rem; font-size: 0.82rem; line-height: 1.55; color: #4A5568; border-bottom: 1px solid rgba(0,0,0,0.05); }
+    .email-attach { padding: 0.9rem 1.4rem; }
+    .email-attach .label { font-family: 'IBM Plex Mono', monospace; font-size: 0.62rem; letter-spacing: 0.10em; text-transform: uppercase; color: #8896A6; margin-bottom: 0.5rem; }
+    .email-attach .file {
+      display: flex; align-items: center; gap: 0.5rem;
+      padding: 0.36rem 0;
+      font-size: 0.78rem; color: #1A2332;
+    }
+    .email-attach .file .ico { font-family: 'IBM Plex Mono', monospace; font-size: 0.66rem; color: #5AABCC; width: 16px; }
+    .email-attach .file .sz { font-family: 'IBM Plex Mono', monospace; font-size: 0.66rem; color: #8896A6; margin-left: auto; }
+    .email-foot {
+      display: flex; align-items: center; gap: 0.7rem;
+      padding: 0.9rem 1.4rem;
+      background: rgba(90,171,204,0.06);
+      border-top: 1px solid rgba(90,171,204,0.18);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.06em;
+      color: #2B7BA3;
+      text-transform: uppercase;
+    }
+    .email-foot .chk { color: #3A7A55; }
+    .email-foot .sp { flex: 1; }
+    .email-foot .btn { padding: 0.32rem 0.7rem; border: 1px solid #2B7BA3; border-radius: 3px; color: #2B7BA3; }
+
+    /* certificate bundle */
+    .cert-cal {
+      padding: 1.6rem 1.6rem 1.2rem;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .cert-cal .month {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.66rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 0.7rem;
+    }
+    .cert-cal .countdown {
+      font-size: 1.8rem; font-weight: 300; letter-spacing: -0.01em; line-height: 1; margin-bottom: 0.5rem;
+    }
+    .cert-cal .countdown em { font-family: var(--_size---font-family-accent); font-style: italic; color: #BADDE9; }
+    .cert-cal .ann {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.74rem;
+      letter-spacing: 0.04em;
+      color: rgba(255,255,255,0.62);
+    }
+    .cert-list { padding: 0.4rem 0; }
+    .cert-row {
+      display: grid; grid-template-columns: 22px 1fr auto;
+      gap: 0.8rem; align-items: center;
+      padding: 0.6rem 1.6rem;
+      font-size: 0.8rem;
+      border-bottom: 1px solid rgba(255,255,255,0.03);
+    }
+    .cert-row:last-child { border-bottom: none; }
+    .cert-row .dot { width: 6px; height: 6px; border-radius: 50%; justify-self: center; }
+    .cert-row.green .dot { background: #3A7A55; }
+    .cert-row.amber .dot { background: #C4893B; }
+    .cert-row.red .dot { background: #C53030; }
+    .cert-row .name { color: rgba(255,255,255,0.86); }
+    .cert-row .exp { font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; letter-spacing: 0.04em; color: rgba(255,255,255,0.55); }
+    .cert-row.red .exp { color: #E07474; }
+    .cert-row.amber .exp { color: #D6A056; }
+    .cert-foot {
+      padding: 0.9rem 1.6rem;
+      background: rgba(186,221,233,0.06);
+      border-top: 1px solid rgba(186,221,233,0.18);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.66rem;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      color: #BADDE9;
+      display: flex; align-items: center; gap: 0.6rem;
+    }
+    .cert-foot .sp { flex: 1; }
+
+    /* receiving compare */
+    .recv-head {
+      padding: 1.2rem 1.4rem;
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+      display: flex; align-items: baseline; gap: 0.6rem;
+    }
+    .recv-head .id {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.66rem;
+      letter-spacing: 0.10em;
+      color: #5AABCC;
+      text-transform: uppercase;
+    }
+    .recv-head .supplier { font-size: 0.86rem; color: #1A2332; font-weight: 500; }
+    .recv-head .date { margin-left: auto; font-family: 'IBM Plex Mono', monospace; font-size: 0.66rem; color: #8896A6; }
+    .recv-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+    }
+    .recv-col { padding: 1rem 1.2rem; }
+    .recv-col:first-child { border-right: 1px solid rgba(0,0,0,0.06); }
+    .recv-col .col-h {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.10em;
+      color: #8896A6;
+      text-transform: uppercase;
+      margin-bottom: 0.7rem;
+    }
+    .recv-line {
+      display: flex; justify-content: space-between; gap: 0.6rem;
+      padding: 0.36rem 0;
+      font-size: 0.76rem;
+      color: #1A2332;
+      border-bottom: 1px solid rgba(0,0,0,0.04);
+    }
+    .recv-line:last-child { border-bottom: none; }
+    .recv-line .qty { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; color: #4A5568; }
+    .recv-line.missing .label { color: #C53030; text-decoration: line-through; text-decoration-color: rgba(197,48,48,0.45); }
+    .recv-line.missing .qty { color: #C53030; }
+    .recv-delta {
+      padding: 0.9rem 1.4rem;
+      background: rgba(197,48,48,0.06);
+      border-top: 1px solid rgba(197,48,48,0.24);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.04em;
+      color: #C53030;
+      display: flex; gap: 0.7rem; align-items: center;
+    }
+    .recv-delta .draft { color: #2B7BA3; margin-left: auto; padding: 0.3rem 0.7rem; border: 1px solid #2B7BA3; border-radius: 3px; }
+
+    /* repeat-fault timeline */
+    .tl-stack { padding: 0.8rem 0; position: relative; }
+    .tl-stack::before {
+      content: ''; position: absolute;
+      left: 30px; top: 1.4rem; bottom: 1.4rem;
+      width: 1px; background: rgba(255,255,255,0.10);
+    }
+    .tl-row {
+      display: grid; grid-template-columns: 60px 1fr;
+      gap: 0.8rem;
+      padding: 1rem 1.4rem;
+      position: relative;
+    }
+    .tl-row .dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,0.30); margin-left: 25px; margin-top: 4px; position: relative; z-index: 1; }
+    .tl-row.now .dot { background: #C53030; box-shadow: 0 0 0 4px rgba(197,48,48,0.18); }
+    .tl-row.match .dot { background: #BADDE9; box-shadow: 0 0 0 4px rgba(186,221,233,0.18); }
+    .tl-row .date { font-family: 'IBM Plex Mono', monospace; font-size: 0.66rem; letter-spacing: 0.06em; color: rgba(255,255,255,0.5); text-transform: uppercase; }
+    .tl-row.now .date { color: #E07474; }
+    .tl-row.match .date { color: #BADDE9; }
+    .tl-row .title { font-size: 0.86rem; color: rgba(255,255,255,0.92); margin-top: 0.2rem; }
+    .tl-row .meta { font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; letter-spacing: 0.02em; color: rgba(255,255,255,0.55); margin-top: 0.2rem; }
+    .tl-row.match .meta strong { color: #BADDE9; font-weight: 500; }
+    .tl-foot {
+      padding: 0.9rem 1.4rem;
+      background: rgba(186,221,233,0.06);
+      border-top: 1px solid rgba(186,221,233,0.18);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.66rem;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      color: #BADDE9;
+    }
+
+    /* cross-domain three sources */
+    .xd-q {
+      padding: 1.2rem 1.4rem;
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+      font-size: 0.94rem; color: #1A2332;
+      display: flex; gap: 0.6rem; align-items: baseline;
+    }
+    .xd-q .prompt { color: #5AABCC; font-family: 'IBM Plex Mono', monospace; }
+    .xd-a {
+      padding: 1.2rem 1.4rem;
+      background: linear-gradient(180deg, rgba(90,171,204,0.06) 0%, rgba(90,171,204,0.02) 100%);
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+    }
+    .xd-a .num {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.66rem;
+      letter-spacing: 0.10em;
+      color: #2B7BA3;
+      text-transform: uppercase;
+      margin-bottom: 0.4rem;
+    }
+    .xd-a .val { font-size: 1.4rem; font-weight: 500; color: #1A2332; letter-spacing: -0.005em; }
+    .xd-a .val em { font-family: var(--_size---font-family-accent); font-style: italic; color: #2B7BA3; font-weight: 400; }
+    .xd-sources { padding: 0.6rem 0; }
+    .xd-src {
+      padding: 0.7rem 1.4rem;
+      display: grid; grid-template-columns: 90px 1fr;
+      gap: 0.8rem;
+      border-bottom: 1px solid rgba(0,0,0,0.04);
+      font-size: 0.78rem;
+      color: #1A2332;
+    }
+    .xd-src:last-child { border-bottom: none; }
+    .xd-src .kind { font-family: 'IBM Plex Mono', monospace; font-size: 0.66rem; letter-spacing: 0.10em; color: #8896A6; text-transform: uppercase; padding-top: 0.18rem; }
+    .xd-src .body .ref { font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; color: #5AABCC; }
+    .xd-src .body .quote { color: #4A5568; font-style: italic; margin-top: 0.2rem; font-size: 0.78rem; }
+
+    /* coverage rule callout */
+    .cov-rule {
+      max-width: 880px; margin: 0 auto;
+      padding: 2rem 2.4rem;
+      background: rgba(127,127,127,0.04);
+      border-left: 2px solid var(--_colors---accent);
+      font-family: 'IBM Plex Mono', monospace;
+      font-style: italic;
+      font-size: 1rem;
+      line-height: 1.65;
+      opacity: 0.86;
+    }
+    .cov-rule em { font-family: var(--_size---font-family-accent); font-style: italic; color: var(--_colors---accent); }
+
+    @media (max-width: 1000px) {
+      .w-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .w-section { padding: 7rem 1.5rem; }
+      .artefact { max-width: 100%; }
+      .recv-grid { grid-template-columns: 1fr; }
+      .recv-col:first-child { border-right: none; border-bottom: 1px solid rgba(0,0,0,0.06); }
+    }
+  </style>
+
+  <!-- WORKERS — INTRO -->
+  <section id="missions" class="w-section" style="text-align:center;">
+    <div class="w-container" style="max-width:880px;">
+      <div class="w-label" style="display:inline-block;">What CelesteOS does in the background</div>
+      <h2 class="w-h2" style="text-align:center;">You don&rsquo;t know <em>what you don&rsquo;t know.</em></h2>
+      <p class="w-body" style="margin:0 auto;font-size:1.15rem;">Five workers running while the boat runs. Each one is a draft, not an action. Each result is cited. Nothing leaves without your sign-off.</p>
+    </div>
+  </section>
+
+  <!-- WORKER 01 — WARRANTY -->
+  <section class="w-section">
+    <div class="w-container">
+      <div class="w-grid">
         <div>
-          <div style="font-family:'IBM Plex Mono',monospace;font-size:0.74rem;letter-spacing:0.10em;text-transform:uppercase;color:var(--_colors---accent);margin-bottom:0.6rem;">01 · Money</div>
-          <h3 style="font-size:1.35rem;font-weight:500;line-height:1.3;margin:0 0 0.6rem 0;letter-spacing:-0.005em;">Money about to be spent.</h3>
-          <p style="font-size:0.95rem;line-height:1.65;opacity:0.78;margin:0;">Items still under manufacturer warranty surface the moment a fault is raised against them, with a forward-ready claim pack: fault history, photos, work order, cited warranty clause. You forward. The supplier pays.</p>
+          <div class="w-label"><span class="num">Worker 01</span>Warranty</div>
+          <h2 class="w-h2">Money about <em>to be spent.</em></h2>
+          <p class="w-scene">It is Tuesday morning. A fault is logged against the port-side generator. The bridge does not know it. The yard does not know it. The supplier&rsquo;s warranty desk does not know it.</p>
+          <p class="w-body">CelesteOS does. The moment the fault is raised, the warranty worker matches the equipment to its purchase record, its installation date, and its manufacturer&rsquo;s clause. A claim pack assembles itself in the background — fault history, photos, work order, the cited warranty paragraph — addressed to the supplier&rsquo;s warranty desk and ready to forward.</p>
+          <p class="w-body">You read it. You forward. The supplier pays.</p>
+          <div class="w-outcome"><span class="save">€ 18,420</span> &middot; what does not leave the operating budget this rotation</div>
         </div>
-
         <div>
-          <div style="font-family:'IBM Plex Mono',monospace;font-size:0.74rem;letter-spacing:0.10em;text-transform:uppercase;color:var(--_colors---accent);margin-bottom:0.6rem;">02 · Certificates</div>
-          <h3 style="font-size:1.35rem;font-weight:500;line-height:1.3;margin:0 0 0.6rem 0;letter-spacing:-0.005em;">Certificates before they expire.</h3>
-          <p style="font-size:0.95rem;line-height:1.65;opacity:0.78;margin:0;">Survey 60 days out. CelesteOS gathers every certificate the surveyor will ask for, and flags the three that expire inside the window, into one signed bundle.</p>
+          <div class="artefact">
+            <div class="ah">
+              <span>Warranty &middot; Draft email</span>
+              <span class="spacer"></span>
+              <span class="meta">CO-WC-2026-0421</span>
+            </div>
+            <div class="email-meta">
+              <div class="row"><div class="k">To</div><div class="v">warranty@northern-lights.com</div></div>
+              <div class="row"><div class="k">CC</div><div class="v">chief.engineer@my-celeste.example</div></div>
+              <div class="row"><div class="k">Subject</div><div class="v subj">Claim under warranty &middot; NL-GEN-04, S/N 27419<span class="tag">Cited</span></div></div>
+            </div>
+            <div class="email-body">
+              On 21 Apr 2026 a fault was raised against unit NL-GEN-04 (S/N 27419), installed 06 May 2024 and covered under your 36-month workmanship warranty (clause 4.2(a)). Diagnosis enclosed. Photos enclosed. Work order enclosed. Requesting RMA &amp; replacement under the existing policy.
+            </div>
+            <div class="email-attach">
+              <div class="label">Attachments &middot; 4</div>
+              <div class="file"><span class="ico">▢</span>Fault history NL-GEN-04 (3 yr).pdf<span class="sz">214 KB</span></div>
+              <div class="file"><span class="ico">▢</span>Photo evidence &middot; 7 images.zip<span class="sz">8.4 MB</span></div>
+              <div class="file"><span class="ico">▢</span>Work order WO-1086.pdf<span class="sz">96 KB</span></div>
+              <div class="file"><span class="ico">▢</span>Warranty clause 4.2(a), p.18.pdf<span class="sz">22 KB</span></div>
+            </div>
+            <div class="email-foot">
+              <span class="chk">✓</span><span>Ready to forward &middot; you approve, you send</span>
+              <span class="sp"></span>
+              <span class="btn">Review &amp; send</span>
+            </div>
+          </div>
         </div>
-
-        <div>
-          <div style="font-family:'IBM Plex Mono',monospace;font-size:0.74rem;letter-spacing:0.10em;text-transform:uppercase;color:var(--_colors---accent);margin-bottom:0.6rem;">03 · Receiving</div>
-          <h3 style="font-size:1.35rem;font-weight:500;line-height:1.3;margin:0 0 0.6rem 0;letter-spacing:-0.005em;">Discrepancies on the dock.</h3>
-          <p style="font-size:0.95rem;line-height:1.65;opacity:0.78;margin:0;">A photo of the packing list goes in. Matched PO lines, the inventory delta, and a drafted discrepancy email come out. The shipment goes back before it is signed for.</p>
-        </div>
-
-        <div>
-          <div style="font-family:'IBM Plex Mono',monospace;font-size:0.74rem;letter-spacing:0.10em;text-transform:uppercase;color:var(--_colors---accent);margin-bottom:0.6rem;">04 · Faults</div>
-          <h3 style="font-size:1.35rem;font-weight:500;line-height:1.3;margin:0 0 0.6rem 0;letter-spacing:-0.005em;">Faults already diagnosed.</h3>
-          <p style="font-size:0.95rem;line-height:1.65;opacity:0.78;margin:0;">The same fault, on the same equipment, three rotations ago. The diagnosis is in the record. CelesteOS surfaces it before the marine technician&rsquo;s callout is booked.</p>
-        </div>
-
-        <div style="grid-column:1 / -1;max-width:640px;">
-          <div style="font-family:'IBM Plex Mono',monospace;font-size:0.74rem;letter-spacing:0.10em;text-transform:uppercase;color:var(--_colors---accent);margin-bottom:0.6rem;">05 · Answers</div>
-          <h3 style="font-size:1.35rem;font-weight:500;line-height:1.3;margin:0 0 0.6rem 0;letter-spacing:-0.005em;">Answers across email and manuals.</h3>
-          <p style="font-size:0.95rem;line-height:1.65;opacity:0.78;margin:0;">&ldquo;Which generator setting did the manufacturer recommend after last summer&rsquo;s overheating?&rdquo; Answered, with the email thread and the manual page beside the answer.</p>
-        </div>
-
       </div>
+    </div>
+  </section>
 
-      <!-- §11 B19 + §4 coverage rule -->
-      <div style="margin-top:3.6rem;padding:1.4rem 1.6rem;border-left:2px solid var(--_colors---accent);background:rgba(127,127,127,0.04);font-size:0.95rem;line-height:1.65;font-family:'IBM Plex Mono',monospace;font-style:italic;opacity:0.86;max-width:720px;">
-        Every search above is a draft, not an action. You read the citation; you decide; CelesteOS records what you decided. It never auto-files, auto-sends, or auto-asserts.
+  <!-- WORKER 02 — SURVEY -->
+  <section class="w-section">
+    <div class="w-container">
+      <div class="w-grid">
+        <div>
+          <div class="w-label"><span class="num">Worker 02</span>Survey</div>
+          <h2 class="w-h2">Certificates <em>before they expire.</em></h2>
+          <p class="w-scene">Sixty days before the class survey, the schedule runs over the calendar. Three certificates expire inside the window. Nobody has noticed.</p>
+          <p class="w-body">The survey worker checks every certificate against the date the inspector will be on board, gathers the documents in the order the surveyor asks for them, and flags the three that need re-issuing before the survey opens. One signed bundle, every certificate accounted for, the three that need attention sorted by lead time.</p>
+          <p class="w-body">The Friday-before-survey scramble does not happen.</p>
+          <div class="w-outcome"><span class="save">14 unpaid hours</span> &middot; not spent on the week-of-survey document chase</div>
+        </div>
+        <div>
+          <div class="artefact artefact-dark">
+            <div class="ah">
+              <span>Survey worker &middot; bundle</span>
+              <span class="spacer"></span>
+              <span class="meta">CO-SVY-2026-0414</span>
+            </div>
+            <div class="cert-cal">
+              <div class="month">Class survey &middot; M/Y Celeste</div>
+              <div class="countdown">Inspector aboard <em>14 Jun 2026.</em></div>
+              <div class="ann">47 days &middot; 12 certificates required &middot; 3 expire inside window</div>
+            </div>
+            <div class="cert-list">
+              <div class="cert-row red"><span class="dot"></span><span class="name">Safety Equipment certificate</span><span class="exp">EXP 28 May 2026 &middot; re-issue</span></div>
+              <div class="cert-row red"><span class="dot"></span><span class="name">Radio licence (GMDSS A2)</span><span class="exp">EXP 02 Jun 2026 &middot; re-issue</span></div>
+              <div class="cert-row red"><span class="dot"></span><span class="name">EPIRB hydrostatic release certificate</span><span class="exp">EXP 12 Jun 2026 &middot; re-issue</span></div>
+              <div class="cert-row amber"><span class="dot"></span><span class="name">Liferaft service certificate</span><span class="exp">EXP 22 Aug 2026 &middot; on schedule</span></div>
+              <div class="cert-row green"><span class="dot"></span><span class="name">SMC &middot; Safety Management Certificate</span><span class="exp">EXP 14 Nov 2026</span></div>
+              <div class="cert-row green"><span class="dot"></span><span class="name">DOC &middot; Document of Compliance</span><span class="exp">EXP 01 Mar 2028</span></div>
+              <div class="cert-row green"><span class="dot"></span><span class="name">MARPOL Annex VI</span><span class="exp">EXP 09 Sep 2027</span></div>
+              <div class="cert-row green"><span class="dot"></span><span class="name">+ 4 more, all current</span><span class="exp">all valid</span></div>
+            </div>
+            <div class="cert-foot">
+              <span>Bundle ready &middot; signed &middot; one PDF</span>
+              <span class="sp"></span>
+              <span>Export to surveyor →</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORKER 03 — RECEIVING -->
+  <section class="w-section">
+    <div class="w-container">
+      <div class="w-grid">
+        <div>
+          <div class="w-label"><span class="num">Worker 03</span>Receiving</div>
+          <h2 class="w-h2">Discrepancies <em>on the dock.</em></h2>
+          <p class="w-scene">A truck arrives at the yard. Twelve cartons. The PO has fifteen lines. Nobody is checking line-by-line against the packing list at 16:40 on a Friday. The signature happens. The shortage is discovered six weeks later at the quarterly count, and by then the supplier&rsquo;s claim window has closed.</p>
+          <p class="w-body">The receiving worker takes a photo of the packing list, matches it line-by-line to the PO, and surfaces the delta &mdash; the three items not delivered, the two delivered in the wrong quantity, the one delivered in the wrong part number. A drafted discrepancy email comes back, ready to forward to the supplier before the carton seal is broken.</p>
+          <p class="w-body">The shipment goes back before it is signed for.</p>
+          <div class="w-outcome"><span class="save">€ 3,840</span> &middot; what the boat does not pay for, then never receives</div>
+        </div>
+        <div>
+          <div class="artefact">
+            <div class="ah">
+              <span>Receiving &middot; PO vs packing list</span>
+              <span class="spacer"></span>
+              <span class="meta">CO-RX-2026-0419</span>
+            </div>
+            <div class="recv-head">
+              <div class="id">WO-1042</div>
+              <div class="supplier">Northern Lights spares, Lot N-87412</div>
+              <div class="date">19 Apr 2026 &middot; 16:40</div>
+            </div>
+            <div class="recv-grid">
+              <div class="recv-col">
+                <div class="col-h">Purchase order &middot; 8 lines</div>
+                <div class="recv-line"><span class="label">Impeller kit, P-774B</span><span class="qty">2 × £180</span></div>
+                <div class="recv-line"><span class="label">O-ring set, P-ORG-114</span><span class="qty">4 × £42</span></div>
+                <div class="recv-line"><span class="label">Coolant header gasket</span><span class="qty">2 × £88</span></div>
+                <div class="recv-line"><span class="label">Hose clip P3, stainless</span><span class="qty">12 × £14</span></div>
+                <div class="recv-line"><span class="label">Fuel filter, primary</span><span class="qty">2 × £62</span></div>
+                <div class="recv-line"><span class="label">Lube oil, MTU spec</span><span class="qty">40 L × £8.40</span></div>
+                <div class="recv-line"><span class="label">Glow plug, replacement</span><span class="qty">2 × £24</span></div>
+                <div class="recv-line"><span class="label">Voltage regulator card</span><span class="qty">1 × £1,420</span></div>
+              </div>
+              <div class="recv-col">
+                <div class="col-h">Packing list &middot; received</div>
+                <div class="recv-line"><span class="label">Impeller kit, P-774B</span><span class="qty">2 ✓</span></div>
+                <div class="recv-line missing"><span class="label">O-ring set, P-ORG-114</span><span class="qty">0 of 4</span></div>
+                <div class="recv-line"><span class="label">Coolant header gasket</span><span class="qty">2 ✓</span></div>
+                <div class="recv-line missing"><span class="label">Hose clip P3, stainless</span><span class="qty">0 of 12</span></div>
+                <div class="recv-line"><span class="label">Fuel filter, primary</span><span class="qty">2 ✓</span></div>
+                <div class="recv-line"><span class="label">Lube oil, MTU spec</span><span class="qty">40 L ✓</span></div>
+                <div class="recv-line"><span class="label">Glow plug, replacement</span><span class="qty">2 ✓</span></div>
+                <div class="recv-line missing"><span class="label">Voltage regulator card</span><span class="qty">0 of 1</span></div>
+              </div>
+            </div>
+            <div class="recv-delta">
+              <span>3 lines short &middot; £1,630 not delivered &middot; drafted reply ready</span>
+              <span class="draft">Open draft →</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORKER 04 — REPEAT-FAULT -->
+  <section class="w-section">
+    <div class="w-container">
+      <div class="w-grid">
+        <div>
+          <div class="w-label"><span class="num">Worker 04</span>Repeat-fault</div>
+          <h2 class="w-h2">Faults already <em>diagnosed.</em></h2>
+          <p class="w-scene">The fault is new to the engineer logging it. It is not new to the boat. The same fault, on the same equipment, has been diagnosed and fixed twice before — once by an engineer who has rotated off, once by an engineer two engineers before that. Both diagnoses are in the record. Neither is on the new engineer&rsquo;s desk.</p>
+          <p class="w-body">The repeat-fault worker watches every new fault as it is logged, scans the full operational history for the same equipment, and surfaces the prior diagnoses the moment the match is made. Before the marine technician&rsquo;s callout is booked. Before the wrong part is ordered for the third time. Before the consultancy hour is authorised.</p>
+          <p class="w-body">The boat does not pay to discover what the boat already knows.</p>
+          <div class="w-outcome"><span class="save">€ 2,400</span> &middot; marine technician callout avoided &middot; same diagnosis, third time</div>
+        </div>
+        <div>
+          <div class="artefact artefact-dark">
+            <div class="ah">
+              <span>Repeat-fault worker</span>
+              <span class="spacer"></span>
+              <span class="meta">CO-RF-2026-0429</span>
+            </div>
+            <div style="padding:1.2rem 1.4rem; border-bottom:1px solid rgba(255,255,255,0.06);">
+              <div style="font-family:'IBM Plex Mono',monospace; font-size:0.66rem; letter-spacing:0.10em; color:#BADDE9; text-transform:uppercase; margin-bottom:0.4rem;">Equipment &middot; E-007 Port engine, MTU 12V 2000 M94</div>
+              <div style="font-size:1.1rem; font-weight:400; color:#fff; letter-spacing:-0.005em;">High coolant temperature alarm</div>
+              <div style="font-family:'IBM Plex Mono',monospace; font-size:0.74rem; color:rgba(255,255,255,0.55); margin-top:0.3rem;">FLT-2847 &middot; logged 29 Apr 2026, 03:14 UTC &middot; T. Hoffmann</div>
+            </div>
+            <div class="tl-stack">
+              <div class="tl-row now">
+                <span class="dot"></span>
+                <div>
+                  <div class="date">29 Apr 2026 &middot; now</div>
+                  <div class="title">FLT-2847 &middot; High coolant temperature alarm</div>
+                  <div class="meta">Open &middot; assigned to T. Hoffmann (chief engineer, current rotation)</div>
+                </div>
+              </div>
+              <div class="tl-row match">
+                <span class="dot"></span>
+                <div>
+                  <div class="date">14 Mar 2026 &middot; 11 weeks ago</div>
+                  <div class="title">FLT-2691 &middot; High coolant temperature alarm</div>
+                  <div class="meta"><strong>Root cause: hose clip P3 failure</strong> &middot; R. Chen, closed in 38 min</div>
+                </div>
+              </div>
+              <div class="tl-row match">
+                <span class="dot"></span>
+                <div>
+                  <div class="date">04 Aug 2025 &middot; 9 months ago</div>
+                  <div class="title">FLT-2104 &middot; High coolant temperature alarm</div>
+                  <div class="meta"><strong>Root cause: hose clip P3 failure</strong> &middot; M. Torres, closed in 52 min, P3 clip noted as &ldquo;recurring&rdquo;</div>
+                </div>
+              </div>
+            </div>
+            <div class="tl-foot">
+              Same root cause × 2. Suggested action: replace P3 clip stock. Open the linked work order →
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORKER 05 — CROSS-DOMAIN -->
+  <section class="w-section">
+    <div class="w-container">
+      <div class="w-grid">
+        <div>
+          <div class="w-label"><span class="num">Worker 05</span>Cross-domain</div>
+          <h2 class="w-h2">Answers across email, <em>manuals, and the record.</em></h2>
+          <p class="w-scene">The question is small. The answer is in three places that do not talk to each other. A manual sentence on page 187. An email reply from the manufacturer&rsquo;s technical desk last August. A work-order note from a chief engineer who has since rotated off. Today&rsquo;s engineer does not know any of them are connected.</p>
+          <p class="w-body">The cross-domain worker treats the boat&rsquo;s manuals, faults, parts, work orders, certificates, and email as one record. One question, every domain. The answer comes back with every source cited &mdash; manual page, work order ID, email thread &mdash; visible beside the answer.</p>
+          <p class="w-body">No hallucinations. If CelesteOS cannot find a source, it says so.</p>
+          <div class="w-outcome"><span class="save">12 minutes</span> &middot; not 90 minutes of asking, waiting, and chasing the back-to-back</div>
+        </div>
+        <div>
+          <div class="artefact">
+            <div class="ah">
+              <span>Cross-domain answer</span>
+              <span class="spacer"></span>
+              <span class="meta">3 sources cited</span>
+            </div>
+            <div class="xd-q">
+              <span class="prompt">&gt;</span>
+              <span>What is the MTU-recommended max coolant inlet temperature for the port engine after last summer&rsquo;s overheating?</span>
+            </div>
+            <div class="xd-a">
+              <div class="num">Answer</div>
+              <div class="val"><em>95 °C max</em> at the coolant inlet, under sustained load &gt; 85 % MCR.</div>
+            </div>
+            <div class="xd-sources">
+              <div class="xd-src">
+                <div class="kind">Manual</div>
+                <div class="body">
+                  <div class="ref">MTU 12V 2000 M94 &middot; Rev 3 &middot; § 14.2, p. 187</div>
+                  <div class="quote">&ldquo;Coolant inlet temperature shall not exceed 95 °C under continuous duty above 85 % MCR.&rdquo;</div>
+                </div>
+              </div>
+              <div class="xd-src">
+                <div class="kind">Email</div>
+                <div class="body">
+                  <div class="ref">From MTU EMEA support &middot; 09 Aug 2025, 14:22 CEST</div>
+                  <div class="quote">&ldquo;Confirming for M/Y Celeste &middot; max inlet 95 °C, derate output above this. Logging interval 5 min suggested.&rdquo;</div>
+                </div>
+              </div>
+              <div class="xd-src">
+                <div class="kind">Work order</div>
+                <div class="body">
+                  <div class="ref">WO-2025-0312 &middot; closed 06 Jan 2026 &middot; M. Torres</div>
+                  <div class="quote">&ldquo;Cooling-loop service complete, set sensor alarm threshold to 95 °C per MTU advice.&rdquo;</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORKERS — COVERAGE RULE -->
+  <section class="w-section" style="padding:8rem 2rem; min-height:auto;">
+    <div class="w-container">
+      <div class="cov-rule">
+        Every worker above is a <em>draft</em>, not an action. You read the citation; you decide; CelesteOS records what you decided. It never auto-files, auto-sends, or auto-asserts.
       </div>
     </div>
   </section>
