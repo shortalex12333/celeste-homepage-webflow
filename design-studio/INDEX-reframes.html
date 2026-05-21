@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>CelesteOS reframe prototypes · §11 plan</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Cormorant+Garamond:ital,wght@1,400&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after { margin:0; padding:0; box-sizing:border-box; }
+  html, body { font-family:'Inter',-apple-system,sans-serif; background:#0A0A0A; color:rgba(255,255,255,0.92); -webkit-font-smoothing:antialiased; line-height:1.55; }
+  body { padding:64px 48px; min-height:100vh; }
+  .head { max-width:880px; margin:0 auto 64px; }
+  .crumbs { font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:#BADDE9; margin-bottom:18px; }
+  h1 { font-size:48px; font-weight:300; letter-spacing:-0.02em; line-height:1.1; margin-bottom:20px; }
+  h1 em { font-family:'Cormorant Garamond',serif; font-style:italic; color:#BADDE9; }
+  .lede { font-size:17px; line-height:1.65; color:rgba(255,255,255,0.74); max-width:680px; }
+
+  .grid { display:grid; grid-template-columns:repeat(2,1fr); gap:24px; max-width:1280px; margin:0 auto; }
+  a.card {
+    display:block; padding:32px;
+    background:rgba(255,255,255,0.03);
+    border:1px solid rgba(255,255,255,0.08); border-radius:8px;
+    color:inherit; text-decoration:none;
+    transition:border-color 200ms, background 200ms;
+  }
+  a.card:hover { border-color:#BADDE9; background:rgba(186,221,233,0.04); }
+  .v-label { font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.14em; color:#BADDE9; text-transform:uppercase; margin-bottom:10px; }
+  .v-title { font-size:24px; font-weight:500; letter-spacing:-0.005em; margin-bottom:6px; }
+  .v-sub { font-size:14px; color:rgba(255,255,255,0.62); margin-bottom:18px; font-style:italic; font-family:'Cormorant Garamond',serif; }
+  .v-desc { font-size:14px; line-height:1.65; color:rgba(255,255,255,0.72); margin-bottom:20px; }
+  .v-meta { display:flex; gap:18px; font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.10em; color:rgba(255,255,255,0.5); text-transform:uppercase; }
+  .v-meta span { display:inline-flex; gap:6px; align-items:center; }
+  .v-meta span::before { content:'·'; color:#BADDE9; }
+
+  .rubric {
+    max-width:880px; margin:96px auto 0; padding:32px;
+    background:rgba(186,221,233,0.04);
+    border:1px solid rgba(186,221,233,0.18); border-radius:8px;
+  }
+  .rubric h2 { font-size:14px; font-family:'IBM Plex Mono',monospace; letter-spacing:0.16em; text-transform:uppercase; color:#BADDE9; margin-bottom:18px; }
+  .rubric ol { padding-left:24px; }
+  .rubric li { font-size:14px; line-height:1.7; color:rgba(255,255,255,0.78); margin-bottom:8px; }
+  .rubric li em { font-family:'Cormorant Garamond',serif; font-style:italic; color:#BADDE9; }
+
+  footer { max-width:880px; margin:96px auto 0; padding-top:32px; border-top:1px dashed rgba(255,255,255,0.08); font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.08em; color:rgba(255,255,255,0.42); }
+  footer a { color:rgba(186,221,233,0.86); text-decoration:none; }
+
+  @media (max-width:900px) {
+    .grid { grid-template-columns:1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="head">
+  <div class="crumbs">Design studio · Reframe prototypes</div>
+  <h1>Five takes on the <em>§11 site reframe.</em></h1>
+  <p class="lede">Each prototype is a full homepage, faithful to the §11 plan: handover-led, no receipts surface, no Integrity Score, no insurance, continuity guarantee included. They differ only in visual rhythm, structural ordering, and which buyer they speak to first.</p>
+</div>
+
+<div class="grid">
+
+  <a class="card" href="reframe-v1-surgical.html" target="_blank">
+    <div class="v-label">V1 · Surgical</div>
+    <div class="v-title">Plan-literal edit.</div>
+    <div class="v-sub">Closest to the current production site.</div>
+    <p class="v-desc">Keeps the current dark hero with the search-artefact panel. Reorders services 01→02→03 (handover / search / consolidate). Drops the "Proof, when proof matters" service. Adds the new "What CelesteOS searches for you" catalog. Trust posture kept; Trust removed from primary nav. Pricing $450 unchanged.</p>
+    <div class="v-meta">
+      <span>Buyer: engineer-first</span>
+      <span>Vibe: production-tier</span>
+      <span>Risk: low</span>
+    </div>
+  </a>
+
+  <a class="card" href="reframe-v2-question-anchor.html" target="_blank">
+    <div class="v-label">V2 · Question-anchor</div>
+    <div class="v-title">Editorial single-column.</div>
+    <div class="v-sub">Light mode, Cormorant Garamond italics, B&amp;O / Rolex restraint.</div>
+    <p class="v-desc">Each section is a question with an answer. "A chief engineer leaves on a Tuesday." → "By Friday morning, the boat already knows everything." Light mode, 720px column, deliberate whitespace. Five missions rendered one per scroll. Buyer band addresses the office. Lowest density, highest editorial weight.</p>
+    <div class="v-meta">
+      <span>Buyer: equal voice</span>
+      <span>Vibe: editorial / magazine</span>
+      <span>Risk: medium (slow scan)</span>
+    </div>
+  </a>
+
+  <a class="card" href="reframe-v3-mission-catalog.html" target="_blank">
+    <div class="v-label">V3 · Mission catalog</div>
+    <div class="v-title">Linear / Stripe-style tile grid.</div>
+    <div class="v-sub">Sticky nav, hero stat-tiles, mission cards in a 3-up grid.</div>
+    <p class="v-desc">Hero: "One question. Every record on the boat." Big painkiller card (text + doc visual). Five mission cards in a 3-up grid with a sixth "anything else you teach it" placeholder. Two-column Continuity + Trust reassurance. Big pricing card. Sticky nav with a contrasting pilot CTA — the most browse-able / scan-friendly variant.</p>
+    <div class="v-meta">
+      <span>Buyer: scanner-first</span>
+      <span>Vibe: modern SaaS</span>
+      <span>Risk: low</span>
+    </div>
+  </a>
+
+  <a class="card" href="reframe-v4-two-persona-split.html" target="_blank">
+    <div class="v-label">V4 · Two-persona split</div>
+    <div class="v-title">Engineer | Office, side-by-side.</div>
+    <div class="v-sub">Dark left half / light right half. Both audiences read first.</div>
+    <p class="v-desc">Literal split hero — left pane (dark) speaks to the chief engineer; right pane (light) speaks to the management company. Below, a unified band: the five missions in a strip both audiences need. Three reassurance cards: Continuity / Trust / Founder bio. Names the buyer explicitly without burying the user.</p>
+    <div class="v-meta">
+      <span>Buyer: explicit split</span>
+      <span>Vibe: editorial / asymmetric</span>
+      <span>Risk: medium (visual commitment)</span>
+    </div>
+  </a>
+
+  <a class="card" href="reframe-v5-anti-pitch.html" target="_blank" style="grid-column:1 / -1;">
+    <div class="v-label">V5 · Anti-pitch</div>
+    <div class="v-title">"What CelesteOS is <em style="font-family:'Cormorant Garamond',serif; font-style:italic;">not</em>, and what it is."</div>
+    <div class="v-sub">Inversion of the SaaS norm — leads with what's been removed.</div>
+    <p class="v-desc">Hero is three crossed-out sentences with the truthful replacement underneath ("CelesteOS <s>replaces your PMS</s> sits alongside it. CelesteOS <s>predicts your insurance premium</s> writes your handover. CelesteOS <s>scores your boat</s> answers one question at a time.") Four "NOT / IS" rows directly address Flaws #2, #4, #5 from the pressure test. Five missions as a numbered list. "The boring honest part" block answers buyer-questions upfront. Riskiest tonally — but most-defensible against any "you're hiding something" read.</p>
+    <div class="v-meta">
+      <span>Buyer: defensive / objection-led</span>
+      <span>Vibe: contrarian editorial</span>
+      <span>Risk: medium-high (tonal commitment)</span>
+    </div>
+  </a>
+
+</div>
+
+<div class="rubric">
+  <h2>The §11-L1 test, against every variant</h2>
+  <ol>
+    <li>A captain reading this homepage for 90 seconds walks away able to say one sentence: <em>"They write your handover for you, search every record on the boat, and save you money on what's already under warranty — and they never claim anything they can't cite."</em></li>
+    <li>The painkiller (handover) is leading.</li>
+    <li>The vitamin (search) is supporting.</li>
+    <li>The liability (receipts) is invisible on the sales surface.</li>
+    <li>The §4 coverage rule (drafts + citations + crew confirms) is felt without being lectured.</li>
+    <li>The word <em>insurance</em>, the phrase <em>Integrity Score</em>, and <em>liability is the…</em> framing never appear.</li>
+    <li>Continuity &amp; portability are stated — the solo-founder bus-factor objection (Flaw #4) is answered before it's asked.</li>
+  </ol>
+</div>
+
+<footer>
+  Files: design-studio/reframe-v{1..5}-*.html · Plan: <a href="file:///Users/celeste7/Documents/CelesteOS-Score/review/11_site_copy_reframe.md">11_site_copy_reframe.md</a>
+</footer>
+
+</body>
+</html>

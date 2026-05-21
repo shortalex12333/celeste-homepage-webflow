@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>V4 · Two-persona split (engineer / superintendent) — CelesteOS reframe</title>
+<meta name="description" content="For the engineer: the handover writes itself. For the office: every handover, every boat, the same shape.">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Cormorant+Garamond:ital,wght@1,400&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after { margin:0; padding:0; box-sizing:border-box; }
+  html, body { font-family:'Inter',-apple-system,sans-serif; -webkit-font-smoothing:antialiased; }
+  body { min-height:100vh; line-height:1.55; background:#0A0A0A; color:rgba(255,255,255,0.92); }
+  .stage-badge {
+    position:fixed; top:14px; left:14px;
+    font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.14em; text-transform:uppercase;
+    color:rgba(186,221,233,0.62);
+    background:rgba(0,0,0,0.7); padding:6px 10px; border:1px solid rgba(186,221,233,0.32); border-radius:2px;
+    z-index:100;
+  }
+
+  nav.top {
+    padding:24px 40px; display:flex; align-items:center; gap:24px;
+    border-bottom:1px dashed rgba(255,255,255,0.08);
+    background:#0A0A0A;
+  }
+  nav.top .brand { font-size:14px; font-weight:500; letter-spacing:0.01em; margin-right:auto; }
+  nav.top a {
+    font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.06em;
+    color:rgba(255,255,255,0.62); text-decoration:none;
+  }
+  nav.top a:hover { color:#BADDE9; }
+
+  /* The split hero */
+  .split-hero {
+    display:grid; grid-template-columns:1fr 1fr;
+    min-height:80vh;
+    position:relative;
+  }
+  .split-hero::after {
+    content:''; position:absolute; top:0; bottom:0; left:50%; width:1px;
+    background:linear-gradient(180deg,
+      rgba(186,221,233,0) 0%,
+      rgba(186,221,233,0.3) 20%,
+      rgba(186,221,233,0.3) 80%,
+      rgba(186,221,233,0) 100%);
+  }
+  .pane { padding:96px 48px; display:flex; flex-direction:column; justify-content:center; }
+  .pane.engineer { background:#0A0A0A; }
+  .pane.office { background:linear-gradient(180deg,#FAFAF8 0%,#F2EEE8 100%); color:#1A2332; }
+
+  .pane .audience {
+    font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.18em; text-transform:uppercase;
+    margin-bottom:24px;
+  }
+  .pane.engineer .audience { color:#BADDE9; }
+  .pane.office .audience { color:#2B7BA3; }
+
+  .pane h1 {
+    font-size:clamp(36px,4.5vw,56px); font-weight:300; letter-spacing:-0.015em; line-height:1.1;
+    margin-bottom:32px; max-width:540px;
+  }
+  .pane h1 em { font-family:'Cormorant Garamond',serif; font-style:italic; font-weight:400; }
+  .pane.engineer h1 em { color:#BADDE9; }
+  .pane.office h1 em { color:#2B7BA3; }
+
+  .pane p { font-size:16px; line-height:1.7; max-width:480px; margin-bottom:18px; }
+  .pane.engineer p { color:rgba(255,255,255,0.78); }
+  .pane.office p { color:#4A5568; }
+
+  .pane .key {
+    margin-top:32px; padding-top:24px; max-width:480px;
+    font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.06em;
+  }
+  .pane.engineer .key { border-top:1px solid rgba(255,255,255,0.12); color:rgba(186,221,233,0.86); }
+  .pane.office .key { border-top:1px solid rgba(43,123,163,0.18); color:#2B7BA3; }
+  .pane .key div { padding:6px 0; }
+
+  /* Unifying band — both audiences need the missions */
+  .unify {
+    padding:120px 40px; background:#0A0A0A;
+    text-align:center;
+  }
+  .unify .label {
+    font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.16em; text-transform:uppercase;
+    color:#BADDE9; margin-bottom:20px;
+  }
+  .unify h2 {
+    font-size:clamp(40px,5vw,68px); font-weight:300; letter-spacing:-0.02em; line-height:1.05;
+    max-width:780px; margin:0 auto 24px;
+  }
+  .unify h2 em { font-family:'Cormorant Garamond',serif; font-style:italic; color:#BADDE9; }
+  .unify .lede { font-size:17px; line-height:1.6; max-width:600px; margin:0 auto 64px; color:rgba(255,255,255,0.7); }
+
+  .mission-strip {
+    display:grid; grid-template-columns:repeat(5,1fr); gap:1px;
+    background:rgba(255,255,255,0.06); border-radius:8px; overflow:hidden;
+    max-width:1280px; margin:0 auto;
+  }
+  .mission-cell {
+    background:#0c0c0c; padding:32px 24px; text-align:left; min-height:240px;
+    display:flex; flex-direction:column; gap:14px;
+    transition:background 200ms;
+  }
+  .mission-cell:hover { background:rgba(186,221,233,0.05); }
+  .mission-cell .num {
+    font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.16em; text-transform:uppercase;
+    color:rgba(186,221,233,0.74);
+  }
+  .mission-cell h4 { font-size:18px; font-weight:500; letter-spacing:-0.005em; line-height:1.3; }
+  .mission-cell p { font-size:13px; line-height:1.6; color:rgba(255,255,255,0.62); margin-top:auto; }
+
+  .coverage-rule {
+    margin:64px auto 0; max-width:760px;
+    padding:28px 32px; background:rgba(186,221,233,0.04);
+    border:1px solid rgba(186,221,233,0.18); border-radius:8px;
+    font-size:15px; line-height:1.65; color:rgba(255,255,255,0.82);
+    text-align:left;
+  }
+  .coverage-rule em { font-family:'Cormorant Garamond',serif; font-style:italic; color:#BADDE9; }
+
+  /* Sits-alongside (shared band, narrow) */
+  .positioning {
+    padding:96px 40px; text-align:center;
+    background:linear-gradient(180deg,#0A0A0A 0%,#0c0c0c 100%);
+  }
+  .positioning .inner { max-width:720px; margin:0 auto; }
+  .positioning .label {
+    font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.16em; text-transform:uppercase;
+    color:#BADDE9; margin-bottom:20px;
+  }
+  .positioning h2 { font-size:clamp(32px,4vw,48px); font-weight:300; letter-spacing:-0.015em; line-height:1.15; margin-bottom:24px; }
+  .positioning h2 em { font-family:'Cormorant Garamond',serif; font-style:italic; color:#BADDE9; }
+  .positioning p { font-size:15px; line-height:1.7; color:rgba(255,255,255,0.7); margin-bottom:14px; }
+
+  /* Buyer reassurance — bus-factor / continuity */
+  .reassure-grid {
+    display:grid; grid-template-columns:1fr 1fr 1fr; gap:20px;
+    padding:96px 40px; max-width:1280px; margin:0 auto;
+  }
+  .reassure-card {
+    padding:32px;
+    background:rgba(255,255,255,0.02);
+    border:1px solid rgba(255,255,255,0.08); border-radius:8px;
+  }
+  .reassure-card .ttl {
+    font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.16em; text-transform:uppercase;
+    color:#BADDE9; margin-bottom:14px;
+  }
+  .reassure-card h3 { font-size:20px; font-weight:400; margin-bottom:14px; line-height:1.3; }
+  .reassure-card p { font-size:14px; line-height:1.65; color:rgba(255,255,255,0.7); }
+
+  /* Pricing — single band */
+  .pricing-band {
+    padding:96px 40px;
+    display:flex; flex-direction:column; align-items:center; gap:24px;
+    background:linear-gradient(180deg,#0c0c0c 0%,#080808 100%);
+    border-top:1px solid rgba(186,221,233,0.18);
+  }
+  .pricing-band .label { font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.18em; text-transform:uppercase; color:rgba(255,255,255,0.5); }
+  .pricing-band .price { font-size:clamp(96px,12vw,168px); font-weight:200; line-height:0.9; letter-spacing:-0.025em; color:#BADDE9; }
+  .pricing-band .unit { font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.22em; text-transform:uppercase; color:rgba(255,255,255,0.5); }
+  .pricing-band .desc { font-size:15px; line-height:1.7; color:rgba(255,255,255,0.78); max-width:560px; text-align:center; margin-top:14px; }
+
+  .btn {
+    padding:14px 22px; border:1px solid currentColor; border-radius:2px;
+    font-family:'IBM Plex Mono',monospace; font-size:13px; letter-spacing:0.04em; text-transform:uppercase;
+    background:transparent; cursor:pointer; text-decoration:none;
+    display:inline-flex; align-items:center; gap:8px; color:#BADDE9;
+  }
+  .btn:hover { background:rgba(186,221,233,0.06); }
+
+  /* Close */
+  .close { padding:96px 40px; text-align:center; max-width:880px; margin:0 auto; }
+  .close h2 { font-size:clamp(40px,5.5vw,68px); font-weight:300; letter-spacing:-0.02em; line-height:1.1; margin-bottom:32px; }
+  .close h2 em { font-family:'Cormorant Garamond',serif; font-style:italic; color:#BADDE9; }
+
+  footer { padding:48px 40px; border-top:1px dashed rgba(255,255,255,0.08); display:flex; align-items:center; gap:24px; flex-wrap:wrap; font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.08em; color:rgba(255,255,255,0.42); }
+  footer .spacer { flex:1; }
+  footer a { color:rgba(255,255,255,0.62); text-decoration:none; }
+  footer a:hover { color:#BADDE9; }
+
+  @media (max-width:900px) {
+    .split-hero { grid-template-columns:1fr; min-height:auto; }
+    .split-hero::after { display:none; }
+    .pane { padding:64px 28px; }
+    .mission-strip { grid-template-columns:1fr; }
+    .reassure-grid { grid-template-columns:1fr; padding:64px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="stage-badge">V4 · Two-persona split · engineer | office</div>
+
+<nav class="top">
+  <div class="brand">CelesteOS</div>
+  <a href="#engineer">For the engineer</a>
+  <a href="#office">For the office</a>
+  <a href="#missions">What it does</a>
+  <a href="#pricing">Pricing</a>
+</nav>
+
+<div class="split-hero">
+  <div class="pane engineer" id="engineer">
+    <div class="audience">For the chief engineer</div>
+    <h1>Your shift. Your boat. <em>The handover writes itself.</em></h1>
+    <p>Last night of swing. Three pages of rough notes. Drop them in. CelesteOS returns a structured, survey-ready handover by the time you're off the boat.</p>
+    <p>Every entry linked to the source — the fault, the work order, the parts used, the email thread. Editable until you sign. Sealed after.</p>
+    <div class="key">
+      <div>· Nothing to install</div>
+      <div>· 15 minutes to onboard</div>
+      <div>· Runs alongside your existing PMS</div>
+      <div>· Unlimited seats per vessel</div>
+    </div>
+  </div>
+  <div class="pane office" id="office">
+    <div class="audience">For the management company</div>
+    <h1>Your fleet. Your liability. <em>Every handover, the same shape.</em></h1>
+    <p>Across fifteen boats, every chief engineer's handover comes out in the same structure. New crew on any vessel is productive on day 1, not week 2. The first survey of every season opens without a scramble.</p>
+    <p>Data is exportable on demand, in standard formats. Continuity is in writing. The vessel's record stays with the vessel.</p>
+    <div class="key">
+      <div>· Audit-ready by design</div>
+      <div>· GDPR / SOC-2 / ISM Code aligned</div>
+      <div>· Continuity &amp; portability guaranteed</div>
+      <div>· Quietly priced — $450 / 28d / vessel</div>
+    </div>
+  </div>
+</div>
+
+<section class="unify" id="missions">
+  <div class="label">What CelesteOS does, regardless of who's reading</div>
+  <h2>Five missions. <em>Every one cited.</em></h2>
+  <p class="lede">The handover engine, pointed at the moments where money quietly leaves the boat.</p>
+
+  <div class="mission-strip">
+    <div class="mission-cell">
+      <div class="num">01 · Money</div>
+      <h4>Money about to be spent.</h4>
+      <p>Items still under manufacturer warranty surface the moment a fault is raised. Forward-ready claim pack. You forward. The supplier pays.</p>
+    </div>
+    <div class="mission-cell">
+      <div class="num">02 · Certs</div>
+      <h4>Certificates before they expire.</h4>
+      <p>Survey 60 days out. Every certificate the surveyor will ask for — gathered, dated, flagged if it expires inside the window.</p>
+    </div>
+    <div class="mission-cell">
+      <div class="num">03 · Dock</div>
+      <h4>Discrepancies on the dock.</h4>
+      <p>A photo of the packing list goes in. Matched PO lines, inventory delta, drafted discrepancy email — out. Before it's signed for.</p>
+    </div>
+    <div class="mission-cell">
+      <div class="num">04 · Faults</div>
+      <h4>Faults already diagnosed.</h4>
+      <p>The same fault, three rotations ago. The diagnosis is in the record. Surfaced before the marine technician's callout is booked.</p>
+    </div>
+    <div class="mission-cell">
+      <div class="num">05 · Answers</div>
+      <h4>Email + manuals.</h4>
+      <p>"Which generator setting did the manufacturer recommend after last summer's overheating?" Answered, with the email and the manual page beside it.</p>
+    </div>
+  </div>
+
+  <div class="coverage-rule">
+    Every search above is a <em>draft</em>, not an action. You read the citation; you decide; CelesteOS records what you decided. It never auto-files, auto-sends, or auto-asserts.
+  </div>
+</section>
+
+<section class="positioning">
+  <div class="inner">
+    <div class="label">Positioning</div>
+    <h2>CelesteOS does <em>not</em> replace your PMS.</h2>
+    <p>Your existing PMS — Seahub, ShipManager, IDEA, smartPAL, MXSuite, or otherwise — keeps its class society approvals, its workflows, and its crew familiarity. CelesteOS indexes everything it produces, alongside your manuals, emails, work orders, and notes.</p>
+    <p>Lower switching cost. Lower implementation risk. Higher operational continuity.</p>
+  </div>
+</section>
+
+<section>
+  <div class="reassure-grid">
+    <div class="reassure-card">
+      <div class="ttl">Continuity</div>
+      <h3>The vessel's data is the vessel's data.</h3>
+      <p>Customer data exports — every fault, work order, handover, and linked document — produced on request in standard formats (CSV, PDF, signed JSON). A documented escrow arrangement ensures continuity if CelesteOS the company ceases to operate.</p>
+    </div>
+    <div class="reassure-card">
+      <div class="ttl">Trust</div>
+      <h3>Honest hedge phrasing.</h3>
+      <p>GDPR-aligned (EU data under SCCs and UK IDTA). SOC-2 controls built against AICPA TSC; audit not yet commissioned. ISM Code Sections 10 and 11 — audit evidence, not class approval. <a href="/trust" style="color:#BADDE9; text-decoration:none;">Full mapping →</a></p>
+    </div>
+    <div class="reassure-card">
+      <div class="ttl">Built by</div>
+      <h3>An ETO who lived this problem.</h3>
+      <p>Alex Short, five years as Chief Engineer / Head of Department on superyachts up to 122 metres — Maryah, Legend, Freedom, Nero, Whisper. Now a yacht-risk specialist at MMA-FL. <a href="https://linkedin.com/in/short-alex" style="color:#BADDE9; text-decoration:none;">LinkedIn →</a></p>
+    </div>
+  </div>
+</section>
+
+<section class="pricing-band" id="pricing">
+  <div class="label">The pilot · 2026</div>
+  <div class="price">$450</div>
+  <div class="unit">per 28 days · per vessel</div>
+  <p class="desc">Unlimited seats. No per-module tiering. One vessel at a time. Onboarded in hours, not weeks. For teams who intend to use CelesteOS as the work surface.</p>
+  <a class="btn" href="mailto:contact@celeste7.ai?subject=Pilot%20access">Request pilot access ↗</a>
+</section>
+
+<section class="close" id="contact">
+  <h2>If this describes your vessel, <em>the next handover writes itself.</em></h2>
+  <a class="btn" href="mailto:contact@celeste7.ai">contact@celeste7.ai</a>
+</section>
+
+<footer>
+  <span>CelesteOS · celeste7.ai</span>
+  <span class="spacer"></span>
+  <a href="/trust">Trust</a>
+  <a href="/privacy-policy">Privacy</a>
+  <a href="/sources">Sources</a>
+  <a href="https://verifier.celeste7.ai" target="_blank" rel="noopener">Verifier</a>
+</footer>
+
+</body>
+</html>

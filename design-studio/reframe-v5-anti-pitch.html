@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>V5 · Anti-pitch (inversion) — CelesteOS reframe</title>
+<meta name="description" content="What CelesteOS is not, and what it is. The handover writes itself.">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Cormorant+Garamond:ital,wght@1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after { margin:0; padding:0; box-sizing:border-box; }
+  html, body { font-family:'Inter',-apple-system,sans-serif; background:#0A0A0A; color:rgba(255,255,255,0.92); -webkit-font-smoothing:antialiased; }
+  body { min-height:100vh; line-height:1.55; }
+  .stage-badge {
+    position:fixed; top:14px; left:14px;
+    font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.14em; text-transform:uppercase;
+    color:rgba(186,221,233,0.62);
+    background:rgba(0,0,0,0.7); padding:6px 10px; border:1px solid rgba(186,221,233,0.32); border-radius:2px;
+    z-index:100;
+  }
+
+  nav.top {
+    padding:24px 40px; display:flex; align-items:center; gap:24px;
+    border-bottom:1px dashed rgba(255,255,255,0.08);
+  }
+  nav.top .brand { font-size:14px; font-weight:500; margin-right:auto; }
+  nav.top a { font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.06em; color:rgba(255,255,255,0.62); text-decoration:none; }
+  nav.top a:hover { color:#BADDE9; }
+
+  section { padding:120px 40px; max-width:1180px; margin:0 auto; }
+
+  /* Hero — inverted */
+  .hero { padding-top:100px; padding-bottom:0; }
+  .hero .eyebrow { font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.18em; text-transform:uppercase; color:#BADDE9; margin-bottom:32px; }
+  .hero h1 {
+    font-size:clamp(48px,7vw,96px); font-weight:300; letter-spacing:-0.02em; line-height:1.0;
+    max-width:980px; margin-bottom:48px;
+  }
+  .hero h1 .strike { text-decoration:line-through; text-decoration-thickness:2px; text-decoration-color:rgba(255,255,255,0.3); color:rgba(255,255,255,0.4); }
+  .hero h1 em { font-family:'Cormorant Garamond',serif; font-style:italic; color:#BADDE9; font-weight:400; }
+
+  /* Not-table */
+  .not-table { padding:80px 0; }
+  .nt-row {
+    display:grid; grid-template-columns:1fr 1fr;
+    border-top:1px solid rgba(255,255,255,0.08);
+  }
+  .nt-row:last-child { border-bottom:1px solid rgba(255,255,255,0.08); }
+  .nt-cell { padding:36px 32px; }
+  .nt-cell.not {
+    color:rgba(255,255,255,0.42);
+    border-right:1px dashed rgba(255,255,255,0.10);
+    position:relative;
+  }
+  .nt-cell.not::before {
+    content:'NOT'; position:absolute; top:36px; left:32px;
+    font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:0.18em;
+    color:rgba(255,80,80,0.62);
+  }
+  .nt-cell.not h3 {
+    font-size:22px; font-weight:400; letter-spacing:-0.005em; line-height:1.3;
+    padding-left:48px;
+  }
+  .nt-cell.not p {
+    font-size:14px; line-height:1.65; margin-top:10px;
+    padding-left:48px; color:rgba(255,255,255,0.5);
+  }
+  .nt-cell.is {
+    position:relative;
+  }
+  .nt-cell.is::before {
+    content:'IS'; position:absolute; top:36px; left:32px;
+    font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:0.18em;
+    color:#BADDE9;
+  }
+  .nt-cell.is h3 {
+    font-size:22px; font-weight:500; letter-spacing:-0.005em; line-height:1.3;
+    color:#fff; padding-left:48px;
+  }
+  .nt-cell.is h3 em { font-family:'Cormorant Garamond',serif; font-style:italic; color:#BADDE9; font-weight:400; }
+  .nt-cell.is p {
+    font-size:15px; line-height:1.65; margin-top:10px;
+    padding-left:48px; color:rgba(255,255,255,0.82);
+  }
+
+  /* The painkiller, said plainly */
+  .plain-truth {
+    padding:120px 40px;
+    background:linear-gradient(180deg,rgba(186,221,233,0.04) 0%,rgba(186,221,233,0) 100%);
+    border-top:1px solid rgba(186,221,233,0.16);
+    border-bottom:1px solid rgba(186,221,233,0.16);
+    text-align:center;
+  }
+  .plain-truth .inner { max-width:880px; margin:0 auto; }
+  .plain-truth .label {
+    font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.16em; text-transform:uppercase;
+    color:#BADDE9; margin-bottom:24px;
+  }
+  .plain-truth h2 {
+    font-size:clamp(40px,5.5vw,72px); font-weight:300; letter-spacing:-0.02em; line-height:1.1;
+    margin-bottom:32px;
+  }
+  .plain-truth h2 em { font-family:'Cormorant Garamond',serif; font-style:italic; color:#BADDE9; }
+  .plain-truth p { font-size:17px; line-height:1.7; color:rgba(255,255,255,0.78); max-width:620px; margin:0 auto 18px; }
+
+  /* Five honest things it does */
+  .does {
+    padding:120px 40px; max-width:1180px; margin:0 auto;
+  }
+  .does .label {
+    font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.16em; text-transform:uppercase;
+    color:#BADDE9; margin-bottom:24px;
+  }
+  .does h2 {
+    font-size:clamp(36px,4.5vw,56px); font-weight:300; letter-spacing:-0.015em; line-height:1.1;
+    max-width:760px; margin-bottom:24px;
+  }
+  .does h2 em { font-family:'Cormorant Garamond',serif; font-style:italic; color:#BADDE9; }
+  .does .lede { font-size:16px; line-height:1.65; color:rgba(255,255,255,0.7); max-width:580px; margin-bottom:64px; }
+
+  .does-list { counter-reset:does; }
+  .does-item {
+    display:grid; grid-template-columns:80px 1fr;
+    padding:36px 0;
+    border-top:1px solid rgba(255,255,255,0.06);
+  }
+  .does-item:last-child { border-bottom:1px solid rgba(255,255,255,0.06); }
+  .does-item .num {
+    counter-increment:does;
+    font-family:'IBM Plex Mono',monospace; font-size:14px; letter-spacing:0.06em;
+    color:#BADDE9; padding-top:4px;
+  }
+  .does-item .num::before { content:'0' counter(does) ' /'; }
+  .does-item h3 { font-size:22px; font-weight:500; letter-spacing:-0.005em; line-height:1.35; margin-bottom:10px; }
+  .does-item p { font-size:15px; line-height:1.7; color:rgba(255,255,255,0.72); max-width:680px; }
+
+  .coverage-callout {
+    margin-top:64px; padding:32px 36px;
+    background:rgba(186,221,233,0.04);
+    border-left:2px solid #BADDE9;
+    font-size:16px; line-height:1.65; color:rgba(255,255,255,0.86);
+    max-width:780px;
+  }
+  .coverage-callout em { font-family:'Cormorant Garamond',serif; font-style:italic; color:#BADDE9; }
+
+  /* The boring honest part */
+  .honest-band {
+    padding:120px 40px; max-width:1180px; margin:0 auto;
+  }
+  .honest-band .label {
+    font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.16em; text-transform:uppercase;
+    color:rgba(255,255,255,0.5); margin-bottom:24px;
+  }
+  .honest-band h2 {
+    font-size:clamp(32px,4vw,48px); font-weight:300; letter-spacing:-0.015em; line-height:1.15; margin-bottom:48px;
+  }
+  .honest-band h2 em { font-family:'Cormorant Garamond',serif; font-style:italic; color:rgba(255,255,255,0.62); }
+
+  .honest-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:48px; }
+  .honest-item { padding-top:24px; border-top:1px dashed rgba(255,255,255,0.16); }
+  .honest-item .ttl {
+    font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.14em; text-transform:uppercase;
+    color:#BADDE9; margin-bottom:10px;
+  }
+  .honest-item h4 { font-size:18px; font-weight:500; margin-bottom:10px; }
+  .honest-item p { font-size:14px; line-height:1.7; color:rgba(255,255,255,0.7); }
+
+  /* Pricing — minimal */
+  .pricing {
+    padding:120px 40px; text-align:center;
+  }
+  .pricing .label { font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.18em; text-transform:uppercase; color:rgba(255,255,255,0.5); margin-bottom:32px; }
+  .pricing .price-row { display:inline-flex; align-items:baseline; gap:18px; margin-bottom:32px; }
+  .pricing .price { font-size:clamp(96px,11vw,168px); font-weight:200; line-height:0.9; letter-spacing:-0.025em; color:#BADDE9; }
+  .pricing .unit { font-family:'IBM Plex Mono',monospace; font-size:13px; letter-spacing:0.16em; text-transform:uppercase; color:rgba(255,255,255,0.5); }
+  .pricing .desc { font-size:16px; line-height:1.65; color:rgba(255,255,255,0.78); max-width:560px; margin:0 auto 32px; }
+
+  .btn {
+    padding:14px 22px; border:1px solid #BADDE9; border-radius:2px;
+    font-family:'IBM Plex Mono',monospace; font-size:13px; letter-spacing:0.04em; text-transform:uppercase;
+    color:#BADDE9; background:transparent; cursor:pointer; text-decoration:none;
+    display:inline-flex; align-items:center; gap:8px;
+  }
+  .btn:hover { background:rgba(186,221,233,0.06); }
+
+  /* Close */
+  .close { padding:120px 40px; text-align:center; max-width:840px; margin:0 auto; }
+  .close h2 { font-size:clamp(40px,5.5vw,72px); font-weight:300; letter-spacing:-0.02em; line-height:1.1; margin-bottom:36px; }
+  .close h2 em { font-family:'Cormorant Garamond',serif; font-style:italic; color:#BADDE9; }
+
+  footer { padding:48px 40px; border-top:1px dashed rgba(255,255,255,0.08); display:flex; align-items:center; gap:24px; flex-wrap:wrap; font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.08em; color:rgba(255,255,255,0.42); }
+  footer .spacer { flex:1; }
+  footer a { color:rgba(255,255,255,0.62); text-decoration:none; }
+  footer a:hover { color:#BADDE9; }
+
+  @media (max-width:900px) {
+    .nt-row, .honest-grid { grid-template-columns:1fr; }
+    .nt-cell.not { border-right:none; border-bottom:1px dashed rgba(255,255,255,0.10); }
+    .does-item { grid-template-columns:1fr; gap:14px; }
+    section { padding:64px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="stage-badge">V5 · Anti-pitch · inversion of the SaaS norm</div>
+
+<nav class="top">
+  <div class="brand">CelesteOS</div>
+  <a href="#what-it-is">What it is</a>
+  <a href="#what-it-does">What it does</a>
+  <a href="#pricing">Pricing</a>
+  <a href="#contact">Contact</a>
+</nav>
+
+<section class="hero">
+  <div class="eyebrow">Pilot programme · 2026</div>
+  <h1>
+    CelesteOS <span class="strike">replaces your PMS</span> sits alongside it.<br>
+    CelesteOS <span class="strike">predicts your insurance premium</span> writes <em>your handover.</em><br>
+    CelesteOS <span class="strike">scores your boat</span> answers <em>one question at a time.</em>
+  </h1>
+</section>
+
+<section class="not-table" id="what-it-is">
+
+  <div class="nt-row">
+    <div class="nt-cell not">
+      <h3>A new PMS.</h3>
+      <p>Your existing PMS (IDEA, Seahub, ShipManager, smartPAL, MXSuite) keeps its class society approvals, its workflows, and the management company's stack.</p>
+    </div>
+    <div class="nt-cell is">
+      <h3>A handover engine that sits <em>alongside</em> what's already installed.</h3>
+      <p>CelesteOS indexes what your PMS produces — alongside your manuals, emails, work orders, faults, parts, certificates, and notes. Nothing to replace. Nothing to migrate. Nothing to re-certify with class.</p>
+    </div>
+  </div>
+
+  <div class="nt-row">
+    <div class="nt-cell not">
+      <h3>A receipts product.</h3>
+      <p>We are not selling immutable cryptographic proof as a feature, a pitch, or a CTA. It exists in the substrate; it is not the conversation.</p>
+    </div>
+    <div class="nt-cell is">
+      <h3>A way to write the handover at 1am <em>and have it linked to its source.</em></h3>
+      <p>The structured handover that comes back has the fault, the work order, the parts, the manual page, the email behind every claim. Editable until you sign. Sealed after — because that's how records work, not because we're selling sealing.</p>
+    </div>
+  </div>
+
+  <div class="nt-row">
+    <div class="nt-cell not">
+      <h3>An insurance product, a score, or an underwriting data feed.</h3>
+      <p>Operational data captured by CelesteOS is the vessel's. Not for sale, not piped to underwriters, not used to re-rate the boat against itself. If that ever changes, it will be a separate, consented, opt-in product. Not this one.</p>
+    </div>
+    <div class="nt-cell is">
+      <h3>A working memory for the vessel <em>that travels with the vessel.</em></h3>
+      <p>Every fault, work order, handover, and linked document is exportable on request in standard formats. A documented escrow arrangement ensures continuity if CelesteOS the company ceases. The vessel's data leaves with the vessel.</p>
+    </div>
+  </div>
+
+  <div class="nt-row">
+    <div class="nt-cell not">
+      <h3>An autopilot.</h3>
+      <p>Nothing files itself. Nothing auto-sends. Nothing auto-asserts what the boat did. The crew remains the source of truth and the system of decision.</p>
+    </div>
+    <div class="nt-cell is">
+      <h3>A drafting engine, cited, <em>and yours to confirm.</em></h3>
+      <p>Every output is a draft, attached to the citation. The crew reads, decides, signs. CelesteOS records what was decided — not what it would have decided.</p>
+    </div>
+  </div>
+
+</section>
+
+<section class="plain-truth">
+  <div class="inner">
+    <div class="label">The painkiller, said plainly</div>
+    <h2>The handover the boat <em>writes for itself.</em></h2>
+    <p>Last night of swing. Three pages of rough notes. Drop them in. CelesteOS returns a structured, survey-ready handover by the time you're off the boat.</p>
+    <p>The incoming engineer inherits context, not chaos.</p>
+  </div>
+</section>
+
+<section class="does" id="what-it-does">
+  <div class="label">(02) What it does</div>
+  <h2>Five missions. <em>Every one cited.</em></h2>
+  <p class="lede">Same engine as the handover — pointed at the moments where money quietly leaves the boat.</p>
+
+  <div class="does-list">
+    <div class="does-item">
+      <div class="num"></div>
+      <div>
+        <h3>Money about to be spent.</h3>
+        <p>Items still under manufacturer warranty surface the moment a fault is raised against them — with a forward-ready claim pack: fault history, photos, work order, cited warranty clause. You forward. The supplier pays.</p>
+      </div>
+    </div>
+    <div class="does-item">
+      <div class="num"></div>
+      <div>
+        <h3>Certificates before they expire.</h3>
+        <p>Survey 60 days out. CelesteOS gathers every certificate the surveyor will ask for — and flags the three that expire inside the window — into one signed bundle.</p>
+      </div>
+    </div>
+    <div class="does-item">
+      <div class="num"></div>
+      <div>
+        <h3>Discrepancies on the dock.</h3>
+        <p>A photo of the packing list goes in. Matched PO lines, the inventory delta, and a drafted discrepancy email come out. The shipment goes back before it's signed for.</p>
+      </div>
+    </div>
+    <div class="does-item">
+      <div class="num"></div>
+      <div>
+        <h3>Faults already diagnosed.</h3>
+        <p>The same fault, on the same equipment, three rotations ago. The diagnosis is in the record. CelesteOS surfaces it before the marine technician's callout is booked.</p>
+      </div>
+    </div>
+    <div class="does-item">
+      <div class="num"></div>
+      <div>
+        <h3>Answers across email and manuals.</h3>
+        <p>"Which generator setting did the manufacturer recommend after last summer's overheating?" — answered, with the email thread and the manual page beside the answer.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="coverage-callout">
+    Every search above is a <em>draft</em>, not an action. You read the citation; you decide; CelesteOS records what you decided. It never auto-files, auto-sends, or auto-asserts.
+  </div>
+</section>
+
+<section class="honest-band">
+  <div class="label">The boring honest part</div>
+  <h2>Things the buyer will ask, <em>answered upfront.</em></h2>
+  <div class="honest-grid">
+    <div class="honest-item">
+      <div class="ttl">Continuity</div>
+      <h4>"What happens if you get hit by a bus?"</h4>
+      <p>Customer data exports — every fault, work order, handover, and linked document — are produced on request in standard formats. A documented escrow arrangement ensures continuity if CelesteOS ceases. The vessel's data leaves with the vessel.</p>
+    </div>
+    <div class="honest-item">
+      <div class="ttl">Coexistence</div>
+      <h4>"Do we rip out IDEA?"</h4>
+      <p>No. Your existing PMS keeps its class approvals, workflows, and crew familiarity. CelesteOS sits alongside, indexes what it produces, and adds the handover and search surfaces on top.</p>
+    </div>
+    <div class="honest-item">
+      <div class="ttl">Liability</div>
+      <h4>"What is signed and what is sealed?"</h4>
+      <p>The handover is editable until the departing officer signs. After that, the record holds in the order it happened, attributed, and yours to export. CelesteOS does not adjudicate, does not auto-file, does not auto-send.</p>
+    </div>
+    <div class="honest-item">
+      <div class="ttl">Frameworks</div>
+      <h4>"What about GDPR / SOC-2 / ISM?"</h4>
+      <p>GDPR-aligned (EU data processed in the US under SCCs and UK IDTA). SOC-2 controls built against AICPA TSC; audit not yet commissioned. ISM Code Sections 10 and 11. We don't claim certifications we don't hold. <a href="/trust" style="color:#BADDE9; text-decoration:none;">Full mapping →</a></p>
+    </div>
+  </div>
+</section>
+
+<section class="pricing" id="pricing">
+  <div class="label">The pilot</div>
+  <div class="price-row">
+    <div class="price">$450</div>
+  </div>
+  <div class="unit">per 28 days · per vessel</div>
+  <p class="desc" style="margin-top:32px;">Unlimited seats. No per-module tiering. One vessel at a time. Onboarded in hours, not weeks. For teams who intend to use CelesteOS as the work surface.</p>
+  <a class="btn" href="mailto:contact@celeste7.ai?subject=Pilot%20access">Request pilot access ↗</a>
+</section>
+
+<section class="close" id="contact">
+  <h2>If this describes your vessel, <em>the next handover writes itself.</em></h2>
+  <a class="btn" href="mailto:contact@celeste7.ai">contact@celeste7.ai</a>
+</section>
+
+<footer>
+  <span>CelesteOS · celeste7.ai</span>
+  <span class="spacer"></span>
+  <a href="/trust">Trust</a>
+  <a href="/privacy-policy">Privacy</a>
+  <a href="/sources">Sources</a>
+  <a href="https://verifier.celeste7.ai" target="_blank" rel="noopener">Verifier</a>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>V3 · Mission catalog (Linear / Stripe style) — CelesteOS reframe</title>
+<meta name="description" content="One question. Every record on the boat. CelesteOS writes the next handover, finds money already covered, surfaces every fault the boat has seen before.">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&family=Cormorant+Garamond:ital,wght@1,400&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after { margin:0; padding:0; box-sizing:border-box; }
+  html, body { font-family:'Inter',-apple-system,sans-serif; background:#0A0A0A; color:rgba(255,255,255,0.92); -webkit-font-smoothing:antialiased; }
+  body { min-height:100vh; line-height:1.5; }
+  .stage-badge {
+    position:fixed; top:14px; left:14px;
+    font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.14em; text-transform:uppercase;
+    color:rgba(186,221,233,0.62);
+    background:rgba(0,0,0,0.7); padding:6px 10px; border:1px solid rgba(186,221,233,0.32); border-radius:2px;
+    z-index:100;
+  }
+
+  nav.top {
+    position:sticky; top:0; z-index:50;
+    padding:18px 32px;
+    background:rgba(10,10,10,0.86); backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
+    border-bottom:1px solid rgba(255,255,255,0.06);
+    display:flex; align-items:center; gap:24px;
+  }
+  nav.top .brand { font-size:14px; font-weight:600; letter-spacing:0.01em; margin-right:auto; }
+  nav.top a {
+    font-size:13px; letter-spacing:0;
+    color:rgba(255,255,255,0.62); text-decoration:none;
+  }
+  nav.top a:hover { color:#fff; }
+  nav.top .cta {
+    padding:8px 16px; background:#BADDE9; color:#0A0A0A; border-radius:6px; font-weight:500;
+  }
+  nav.top .cta:hover { background:#fff; }
+
+  /* Hero */
+  section.hero { padding:96px 32px 64px; max-width:1200px; margin:0 auto; text-align:center; }
+  .eyebrow {
+    display:inline-block;
+    padding:6px 14px; border:1px solid rgba(186,221,233,0.32); border-radius:100px;
+    font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.12em; text-transform:uppercase;
+    color:#BADDE9;
+    margin-bottom:32px;
+  }
+  h1.mega {
+    font-size:clamp(48px,7vw,96px); font-weight:300; letter-spacing:-0.025em; line-height:1.0;
+    max-width:900px; margin:0 auto 32px;
+  }
+  h1.mega em { font-family:'Cormorant Garamond',serif; font-style:italic; color:#BADDE9; font-weight:400; }
+  .hero-sub {
+    font-size:19px; line-height:1.55; color:rgba(255,255,255,0.74);
+    max-width:640px; margin:0 auto 40px;
+  }
+  .hero-ctas { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-bottom:64px; }
+  .btn {
+    padding:14px 22px; border-radius:6px; font-size:14px; font-weight:500;
+    text-decoration:none; display:inline-flex; align-items:center; gap:8px;
+  }
+  .btn.primary { background:#BADDE9; color:#0A0A0A; }
+  .btn.primary:hover { background:#fff; }
+  .btn.ghost { color:#fff; border:1px solid rgba(255,255,255,0.16); }
+  .btn.ghost:hover { border-color:#BADDE9; color:#BADDE9; }
+
+  .hero-tile-row {
+    display:grid; grid-template-columns:repeat(4,1fr); gap:16px;
+    max-width:1100px; margin:0 auto;
+  }
+  .hero-tile {
+    padding:18px; border:1px solid rgba(255,255,255,0.08); border-radius:8px;
+    background:linear-gradient(180deg,rgba(186,221,233,0.04) 0%,rgba(186,221,233,0) 100%);
+    text-align:left;
+  }
+  .hero-tile .icon {
+    font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.14em; text-transform:uppercase;
+    color:#BADDE9; margin-bottom:8px;
+  }
+  .hero-tile .v { font-size:22px; font-weight:300; letter-spacing:-0.01em; margin-bottom:4px; }
+  .hero-tile .l { font-size:12px; color:rgba(255,255,255,0.62); }
+
+  /* Section heading */
+  section.block { padding:96px 32px; max-width:1280px; margin:0 auto; }
+  .sec-label {
+    font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.16em; text-transform:uppercase;
+    color:#BADDE9; margin-bottom:16px;
+  }
+  h2.section-h {
+    font-size:clamp(40px,5vw,68px); font-weight:300; letter-spacing:-0.02em; line-height:1.05;
+    max-width:760px; margin-bottom:24px;
+  }
+  h2.section-h em { font-family:'Cormorant Garamond',serif; font-style:italic; color:#BADDE9; }
+  .section-lede { font-size:18px; line-height:1.6; color:rgba(255,255,255,0.7); max-width:640px; margin-bottom:64px; }
+
+  /* Big painkiller card */
+  .painkiller-card {
+    display:grid; grid-template-columns:1.2fr 1fr; gap:0;
+    background:linear-gradient(180deg,rgba(186,221,233,0.06) 0%,rgba(186,221,233,0.02) 100%);
+    border:1px solid rgba(186,221,233,0.24); border-radius:12px;
+    overflow:hidden;
+    margin-bottom:32px;
+  }
+  .painkiller-card .text { padding:48px; }
+  .painkiller-card .text .label {
+    font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.14em; text-transform:uppercase;
+    color:#BADDE9; margin-bottom:14px;
+  }
+  .painkiller-card .text h3 { font-size:36px; font-weight:400; line-height:1.15; letter-spacing:-0.015em; margin-bottom:18px; }
+  .painkiller-card .text h3 em { font-family:'Cormorant Garamond',serif; font-style:italic; color:#BADDE9; }
+  .painkiller-card .text p { font-size:15px; line-height:1.65; color:rgba(255,255,255,0.78); margin-bottom:14px; }
+  .painkiller-card .visual {
+    padding:48px; background:linear-gradient(135deg,#141414 0%,#0c0c0c 100%);
+    border-left:1px solid rgba(255,255,255,0.06);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .painkiller-card .doc {
+    background:#fff; color:#1A2332;
+    border-radius:4px; padding:24px; width:100%; max-width:280px;
+    box-shadow:0 24px 60px rgba(0,0,0,0.5);
+    font-size:11px;
+  }
+  .painkiller-card .doc .h {
+    font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:0.12em; text-transform:uppercase;
+    color:#2B7BA3; margin-bottom:10px;
+  }
+  .painkiller-card .doc .title { font-size:14px; font-weight:700; text-transform:uppercase; letter-spacing:0.04em; margin-bottom:8px; }
+  .painkiller-card .doc .sub { color:#4A5568; margin-bottom:12px; font-size:10px; }
+  .painkiller-card .doc .rule { height:1px; background:#2B7BA3; width:32px; margin-bottom:10px; }
+  .painkiller-card .doc .line { display:flex; justify-content:space-between; font-family:'IBM Plex Mono',monospace; font-size:9px; padding:4px 0; border-bottom:1px solid rgba(0,0,0,0.06); }
+  .painkiller-card .doc .line:last-child { border:none; }
+  .painkiller-card .doc .line .k { color:#8896A6; text-transform:uppercase; letter-spacing:0.04em; }
+
+  /* Mission tile grid */
+  .mission-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+  .mission-card {
+    padding:32px;
+    background:rgba(255,255,255,0.025);
+    border:1px solid rgba(255,255,255,0.08); border-radius:10px;
+    display:flex; flex-direction:column; gap:14px;
+    transition:border-color 200ms, background 200ms;
+  }
+  .mission-card:hover { border-color:rgba(186,221,233,0.4); background:rgba(186,221,233,0.04); }
+  .mission-card .badge {
+    width:36px; height:36px; border-radius:8px;
+    background:rgba(186,221,233,0.16); border:1px solid rgba(186,221,233,0.32);
+    display:inline-flex; align-items:center; justify-content:center;
+    color:#BADDE9; font-size:16px;
+  }
+  .mission-card h4 { font-size:18px; font-weight:500; letter-spacing:-0.005em; line-height:1.3; }
+  .mission-card p { font-size:14px; line-height:1.6; color:rgba(255,255,255,0.66); }
+  .mission-card .tag {
+    font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.12em; text-transform:uppercase;
+    color:rgba(186,221,233,0.74); margin-top:auto; padding-top:14px; border-top:1px solid rgba(255,255,255,0.06);
+  }
+
+  /* Coverage rule */
+  .coverage-rule {
+    margin-top:48px; padding:28px 36px;
+    background:rgba(186,221,233,0.04);
+    border:1px solid rgba(186,221,233,0.16); border-radius:8px;
+    font-size:15px; line-height:1.65; color:rgba(255,255,255,0.82); max-width:760px;
+  }
+  .coverage-rule em { font-family:'Cormorant Garamond',serif; font-style:italic; color:#BADDE9; }
+
+  /* Positioning band */
+  .positioning {
+    background:linear-gradient(135deg,#0c0c0c 0%,#0A0A0A 100%);
+    border-top:1px solid rgba(255,255,255,0.06); border-bottom:1px solid rgba(255,255,255,0.06);
+    padding:96px 32px; text-align:center;
+  }
+  .positioning .inner { max-width:780px; margin:0 auto; }
+  .positioning h2 { font-size:clamp(32px,4vw,52px); font-weight:300; letter-spacing:-0.015em; line-height:1.15; margin-bottom:24px; }
+  .positioning h2 em { font-family:'Cormorant Garamond',serif; font-style:italic; color:#BADDE9; }
+  .positioning p { font-size:15px; line-height:1.7; color:rgba(255,255,255,0.7); margin-bottom:14px; }
+
+  /* Continuity + Trust */
+  .two-col { display:grid; grid-template-columns:1fr 1fr; gap:32px; }
+  .info-card {
+    padding:36px;
+    border:1px solid rgba(255,255,255,0.08); border-radius:8px;
+    background:rgba(255,255,255,0.02);
+  }
+  .info-card .tag {
+    font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.14em; text-transform:uppercase;
+    color:#BADDE9; margin-bottom:14px;
+  }
+  .info-card h3 { font-size:22px; font-weight:400; margin-bottom:16px; }
+  .info-card p { font-size:14px; line-height:1.7; color:rgba(255,255,255,0.72); }
+
+  /* Pricing card */
+  .pricing-block { display:flex; justify-content:center; padding:96px 32px; }
+  .pricing-card {
+    width:100%; max-width:760px;
+    padding:48px; border-radius:12px;
+    background:linear-gradient(180deg,rgba(186,221,233,0.06) 0%,rgba(186,221,233,0.02) 100%);
+    border:1px solid rgba(186,221,233,0.24);
+    text-align:center;
+  }
+  .pricing-card .tag { font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.16em; text-transform:uppercase; color:#BADDE9; margin-bottom:18px; }
+  .pricing-card .price { font-size:clamp(96px,12vw,168px); font-weight:200; line-height:0.9; letter-spacing:-0.025em; color:#fff; }
+  .pricing-card .unit { font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.22em; text-transform:uppercase; color:rgba(255,255,255,0.5); margin-top:14px; margin-bottom:28px; }
+  .pricing-card .desc { font-size:16px; line-height:1.65; color:rgba(255,255,255,0.8); margin-bottom:14px; }
+  .pricing-card .qual { font-size:13px; color:rgba(255,255,255,0.55); margin-bottom:32px; max-width:520px; margin-left:auto; margin-right:auto; }
+
+  /* Close */
+  .close { padding:96px 32px; text-align:center; max-width:880px; margin:0 auto; }
+  .close h2 { font-size:clamp(40px,5.5vw,72px); font-weight:300; letter-spacing:-0.02em; line-height:1.1; margin-bottom:32px; }
+  .close h2 em { font-family:'Cormorant Garamond',serif; font-style:italic; color:#BADDE9; }
+
+  footer { padding:48px 32px; border-top:1px solid rgba(255,255,255,0.06); display:flex; gap:24px; flex-wrap:wrap; align-items:center; font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.08em; color:rgba(255,255,255,0.42); }
+  footer .spacer { flex:1; }
+  footer a { color:rgba(255,255,255,0.62); text-decoration:none; }
+  footer a:hover { color:#BADDE9; }
+
+  @media (max-width:900px) {
+    .hero-tile-row, .mission-grid, .two-col { grid-template-columns:1fr; }
+    .painkiller-card { grid-template-columns:1fr; }
+    .painkiller-card .visual { border-left:none; border-top:1px solid rgba(255,255,255,0.06); }
+    section.block { padding:64px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="stage-badge">V3 · Mission catalog · Linear / Stripe style</div>
+
+<nav class="top">
+  <div class="brand">CelesteOS</div>
+  <a href="#painkiller">Handover</a>
+  <a href="#missions">What it does</a>
+  <a href="#positioning">PMS</a>
+  <a href="#pricing">Pricing</a>
+  <a class="cta" href="#pricing">Request pilot</a>
+</nav>
+
+<section class="hero">
+  <span class="eyebrow">Pilot programme · 2026</span>
+  <h1 class="mega">One question. <em>Every record on the boat.</em></h1>
+  <p class="hero-sub">CelesteOS keeps the vessel's operational knowledge in the vessel — so the next handover writes itself, and every search across it answers in seconds.</p>
+  <div class="hero-ctas">
+    <a class="btn primary" href="#pricing">Request pilot access ↗</a>
+    <a class="btn ghost" href="#painkiller">See how it works ↗</a>
+  </div>
+
+  <div class="hero-tile-row">
+    <div class="hero-tile">
+      <div class="icon">Onboarding</div>
+      <div class="v">15 minutes</div>
+      <div class="l">Searchable by morning.</div>
+    </div>
+    <div class="hero-tile">
+      <div class="icon">Pricing</div>
+      <div class="v">$450 / 28d</div>
+      <div class="l">Per vessel, not per user.</div>
+    </div>
+    <div class="hero-tile">
+      <div class="icon">Coexistence</div>
+      <div class="v">Alongside</div>
+      <div class="l">Your existing PMS keeps running.</div>
+    </div>
+    <div class="hero-tile">
+      <div class="icon">Continuity</div>
+      <div class="v">Export ready</div>
+      <div class="l">Your data is yours, on demand.</div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="painkiller">
+  <div class="sec-label">(01) The painkiller</div>
+  <h2 class="section-h">The handover the boat <em>writes for itself.</em></h2>
+  <p class="section-lede">Drop your rough notes from the last week. CelesteOS returns a structured handover linked to the source of every claim. Editable up to sign-off. Sealed after.</p>
+
+  <div class="painkiller-card">
+    <div class="text">
+      <div class="label">Use case · 03:00, last night of swing</div>
+      <h3>1am rough notes in. <em>Survey-ready handover out.</em></h3>
+      <p>You're tired. The replacement boards in 36 hours. Last summer's heat-exchanger story is in three places — your notebook, an email thread, and the manufacturer's reply. CelesteOS pulls the thread.</p>
+      <p>Linked to the source record of every item. Editable until you sign. Sealed after.</p>
+    </div>
+    <div class="visual">
+      <div class="doc">
+        <div class="h">CelesteOS · Handover · M/Y Celeste</div>
+        <div class="title">Technical Handover Report</div>
+        <div class="sub">M/Y Celeste · 52m · 14 March 2026</div>
+        <div class="rule"></div>
+        <div class="line"><span class="k">Period</span><span>14 Sep → 14 Mar</span></div>
+        <div class="line"><span class="k">Sections</span><span>12 of 12</span></div>
+        <div class="line"><span class="k">Records</span><span>147 linked</span></div>
+        <div class="line"><span class="k">Outgoing</span><span>M. Torres</span></div>
+        <div class="line"><span class="k">Incoming</span><span>R. Lindqvist</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="missions">
+  <div class="sec-label">(02) The searches it runs without being asked</div>
+  <h2 class="section-h">Five missions. <em>Every one cited.</em></h2>
+  <p class="section-lede">Same engine as the handover — pointed at the moments where money quietly leaves the boat.</p>
+
+  <div class="mission-grid">
+    <div class="mission-card">
+      <div class="badge">$</div>
+      <h4>Money about to be spent.</h4>
+      <p>Items still under manufacturer warranty surface the moment a fault is raised against them — with a forward-ready claim pack. You forward. The supplier pays.</p>
+      <div class="tag">Warranty engine</div>
+    </div>
+    <div class="mission-card">
+      <div class="badge">✓</div>
+      <h4>Certificates before they expire.</h4>
+      <p>Survey 60 days out. CelesteOS gathers every certificate the surveyor will ask for — and flags the three that expire inside the window.</p>
+      <div class="tag">Survey window</div>
+    </div>
+    <div class="mission-card">
+      <div class="badge">▢</div>
+      <h4>Discrepancies on the dock.</h4>
+      <p>A photo of the packing list goes in. Matched PO lines, the inventory delta, and a drafted discrepancy email come out. The shipment goes back before it's signed for.</p>
+      <div class="tag">Receiving OCR</div>
+    </div>
+    <div class="mission-card">
+      <div class="badge">⚠</div>
+      <h4>Faults already diagnosed.</h4>
+      <p>The same fault, on the same equipment, three rotations ago. The diagnosis is in the record. CelesteOS surfaces it before the marine technician's callout is booked.</p>
+      <div class="tag">Repeat-fault</div>
+    </div>
+    <div class="mission-card">
+      <div class="badge">?</div>
+      <h4>Answers across email and manuals.</h4>
+      <p>"Which generator setting did the manufacturer recommend after last summer's overheating?" Answered, with the email thread and the manual page beside the answer.</p>
+      <div class="tag">Cross-domain</div>
+    </div>
+    <div class="mission-card" style="background:transparent; border-style:dashed;">
+      <div class="badge" style="background:transparent; border-style:dashed;">+</div>
+      <h4>And anything else you teach it.</h4>
+      <p>Every operation has its own rhythm. The engine learns the questions your boat asks most often — and turns each one into a search it can run on the next rotation.</p>
+      <div class="tag">Custom missions · Q3 2026</div>
+    </div>
+  </div>
+
+  <div class="coverage-rule">
+    Every search above is a <em>draft</em>, not an action. You read the citation; you decide; CelesteOS records what you decided. It never auto-files, auto-sends, or auto-asserts.
+  </div>
+</section>
+
+<section class="positioning" id="positioning">
+  <div class="inner">
+    <div class="sec-label" style="display:inline-block;">Positioning</div>
+    <h2>CelesteOS does <em>not</em> replace your PMS.</h2>
+    <p>Your existing PMS — Seahub, ShipManager, IDEA, smartPAL, MXSuite, or otherwise — keeps its class society approvals, its workflows, and its crew familiarity. CelesteOS indexes everything it produces, alongside your manuals, emails, work orders, and notes.</p>
+    <p>Lower switching cost. Lower implementation risk. Higher operational continuity.</p>
+  </div>
+</section>
+
+<section class="block">
+  <div class="two-col">
+    <div class="info-card">
+      <div class="tag">Continuity &amp; portability</div>
+      <h3>The vessel's data is the vessel's data.</h3>
+      <p>CelesteOS holds the vessel's record in a documented format. Every fault, work order, handover, and linked document is exportable on demand in standard formats (CSV, PDF, signed JSON). A documented escrow arrangement ensures continuity if CelesteOS the company ceases to operate. The vessel's data leaves with the vessel.</p>
+    </div>
+    <div class="info-card">
+      <div class="tag">Trust · GDPR / SOC-2 / ISM</div>
+      <h3>Aligned with the frameworks that matter.</h3>
+      <p>GDPR-aligned (EU data processed in the US under SCCs and UK IDTA). SOC-2 controls built against AICPA TSC. ISM Code Sections 10 and 11. Honest hedge phrasing — no certification we don't hold. <a href="/trust" style="color:#BADDE9; text-decoration:none;">Full mapping →</a></p>
+    </div>
+  </div>
+</section>
+
+<div class="pricing-block" id="pricing">
+  <div class="pricing-card">
+    <div class="tag">The pilot</div>
+    <div class="price">$450</div>
+    <div class="unit">per 28 days</div>
+    <div class="desc">Unlimited seats. No per-module tiering. Per vessel, not per user.</div>
+    <p class="qual">One vessel at a time. Onboarded in hours, not weeks. For teams who intend to use CelesteOS as the work surface.</p>
+    <a class="btn primary" href="mailto:contact@celeste7.ai?subject=Pilot%20access">Request pilot access ↗</a>
+  </div>
+</div>
+
+<section class="close">
+  <h2>If this describes your vessel, <em>the next handover writes itself.</em></h2>
+  <a class="btn primary" href="mailto:contact@celeste7.ai">contact@celeste7.ai</a>
+</section>
+
+<footer>
+  <span>CelesteOS · celeste7.ai</span>
+  <span class="spacer"></span>
+  <a href="/trust">Trust</a>
+  <a href="/privacy-policy">Privacy</a>
+  <a href="/sources">Sources</a>
+  <a href="https://verifier.celeste7.ai" target="_blank" rel="noopener">Verifier</a>
+</footer>
+
+</body>
+</html>
