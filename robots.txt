@@ -7,3 +7,6 @@ Disallow: /README.md
 Disallow: /design-studio/
 
 Sitemap: https://celeste7.ai/sitemap.xml
+
+# LLM Discovery
+# llms.txt: https://celeste7.ai/llms.txt
