@@ -30,6 +30,15 @@
           "value": "noindex"
         }
       ]
+    },
+    {
+      "source": "/prototypes/(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex"
+        }
+      ]
     }
   ],
   "redirects": [
@@ -49,6 +58,16 @@
     { "source": "/competitor-playbook-step-1", "destination": "/410.html", "statusCode": 410 },
     { "source": "/bio-optimiser", "destination": "/410.html", "statusCode": 410 },
     { "source": "/e-learning", "destination": "/410.html", "statusCode": 410 },
+    { "source": "/prototypes/handover-export", "destination": "/410.html", "statusCode": 410 },
+    { "source": "/prototypes/handover-export.html", "destination": "/410.html", "statusCode": 410 },
+    { "source": "/prototypes/lens-email", "destination": "/410.html", "statusCode": 410 },
+    { "source": "/prototypes/lens-email.html", "destination": "/410.html", "statusCode": 410 },
+    { "source": "/prototypes/lens-handover", "destination": "/410.html", "statusCode": 410 },
+    { "source": "/prototypes/lens-handover.html", "destination": "/410.html", "statusCode": 410 },
+    { "source": "/prototypes/lens-work-order", "destination": "/410.html", "statusCode": 410 },
+    { "source": "/prototypes/lens-work-order.html", "destination": "/410.html", "statusCode": 410 },
+    { "source": "/prototypes/show-related", "destination": "/410.html", "statusCode": 410 },
+    { "source": "/prototypes/show-related.html", "destination": "/410.html", "statusCode": 410 },
     { "source": "/privacy", "destination": "/privacy-policy", "permanent": true }
   ]
 }
