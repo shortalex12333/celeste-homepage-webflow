@@ -93,6 +93,12 @@ Every mock on the page traces its visual signature to a real Cloud_PMS prototype
 
 **Token bridge:** prototype `--mark` / `--teal` / `--surface` / `--txt` / `--txt2` → landing `var(--_colors---accent)` / `var(--_colors---text-color)` / `var(--_colors---surface)` / `var(--_colors---color-7)` / `var(--_colors---color-5)`. New page-local tokens `--lp-*` defined on `.lp-main` and overridden under `.dark-mode .lp-main`.
 
+**Typography (all four canonical fonts):**
+- **Eloquia Display** — headlines (`.lp-hero-title`, `.lp-h2`, `.lp-step-title`, `.lp-mock-doc-title`, etc.) — self-hosted woff2 in `/fonts/`
+- **DM Sans** — body copy, captions, mock content — Google Fonts via `WebFont.load`
+- **IBM Plex Mono** — system voice: eyebrows, mono IDs, timestamps, pill labels — Google Fonts
+- **Cormorant Garamond italic** — accent type for `<em>` inside headlines (loaded via WebFont.load, tokenized as `--lp-font-italic`, applied at `landing-v2.css:111,231,441,1270,1325`). Verified live 2026-05-27 against `celeste-brand-typography` brand spec after TIM29 peer cold-check.
+
 ---
 
 ## 6. Known contradictions + flagged decisions
