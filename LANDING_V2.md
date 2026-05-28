@@ -21,7 +21,7 @@ The old homepage treated the page as a luxury advertisement for a known brand. C
 | `js/landing-v2.js` | 58 | IntersectionObserver scroll-reveal for §02 handover-flow steps. Reduced-motion + missing-API bypass. |
 | `LANDING_V2.md` | this | Decision log. |
 | `tests/journeys/landing-v2.spec.js` | 228 | Playwright smoke test. Asserts 14 sections, before/after panels, scroll-reveal in both motion modes, ledger SealMark links, font load, scroll-height band, mobile no-overflow. |
-| `docs/landing-v2-screenshots/` | 2 jpegs | Full-page captures at 1440 + 375 for PR review. |
+| `docs/landing-v2-screenshots/` | 3 jpegs | Full-page captures at 1440 light + 1440 dark + 375 mobile. |
 
 Total: 2,721 LOC. Cardinal Rule 7 (800-LOC atomic cap) governs in-place mutations; this is a single net-new file family for a coherent rewrite. Flagged here so review is not surprised.
 
@@ -121,6 +121,17 @@ Both old `index.html` and new `landing-v2.html` use `id="pricing"`. Not a runtim
 
 ### E · Mobile is not pixel-spec'd
 Spec deliberately scopes out mobile. The new file ships a responsive layout (≤900px collapses before/after to single-column; ≤540px collapses the doc grid). Treated as best-effort; mobile pixel pass is a separate exercise.
+
+### G · "No animations" refusal vs. §02 scroll-reveal
+The Cloud_PMS-side `LANDING_PAGE_COMPONENT_MAP.md` (PR #1269) lists the spec's refusal item as **"Animations (no parallax, fade-ins, scroll-triggers)."** This build has a fade-on-scroll-reveal on §02 handover steps. The CEO explicitly authorized this in-session via AskUserQuestion ("scroll-triggered reveal per step — narrative pacing, not decoration"), framed as Apple-product-page scrollytelling vs. SaaS feature-animation. `prefers-reduced-motion` bypasses it at both JS and CSS layers, so users with that preference see all 5 steps revealed instantly. Documented here so the next reader doesn't read the refusal list literally and tear the reveal out.
+
+### H · Light/dark toggle — verified live 2026-05-27
+The existing `js/celeste-theme.js` toggle (sun/moon button in nav) drives `dark-mode` ↔ `light-mode` class on `<html>` with `localStorage` persistence + system-preference fallback. Verified via Playwright walk on local server:
+- `.lp-main` background: `rgb(250,250,250)` (light) ↔ `rgb(12,11,10)` (dark, `--surface-base`)
+- `.lp-hero-title` color: `rgba(0,0,0,0.87)` ↔ `rgba(255,255,255,0.92)`
+- Accent `--_colors---accent` resolves to `#2B7BA3` (light) / `#5AABCC` (dark)
+- All 14 sections render correctly in both modes — see `docs/landing-v2-screenshots/desktop-1440-dark.jpeg` for the dark capture
+- `localStorage` persists across reload; system `prefers-color-scheme: dark` auto-applies when no user pref saved
 
 ### F · 800 LOC cap deviation
 Measured 2,721 LOC across 7 new files (see §2 for breakdown). Cardinal Rule 7's 800-LOC cap governs **in-place mutations**; a coherent net-new page family is the intended exception. Flagged here so it isn't a surprise on review.
