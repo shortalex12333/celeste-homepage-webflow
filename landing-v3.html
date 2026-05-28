@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html data-wf-page="6989f9a579d759cf0851e0d1" data-wf-site="6989f9a479d759cf0851e04c" lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>CelesteOS — Control over your complexity</title>
+  <meta name="description" content="CelesteOS makes your vessel's manuals, faults, work orders, parts, warranties, certificates, hours of rest, and handover records searchable from one surface. Runs alongside your existing PMS. Onboard in hours.">
+  <meta property="og:title" content="CelesteOS — Control over your complexity">
+  <meta property="og:description" content="Search the vessel like ordering a Starbucks. Handover writes itself. Warranty money you didn't know you had.">
+  <meta property="og:image" content="https://celeste7.ai/images/og-image.png">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="robots" content="noindex,follow">
+  <link rel="canonical" href="https://celeste7.ai/landing-v3">
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+
+  <link href="css/normalize.css" rel="stylesheet" type="text/css">
+  <link href="css/webflow.css" rel="stylesheet" type="text/css">
+  <link href="css/celeste7homepage.webflow.css" rel="stylesheet" type="text/css">
+  <link href="css/hp-tokens.css" rel="stylesheet" type="text/css">
+  <link href="css/hp-animations.css" rel="stylesheet" type="text/css">
+  <link href="css/hp-nav.css" rel="stylesheet" type="text/css">
+
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script>
+  <script type="text/javascript">WebFont.load({google:{families:["DM Sans:300,400,500","IBM Plex Mono:400,500,600","Cormorant Garamond:300,300italic,400,400italic"]}});</script>
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="apple-touch-icon" href="/favicon.png">
+
+  <style>
+    /* WEBFLOW IX OVERRIDE — landing-v3 is a static page with no scroll-driven
+       animations. Webflow's IX engine (driven by data-wf-page="..." on <html>)
+       applies opacity:0 + translateY initial states to .hero-text, .hero-image-
+       wrapper, .pre-about-section, .testi-2/3/4, .benefits-text2/3/4,
+       .benefits-item2/3/4, .logo-mid, .heading-service, .number-service,
+       and waits for scroll-into-view triggers that don't exist on v3 because
+       we stripped the data-w-id attributes. Force-visible everything that
+       lives inside our v3 layout. */
+    #Hero .hero-text, #Hero .hero-texr, #Hero .hero-heading, #Hero .hero-image-wrapper,
+    #Hero .heading, #Hero .text-hero1, #Hero .hero-button, #Hero .proof-list,
+    .v3-section *, .hflow-step, .ba-row, .timeline, .ledger-frame, .single-frame,
+    .pre-about-section, .pre-about-block, .pre-about-text,
+    .logo-mid, .heading-service, .number-service,
+    .benefits-item2, .benefits-item3, .benefits-item4,
+    .benefits-text2, .benefits-text3, .benefits-text4,
+    .testi-2, .testi3, .testi4 {
+      opacity: 1 !important;
+      transform: none !important;
+    }
+
+    /* Eloquia Display — same chain as index.html */
+    @font-face { font-family: 'Eloquia Display'; src: url('fonts/Eloquia-Display-Light.woff2') format('woff2'); font-weight: 300; font-style: normal; font-display: swap; }
+    @font-face { font-family: 'Eloquia Display'; src: url('fonts/Eloquia-Display-Light-Italic.woff2') format('woff2'); font-weight: 300; font-style: italic; font-display: swap; }
+    @font-face { font-family: 'Eloquia Display'; src: url('fonts/Eloquia-Display-Regular.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
+    @font-face { font-family: 'Eloquia Display'; src: url('fonts/Eloquia-Display-Italic.woff2') format('woff2'); font-weight: 400; font-style: italic; font-display: swap; }
+    @font-face { font-family: 'Eloquia Display'; src: url('fonts/Eloquia-Display-Medium.woff2') format('woff2'); font-weight: 500; font-style: normal; font-display: swap; }
+    @font-face { font-family: 'Eloquia Display'; src: url('fonts/Eloquia-Display-Medium-Italic.woff2') format('woff2'); font-weight: 500; font-style: italic; font-display: swap; }
+    .heading em, .cta-heading em, .about-heading em, .heading-service em, .heading--benefits em, .impact-heading em, .footer-heading em {
+      font-family: var(--_size---font-family-accent); font-style: italic; font-weight: 300; color: var(--_colors---accent);
+    }
+    .accent { font-family: var(--_size---font-family-accent); font-style: italic; font-weight: 300; color: var(--_colors---accent); }
+
+    /* MINIMAL section-specific additions — extend, don't replace.
+       Only patterns the existing index.html doesn't already ship. */
+
+    /* §02 handover-flow grid — 5 sequential items, alternates L/R per row */
+    .handover-flow { display: flex; flex-direction: column; gap: 4rem; margin-top: 3rem; }
+    .hflow-step { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+    .hflow-step:nth-child(even) { direction: rtl; }
+    .hflow-step:nth-child(even) > * { direction: ltr; }
+    .hflow-text { padding: 0 1rem; }
+    .hflow-num { font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem; letter-spacing: 0.12em; color: var(--_colors---accent); font-weight: 500; margin-bottom: 0.8rem; text-transform: uppercase; }
+    .hflow-title { font-family: var(--_size---font-family); font-size: clamp(1.4rem, 2vw, 1.9rem); font-weight: 400; line-height: 1.2; color: var(--_colors---text-color); margin-bottom: 0.8rem; letter-spacing: -0.01em; }
+    .hflow-title em { font-family: var(--_size---font-family-accent); font-style: italic; font-weight: 300; color: var(--_colors---accent); }
+    .hflow-cap { font-family: var(--_size---font-family); font-size: 1rem; line-height: 1.6; color: var(--_colors---color-7); max-width: 36ch; }
+    .hflow-frame { border-radius: 12px; overflow: hidden; box-shadow: 0 8px 32px rgba(0,0,0,0.08); border: 1px solid rgba(0,0,0,0.06); background: var(--_colors---surface); }
+    .hflow-frame iframe { display: block; width: 100%; border: 0; }
+    .dark-mode .hflow-frame { box-shadow: 0 8px 32px rgba(0,0,0,0.35); border-color: rgba(255,255,255,0.06); }
+    @media (max-width: 800px) { .hflow-step, .hflow-step:nth-child(even) { grid-template-columns: 1fr; direction: ltr; } }
+
+    /* §03 / §05 / §06 before/after split */
+    .ba-row { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2.4rem; }
+    .ba-panel { padding: 1.6rem; background: rgba(0,0,0,0.02); border: 1px solid rgba(0,0,0,0.06); border-radius: 14px; display: flex; flex-direction: column; min-width: 0; }
+    .dark-mode .ba-panel { background: rgba(255,255,255,0.025); border-color: rgba(255,255,255,0.07); }
+    .ba-lbl { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--_colors---color-4); font-weight: 600; margin-bottom: 1rem; }
+    .ba-panel.after .ba-lbl { color: var(--_colors---accent); }
+    .ba-cap { font-family: var(--_size---font-family); font-size: 0.88rem; color: var(--_colors---color-5); margin-top: 1rem; line-height: 1.55; }
+    .ba-frame { border-radius: 8px; overflow: hidden; flex: 1; min-height: 240px; background: #FAF8F5; }
+    .dark-mode .ba-frame { background: #181614; }
+    .ba-frame iframe { display: block; width: 100%; height: 100%; min-height: 240px; border: 0; }
+    @media (max-width: 800px) { .ba-row { grid-template-columns: 1fr; } }
+
+    /* §03 "before" — six scattered sources */
+    .scatter { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; padding: 1rem 0; }
+    .scatter-tile { aspect-ratio: 1.4 / 1; background: var(--_colors---surface); border: 1px dashed rgba(0,0,0,0.12); border-radius: 6px; padding: 0.6rem; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 0.3rem; text-align: center; }
+    .dark-mode .scatter-tile { border-color: rgba(255,255,255,0.1); }
+    .scatter-ico { font-size: 1.2rem; opacity: 0.55; }
+    .scatter-lbl { font-family: 'DM Sans', sans-serif; font-size: 0.7rem; line-height: 1.3; color: var(--_colors---color-5); font-weight: 500; }
+    .scatter-tile.gone { opacity: 0.5; }
+    .scatter-tile.gone .scatter-ico { text-decoration: line-through; }
+
+    /* §05 "before" — invoice card */
+    .invoice { padding: 1.1rem; background: var(--_colors---surface); border: 1px solid rgba(0,0,0,0.07); border-radius: 8px; }
+    .dark-mode .invoice { border-color: rgba(255,255,255,0.07); }
+    .invoice-hdr { display: flex; justify-content: space-between; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(0,0,0,0.05); margin-bottom: 0.6rem; }
+    .dark-mode .invoice-hdr { border-bottom-color: rgba(255,255,255,0.05); }
+    .invoice-mono { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--_colors---color-4); }
+    .invoice-vendor { font-size: 0.92rem; font-weight: 500; color: var(--_colors---text-color); margin-top: 0.2rem; }
+    .invoice-amt { font-family: 'IBM Plex Mono', monospace; font-size: 1.4rem; font-weight: 500; color: var(--_colors---text-color); line-height: 1; }
+    .invoice-line { display: flex; justify-content: space-between; padding: 0.4rem 0; font-size: 0.8rem; color: var(--_colors---color-7); border-bottom: 1px solid rgba(0,0,0,0.04); }
+    .dark-mode .invoice-line { border-bottom-color: rgba(255,255,255,0.04); }
+    .invoice-line:last-of-type { border-bottom: 0; }
+    .invoice-line .mono { font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem; }
+    .invoice-foot { font-size: 0.75rem; font-style: italic; color: var(--_colors---color-5); padding-top: 0.6rem; border-top: 1px solid rgba(0,0,0,0.05); margin-top: 0.4rem; }
+    .dark-mode .invoice-foot { border-top-color: rgba(255,255,255,0.05); }
+
+    /* §06 "before" — delivery note */
+    .delivery { padding: 1.1rem; background: var(--_colors---surface); border: 1px solid rgba(0,0,0,0.07); border-radius: 8px; }
+    .dark-mode .delivery { border-color: rgba(255,255,255,0.07); }
+    .delivery-h { font-size: 0.92rem; font-weight: 500; color: var(--_colors---text-color); margin: 0.2rem 0 0.6rem; }
+    .delivery-list { list-style: none; padding: 0; margin: 0 0 0.6rem; }
+    .delivery-list li { font-size: 0.82rem; color: var(--_colors---color-7); padding: 0.35rem 0; border-bottom: 1px solid rgba(0,0,0,0.04); }
+    .dark-mode .delivery-list li { border-bottom-color: rgba(255,255,255,0.04); }
+    .delivery-list li:last-child { border-bottom: 0; }
+    .delivery-sig { font-size: 0.78rem; color: var(--_colors---color-5); padding-top: 0.5rem; border-top: 1px solid rgba(0,0,0,0.05); }
+    .dark-mode .delivery-sig { border-top-color: rgba(255,255,255,0.05); }
+    .delivery-foot { font-size: 0.78rem; color: var(--_colors---color-5); font-style: italic; margin-top: 0.5rem; }
+    .delivery-foot strong { color: var(--_colors---color-7); }
+
+    /* §07 + §08 compact before/after — table-of-3 rows */
+    .compact-row { display: grid; grid-template-columns: 3.5rem 1fr auto; gap: 0.7rem; align-items: center; padding: 0.55rem 0; border-bottom: 1px solid rgba(0,0,0,0.04); font-size: 0.85rem; color: var(--_colors---color-7); }
+    .dark-mode .compact-row { border-bottom-color: rgba(255,255,255,0.04); }
+    .compact-row:last-child { border-bottom: 0; }
+    .compact-row .mono { font-family: 'IBM Plex Mono', monospace; font-size: 0.75rem; color: var(--_colors---color-4); letter-spacing: 0.04em; }
+    .compact-row.dim { opacity: 0.55; }
+    .pill { display: inline-flex; align-items: center; font-family: 'IBM Plex Mono', monospace; font-size: 0.62rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; padding: 0.15rem 0.5rem; border-radius: 4px; }
+    .pill.red { background: rgba(192,80,58,0.10); color: #C0503A; }
+    .pill.amber { background: rgba(184,122,46,0.12); color: #B87A2E; }
+    .pill.green { background: rgba(76,175,129,0.10); color: #3D9268; }
+    .dark-mode .pill.red { color: #E07060; }
+    .dark-mode .pill.amber { color: #C4893B; }
+    .dark-mode .pill.green { color: #6BB885; }
+
+    /* §08 paper-grid + hor-grid */
+    .paper-grid { display: grid; grid-template-columns: repeat(8, 1fr); gap: 4px; padding: 0.8rem 0; }
+    .paper-cell { height: 18px; border: 1px solid rgba(0,0,0,0.12); border-radius: 2px; }
+    .paper-cell.w { background: repeating-linear-gradient(45deg, rgba(0,0,0,0.10) 0 2px, transparent 2px 6px); }
+    .dark-mode .paper-cell { border-color: rgba(255,255,255,0.12); }
+    .dark-mode .paper-cell.w { background: repeating-linear-gradient(45deg, rgba(255,255,255,0.10) 0 2px, transparent 2px 6px); }
+    .hor-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 3px; padding: 0.6rem 0 1rem; }
+    .hor-cell { height: 12px; border-radius: 2px; background: rgba(0,0,0,0.06); }
+    .hor-cell.ok { background: rgba(43,123,163,0.28); }
+    .hor-cell.warn { background: #B87A2E; }
+    .dark-mode .hor-cell { background: rgba(255,255,255,0.08); }
+    .dark-mode .hor-cell.ok { background: rgba(90,171,204,0.40); }
+    .dark-mode .hor-cell.warn { background: #C4893B; }
+
+    /* §10 onboarding timeline */
+    .timeline { display: flex; flex-direction: column; gap: 0; max-width: 720px; margin-top: 2.4rem; }
+    .tl-step { display: grid; grid-template-columns: 5rem 1fr; gap: 1.6rem; padding: 1.4rem 0; border-bottom: 1px solid rgba(0,0,0,0.05); align-items: flex-start; }
+    .dark-mode .tl-step { border-bottom-color: rgba(255,255,255,0.06); }
+    .tl-step:last-child { border-bottom: 0; }
+    .tl-marker { font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.10em; color: var(--_colors---accent); padding-top: 0.3rem; }
+    .tl-title { font-family: var(--_size---font-family); font-size: 1.1rem; font-weight: 500; color: var(--_colors---text-color); margin-bottom: 0.4rem; line-height: 1.3; }
+    .tl-body { font-family: 'DM Sans', sans-serif; font-size: 0.95rem; line-height: 1.6; color: var(--_colors---color-6); margin: 0; }
+    .tl-body strong { color: var(--_colors---text-color); font-weight: 500; }
+    @media (max-width: 540px) { .tl-step { grid-template-columns: 1fr; gap: 0.4rem; } }
+
+    /* §11 ledger single illustration */
+    .ledger-frame { border-radius: 12px; overflow: hidden; box-shadow: 0 8px 32px rgba(0,0,0,0.08); border: 1px solid rgba(0,0,0,0.06); margin-top: 2rem; background: var(--_colors---surface); }
+    .dark-mode .ledger-frame { box-shadow: 0 8px 32px rgba(0,0,0,0.35); border-color: rgba(255,255,255,0.06); }
+    .ledger-frame iframe { display: block; width: 100%; border: 0; min-height: 360px; }
+
+    /* §03 / §04 single iframe panel */
+    .single-frame { border-radius: 12px; overflow: hidden; box-shadow: 0 8px 32px rgba(0,0,0,0.08); border: 1px solid rgba(0,0,0,0.06); background: var(--_colors---surface); height: 100%; min-height: 240px; }
+    .dark-mode .single-frame { box-shadow: 0 8px 32px rgba(0,0,0,0.35); border-color: rgba(255,255,255,0.06); }
+    .single-frame iframe { display: block; width: 100%; height: 100%; min-height: 240px; border: 0; }
+
+    /* Generic section header echo of services/benefits patterns */
+    .v3-section { padding: 6rem 0 4rem; }
+    .v3-section + .v3-section { border-top: 1px solid rgba(0,0,0,0.06); }
+    .dark-mode .v3-section + .v3-section { border-top-color: rgba(255,255,255,0.06); }
+    .v3-container { max-width: 1100px; margin: 0 auto; padding: 0 clamp(1.2rem, 4vw, 4rem); }
+    .v3-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 1rem; gap: 1.2rem; }
+    .v3-h2 { font-family: var(--_size---font-family); font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 400; line-height: 1.15; color: var(--_colors---text-color); letter-spacing: -0.015em; max-width: 28ch; }
+    .v3-h2 em { font-family: var(--_size---font-family-accent); font-style: italic; font-weight: 300; color: var(--_colors---accent); }
+    .v3-num { font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem; letter-spacing: 0.12em; color: var(--_colors---accent); font-weight: 500; flex-shrink: 0; }
+    .v3-sub { font-family: 'DM Sans', sans-serif; font-size: 1rem; line-height: 1.6; color: var(--_colors---color-5); max-width: 60ch; margin: 0.2rem 0 0; }
+
+    /* Founder block — reuse existing .founder-* classes from hp-tokens.css */
+
+    /* Iframe sizing — match existing index.html .iframe-crop--* pattern.
+       Each iframe gets a fixed CROP window; the iframe inside is forced to a
+       larger viewport (720×2000 by default in celeste7homepage.webflow.css)
+       and celeste-iframe-theme.js resets scrollTop=0 so top-left content is
+       always in the visible crop. */
+    .hflow-frame, .ba-frame, .single-frame, .ledger-frame {
+      /* Make legacy v3 classes behave like .iframe-product-wrap if any remain */
+      box-shadow: none; border: none; background: transparent;
+    }
+    .v3-iframe-wrap { /* container that centres the iframe-product-wrap on the page */
+      display: flex; justify-content: center;
+      margin: 0 auto;
+    }
+    /* Override iframe size from 720×2000 down to per-prototype sensible defaults
+       so the inner card fills the cropped window without empty whitespace. */
+    .iframe-product-wrap.v3-step iframe { width: 560px; height: 320px; }
+    .iframe-product-wrap.v3-step { width: 100%; max-width: 560px; height: 320px; margin: 0 auto; }
+
+    .iframe-product-wrap.v3-tall iframe { width: 720px; height: 900px; }
+    .iframe-product-wrap.v3-tall { width: 100%; max-width: 720px; height: 600px; margin: 0 auto; }
+
+    .iframe-product-wrap.v3-after iframe { width: 560px; height: 400px; }
+    .iframe-product-wrap.v3-after { width: 100%; max-width: 560px; height: 400px; }
+
+    .iframe-product-wrap.v3-ledger iframe { width: 560px; height: 360px; }
+    .iframe-product-wrap.v3-ledger { width: 100%; max-width: 560px; height: 360px; margin: 0 auto; }
+
+    .iframe-product-wrap.v3-related iframe { width: 720px; height: 900px; }
+    .iframe-product-wrap.v3-related { width: 100%; max-width: 720px; height: 600px; margin: 0 auto; }
+  </style>
+</head>
+<body>
+
+  <!-- NAV — identical to index.html -->
+  <section class="navbar-section">
+    <div class="w-layout-blockcontainer navbar-container w-container">
+      <div class="navbar-wrapper">
+        <div class="logo">
+          <a href="/" class="logo-link w-inline-block"><div class="text-block-19">CelesteOS</div></a>
+        </div>
+        <div class="menu">
+          <a href="#Hero" class="menu-nav1 first">Home</a>
+          <a href="#handover" class="menu-nav1">Handover</a>
+          <a href="#search" class="menu-nav1">Search</a>
+          <a href="#money" class="menu-nav1">ROI</a>
+          <a href="/trust" class="menu-nav1">Trust</a>
+          <a href="#contact" class="menu-nav1 last">Pilot</a>
+        </div>
+        <button type="button" id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode" aria-pressed="false" title="Toggle light/dark mode">
+          <svg class="theme-icon sun" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+          <svg class="theme-icon moon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- §01 HERO — uses .hero-section pattern from index.html -->
+  <section id="Hero" class="hero-section">
+    <div class="w-layout-blockcontainer hero-container w-container">
+      <div class="hero-wrapper">
+        <div class="hero-text">
+          <div class="hero-heading">
+            <h1 class="heading">The vessel's knowledge<br><em>stays in the vessel.</em></h1>
+          </div>
+          <div class="hero-texr">
+            <div class="text-hero1">Manuals. Faults. Handovers. Parts. Warranties. Certificates. Hours of rest. <span class="accent">One searchable surface</span> that survives every crew change.</div>
+            <div class="text-hero1">CelesteOS runs alongside your existing PMS. <span class="accent">Nothing to install. Nothing to replace.</span> Onboard in hours, not weeks. Per vessel, not per user.</div>
+            <a data-mailto="pilot" href="#" class="hero-button w-inline-block">
+              <img src="images/Frame-5_1Frame-5.png" alt="" role="presentation" class="hero-button-icon _2">
+              <div class="text-hero2">Request pilot access</div>
+              <img src="images/Frame-4_2Frame-4.png" alt="" role="presentation" class="hero-button-icon _1">
+            </a>
+            <a href="#handover" class="hero-button w-inline-block">
+              <img src="images/Frame-5_1Frame-5.png" alt="" role="presentation" class="hero-button-icon _2">
+              <div class="text-hero2">See how it works</div>
+              <img src="images/Frame-4_2Frame-4.png" alt="" role="presentation" class="hero-button-icon _1">
+            </a>
+            <div class="proof-list">
+              <div class="proof-item"><div class="proof-dot"></div>Used during live faults, when the previous engineer's knowledge is no longer available</div>
+              <div class="proof-item"><div class="proof-dot"></div>Used during Port State Control inspections, records exist and are trusted, not assembled under pressure</div>
+              <div class="proof-item"><div class="proof-dot"></div>Used during handovers, eight months of operational context, not two days of verbal briefing</div>
+              <div class="proof-item"><div class="proof-dot"></div>Used when decisions cannot be reversed, every action explicit, signed, permanently recorded</div>
+            </div>
+            <a href="https://verify.celeste7.ai" target="_blank" rel="noopener" class="hero-verifier-anchor" style="display:inline-block;margin-top:1.6rem;padding-top:0.9rem;border-top:1px solid rgba(127,127,127,0.18);font-family:'IBM Plex Mono',monospace;font-size:0.72rem;letter-spacing:0.04em;color:inherit;text-decoration:none;opacity:0.55;">
+              Every record independently verifiable <span style="opacity:0.7;">→ verify.celeste7.ai</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- §02 HANDOVER FLOW — 5 sequential steps, alternating L/R -->
+  <section id="handover" class="v3-section">
+    <div class="v3-container">
+      <div class="v3-head">
+        <h2 class="v3-h2">The next handover <em>writes itself.</em></h2>
+        <div class="v3-num">(02)</div>
+      </div>
+      <p class="v3-sub">Five moments. Each one happens during normal work. Together they replace the midnight Word document with a sealed record that survives the crew change.</p>
+
+      <div class="handover-flow">
+
+        <article class="hflow-step">
+          <div class="hflow-text">
+            <div class="hflow-num">Step 01 · Daily</div>
+            <h3 class="hflow-title">The <em>daily prompt</em></h3>
+            <p class="hflow-cap">Every record you touch can become a handover entry. One tap. No extra work. Never re-prompted if you dismiss.</p>
+          </div>
+          <div class="iframe-product-wrap v3-step">
+            <iframe src="prototypes/handover-prompt.html" title="The daily handover prompt"></iframe>
+          </div>
+        </article>
+
+        <article class="hflow-step">
+          <div class="hflow-text">
+            <div class="hflow-num">Step 02 · Weeks of work</div>
+            <h3 class="hflow-title">The <em>draft accumulates</em></h3>
+            <p class="hflow-cap">Every "yes" from step 1 adds an entry. Eight months of context, organised by department. Zero dedicated writing time.</p>
+          </div>
+          <div class="iframe-product-wrap v3-step">
+            <iframe src="prototypes/editorial-handover.html" title="Handover draft, signed and ready"></iframe>
+          </div>
+        </article>
+
+        <article class="hflow-step">
+          <div class="hflow-text">
+            <div class="hflow-num">Step 03 · Last week</div>
+            <h3 class="hflow-title">Review and <em>edit</em></h3>
+            <p class="hflow-cap">The outgoing chief opens the draft, reviews entries, edits anything that needs context. The system did the heavy lifting. This is a review task, not a writing task.</p>
+          </div>
+          <div class="iframe-product-wrap v3-step">
+            <iframe src="prototypes/lens-handover.html" title="Reviewing the handover draft"></iframe>
+          </div>
+        </article>
+
+        <article class="hflow-step">
+          <div class="hflow-text">
+            <div class="hflow-num">Step 04 · Sign-off</div>
+            <h3 class="hflow-title">Sign-off, <em>both sides</em></h3>
+            <p class="hflow-cap">The outgoing engineer cannot glaze over issues. The incoming engineer cannot claim they weren't told. The captain is notified.</p>
+          </div>
+          <div class="iframe-product-wrap v3-step">
+            <iframe src="prototypes/handover-signoff.html" title="Dual sign-off, sealed"></iframe>
+          </div>
+        </article>
+
+        <article class="hflow-step">
+          <div class="hflow-text">
+            <div class="hflow-num">Step 05 · Permanent</div>
+            <h3 class="hflow-title">Sealed. <em>Independently verifiable.</em></h3>
+            <p class="hflow-cap">The handover is sealed. Anyone can click the SealMark to verify it independently at <a href="https://verify.celeste7.ai" target="_blank" rel="noopener" style="color:var(--_colors---accent);text-decoration:none;border-bottom:1px solid rgba(43,123,163,0.3);">verify.celeste7.ai</a>, without an account.</p>
+          </div>
+          <div class="iframe-product-wrap v3-step">
+            <iframe src="prototypes/handover-cover.html" title="Sealed handover, click to verify"></iframe>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- §03 SEARCH — before / after -->
+  <section id="search" class="v3-section">
+    <div class="v3-container">
+      <div class="v3-head">
+        <h2 class="v3-h2">Search the vessel <em>like ordering a Starbucks.</em></h2>
+        <div class="v3-num">(03)</div>
+      </div>
+      <p class="v3-sub">3am. Alarm firing. The answer lives across six places — until it doesn't.</p>
+
+      <div class="ba-row">
+        <div class="ba-panel before">
+          <div class="ba-lbl">Before</div>
+          <div class="scatter">
+            <div class="scatter-tile"><div class="scatter-ico">📁</div><div class="scatter-lbl">PMS menu</div></div>
+            <div class="scatter-tile"><div class="scatter-ico">🗄</div><div class="scatter-lbl">Filing cabinet</div></div>
+            <div class="scatter-tile"><div class="scatter-ico">💻</div><div class="scatter-lbl">Old engineer's laptop</div></div>
+            <div class="scatter-tile"><div class="scatter-ico">💬</div><div class="scatter-lbl">WhatsApp<br>(archived)</div></div>
+            <div class="scatter-tile"><div class="scatter-ico">✉</div><div class="scatter-lbl">Email thread</div></div>
+            <div class="scatter-tile gone"><div class="scatter-ico">👤</div><div class="scatter-lbl">Prev chief<br><span style="font-family:'IBM Plex Mono',monospace;font-size:0.62rem;opacity:0.7;">— left 6 mo ago</span></div></div>
+          </div>
+          <p class="ba-cap">Six places. Three not on the vessel. One you can never call back.</p>
+        </div>
+        <div class="ba-panel after">
+          <div class="ba-lbl">After</div>
+          <div class="iframe-product-wrap v3-after">
+            <iframe src="prototypes/elegant-results.html" title="One search bar, three linked results"></iframe>
+          </div>
+          <p class="ba-cap">One bar. Manuals, faults, parts — answered in under a second.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- §04 SHOW RELATED — single illustration -->
+  <section id="related" class="v3-section">
+    <div class="v3-container">
+      <div class="v3-head">
+        <h2 class="v3-h2">One press. <em>Every linked record.</em></h2>
+        <div class="v3-num">(04)</div>
+      </div>
+      <p class="v3-sub">Search finds one thing. Show Related finds everything connected to it. For a chief diagnosing a recurring fault, the linked records are the answer.</p>
+
+      <div class="iframe-product-wrap v3-related" style="margin-top:2rem;">
+        <iframe src="prototypes/show-related.html" title="Show related — every linked record"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- §05 WARRANTY MONEY-FINDER — before / after with £4,200 -->
+  <section id="money" class="v3-section">
+    <div class="v3-container">
+      <div class="v3-head">
+        <h2 class="v3-h2"><em>£4,200</em> in unclaimed coverage. One scan.</h2>
+        <div class="v3-num">(05)</div>
+      </div>
+      <p class="v3-sub">Warranty terms live in supplier emails and three-ring binders. Until they don't.</p>
+
+      <div class="ba-row">
+        <div class="ba-panel before">
+          <div class="ba-lbl">Before</div>
+          <div class="invoice">
+            <div class="invoice-hdr">
+              <div>
+                <div class="invoice-mono">Supplier · invoice 2025-08-447</div>
+                <div class="invoice-vendor">Marine Power Solutions</div>
+              </div>
+              <div>
+                <div class="invoice-amt">£4,200</div>
+                <div class="invoice-mono" style="text-align:right;margin-top:0.2rem;">Due 30 days</div>
+              </div>
+            </div>
+            <div class="invoice-line"><span>BCS panel battery 3 — replacement</span><span class="mono">£3,400</span></div>
+            <div class="invoice-line"><span>Labour · 4h</span><span class="mono">£640</span></div>
+            <div class="invoice-line"><span>Shipping</span><span class="mono">£160</span></div>
+            <div class="invoice-foot">Management company pays. Warranty status: unknown.</div>
+          </div>
+          <p class="ba-cap">The receipt sits on the desk. Nobody asks if it's covered.</p>
+        </div>
+        <div class="ba-panel after">
+          <div class="ba-lbl">After</div>
+          <div class="iframe-product-wrap v3-after">
+            <iframe src="prototypes/warranty-money-finder.html" title="Warranty money-finder — claim pack ready"></iframe>
+          </div>
+          <p class="ba-cap">One press. Every piece of evidence. The supplier has nothing left to dispute.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- §06 RECEIVING OCR — before / after with £4,200 -->
+  <section id="receiving" class="v3-section">
+    <div class="v3-container">
+      <div class="v3-head">
+        <h2 class="v3-h2">Caught on the dock. <em>Not on the invoice.</em></h2>
+        <div class="v3-num">(06)</div>
+      </div>
+      <p class="v3-sub">Twelve items ordered. Ten delivered. The discrepancy used to be paid in full and forgotten.</p>
+
+      <div class="ba-row">
+        <div class="ba-panel before">
+          <div class="ba-lbl">Before</div>
+          <div class="delivery">
+            <div class="invoice-mono">Delivery note · DN-2025-1102</div>
+            <div class="delivery-h">Aquamarine Spares · Antibes</div>
+            <ul class="delivery-list">
+              <li>Watermaker membrane · qty 4</li>
+              <li>O-ring kit · qty 6</li>
+              <li>Salinity probe · qty 2</li>
+            </ul>
+            <div class="delivery-sig">Signed for · 14 boxes · purser, 09:18</div>
+            <div class="delivery-foot">Discrepancy: <strong>not noticed at the dock.</strong></div>
+          </div>
+          <p class="ba-cap">Purser counts boxes. Discrepancy hides inside a box. Invoice paid in full.</p>
+        </div>
+        <div class="ba-panel after">
+          <div class="ba-lbl">After</div>
+          <div class="iframe-product-wrap v3-after">
+            <iframe src="prototypes/receiving-ocr.html" title="Receiving OCR caught the short-shipment"></iframe>
+          </div>
+          <p class="ba-cap">OCR reads the delivery note, cross-references the PO, flags the gap before signature.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- §07 CERTIFICATES -->
+  <section id="certificates" class="v3-section">
+    <div class="v3-container">
+      <div class="v3-head">
+        <h2 class="v3-h2">No lapse. <em>No detention.</em></h2>
+        <div class="v3-num">(07)</div>
+      </div>
+
+      <div class="ba-row">
+        <div class="ba-panel before">
+          <div class="ba-lbl">Before</div>
+          <div style="padding:0.4rem 0.6rem;">
+            <div class="compact-row"><span class="mono">SMC</span><span>expires 2025-12-04</span><span class="pill red">Lapsed 8d</span></div>
+            <div class="compact-row dim"><span class="mono">DOC</span><span>renewal noticed in spreadsheet</span><span style="color:var(--_colors---color-4);">—</span></div>
+            <div class="compact-row dim"><span class="mono">ISPS</span><span>expires 2026-02-11</span><span style="color:var(--_colors---color-4);">—</span></div>
+          </div>
+          <p class="ba-cap">A spreadsheet. A monthly check that someone forgets when the season starts.</p>
+        </div>
+        <div class="ba-panel after">
+          <div class="ba-lbl">After</div>
+          <div style="padding:0.4rem 0.6rem;">
+            <div class="compact-row"><span class="mono">SMC</span><span>renewal scheduled</span><span class="pill green">60d notice</span></div>
+            <div class="compact-row"><span class="mono">DOC</span><span>auditor booked</span><span class="pill green">30d notice</span></div>
+            <div class="compact-row"><span class="mono">ISPS</span><span>paperwork drafted</span><span class="pill amber">14d</span></div>
+          </div>
+          <p class="ba-cap">60-day, 30-day, 14-day notices to the captain. Full pack exportable at audit, sealed.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- §08 HOURS OF REST -->
+  <section id="hor" class="v3-section">
+    <div class="v3-container">
+      <div class="v3-head">
+        <h2 class="v3-h2">MLC compliance <em>without the scramble.</em></h2>
+        <div class="v3-num">(08)</div>
+      </div>
+
+      <div class="ba-row">
+        <div class="ba-panel before">
+          <div class="ba-lbl">Before</div>
+          <div style="font-size:0.85rem;color:var(--_colors---color-5);font-style:italic;padding:0.4rem 0;">HoR · paper logs · backfilled the night before inspection</div>
+          <div class="paper-grid">
+            <span class="paper-cell"></span><span class="paper-cell w"></span><span class="paper-cell w"></span><span class="paper-cell"></span><span class="paper-cell w"></span><span class="paper-cell"></span><span class="paper-cell"></span><span class="paper-cell"></span>
+          </div>
+          <p class="ba-cap">"The inspector probably won't catch it this time." Everyone knows the logs are wrong. Nobody has a better tool.</p>
+        </div>
+        <div class="ba-panel after">
+          <div class="ba-lbl">After</div>
+          <div style="font-size:0.85rem;color:var(--_colors---color-7);font-weight:500;padding:0.4rem 0;">November 2025 · 7 of 8 crew compliant</div>
+          <div class="hor-grid">
+            <span class="hor-cell ok"></span><span class="hor-cell ok"></span><span class="hor-cell ok"></span><span class="hor-cell ok"></span><span class="hor-cell ok"></span><span class="hor-cell ok"></span><span class="hor-cell warn"></span>
+            <span class="hor-cell ok"></span><span class="hor-cell ok"></span><span class="hor-cell ok"></span><span class="hor-cell ok"></span><span class="hor-cell ok"></span><span class="hor-cell ok"></span><span class="hor-cell ok"></span>
+            <span class="hor-cell ok"></span><span class="hor-cell ok"></span><span class="hor-cell ok"></span><span class="hor-cell ok"></span><span class="hor-cell ok"></span><span class="hor-cell ok"></span><span class="hor-cell ok"></span>
+            <span class="hor-cell ok"></span><span class="hor-cell ok"></span><span class="hor-cell ok"></span><span class="hor-cell ok"></span><span class="hor-cell ok"></span><span class="hor-cell ok"></span><span class="hor-cell ok"></span>
+          </div>
+          <div class="compact-row"><span class="mono">CREW</span><span></span><span class="pill green">7 signed</span></div>
+          <div class="compact-row"><span class="mono">HOD</span><span></span><span class="pill green">Signed 28 Nov</span></div>
+          <div class="compact-row"><span class="mono">MASTER</span><span></span><span class="pill green">Signed 28 Nov</span></div>
+          <p class="ba-cap">Logged daily. Violations flagged in real time, before they become findings.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- §09 SITS ALONGSIDE — adapted from existing index.html .impact-section -->
+  <section id="sits-alongside" class="v3-section">
+    <div class="v3-container">
+      <div class="v3-head">
+        <h2 class="v3-h2">Keep AMOS. Keep Seahub. <em>Keep IDEA.</em></h2>
+        <div class="v3-num">(09)</div>
+      </div>
+      <p class="v3-sub" style="max-width:64ch;">CelesteOS reads what your PMS holds and adds what it structurally cannot: searchable history, auto-generated handovers, and sealed proof. Nothing to replace. Nothing to migrate.</p>
+
+      <div style="display:flex;flex-direction:column;align-items:center;gap:0.5rem;margin-top:2.4rem;max-width:680px;margin-left:auto;margin-right:auto;">
+        <div style="width:100%;text-align:center;padding:1.2rem 1.6rem;background:rgba(43,123,163,0.08);border:1px solid rgba(43,123,163,0.22);border-radius:8px;font-family:'IBM Plex Mono',monospace;font-size:0.78rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--_colors---accent);">
+          CelesteOS · search · handover · proof
+        </div>
+        <div style="display:flex;gap:5rem;font-size:1rem;color:var(--_colors---accent);font-weight:600;margin:0.2rem 0;" aria-hidden="true">
+          <span>↑</span><span>↑</span><span>↑</span>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:0.5rem;width:100%;">
+          <div style="background:var(--_colors---surface);border:1px solid rgba(0,0,0,0.07);border-radius:8px;padding:1.2rem;text-align:center;font-family:var(--_size---font-family);font-size:1rem;font-weight:500;color:var(--_colors---color-7);">AMOS</div>
+          <div style="background:var(--_colors---surface);border:1px solid rgba(0,0,0,0.07);border-radius:8px;padding:1.2rem;text-align:center;font-family:var(--_size---font-family);font-size:1rem;font-weight:500;color:var(--_colors---color-7);">Seahub</div>
+          <div style="background:var(--_colors---surface);border:1px solid rgba(0,0,0,0.07);border-radius:8px;padding:1.2rem;text-align:center;font-family:var(--_size---font-family);font-size:1rem;font-weight:500;color:var(--_colors---color-7);">IDEA</div>
+          <div style="background:var(--_colors---surface);border:1px solid rgba(0,0,0,0.07);border-radius:8px;padding:1.2rem;text-align:center;font-family:var(--_size---font-family);font-size:1rem;font-weight:500;color:var(--_colors---color-7);opacity:0.55;font-style:italic;">Excel</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- §10 ONBOARDING -->
+  <section id="onboarding" class="v3-section">
+    <div class="v3-container">
+      <div class="v3-head">
+        <h2 class="v3-h2">Onboard in <em>hours.</em> Not weeks. Not months.</h2>
+        <div class="v3-num">(10)</div>
+      </div>
+
+      <div class="timeline">
+        <div class="tl-step">
+          <div class="tl-marker">WK 1</div>
+          <div>
+            <div class="tl-title">NAS connected. SQL export from your PMS uploaded.</div>
+            <p class="tl-body">Equipment, parts, work orders imported. Crew accounts created. <strong>Total crew involvement: 15 minutes.</strong></p>
+          </div>
+        </div>
+        <div class="tl-step">
+          <div class="tl-marker">WK 2</div>
+          <div>
+            <div class="tl-title">Documents indexed. Certificates registered.</div>
+            <p class="tl-body">Manuals searchable. Expiry dates loaded with 60-day notices. 60-minute crew onboarding session. <strong>System live.</strong></p>
+          </div>
+        </div>
+        <div class="tl-step">
+          <div class="tl-marker">WK 3+</div>
+          <div>
+            <div class="tl-title">The system earns its keep through use.</div>
+            <p class="tl-body">Handover drafts accumulate from daily operations. Faults logged. Shopping lists flowing. Nobody sits down to "use CelesteOS" — it appears where work already happens.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- §11 LEDGER / PROOF -->
+  <section id="ledger" class="v3-section">
+    <div class="v3-container">
+      <div class="v3-head">
+        <h2 class="v3-h2">Every action recorded <em>like a scribe was watching.</em></h2>
+        <div class="v3-num">(11)</div>
+      </div>
+      <p class="v3-sub">Surveyor, insurer, management. Court-grade proof of who did what, when, and why. Every seal independently verifiable at <a href="https://verify.celeste7.ai" target="_blank" rel="noopener" style="color:var(--_colors---accent);text-decoration:none;border-bottom:1px solid rgba(43,123,163,0.3);">verify.celeste7.ai</a>.</p>
+
+      <div class="iframe-product-wrap v3-ledger">
+        <iframe src="prototypes/editorial-ledger.html" title="Ledger — every action sealed"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- §12 FOUNDER — reuses .about-section + existing .founder-block class -->
+  <section id="founder" class="v3-section">
+    <div class="v3-container">
+      <div class="v3-head">
+        <h2 class="v3-h2">Built by an engineer who <em>lived this.</em></h2>
+        <div class="v3-num">(12)</div>
+      </div>
+      <div class="founder-block" style="max-width:720px;margin-top:1.6rem;">
+        <img src="images/alex-short.png" alt="Alex Short, founder of CelesteOS, former superyacht ETO" class="founder-portrait" width="64" height="64">
+        <div class="about-text1 founder-text">
+          <p style="margin:0 0 1rem;">Alex Short spent five years as an Electro-Technical Officer on superyachts up to 122 metres, including <em>Maryah</em>, <em>Legend</em>, <em>Freedom</em>, <em>Nero</em>, and <em>Whisper</em>. He inherited vessels mid-rotation and watched operational knowledge walk off the gangway with every handover.</p>
+          <p style="margin:0;">CelesteOS is the system he wished existed at that moment.</p>
+          <div style="margin-top:1.2rem;">
+            <a href="https://www.linkedin.com/in/short-alex" target="_blank" rel="noopener" style="font-family:'IBM Plex Mono',monospace;font-size:0.78rem;letter-spacing:0.01em;opacity:0.78;color:inherit;text-decoration:underline;">LinkedIn</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- §13 PRICING — reuses existing .cta-section pattern from index.html:748 -->
+  <section id="pricing" class="cta-section">
+    <div class="w-layout-blockcontainer cta-container w-container">
+      <div class="cta-wrapper">
+        <div class="cta-image">
+          <div class="cta-text">
+            <div class="cta-heading-col">
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:0.7rem;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:1.2rem;">(13) · Pilot Pricing</div>
+              <h2 class="cta-heading" style="margin-bottom:6px;line-height:1.1;letter-spacing:-0.015em;"><span style="font-weight:200;font-size:clamp(80px,11vw,180px);">$450</span></h2>
+              <div style="font-family:var(--_size---font-family-mono);font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-top:12px;">per vessel · per 28 days</div>
+            </div>
+            <div class="cta-text-wrap">
+              <div class="cta-text1" style="margin-bottom:16px;">Unlimited seats. No per-module tiering. Per vessel, not per user.</div>
+              <div class="cta-text1" style="margin-bottom:26px;opacity:0.78;">One vessel at a time. Onboarded in hours, not weeks. For teams who intend to use CelesteOS as the work surface.</div>
+              <a data-mailto="pilot" href="#" class="hero-button white w-inline-block">
+                <img src="images/arrow-right.svg" alt="" role="presentation" class="hero-button-icon _2">
+                <div class="text-hero2">Request pilot access</div>
+                <img src="images/arrow-right.svg" alt="" role="presentation" class="hero-button-icon _1">
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- §14 FINAL CTA / FOOTER — reuses existing .footer-section from index.html:769 -->
+  <section id="contact" class="footer-section">
+    <div class="footer-vertical-line"></div>
+    <div class="footer-circle"></div>
+    <div class="footer-background-wrapper"></div>
+    <div class="w-layout-blockcontainer footer-container w-container">
+      <div class="footer-wrapper">
+        <div class="cta-close">
+          <div class="cta-label">(14) · Pilot Programme · 2026</div>
+          <h2 class="cta-heading">If this describes your vessel, <em>the next handover writes itself.</em></h2>
+          <p class="cta-body">Private and charter vessels from 30m, no upper limit. Where operational knowledge currently lives in crew minds, not the vessel.</p>
+        </div>
+        <div class="email">
+          <a data-mailto="pilot" href="#" class="link-block w-inline-block">
+            <h2 class="footer-heading">contact@celeste7.ai</h2>
+          </a>
+        </div>
+        <div class="logo-sosmed">
+          <div class="footer-icon-block">
+            <a href="https://www.linkedin.com/company/celesteos/" target="_blank" rel="noopener noreferrer" aria-label="CelesteOS on LinkedIn" style="color: inherit; text-decoration: none;">LinkedIn</a>
+          </div>
+        </div>
+        <div class="footer">
+          <div class="footer-text">CelesteOS</div>
+          <div class="menu-footer">
+            <span class="footer-link">celeste7.ai · Operational correspondence only</span>
+            <span class="footer-link" style="margin-left:1.5rem;opacity:0.7;">
+              <a href="/trust" style="color:inherit;text-decoration:none;">Trust</a> ·
+              <a href="/privacy-policy" style="color:inherit;text-decoration:none;">Privacy Policy</a> ·
+              <a href="/sources" style="color:inherit;text-decoration:none;">Sources</a>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=6989f9a479d759cf0851e04c" type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+  <script src="js/celeste-mailto.js" type="text/javascript"></script>
+  <script src="js/celeste-theme.js" type="text/javascript"></script>
+  <script src="js/celeste-iframe-theme.js" type="text/javascript"></script>
+  <script src="js/webflow.js" type="text/javascript"></script>
+  <script src="js/hp-nav.js" type="text/javascript"></script>
+</body>
+</html>
