@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html data-wf-page="6989f9a579d759cf0851e0d1" data-wf-site="6989f9a479d759cf0851e04c" lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>CelesteOS — Control over your complexity</title>
+  <meta name="description" content="CelesteOS makes your vessel's manuals, faults, work orders, parts, warranties, certificates, hours of rest, and handover records searchable from one surface. Runs alongside your existing PMS. Onboard in hours, not weeks.">
+  <meta property="og:title" content="CelesteOS — Control over your complexity">
+  <meta property="og:description" content="Search the vessel like ordering a Starbucks. Handover writes itself. Warranty money you didn't know you had.">
+  <meta property="og:image" content="https://celeste7.ai/images/og-image.png">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="robots" content="noindex,follow">
+  <link rel="canonical" href="https://celeste7.ai/landing-v2">
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+
+  <link href="css/normalize.css" rel="stylesheet" type="text/css">
+  <link href="css/webflow.css" rel="stylesheet" type="text/css">
+  <link href="css/celeste7homepage.webflow.css" rel="stylesheet" type="text/css">
+  <link href="css/hp-tokens.css" rel="stylesheet" type="text/css">
+  <link href="css/hp-nav.css" rel="stylesheet" type="text/css">
+  <link href="css/landing-v2.css" rel="stylesheet" type="text/css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script>
+  <script type="text/javascript">WebFont.load({google:{families:["DM Sans:300,400,500","IBM Plex Mono:400,500,600","Cormorant Garamond:300,300italic,400,400italic"]}});</script>
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="apple-touch-icon" href="/favicon.png">
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════════════════
+       NAVBAR — reused 1:1 from index.html to keep brand surface continuous
+       ═══════════════════════════════════════════════════════ -->
+  <section class="navbar-section">
+    <div class="w-layout-blockcontainer navbar-container w-container">
+      <div class="navbar-wrapper">
+        <div class="logo">
+          <a href="/" class="logo-link w-inline-block"><div class="text-block-19">CelesteOS</div></a>
+        </div>
+        <div class="menu">
+          <a href="#hero" class="menu-nav1 first">Home</a>
+          <a href="#handover" class="menu-nav1">Handover</a>
+          <a href="#search" class="menu-nav1">Search</a>
+          <a href="#money" class="menu-nav1">ROI</a>
+          <a href="/trust" class="menu-nav1">Trust</a>
+          <a href="#cta" class="menu-nav1 last">Pilot</a>
+        </div>
+        <button type="button" id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode" aria-pressed="false" title="Toggle light/dark mode">
+          <svg class="theme-icon sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+          <svg class="theme-icon moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <main class="lp-main">
+
+  <!-- ═══════════════════════════════════════════════════════
+       §01 · HERO — 55vh, visible sub-line (no click-to-reveal)
+       ═══════════════════════════════════════════════════════ -->
+  <section id="hero" class="lp-section lp-hero">
+    <div class="lp-container">
+      <div class="lp-eyebrow">CelesteOS · Pilot Programme · 2026</div>
+      <h1 class="lp-hero-title">The vessel's knowledge<br><em>stays in the vessel.</em></h1>
+      <p class="lp-hero-sub">Manuals. Faults. Handovers. Parts. Warranties. Certificates. Hours of rest. One searchable surface that survives every crew change.</p>
+      <div class="lp-hero-scroll-hint">Scroll <span aria-hidden="true">↓</span></div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       §02 · HANDOVER FLOW — the lead, 5 sequential steps
+       Scroll-revealed per step; reduced-motion serves all five static.
+       Visual signature derived from Cloud_PMS popup-journeys.html (L0 read overlay)
+       + lens-handover.html (ho-doc-*, sig-row, sig-status).
+       ═══════════════════════════════════════════════════════ -->
+  <section id="handover" class="lp-section lp-handover">
+    <div class="lp-container">
+      <div class="lp-section-head">
+        <div class="lp-eyebrow">02 · Handover</div>
+        <h2 class="lp-h2">The next handover <em>writes itself.</em></h2>
+        <p class="lp-section-sub">Five moments. Each one happens during normal work. Together they replace the midnight Word document with a sealed record that survives the crew change.</p>
+      </div>
+
+      <!-- Step 1 — The daily prompt -->
+      <article class="lp-step" data-step="1">
+        <div class="lp-step-num"><span>01</span></div>
+        <div class="lp-step-content">
+          <h3 class="lp-step-title">The daily prompt</h3>
+          <p class="lp-step-caption">Every record you touch can become a handover entry. One tap. No extra work.</p>
+
+          <div class="lp-mock lp-mock--prompt" aria-hidden="true">
+            <div class="lp-mock-stage">
+              <!-- Underlying lens (faded, suggesting context) -->
+              <div class="lp-mock-bg">
+                <div class="lp-mock-bg-row"><span class="lp-mono lp-mono--xs">FLT-1843</span> · Starboard chiller short-cycling</div>
+                <div class="lp-mock-bg-row lp-mock-bg-row--mid"><span class="lp-pill lp-pill--green">Resolved</span> · Expansion valve replaced · 14:32</div>
+                <div class="lp-mock-bg-row lp-mock-bg-row--low">Closed by C/E Williams · linked to WO-0142, P-00412</div>
+              </div>
+              <!-- The L0 read overlay (the daily prompt itself) -->
+              <div class="lp-mock-popup lp-mock-popup--prompt">
+                <div class="lp-mock-popup-icon" aria-hidden="true">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 4h16v12H5.17L4 17.17V4z"/><line x1="8" y1="9" x2="16" y2="9"/><line x1="8" y1="12" x2="13" y2="12"/></svg>
+                </div>
+                <div class="lp-mock-popup-body">
+                  <div class="lp-mock-popup-title">Add to handover draft?</div>
+                  <div class="lp-mock-popup-sub">FLT-1843 · Starboard chiller short-cycling</div>
+                </div>
+                <div class="lp-mock-popup-actions">
+                  <button type="button" class="lp-mock-btn lp-mock-btn--ghost">Dismiss</button>
+                  <button type="button" class="lp-mock-btn lp-mock-btn--primary">Yes</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Step 2 — Draft accumulates -->
+      <article class="lp-step" data-step="2">
+        <div class="lp-step-num"><span>02</span></div>
+        <div class="lp-step-content">
+          <h3 class="lp-step-title">The draft accumulates</h3>
+          <p class="lp-step-caption">Eight months of context. Zero dedicated writing time.</p>
+
+          <div class="lp-mock lp-mock--draft" aria-hidden="true">
+            <div class="lp-mock-doc">
+              <div class="lp-mock-doc-hdr">
+                <div class="lp-mock-doc-title">Handover Draft</div>
+                <div class="lp-mock-doc-sub">M/Y Whisper · C/E Williams → Incoming</div>
+                <div class="lp-mock-doc-meta">Mar 12 2025 – Nov 28 2025 · 247 entries · last added 2h ago</div>
+              </div>
+              <div class="lp-mock-doc-grid">
+                <div class="lp-mock-doc-card"><div class="lp-mock-doc-num">98</div><div class="lp-mock-doc-lbl">Faults</div></div>
+                <div class="lp-mock-doc-card"><div class="lp-mock-doc-num">63</div><div class="lp-mock-doc-lbl">Work orders</div></div>
+                <div class="lp-mock-doc-card"><div class="lp-mock-doc-num">52</div><div class="lp-mock-doc-lbl">Notes</div></div>
+                <div class="lp-mock-doc-card"><div class="lp-mock-doc-num">21</div><div class="lp-mock-doc-lbl">Parts</div></div>
+                <div class="lp-mock-doc-card"><div class="lp-mock-doc-num">9</div><div class="lp-mock-doc-lbl">Suppliers</div></div>
+                <div class="lp-mock-doc-card"><div class="lp-mock-doc-num">4</div><div class="lp-mock-doc-lbl">Warranties</div></div>
+              </div>
+              <div class="lp-mock-doc-list">
+                <div class="lp-mock-doc-list-h">Engineering · 142</div>
+                <div class="lp-mock-doc-list-h">Deck · 38</div>
+                <div class="lp-mock-doc-list-h">Interior · 31</div>
+                <div class="lp-mock-doc-list-h">Bridge / Nav · 22</div>
+                <div class="lp-mock-doc-list-h">Tender / Toys · 14</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Step 3 — Review and edit -->
+      <article class="lp-step" data-step="3">
+        <div class="lp-step-num"><span>03</span></div>
+        <div class="lp-step-content">
+          <h3 class="lp-step-title">Review and edit</h3>
+          <p class="lp-step-caption">Review what the system captured. Edit what needs context. Skip the brain dump.</p>
+
+          <div class="lp-mock lp-mock--review" aria-hidden="true">
+            <div class="lp-mock-doc">
+              <div class="lp-mock-doc-hdr lp-mock-doc-hdr--compact">
+                <div class="lp-mock-doc-title">Review draft · Engineering</div>
+                <div class="lp-mock-doc-sub">142 entries · 9 edited · 0 removed</div>
+              </div>
+              <ul class="lp-mock-review-list">
+                <li class="lp-mock-review-row lp-mock-review-row--edited">
+                  <span class="lp-mock-review-tag">Edited</span>
+                  <span class="lp-mock-review-body"><strong>Stb generator coolant pump</strong> — replaced May, runs hot above 1,800 rpm under load. <em>Editorial note: monitor first 50h post-overhaul.</em></span>
+                </li>
+                <li class="lp-mock-review-row">
+                  <span class="lp-mock-review-tag lp-mock-review-tag--auto">As captured</span>
+                  <span class="lp-mock-review-body"><strong>Watermaker membranes</strong> — last serviced Jul, due Dec. Supplier: Aquamarine, 14-day lead.</span>
+                </li>
+                <li class="lp-mock-review-row">
+                  <span class="lp-mock-review-tag lp-mock-review-tag--auto">As captured</span>
+                  <span class="lp-mock-review-body"><strong>BCS panel batt 3</strong> — replaced Oct under warranty (WRN-412). Receipt sealed.</span>
+                </li>
+                <li class="lp-mock-review-row lp-mock-review-row--edited">
+                  <span class="lp-mock-review-tag">Edited</span>
+                  <span class="lp-mock-review-body"><strong>Port main shaft seal</strong> — replaced Sep. <em>Editorial note: the OEM update bulletin we acted on is at DOC-7728.</em></span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Step 4 — Sign-off (both sides) -->
+      <article class="lp-step" data-step="4">
+        <div class="lp-step-num"><span>04</span></div>
+        <div class="lp-step-content">
+          <h3 class="lp-step-title">Sign-off, both sides</h3>
+          <p class="lp-step-caption">The outgoing engineer cannot glaze over issues. The incoming engineer cannot claim they weren't told.</p>
+
+          <div class="lp-mock lp-mock--signoff" aria-hidden="true">
+            <div class="lp-mock-sig">
+              <div class="lp-mock-sig-row">
+                <div class="lp-mock-sig-avatar">JW</div>
+                <div class="lp-mock-sig-info">
+                  <div class="lp-mock-sig-name">James Williams</div>
+                  <div class="lp-mock-sig-role">Outgoing Chief Engineer</div>
+                </div>
+                <div class="lp-mock-sig-ts">2025-11-28 · 14:42 UTC</div>
+                <div class="lp-mock-sig-state lp-mock-sig-state--signed">
+                  <span class="lp-sealmark" aria-hidden="true"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+                  Signed
+                </div>
+              </div>
+              <div class="lp-mock-sig-row">
+                <div class="lp-mock-sig-avatar">MD</div>
+                <div class="lp-mock-sig-info">
+                  <div class="lp-mock-sig-name">Mark Davies</div>
+                  <div class="lp-mock-sig-role">Incoming Chief Engineer · critical acknowledgement</div>
+                </div>
+                <div class="lp-mock-sig-ts">2025-11-28 · 16:11 UTC</div>
+                <div class="lp-mock-sig-state lp-mock-sig-state--signed">
+                  <span class="lp-sealmark" aria-hidden="true"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+                  Acknowledged
+                </div>
+              </div>
+              <div class="lp-mock-sig-row">
+                <div class="lp-mock-sig-avatar">SH</div>
+                <div class="lp-mock-sig-info">
+                  <div class="lp-mock-sig-name">Capt. S. Hawthorne</div>
+                  <div class="lp-mock-sig-role">Notified · M/Y Whisper</div>
+                </div>
+                <div class="lp-mock-sig-ts">2025-11-28 · 16:11 UTC</div>
+                <div class="lp-mock-sig-state lp-mock-sig-state--notified">Notified</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Step 5 — Sealed & verifiable -->
+      <article class="lp-step" data-step="5">
+        <div class="lp-step-num"><span>05</span></div>
+        <div class="lp-step-content">
+          <h3 class="lp-step-title">Sealed. Independently verifiable.</h3>
+          <p class="lp-step-caption">The handover is permanent. Anyone can verify it without an account and without us.</p>
+
+          <div class="lp-mock lp-mock--sealed" aria-hidden="true">
+            <div class="lp-mock-pdf">
+              <div class="lp-mock-pdf-stripe"></div>
+              <div class="lp-mock-pdf-body">
+                <div class="lp-mock-pdf-eyebrow">M/Y Whisper · Engineering Handover</div>
+                <div class="lp-mock-pdf-title">November 2025</div>
+                <div class="lp-mock-pdf-meta">247 entries · 5 departments · 8 months</div>
+                <div class="lp-mock-pdf-seal">
+                  <div class="lp-mock-pdf-seal-mark">
+                    <span class="lp-sealmark lp-sealmark--lg" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+                  </div>
+                  <div class="lp-mock-pdf-seal-info">
+                    <div class="lp-mock-pdf-seal-lbl">Receipt R-2025-1142 · Sealed</div>
+                    <div class="lp-mock-pdf-seal-sub">PAdES-B-LT · RFC 3161 timestamp · Merkle chain</div>
+                  </div>
+                </div>
+                <a href="https://verify.celeste7.ai/?receipt=R-2025-1142" target="_blank" rel="noopener noreferrer" class="lp-mock-pdf-verify">Verify independently → verify.celeste7.ai</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       §03 · SEARCH — before/after
+       Signature from Cloud_PMS light.html (search-panel)
+       ═══════════════════════════════════════════════════════ -->
+  <section id="search" class="lp-section lp-ba-section">
+    <div class="lp-container">
+      <div class="lp-section-head">
+        <div class="lp-eyebrow">03 · Search</div>
+        <h2 class="lp-h2">Search the vessel <em>like ordering a Starbucks.</em></h2>
+        <p class="lp-section-sub">3am. Alarm firing. The answer lives across six places — until it doesn't.</p>
+      </div>
+
+      <div class="lp-ba">
+        <div class="lp-panel lp-panel--before">
+          <div class="lp-panel-lbl">Before</div>
+          <div class="lp-mock lp-mock--scatter">
+            <div class="lp-scatter-grid">
+              <div class="lp-scatter-tile"><div class="lp-scatter-icon" aria-hidden="true">📁</div><div class="lp-scatter-lbl">PMS menu tree</div></div>
+              <div class="lp-scatter-tile"><div class="lp-scatter-icon" aria-hidden="true">🗄</div><div class="lp-scatter-lbl">Filing cabinet</div></div>
+              <div class="lp-scatter-tile"><div class="lp-scatter-icon" aria-hidden="true">💻</div><div class="lp-scatter-lbl">Old engineer's laptop</div></div>
+              <div class="lp-scatter-tile"><div class="lp-scatter-icon" aria-hidden="true">💬</div><div class="lp-scatter-lbl">WhatsApp group<br>(archived)</div></div>
+              <div class="lp-scatter-tile"><div class="lp-scatter-icon" aria-hidden="true">✉</div><div class="lp-scatter-lbl">Email thread<br>with supplier</div></div>
+              <div class="lp-scatter-tile lp-scatter-tile--gone"><div class="lp-scatter-icon" aria-hidden="true">👤</div><div class="lp-scatter-lbl">Previous chief's memory<br><span class="lp-mono lp-mono--xs">— left vessel 6 mo ago</span></div></div>
+            </div>
+          </div>
+          <p class="lp-panel-cap">Six places. Three of them not on the vessel. One you can never call back.</p>
+        </div>
+
+        <div class="lp-panel lp-panel--after">
+          <div class="lp-panel-lbl">After</div>
+          <div class="lp-mock lp-mock--search">
+            <div class="lp-mock-search-bar">
+              <svg class="lp-mock-search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <span class="lp-mock-search-q">starboard chiller short cycling</span>
+              <span class="lp-mock-search-meta">3 results · 0.41s</span>
+            </div>
+            <div class="lp-mock-search-divider"></div>
+            <ul class="lp-mock-search-results">
+              <li class="lp-mock-search-row">
+                <div class="lp-mock-search-row-icon" aria-hidden="true">📘</div>
+                <div class="lp-mock-search-row-body">
+                  <div class="lp-mock-search-row-title">Daikin VRV manual · §3.2 short-cycle diagnostics</div>
+                  <div class="lp-mock-search-row-sub"><span class="lp-mono">DOC-0047</span> · page 47 · indexed Jun 2025</div>
+                </div>
+              </li>
+              <li class="lp-mock-search-row">
+                <div class="lp-mock-search-row-icon" aria-hidden="true">⚙</div>
+                <div class="lp-mock-search-row-body">
+                  <div class="lp-mock-search-row-title">Prior fault · same symptom · replaced expansion valve</div>
+                  <div class="lp-mock-search-row-sub"><span class="lp-mono">FLT-2024-0089</span> · resolved 2024-08-12 · C/E Williams</div>
+                </div>
+              </li>
+              <li class="lp-mock-search-row">
+                <div class="lp-mock-search-row-icon" aria-hidden="true">📦</div>
+                <div class="lp-mock-search-row-body">
+                  <div class="lp-mock-search-row-title">Expansion valve — TX3-2A · 2 in stock</div>
+                  <div class="lp-mock-search-row-sub"><span class="lp-mono">P-00412</span> · loc Eng Store B · MOQ 1</div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <p class="lp-panel-cap">One bar. Manuals, faults, parts — answered in under a second.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       §04 · SHOW RELATED — single illustration
+       Signature from Cloud_PMS show-related.html (related-drawer)
+       ═══════════════════════════════════════════════════════ -->
+  <section id="related" class="lp-section">
+    <div class="lp-container">
+      <div class="lp-section-head">
+        <div class="lp-eyebrow">04 · Show Related</div>
+        <h2 class="lp-h2">One press. <em>Every linked record.</em></h2>
+        <p class="lp-section-sub">Search finds one thing. Show Related finds everything connected to it. For an engineer diagnosing a recurring fault, the linked records are the answer.</p>
+      </div>
+
+      <div class="lp-related">
+        <div class="lp-related-source">
+          <div class="lp-mono lp-mono--xs">EQP-018</div>
+          <div class="lp-related-source-name">Port Main Engine — MTU 16V 4000 M73L</div>
+          <div class="lp-related-source-meta">7,432 running hours · last service Oct 2025</div>
+          <button type="button" class="lp-related-btn" aria-pressed="true">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            Related <span class="lp-related-count">14</span>
+          </button>
+        </div>
+        <div class="lp-related-drawer">
+          <div class="lp-related-group">
+            <div class="lp-related-group-h">Faults · 3</div>
+            <div class="lp-related-row"><span class="lp-mono">FLT-2025-0142</span> · Coolant temp alarm under load · resolved</div>
+            <div class="lp-related-row"><span class="lp-mono">FLT-2025-0091</span> · Injector replacement · resolved</div>
+            <div class="lp-related-row"><span class="lp-mono">FLT-2024-0223</span> · Oil pressure dip at idle · resolved</div>
+          </div>
+          <div class="lp-related-group">
+            <div class="lp-related-group-h">Work orders · 2</div>
+            <div class="lp-related-row"><span class="lp-mono">WO-0211</span> · 1,000h service · completed Oct 2025</div>
+            <div class="lp-related-row"><span class="lp-mono">WO-0166</span> · Fuel filter changeout · completed Jun 2025</div>
+          </div>
+          <div class="lp-related-group">
+            <div class="lp-related-group-h">Documents · 4</div>
+            <div class="lp-related-row"><span class="lp-mono">DOC-0044</span> · MTU 16V operating manual</div>
+            <div class="lp-related-row"><span class="lp-mono">DOC-0046</span> · Service bulletin SB-2024-03</div>
+            <div class="lp-related-row"><span class="lp-mono">DOC-7728</span> · Shaft-seal advisory</div>
+          </div>
+          <div class="lp-related-group">
+            <div class="lp-related-group-h">Parts · 4</div>
+            <div class="lp-related-row"><span class="lp-mono">P-00781</span> · Injector assembly · TX1-9P</div>
+            <div class="lp-related-row"><span class="lp-mono">P-00412</span> · Expansion valve TX3-2A</div>
+            <div class="lp-related-row"><span class="lp-mono">P-01102</span> · Fuel filter element</div>
+          </div>
+          <div class="lp-related-group">
+            <div class="lp-related-group-h">Warranty · 1</div>
+            <div class="lp-related-row"><span class="lp-mono">WRN-412</span> · MTU power-train · 14 mo remaining · <span class="lp-pill lp-pill--green">Active</span></div>
+          </div>
+        </div>
+      </div>
+      <p class="lp-related-caption">Found in 0.3 seconds. From the equipment record itself — not a separate query.</p>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       §05 · WARRANTY MONEY-FINDER — before/after, £4,200
+       Signature from Cloud_PMS lens-warranty.html
+       ═══════════════════════════════════════════════════════ -->
+  <section id="money" class="lp-section lp-ba-section">
+    <div class="lp-container">
+      <div class="lp-section-head">
+        <div class="lp-eyebrow">05 · Warranty</div>
+        <h2 class="lp-h2"><em>£4,200</em> in unclaimed coverage. One scan.</h2>
+        <p class="lp-section-sub">Warranty terms live in supplier emails and three-ring binders. Until they don't.</p>
+      </div>
+
+      <div class="lp-ba">
+        <div class="lp-panel lp-panel--before">
+          <div class="lp-panel-lbl">Before</div>
+          <div class="lp-mock lp-mock--invoice">
+            <div class="lp-invoice">
+              <div class="lp-invoice-hdr">
+                <div>
+                  <div class="lp-mono lp-mono--xs">SUPPLIER · INVOICE 2025-08-447</div>
+                  <div class="lp-invoice-vendor">Marine Power Solutions</div>
+                </div>
+                <div class="lp-invoice-total">
+                  <div class="lp-invoice-total-num">£4,200</div>
+                  <div class="lp-mono lp-mono--xs">DUE 30 DAYS</div>
+                </div>
+              </div>
+              <div class="lp-invoice-line"><span>BCS panel battery 3 — replacement</span><span class="lp-mono">£3,400</span></div>
+              <div class="lp-invoice-line"><span>Labour · 4h</span><span class="lp-mono">£640</span></div>
+              <div class="lp-invoice-line"><span>Shipping</span><span class="lp-mono">£160</span></div>
+              <div class="lp-invoice-foot">Management company pays. Warranty status: unknown.</div>
+            </div>
+          </div>
+          <p class="lp-panel-cap">The receipt sits on the desk. Nobody asks if it's covered.</p>
+        </div>
+
+        <div class="lp-panel lp-panel--after">
+          <div class="lp-panel-lbl">After</div>
+          <div class="lp-mock lp-mock--warranty">
+            <div class="lp-warranty">
+              <div class="lp-warranty-hdr">
+                <div class="lp-mono lp-mono--xs">EQP-018 · BCS PANEL</div>
+                <div class="lp-warranty-eq">Battery management system</div>
+              </div>
+              <div class="lp-warranty-check">
+                <div class="lp-warranty-days">
+                  <div class="lp-warranty-days-num">428</div>
+                  <div class="lp-warranty-days-lbl">days remaining</div>
+                </div>
+                <div class="lp-warranty-meta">
+                  <div class="lp-mono lp-mono--xs">WRN-412 · ACTIVE</div>
+                  <div>Expires 2027-03-14. This replacement is claimable.</div>
+                </div>
+              </div>
+              <div class="lp-warranty-claim">
+                <div class="lp-warranty-claim-h">Claim pack ready</div>
+                <ul class="lp-warranty-claim-list">
+                  <li>FLT-1843 · fault record</li>
+                  <li>WO-0142 · work order + labour</li>
+                  <li>P-00781 · part + serial</li>
+                  <li>DOC-0046 · OEM service bulletin</li>
+                  <li>Warranty terms · §4.2 covered</li>
+                </ul>
+                <div class="lp-warranty-claim-cta">
+                  <span class="lp-mock-btn lp-mock-btn--primary">Generate claim pack</span>
+                  <span class="lp-warranty-claim-amt"><span class="lp-mono">£4,200</span> recoverable</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <p class="lp-panel-cap">One press. Every piece of evidence. The supplier has nothing left to dispute.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       §06 · RECEIVING OCR — before/after, short-shipment
+       Signature from Cloud_PMS lens-receiving.html (assumed; FRONTEND29 to confirm)
+       ═══════════════════════════════════════════════════════ -->
+  <section id="receiving" class="lp-section lp-ba-section">
+    <div class="lp-container">
+      <div class="lp-section-head">
+        <div class="lp-eyebrow">06 · Receiving</div>
+        <h2 class="lp-h2">Caught on the dock. <em>Not on the invoice.</em></h2>
+        <p class="lp-section-sub">Twelve items ordered. Ten delivered. The discrepancy used to be paid in full and forgotten.</p>
+      </div>
+
+      <div class="lp-ba">
+        <div class="lp-panel lp-panel--before">
+          <div class="lp-panel-lbl">Before</div>
+          <div class="lp-mock lp-mock--delivery">
+            <div class="lp-delivery">
+              <div class="lp-mono lp-mono--xs">DELIVERY NOTE · DN-2025-1102</div>
+              <div class="lp-delivery-vendor">Aquamarine Spares · Antibes</div>
+              <ul class="lp-delivery-list">
+                <li>Watermaker membrane · qty 4</li>
+                <li>O-ring kit · qty 6</li>
+                <li>Salinity probe · qty 2</li>
+              </ul>
+              <div class="lp-delivery-sig">Signed for · 14 boxes · purser, 09:18</div>
+              <div class="lp-delivery-foot">Discrepancy: <strong>not noticed at the dock.</strong></div>
+            </div>
+          </div>
+          <p class="lp-panel-cap">Purser counts boxes. Discrepancy hides inside a box. Invoice paid in full.</p>
+        </div>
+
+        <div class="lp-panel lp-panel--after">
+          <div class="lp-panel-lbl">After</div>
+          <div class="lp-mock lp-mock--ocr">
+            <div class="lp-ocr">
+              <div class="lp-ocr-hdr">
+                <div class="lp-mono lp-mono--xs">RCV-1102 · OCR'd 09:21</div>
+                <span class="lp-pill lp-pill--red">Discrepancy</span>
+              </div>
+              <table class="lp-ocr-table">
+                <thead>
+                  <tr><th>Item</th><th>PO</th><th>DN</th><th>Δ</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>Membrane</td><td class="lp-mono">4</td><td class="lp-mono">4</td><td><span class="lp-pill lp-pill--green">OK</span></td></tr>
+                  <tr><td>O-ring kit</td><td class="lp-mono">6</td><td class="lp-mono">6</td><td><span class="lp-pill lp-pill--green">OK</span></td></tr>
+                  <tr class="lp-ocr-row-bad"><td>Salinity probe</td><td class="lp-mono">12</td><td class="lp-mono">10</td><td><span class="lp-pill lp-pill--red">−2</span></td></tr>
+                </tbody>
+              </table>
+              <div class="lp-ocr-foot">
+                <div class="lp-ocr-amt"><span class="lp-mono">£4,200</span> short-shipped · linked to PO-2026-0034</div>
+                <span class="lp-mock-btn lp-mock-btn--primary">Reject + open claim</span>
+              </div>
+            </div>
+          </div>
+          <p class="lp-panel-cap">OCR reads the delivery note, cross-references the PO, flags the gap before signature.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       §07 · CERTIFICATES — compact before/after
+       ═══════════════════════════════════════════════════════ -->
+  <section id="certificates" class="lp-section lp-ba-section">
+    <div class="lp-container">
+      <div class="lp-section-head">
+        <div class="lp-eyebrow">07 · Certificates</div>
+        <h2 class="lp-h2">No lapse. <em>No detention.</em></h2>
+      </div>
+
+      <div class="lp-ba">
+        <div class="lp-panel lp-panel--before lp-panel--compact">
+          <div class="lp-panel-lbl">Before</div>
+          <div class="lp-mock lp-mock--spread">
+            <div class="lp-spread-row"><span class="lp-mono">SMC</span><span>expires 2025-12-04</span><span class="lp-pill lp-pill--red">Lapsed 8d</span></div>
+            <div class="lp-spread-row lp-spread-row--dim"><span class="lp-mono">DOC</span><span>renewal noticed in spreadsheet</span><span>—</span></div>
+            <div class="lp-spread-row lp-spread-row--dim"><span class="lp-mono">ISPS</span><span>expires 2026-02-11</span><span>—</span></div>
+          </div>
+          <p class="lp-panel-cap">A spreadsheet. A monthly check that someone forgets when the season starts.</p>
+        </div>
+        <div class="lp-panel lp-panel--after lp-panel--compact">
+          <div class="lp-panel-lbl">After</div>
+          <div class="lp-mock lp-mock--cert">
+            <div class="lp-cert-timeline">
+              <div class="lp-cert-row"><div class="lp-cert-bar"><div class="lp-cert-tick lp-cert-tick--60"></div><div class="lp-cert-tick lp-cert-tick--30"></div><div class="lp-cert-tick lp-cert-tick--14"></div></div></div>
+            </div>
+            <ul class="lp-cert-list">
+              <li><span class="lp-mono">SMC</span> · renewal scheduled · <span class="lp-pill lp-pill--green">60d notice</span></li>
+              <li><span class="lp-mono">DOC</span> · auditor booked · <span class="lp-pill lp-pill--green">30d notice</span></li>
+              <li><span class="lp-mono">ISPS</span> · paperwork drafted · <span class="lp-pill lp-pill--amber">14d</span></li>
+            </ul>
+          </div>
+          <p class="lp-panel-cap">60-day, 30-day, 14-day notices to the captain. Full pack exportable at audit, sealed.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       §08 · HOURS OF REST — compact before/after
+       ═══════════════════════════════════════════════════════ -->
+  <section id="hor" class="lp-section lp-ba-section">
+    <div class="lp-container">
+      <div class="lp-section-head">
+        <div class="lp-eyebrow">08 · Hours of Rest</div>
+        <h2 class="lp-h2">MLC compliance <em>without the scramble.</em></h2>
+      </div>
+
+      <div class="lp-ba">
+        <div class="lp-panel lp-panel--before lp-panel--compact">
+          <div class="lp-panel-lbl">Before</div>
+          <div class="lp-mock lp-mock--paper">
+            <div class="lp-paper-stripe"></div>
+            <div class="lp-paper-h">HoR · paper logs · backfilled the night before inspection</div>
+            <div class="lp-paper-grid">
+              <span class="lp-paper-cell"></span><span class="lp-paper-cell lp-paper-cell--w"></span><span class="lp-paper-cell lp-paper-cell--w"></span><span class="lp-paper-cell"></span><span class="lp-paper-cell lp-paper-cell--w"></span><span class="lp-paper-cell"></span><span class="lp-paper-cell"></span><span class="lp-paper-cell"></span>
+            </div>
+            <div class="lp-paper-foot">"The inspector probably won't catch it this time."</div>
+          </div>
+          <p class="lp-panel-cap">Everyone knows the logs are wrong. Nobody has a better tool.</p>
+        </div>
+        <div class="lp-panel lp-panel--after lp-panel--compact">
+          <div class="lp-panel-lbl">After</div>
+          <div class="lp-mock lp-mock--hor">
+            <div class="lp-hor-month">November 2025 · 7 of 8 crew compliant</div>
+            <div class="lp-hor-grid">
+              <span class="lp-hor-cell lp-hor-cell--ok"></span><span class="lp-hor-cell lp-hor-cell--ok"></span><span class="lp-hor-cell lp-hor-cell--ok"></span><span class="lp-hor-cell lp-hor-cell--ok"></span><span class="lp-hor-cell lp-hor-cell--ok"></span><span class="lp-hor-cell lp-hor-cell--ok"></span><span class="lp-hor-cell lp-hor-cell--warn"></span>
+              <span class="lp-hor-cell lp-hor-cell--ok"></span><span class="lp-hor-cell lp-hor-cell--ok"></span><span class="lp-hor-cell lp-hor-cell--ok"></span><span class="lp-hor-cell lp-hor-cell--ok"></span><span class="lp-hor-cell lp-hor-cell--ok"></span><span class="lp-hor-cell lp-hor-cell--ok"></span><span class="lp-hor-cell lp-hor-cell--ok"></span>
+              <span class="lp-hor-cell lp-hor-cell--ok"></span><span class="lp-hor-cell lp-hor-cell--ok"></span><span class="lp-hor-cell lp-hor-cell--ok"></span><span class="lp-hor-cell lp-hor-cell--ok"></span><span class="lp-hor-cell lp-hor-cell--ok"></span><span class="lp-hor-cell lp-hor-cell--ok"></span><span class="lp-hor-cell lp-hor-cell--ok"></span>
+              <span class="lp-hor-cell lp-hor-cell--ok"></span><span class="lp-hor-cell lp-hor-cell--ok"></span><span class="lp-hor-cell lp-hor-cell--ok"></span><span class="lp-hor-cell lp-hor-cell--ok"></span><span class="lp-hor-cell lp-hor-cell--ok"></span><span class="lp-hor-cell lp-hor-cell--ok"></span><span class="lp-hor-cell lp-hor-cell--ok"></span>
+            </div>
+            <div class="lp-hor-signoffs">
+              <div class="lp-hor-row"><span class="lp-mono lp-mono--xs">CREW</span><span class="lp-pill lp-pill--green">7 signed</span></div>
+              <div class="lp-hor-row"><span class="lp-mono lp-mono--xs">HOD</span><span class="lp-pill lp-pill--green">Signed 28 Nov</span></div>
+              <div class="lp-hor-row"><span class="lp-mono lp-mono--xs">MASTER</span><span class="lp-pill lp-pill--green">Signed 28 Nov</span></div>
+            </div>
+          </div>
+          <p class="lp-panel-cap">Logged daily. Violations flagged in real time, before they become findings.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       §09 · SITS ALONGSIDE — diagram, kills rip-and-replace objection
+       ═══════════════════════════════════════════════════════ -->
+  <section id="alongside" class="lp-section">
+    <div class="lp-container">
+      <div class="lp-section-head lp-section-head--center">
+        <div class="lp-eyebrow">09 · Sits Alongside</div>
+        <h2 class="lp-h2">Keep AMOS. Keep Seahub. <em>Keep IDEA.</em></h2>
+        <p class="lp-section-sub">CelesteOS reads what your PMS holds and adds what it structurally cannot: searchable history, auto-generated handovers, sealed proof. Nothing to replace. Nothing to migrate.</p>
+      </div>
+
+      <div class="lp-stack">
+        <div class="lp-stack-top">
+          <div class="lp-stack-celeste">
+            <div class="lp-mono lp-mono--xs">CelesteOS · search · handover · proof</div>
+          </div>
+          <div class="lp-stack-arrows" aria-hidden="true">
+            <span class="lp-stack-arrow">↑</span><span class="lp-stack-arrow">↑</span><span class="lp-stack-arrow">↑</span>
+          </div>
+        </div>
+        <div class="lp-stack-base">
+          <div class="lp-stack-tile">AMOS</div>
+          <div class="lp-stack-tile">Seahub</div>
+          <div class="lp-stack-tile">IDEA</div>
+          <div class="lp-stack-tile lp-stack-tile--dim">Excel</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       §10 · ONBOARDING — 3-step timeline
+       ═══════════════════════════════════════════════════════ -->
+  <section id="onboarding" class="lp-section">
+    <div class="lp-container">
+      <div class="lp-section-head">
+        <div class="lp-eyebrow">10 · Onboarding</div>
+        <h2 class="lp-h2">Onboard in <em>hours.</em> Not weeks. Not months.</h2>
+      </div>
+
+      <div class="lp-timeline">
+        <div class="lp-tl-step">
+          <div class="lp-tl-marker"><div class="lp-mono lp-mono--xs">WK 1</div></div>
+          <div class="lp-tl-body">
+            <div class="lp-tl-title">NAS connected. SQL export from your PMS uploaded.</div>
+            <p>Equipment, parts, work orders imported. Crew accounts created. <strong>Total crew involvement: 15 minutes.</strong></p>
+          </div>
+        </div>
+        <div class="lp-tl-step">
+          <div class="lp-tl-marker"><div class="lp-mono lp-mono--xs">WK 2</div></div>
+          <div class="lp-tl-body">
+            <div class="lp-tl-title">Documents indexed. Certificates registered.</div>
+            <p>Manuals searchable. Expiry dates loaded with 60-day notices. 60-minute crew onboarding session. <strong>System live.</strong></p>
+          </div>
+        </div>
+        <div class="lp-tl-step">
+          <div class="lp-tl-marker"><div class="lp-mono lp-mono--xs">WK 3+</div></div>
+          <div class="lp-tl-body">
+            <div class="lp-tl-title">The system earns its keep through use.</div>
+            <p>Handover drafts accumulate from daily operations. Faults logged. Shopping lists flowing. Nobody sits down to "use CelesteOS" — it appears where work already happens.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       §11 · PROOF / LEDGER — single illustration
+       Signature: ledger-drawer + audit rows from lens-warranty.html
+       ═══════════════════════════════════════════════════════ -->
+  <section id="ledger" class="lp-section">
+    <div class="lp-container">
+      <div class="lp-section-head">
+        <div class="lp-eyebrow">11 · Proof</div>
+        <h2 class="lp-h2">Every action recorded <em>like a scribe was watching.</em></h2>
+        <p class="lp-section-sub">Surveyor, insurer, management. Court-grade proof of who did what, when, and why. Every seal independently verifiable at <a href="https://verify.celeste7.ai" target="_blank" rel="noopener noreferrer" class="lp-link">verify.celeste7.ai</a>.</p>
+      </div>
+
+      <div class="lp-mock lp-mock--ledger">
+        <div class="lp-ledger">
+          <div class="lp-ledger-hdr">
+            <div class="lp-mono lp-mono--xs">LEDGER · M/Y WHISPER · NOV 2025</div>
+            <div class="lp-ledger-count">14,832 events sealed this month</div>
+          </div>
+          <ul class="lp-ledger-list">
+            <li class="lp-ledger-row">
+              <div class="lp-ledger-ts"><span class="lp-mono lp-mono--xs">2025-11-28 16:11:04 UTC</span></div>
+              <div class="lp-ledger-who">M. Davies</div>
+              <div class="lp-ledger-act">acknowledged handover <span class="lp-mono">HO-2025-1142</span></div>
+              <div class="lp-ledger-mark"><span class="lp-sealmark" aria-hidden="true"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></span><a href="https://verify.celeste7.ai/?receipt=R-2025-1142" target="_blank" rel="noopener noreferrer" class="lp-mono lp-mono--xs lp-link">R-2025-1142</a></div>
+            </li>
+            <li class="lp-ledger-row">
+              <div class="lp-ledger-ts"><span class="lp-mono lp-mono--xs">2025-11-28 14:32:18 UTC</span></div>
+              <div class="lp-ledger-who">J. Williams</div>
+              <div class="lp-ledger-act">resolved fault <span class="lp-mono">FLT-1843</span> · replaced expansion valve</div>
+              <div class="lp-ledger-mark"><span class="lp-sealmark" aria-hidden="true"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></span><a href="https://verify.celeste7.ai/?receipt=R-2025-1138" target="_blank" rel="noopener noreferrer" class="lp-mono lp-mono--xs lp-link">R-2025-1138</a></div>
+            </li>
+            <li class="lp-ledger-row">
+              <div class="lp-ledger-ts"><span class="lp-mono lp-mono--xs">2025-11-28 09:21:44 UTC</span></div>
+              <div class="lp-ledger-who">A. Lopez</div>
+              <div class="lp-ledger-act">flagged discrepancy on receiving <span class="lp-mono">RCV-1102</span></div>
+              <div class="lp-ledger-mark"><span class="lp-sealmark" aria-hidden="true"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></span><a href="https://verify.celeste7.ai/?receipt=R-2025-1136" target="_blank" rel="noopener noreferrer" class="lp-mono lp-mono--xs lp-link">R-2025-1136</a></div>
+            </li>
+            <li class="lp-ledger-row">
+              <div class="lp-ledger-ts"><span class="lp-mono lp-mono--xs">2025-11-27 18:04:11 UTC</span></div>
+              <div class="lp-ledger-who">Capt. S. Hawthorne</div>
+              <div class="lp-ledger-act">signed monthly HoR pack · 8 crew</div>
+              <div class="lp-ledger-mark"><span class="lp-sealmark" aria-hidden="true"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></span><a href="https://verify.celeste7.ai/?receipt=R-2025-1129" target="_blank" rel="noopener noreferrer" class="lp-mono lp-mono--xs lp-link">R-2025-1129</a></div>
+            </li>
+            <li class="lp-ledger-row">
+              <div class="lp-ledger-ts"><span class="lp-mono lp-mono--xs">2025-11-27 11:48:02 UTC</span></div>
+              <div class="lp-ledger-who">J. Williams</div>
+              <div class="lp-ledger-act">submitted warranty claim pack <span class="lp-mono">WRN-412</span> · £4,200</div>
+              <div class="lp-ledger-mark"><span class="lp-sealmark" aria-hidden="true"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></span><a href="https://verify.celeste7.ai/?receipt=R-2025-1118" target="_blank" rel="noopener noreferrer" class="lp-mono lp-mono--xs lp-link">R-2025-1118</a></div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       §12 · FOUNDER — text only (faces banned per Visual Guide §8)
+       ═══════════════════════════════════════════════════════ -->
+  <section id="founder" class="lp-section lp-founder">
+    <div class="lp-container lp-container--narrow">
+      <div class="lp-eyebrow">12 · Built by</div>
+      <p class="lp-founder-body">
+        <strong>Alex Short.</strong> Five years as ETO on superyachts up to 122 metres. <em>Maryah</em>, <em>Legend</em>, <em>Freedom</em>, <em>Nero</em>, <em>Whisper</em>. Built CelesteOS because the system should have existed in those engine rooms.
+      </p>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       §13 · PRICING — $450 / 28 days
+       ═══════════════════════════════════════════════════════ -->
+  <section id="pricing" class="lp-section lp-pricing">
+    <div class="lp-container lp-container--narrow">
+      <div class="lp-eyebrow">13 · Pilot Pricing</div>
+      <div class="lp-price-num"><span class="lp-price-currency">$</span>450</div>
+      <div class="lp-price-period">per vessel · per 28 days</div>
+      <p class="lp-price-terms">Unlimited seats. No per-module tiering. Onboard in hours. No migration. For teams who intend to use CelesteOS as the work surface.</p>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       §14 · FINAL CTA — Request pilot access
+       ═══════════════════════════════════════════════════════ -->
+  <section id="cta" class="lp-section lp-final-cta">
+    <div class="lp-container lp-container--narrow">
+      <h2 class="lp-final-cta-h">If this describes your vessel,<br><em>the next handover writes itself.</em></h2>
+      <a data-mailto="pilot" href="#" class="lp-cta-btn">
+        Request pilot access
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+      <a href="https://verify.celeste7.ai" target="_blank" rel="noopener noreferrer" class="lp-final-cta-verifier">
+        Every record independently verifiable <span aria-hidden="true">→ verify.celeste7.ai</span>
+      </a>
+    </div>
+  </section>
+
+  </main>
+
+  <!-- ═══════════════════════════════════════════════════════
+       FOOTER — reused from index.html for surface continuity
+       ═══════════════════════════════════════════════════════ -->
+  <section id="contact" class="footer-section">
+    <div class="footer-vertical-line"></div>
+    <div class="footer-circle"></div>
+    <div class="footer-background-wrapper"></div>
+    <div class="w-layout-blockcontainer footer-container w-container">
+      <div class="footer-wrapper">
+        <div class="email">
+          <a data-mailto="pilot" href="#" class="link-block w-inline-block">
+            <h2 class="footer-heading">contact@celeste7.ai</h2>
+          </a>
+        </div>
+        <div class="logo-sosmed">
+          <div class="footer-icon-block">
+            <a href="https://www.linkedin.com/company/celesteos/" target="_blank" rel="noopener noreferrer" aria-label="CelesteOS on LinkedIn" style="color: inherit; text-decoration: none;">LinkedIn</a>
+          </div>
+        </div>
+        <div class="footer">
+          <div class="footer-text">CelesteOS</div>
+          <div class="menu-footer">
+            <span class="footer-link">celeste7.ai · Operational correspondence only</span>
+            <span class="footer-link" style="margin-left:1.5rem;opacity:0.7;">
+              <a href="/trust" style="color:inherit;text-decoration:none;">Trust</a> ·
+              <a href="/privacy-policy" style="color:inherit;text-decoration:none;">Privacy Policy</a> ·
+              <a href="/sources" style="color:inherit;text-decoration:none;">Sources</a>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=6989f9a479d759cf0851e04c" type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+  <script src="js/celeste-mailto.js" type="text/javascript"></script>
+  <script src="js/celeste-theme.js" type="text/javascript"></script>
+  <script src="js/webflow.js" type="text/javascript"></script>
+  <script src="js/hp-nav.js" type="text/javascript"></script>
+  <script src="js/landing-v2.js" type="text/javascript"></script>
+</body>
+</html>
