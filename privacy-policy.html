@@ -43,7 +43,7 @@
 </nav>
 
 <h1>Privacy Policy</h1>
-<div class="effective">Effective: 14 May 2026 · Last updated: 14 May 2026</div>
+<div class="effective">Effective: 14 May 2026 · Last updated: 01 June 2026</div>
 
 <p>This Privacy Policy explains how CelesteOS ("we", "our", or "us") collects, uses, stores, and protects personal data when you visit celeste7.ai, request pilot access, sign in via third-party identity providers including LinkedIn, or otherwise interact with our services. It is written to comply with the EU General Data Protection Regulation (GDPR), UK GDPR, the California Consumer Privacy Act (CCPA), and the LinkedIn API Terms of Use.</p>
 
@@ -64,8 +64,9 @@
 
 <section id="who">
   <h2>1. Who we are</h2>
-  <p>CelesteOS is operated by the entity behind celeste7.ai. For all data-protection enquiries, contact: <a href="mailto:privacy@celeste7.ai">privacy@celeste7.ai</a>.</p>
+  <p>CelesteOS is a service of <strong>Celeste7 LTD</strong>, a company registered in England and Wales (company number 16617331; registered office 7 Vindex Close, Lincoln, England, LN1 1AH), operating from Miami, Florida, USA. For all data-protection enquiries, contact: <a href="mailto:contact@celeste7.ai">contact@celeste7.ai</a>.</p>
   <p>We act as the data controller for any personal data we collect directly through the website, pilot enquiries, and identity-provider sign-ins. Where we process customer vessel data on behalf of a pilot customer, we act as data processor under that customer's instructions and a Data Processing Agreement.</p>
+  <p>As a UK-established company, Celeste7 LTD is its own representative for UK GDPR purposes. Where we are required to appoint a representative in the European Union under Article 27 of the EU GDPR, we will do so and identify them here.</p>
 </section>
 
 <section id="data">
@@ -134,7 +135,7 @@
     <li>Encryption in transit (TLS 1.2 or higher) for all connections to celeste7.ai and its sub-services.</li>
     <li>Encryption at rest for all stored personal data (AES-256, provided by AWS / Supabase).</li>
     <li>Role-based access control: only the small number of CelesteOS staff with a legitimate operational need can access stored personal data, and all access is logged.</li>
-    <li>Append-only audit ledger and cryptographic receipts for all in-platform actions (see <a href="/trust">/trust</a>).</li>
+    <li>Append-only, tamper-evident audit ledger and cryptographic receipts (SealMark) for all in-platform actions; sealed records are independently verifiable at <a href="https://verifier.celeste7.ai" target="_blank" rel="noopener">verifier.celeste7.ai</a> without an account (see <a href="/trust">/trust</a>).</li>
     <li>Two-factor authentication required on all administrative accounts.</li>
     <li>Routine dependency vulnerability scanning and patching.</li>
   </ul>
@@ -153,25 +154,34 @@
 
 <section id="sharing">
   <h2>6. Sharing and third-party processors</h2>
-  <p>We share personal data only with the following categories of processor, each bound by a written processing agreement:</p>
+  <p>We share personal data only with the following processors, each bound by a written data-processing agreement:</p>
   <ul>
-    <li><strong>Vercel Inc.</strong>: website hosting and edge delivery.</li>
-    <li><strong>Supabase Inc.</strong>: managed database, authentication, and storage on AWS infrastructure.</li>
+    <li><strong>Vercel Inc.</strong> (US / global edge): website hosting and edge delivery.</li>
+    <li><strong>Supabase Inc.</strong> (EU or US): managed database, authentication, and storage on AWS infrastructure.</li>
+    <li><strong>Upstash Inc.</strong> (US): cache used for rate limiting and session management.</li>
+    <li><strong>OpenAI</strong> (US): AI inference, as described below.</li>
+    <li><strong>Microsoft Corporation</strong> (US / global): the Microsoft Graph API, used only to create an email <em>draft</em> in your own Outlook mailbox at your request &mdash; CelesteOS does not send email on your behalf.</li>
     <li><strong>LinkedIn Corporation</strong>: only where you authorise LinkedIn-based authentication; LinkedIn's own privacy policy applies to data they retain.</li>
-    <li><strong>Email provider</strong>: used only for transactional correspondence about your enquiry.</li>
+    <li><strong>Google LLC</strong> (US): Google Analytics 4, for aggregate website-usage measurement (see section 9).</li>
+    <li><strong>Wise Payments Ltd</strong> (UK): payment processing, acting as an independent controller of payment and KYC data.</li>
   </ul>
+  <p>A current, named sub-processor register with locations, terms, and transfer mechanisms is available to pilot customers under the Data Processing Agreement.</p>
+
+  <h3>AI inference</h3>
+  <p>CelesteOS uses a third-party AI inference provider (OpenAI) for three operations only: semantic search across your own records, document suggestion, and cited-answer generation. Only the minimum text needed for the requested operation is sent. The provider does <strong>not</strong> train its models on this data, and we have disabled all data-sharing options in our account with the provider (sharing of inputs and outputs, of evaluation and fine-tuning data, and of model feedback). Under the provider's standard terms, API inputs and outputs are retained for up to 30 days for abuse monitoring and then deleted; Zero Data Retention &mdash; which would remove that 30-day window &mdash; is a separate enterprise control we do not currently hold. We apply data-minimisation to limit what is sent.</p>
+
   <p>We do not sell, rent, or trade personal data to advertisers, data brokers, or third parties for marketing purposes.</p>
   <p>We may disclose data where legally required (court order, regulatory request, lawful investigation), or where necessary to protect the rights, safety, or property of CelesteOS, our customers, or the public.</p>
 </section>
 
 <section id="international">
   <h2>7. International transfers</h2>
-  <p>Where personal data is transferred outside the European Economic Area or the United Kingdom, we rely on the European Commission's Standard Contractual Clauses (SCCs) and, for UK transfers, the International Data Transfer Addendum. Our processors (Vercel, Supabase, AWS) maintain equivalent safeguards. Documentation is available on written request.</p>
+  <p>Database and object storage can be provisioned in the European Union or the United States per customer (EU residency on request). API processing and AI inference currently transit United States infrastructure; an EU-resident backend is on our roadmap. Where personal data is transferred outside the European Economic Area or the United Kingdom, we rely on the European Commission's Standard Contractual Clauses (SCCs) and, for UK transfers, the International Data Transfer Addendum. Our processors (Vercel, Supabase, AWS, Upstash, OpenAI, Microsoft, Google) maintain equivalent safeguards. Documentation is available on written request.</p>
 </section>
 
 <section id="rights">
   <h2>8. Your rights</h2>
-  <p>Under GDPR, UK GDPR, and CCPA you have the following rights, free of charge, exercisable by emailing <a href="mailto:privacy@celeste7.ai">privacy@celeste7.ai</a>:</p>
+  <p>Under GDPR, UK GDPR, and CCPA you have the following rights, free of charge, exercisable by emailing <a href="mailto:contact@celeste7.ai">contact@celeste7.ai</a>:</p>
   <ul>
     <li><strong>Access:</strong> obtain a copy of the personal data we hold about you.</li>
     <li><strong>Rectification:</strong> correct inaccurate or incomplete data.</li>
@@ -187,8 +197,8 @@
 
 <section id="cookies">
   <h2>9. Cookies and tracking</h2>
-  <p>celeste7.ai uses only strictly necessary cookies for session management and a small number of first-party performance cookies set by Vercel for routing and error logging. We do not use third-party advertising cookies, retargeting pixels, or cross-site tracking. We do not deploy social-media tracking pixels (Meta Pixel, LinkedIn Insight Tag, TikTok Pixel, etc.).</p>
-  <p>Where cookies require consent under EU or UK law, a consent banner is presented on first visit. You can withdraw or change your choice at any time by clearing site data in your browser.</p>
+  <p>celeste7.ai uses strictly necessary cookies for session management and routing, and <strong>Google Analytics 4</strong> (measurement ID G-230QN4JY4P), which sets first-party analytics cookies (for example <code>_ga</code>) to help us understand aggregate website usage. Google Analytics processes online identifiers and IP-derived approximate location; Google acts as a processor and analytics data is transferred to the United States under the EU Standard Contractual Clauses and the UK Addendum. We do not use advertising or retargeting cookies, and we do not deploy social-media tracking pixels (Meta Pixel, LinkedIn Insight Tag, TikTok Pixel, etc.).</p>
+  <p>You can opt out of Google Analytics using the <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener">Google Analytics Opt-out Browser Add-on</a>, or by clearing or blocking cookies in your browser.</p>
 </section>
 
 <section id="children">
@@ -204,8 +214,8 @@
 <section id="contact">
   <h2>12. Contact</h2>
   <p>For any question about this policy, your data, or to exercise any of the rights above:</p>
-  <p>Email: <a href="mailto:privacy@celeste7.ai">privacy@celeste7.ai</a></p>
-  <p>Postal address: available on request via the email above.</p>
+  <p>Email: <a href="mailto:contact@celeste7.ai">contact@celeste7.ai</a></p>
+  <p>Postal address: 7 Vindex Close, Lincoln, England, LN1 1AH.</p>
 </section>
 
 </body>
