@@ -24,9 +24,16 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
+    // Consent Mode v2 — default DENY non-essential until the user accepts (PECR/ePrivacy).
+    gtag('consent', 'default', {
+      ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied',
+      analytics_storage: 'denied', functionality_storage: 'granted', security_storage: 'granted',
+      wait_for_update: 500
+    });
     gtag('config', 'AW-17947526022');
     gtag('config', 'G-230QN4JY4P');
   </script>
+  <script defer src="/js/cookie-consent.js"></script>
 </head>
 <body>
   <section class="navbar-section">
