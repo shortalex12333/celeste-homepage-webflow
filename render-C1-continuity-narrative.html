@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CelesteOS — the vessel's knowledge stays in the vessel</title>
+<meta name="description" content="A year of operational history walks down the gangway with every chief who rotates off. CelesteOS keeps that record in the vessel, and surfaces it when you need it.">
+<link rel="icon" href="/favicon.png">
+<link rel="stylesheet" href="render-shared.css">
+<style>
+  /* C1 — continuity NARRATIVE. Long-scroll, warmer-operational; the why breathes.
+     Unlike the editorial sibling (one beat per viewport), C1 lets each section
+     carry two or three moments in sequence, with a left-rule "moment" rhythm
+     so the story reads top-to-bottom like an account, not a feature grid.
+     On-token only — the rules below are composition, never new colour. */
+
+  /* The narrative spine: a quiet left rule that carries the eye down a section. */
+  .moment {
+    border-left: 2px solid var(--teal-ambient);
+    padding-left: var(--space-6);
+    max-width: 60ch;
+  }
+  .moment__label {
+    font-family: var(--font-mono);
+    font-size: var(--fs-eyebrow);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--txt2);
+    margin: 0 0 var(--space-3);
+    display: block;
+  }
+  .moment h3 { margin: 0 0 var(--space-3); }
+  .moment p { color: var(--txt3); margin: 0; }
+
+  /* A single dominant still, held to a calm, warm width. */
+  .still-frame { max-width: 720px; }
+  .still-frame--lead { max-width: 680px; }
+
+  /* "What you're seeing" caption under a still — mono, quiet, factual. */
+  .still-note {
+    font-family: var(--font-mono);
+    font-size: var(--fs-cite);
+    letter-spacing: 0.03em;
+    line-height: 1.7;
+    color: var(--txt-ghost);
+    margin: var(--space-4) 0 0;
+    max-width: 64ch;
+  }
+  .still-note strong { color: var(--txt3); font-weight: var(--fw-regular); }
+
+  /* A quiet one-line declarative used to let a section breathe between beats. */
+  .one-line {
+    font-family: var(--font-display);
+    font-weight: var(--fw-light);
+    font-size: var(--fs-h2);
+    line-height: var(--lh-snug);
+    letter-spacing: -0.01em;
+    color: var(--txt);
+    max-width: 34ch;
+    margin: 0;
+    text-wrap: balance;
+  }
+
+  /* Roadmap marker — honest "not yet live". Mono, ghost, no celebration. */
+  .roadmap-tag {
+    font-family: var(--font-mono);
+    font-size: var(--fs-cite);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--txt-ghost);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius-pill);
+    padding: var(--space-1) var(--space-3);
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin-right: var(--space-3);
+  }
+</style>
+</head>
+<body>
+
+<!-- ======================================================================
+     NAV
+     ====================================================================== -->
+<nav class="nav">
+  <a class="nav__brand" href="/">Celeste<b>OS</b></a>
+  <div class="nav__links">
+    <a href="#handover">Handover</a>
+    <a href="#related">The record</a>
+    <a href="#price">Pricing</a>
+    <a href="#pilot">Pilot</a>
+  </div>
+</nav>
+
+<main class="page">
+
+  <!-- ====================================================================
+       HERO · THE WHY — data continuity. Open with why we exist, not money.
+       Why → first-person founder line woven → one calm still (the past, kept).
+       ==================================================================== -->
+  <section class="section">
+    <div class="container stack">
+      <span class="eyebrow"><span class="eyebrow__num">00</span>Why it exists</span>
+      <h1 class="display display--wide">
+        The vessel's knowledge stays in the <em class="weight">vessel</em>.
+      </h1>
+      <p class="lead" style="max-width: 54ch;">
+        A year of operational history — what's broken, what's bodged, what the surveyor flagged —
+        walks down the gangway with every chief who rotates off. I watched it happen on every handover
+        I ever did. CelesteOS keeps that record in the vessel, and surfaces it when you need it.
+      </p>
+
+      <div class="cta-row">
+        <a class="btn btn--soft" href="#walkthrough">Watch the 2-minute walkthrough</a>
+        <span class="mono-label">No signup. No sales call.</span>
+      </div>
+
+      <!-- One calm, restrained still: the past, kept — a fault with its related record beside it. -->
+      <div class="still-frame still-frame--wide still-frame--lead fade-in" style="margin-top: var(--space-12);">
+        <div class="still-frame__chrome">
+          <span class="still-frame__dots"><span class="still-frame__dot"></span><span class="still-frame__dot"></span><span class="still-frame__dot"></span></span>
+          <span class="still-frame__label">show-related.html</span>
+        </div>
+        <div class="still-frame__viewport">
+          <iframe src="prototypes/show-related.html" loading="lazy" title="A fault opened in the vessel, with the vessel's own related past surfaced beside it — the record, kept and still attached"></iframe>
+        </div>
+      </div>
+      <p class="still-note">
+        The record of a single vessel — faults, work orders, the parts that fixed them — kept in one
+        place and still attached to each other. It didn't leave with the crew that wrote it.
+      </p>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       FOUNDER (near hero) — first person, no photo.
+       ==================================================================== -->
+  <section class="section section--tight section--alt section--hairline-top">
+    <div class="container--narrow quote">
+      <p class="quote__body">
+        I spent five years as an ETO on yachts up to 122 metres — Maryah, Legend, Freedom, Nero,
+        Whisper — and watched a year of knowledge walk off the gangway with every handover.
+        CelesteOS keeps it in the vessel.
+      </p>
+      <span class="quote__cite"><strong>Alex Short</strong> — Founder, former ETO</span>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       S1 · HANDOVER — assisted capture, NOT autonomous. Three moments in
+       sequence (the narrative cadence): capture, sign, wormhole.
+       Capture is one-tap manual from the jobs touched; the user curates it.
+       Only the outgoing user signs and the head of department countersigns.
+       ==================================================================== -->
+  <section class="section" id="handover">
+    <div class="container stack">
+      <span class="eyebrow"><span class="eyebrow__num">01</span>Handover</span>
+      <h2 class="headline">
+        The handover, built from the work you already did.
+      </h2>
+
+      <!-- Moment A — capture: one-tap, manual, drawn from the jobs you touched. -->
+      <div class="moment" style="margin-top: var(--space-8);">
+        <span class="moment__label">A · Capture</span>
+        <h3>One tap, as you go — never a blank page at 2am.</h3>
+        <p>
+          As you close faults and work orders, you add what matters to the handover draft in one tap —
+          drawn from the actual jobs you touched. At rotation it's compiled, sourced and ready to sign.
+          You curate it; you don't write it from a blank page at 2am.
+        </p>
+      </div>
+
+      <div class="still-frame fade-in" style="margin-top: var(--space-8);">
+        <div class="still-frame__chrome">
+          <span class="still-frame__dots"><span class="still-frame__dot"></span><span class="still-frame__dot"></span><span class="still-frame__dot"></span></span>
+          <span class="still-frame__label">handover-prompt.html</span>
+        </div>
+        <div class="still-frame__viewport">
+          <iframe src="prototypes/handover-prompt.html" loading="lazy" title="Closing a fault: add this to the handover draft? — one tap, drawn from the job you just touched"></iframe>
+        </div>
+      </div>
+      <p class="still-note">
+        <strong>Close a fault → “Add to handover draft?”</strong> One tap, drawn from the job you just
+        touched. Repeated across the rotation, you curate the draft as you go — you confirm each line,
+        you don't compose it from nothing.
+      </p>
+
+      <!-- Moment B — sign: outgoing user signs, HOD countersigns. Two signatures. -->
+      <div class="moment" style="margin-top: var(--space-12);">
+        <span class="moment__label">B · Sign</span>
+        <h3>Two signatures, timestamped, on the record.</h3>
+        <p>
+          You sign it; your head of department countersigns — two signatures, timestamped, on the record.
+        </p>
+      </div>
+
+      <div class="still-frame fade-in" style="max-width: 680px; margin-top: var(--space-6);">
+        <div class="still-frame__chrome">
+          <span class="still-frame__label">handover-signoff.html</span>
+        </div>
+        <div class="still-frame__viewport">
+          <iframe src="prototypes/handover-signoff.html" loading="lazy" title="A signed handover: the outgoing user signed, the head of department countersigned — two timestamped signatures on the record"></iframe>
+        </div>
+      </div>
+      <p class="still-note">
+        <strong>Signed, then countersigned.</strong> You sign; your head of department countersigns.
+        Two signatures, each timestamped, kept on the record.
+      </p>
+
+      <!-- Moment C — the wormhole: every line opens the original record. -->
+      <div class="moment" style="margin-top: var(--space-12);">
+        <span class="moment__label">C · The line opens the original</span>
+        <h3>Every line links to the record it came from — one click, not a paraphrase.</h3>
+        <p>
+          Every line links to the original record — the actual work order or fault — one click, not a
+          paraphrase someone typed.
+        </p>
+      </div>
+
+      <div class="still-frame fade-in" style="max-width: 680px; margin-top: var(--space-6);">
+        <div class="still-frame__chrome">
+          <span class="still-frame__label">lens-work-order.html</span>
+        </div>
+        <div class="still-frame__viewport">
+          <iframe src="prototypes/lens-work-order.html" loading="lazy" title="A handover line opens straight into the original work order — full detail, not a summary someone typed"></iframe>
+        </div>
+      </div>
+      <p class="still-note">
+        The incoming engineer doesn't get a retelling. The line opens the <strong>actual work order</strong> —
+        parts, notes, who closed it — one click from the handover.
+      </p>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       S2 · SHOW-RELATED — fully live, the strongest moment. The vessel's own
+       past sits beside today's fault, surfaced by meaning. Nobody linked them;
+       the system found them related. Discovery is automatic; nothing is learned.
+       ==================================================================== -->
+  <section class="section section--alt section--hairline-top" id="related">
+    <div class="container stack">
+      <span class="eyebrow"><span class="eyebrow__num">02</span>Show related</span>
+      <h2 class="headline">
+        Open a fault. The vessel's own past is already beside it.
+      </h2>
+      <p class="sub" style="max-width: 56ch;">
+        A work order the vessel completed before, the part that fixed it then — surfaced by meaning,
+        not because you remembered to search. Nobody linked them; the system found them related.
+      </p>
+
+      <div class="still-frame fade-in" style="margin-top: var(--space-8);">
+        <div class="still-frame__chrome">
+          <span class="still-frame__dots"><span class="still-frame__dot"></span><span class="still-frame__dot"></span><span class="still-frame__dot"></span></span>
+          <span class="still-frame__label">show-related.html</span>
+        </div>
+        <div class="still-frame__viewport">
+          <iframe src="prototypes/show-related.html" loading="lazy" title="Beside today's fault: a work order the vessel completed before and the part that fixed it then — surfaced by meaning, unasked"></iframe>
+        </div>
+      </div>
+      <p class="still-note">
+        Beside the fault you're looking at: a work order the vessel completed before, and the part that
+        fixed it then. You didn't search for it. Nobody linked them — the system found them related, and
+        each one cites where it came from.
+      </p>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       S3 · LINKED DOCUMENTS — manual link ONCE + automatic discovery.
+       NOT auto-propagation. Linking is manual per record; only the surfacing
+       on related records (via Related) is automatic. The link is a deliberate
+       act the engineer makes; the system does not fan it out by itself.
+       ==================================================================== -->
+  <section class="section" id="documents">
+    <div class="container stack">
+      <span class="eyebrow"><span class="eyebrow__num">03</span>Linked documents</span>
+      <h2 class="headline">
+        Find the manual once. It stays on the record.
+      </h2>
+      <p class="sub" style="max-width: 58ch;">
+        Link the engine manual to the work order once, and it's there for the next engineer who opens it
+        — and Related surfaces it on the faults and equipment that reference the same gear. The document
+        lives on the record, not in one person's memory or a folder nobody can find.
+      </p>
+
+      <div class="two-up" style="margin-top: var(--space-8);">
+        <!-- The suggestion + discovery surface. -->
+        <div class="still-frame still-frame--tall fade-in" style="max-width: none;">
+          <div class="still-frame__chrome">
+            <span class="still-frame__label">suggested-docs-tab.html</span>
+          </div>
+          <div class="still-frame__viewport">
+            <iframe src="prototypes/suggested-docs-tab.html" loading="lazy" title="Documents Related surfaces for the equipment — the manual already on the record, surfaced where the same gear is referenced"></iframe>
+          </div>
+        </div>
+        <!-- The one-time manual link. -->
+        <div class="still-frame still-frame--tall fade-in" style="max-width: none;">
+          <div class="still-frame__chrome">
+            <span class="still-frame__label">popup-link-document.html</span>
+          </div>
+          <div class="still-frame__viewport">
+            <iframe src="prototypes/popup-link-document.html" loading="lazy" title="Linking the manual to the work order once — a manual link you make, kept on the record from then on"></iframe>
+          </div>
+        </div>
+      </div>
+      <p class="still-note">
+        <strong>Right:</strong> you link the manual to the work order once. <strong>Left:</strong> from
+        then on it's on the record — and Related surfaces it on the faults and equipment that reference
+        the same gear, so the next engineer finds it without hunting.
+      </p>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       S4 · SEARCH — cited core. Plain-language question, answer with its source.
+       NO domain over-promise: do NOT enumerate guaranteed coverage. It never
+       makes anything up; when there's nothing, it says so.
+       ==================================================================== -->
+  <section class="section section--alt section--hairline-top" id="search">
+    <div class="container stack">
+      <span class="eyebrow"><span class="eyebrow__num">04</span>Search</span>
+      <h2 class="headline">
+        Ask in plain language. Get the answer with its source.
+      </h2>
+      <p class="sub" style="max-width: 58ch;">
+        Ask the vessel a question the way you'd ask a crew member. Results come back citing where they
+        came from — the manual page, the work order, the thread — for you to confirm. CelesteOS surfaces
+        what's there; it never makes anything up, and when there's nothing, it says so.
+      </p>
+
+      <div class="still-frame still-frame--wide fade-in" style="max-width: 680px; margin-top: var(--space-8);">
+        <div class="still-frame__chrome">
+          <span class="still-frame__dots"><span class="still-frame__dot"></span><span class="still-frame__dot"></span><span class="still-frame__dot"></span></span>
+          <span class="still-frame__label">elegant-results.html</span>
+        </div>
+        <div class="still-frame__viewport">
+          <iframe src="prototypes/elegant-results.html" loading="lazy" title="A plain-language question answered, each result citing the manual page, work order or thread it came from"></iframe>
+        </div>
+      </div>
+      <p class="still-note">
+        Each result cites where it came from — the manual page, the work order, the thread — for you to
+        confirm. When there's nothing there, it says so rather than guessing.
+      </p>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       S5 · IMMUTABLY RECORDED — append-only; the record only grows.
+       No revert/resume feature ships. Keep crypto/legal vocabulary out of body.
+       ==================================================================== -->
+  <section class="section" id="record">
+    <div class="container stack">
+      <span class="eyebrow"><span class="eyebrow__num">05</span>Immutably recorded</span>
+      <h2 class="headline">
+        Every action, kept. The record only grows.
+      </h2>
+      <p class="sub" style="max-width: 58ch;">
+        Each fault, work order and signature is written to an append-only record — timestamped,
+        attributable, never quietly edited behind you. The history of the vessel lives in one place,
+        and it only ever gets longer.
+      </p>
+
+      <div class="still-frame still-frame--wide fade-in" style="max-width: 680px; margin-top: var(--space-8);">
+        <div class="still-frame__chrome">
+          <span class="still-frame__label">audit-trail-only.html</span>
+        </div>
+        <div class="still-frame__viewport">
+          <iframe src="prototypes/audit-trail-only.html" loading="lazy" title="The append-only activity trail — each action timestamped and attributable, the record only ever growing"></iframe>
+        </div>
+      </div>
+      <p class="still-note">
+        The activity trail behind the record — each change timestamped and attributable, written in order
+        and never quietly edited behind you. It only ever gets longer.
+      </p>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       GUARANTEE — the value promise (true). Findability + append-only record.
+       Plus the quiet Records-Are-Yours line (once).
+       ==================================================================== -->
+  <section class="section section--alt section--hairline-top" id="promise">
+    <div class="container stack">
+      <span class="eyebrow"><span class="eyebrow__num">06</span>The promise</span>
+      <h2 class="headline" style="max-width: 30ch;">
+        We make the scattered, hard-to-find record of a vessel findable — and we keep it on an
+        append-only record that isn't rewritten.
+      </h2>
+
+      <div class="guarantee" style="margin-inline: 0;">
+        <span class="guarantee__label">Records are yours</span>
+        <p class="guarantee__body">
+          Cancel anytime. Every record exports with you. The vessel's memory was always the vessel's.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       PRICE / ANCHOR — continuity currency. Loss-anchored against INDUSTRY
+       ranges only (cited), never a CelesteOS savings promise.
+       ==================================================================== -->
+  <section class="section" id="price">
+    <div class="container stack-loose">
+
+      <div class="stack">
+        <span class="eyebrow"><span class="eyebrow__num">07</span>The arithmetic</span>
+        <h2 class="headline">Measured against what re-learning a vessel actually costs.</h2>
+        <p class="sub" style="max-width: 56ch;">
+          A class detention runs into thousands a day; re-learning a vessel from scratch every rotation
+          costs days of downtime. CelesteOS keeps the record so the next chief starts where the last
+          one finished.
+        </p>
+      </div>
+
+      <!-- Industry loss range (left) vs CelesteOS price (right). Structural, not urgent. -->
+      <div class="value-anchor">
+        <div class="value-anchor__side">
+          <span class="value-anchor__figure">£5,000&ndash;£50,000</span>
+          <span class="value-anchor__caption">a class detention, per day (industry range)</span>
+        </div>
+        <div class="value-anchor__op">&gt;</div>
+        <div class="value-anchor__side value-anchor__side--right">
+          <span class="value-anchor__figure">$450</span>
+          <span class="value-anchor__caption">CelesteOS — one vessel, 28 days</span>
+        </div>
+      </div>
+      <p class="cite center">Industry ranges, not a CelesteOS figure. Re-learning a vessel each rotation costs days of downtime that sit between.</p>
+
+      <!-- Price card -->
+      <div class="price">
+        <div class="price__amount">$450<span class="price__period">/ vessel / 28 days</span></div>
+        <ul class="price__list">
+          <li>Unlimited seats — every rotation, no per-head charge</li>
+          <li>Runs alongside your existing PMS</li>
+          <li>The record stays in the vessel, denser each rotation</li>
+          <li>Cancel anytime, export everything</li>
+        </ul>
+        <p class="price__note">Priced per vessel.</p>
+      </div>
+
+      <!-- ROADMAP LINE — money-finder. ONE quiet, clearly future-tense line.
+           No figure, visually minor. Reversible. -->
+      <p class="cite center" style="max-width: 64ch; margin-inline: auto; line-height: 1.7;">
+        <span class="roadmap-tag"><span class="pill__dot" style="background: var(--txt-ghost);"></span>On the roadmap</span>
+        Warranty-window flagging — when you log a fault, CelesteOS will check whether the equipment is
+        still under warranty and flag it for you to claim. In development.
+      </p>
+
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       PMS REASSURANCE — stated ONCE, one calm passage.
+       ==================================================================== -->
+  <section class="section section--tight section--alt section--hairline-top" id="pms">
+    <div class="container stack">
+      <span class="eyebrow eyebrow--muted"><span class="eyebrow__num">08</span>Alongside your PMS</span>
+      <p class="one-line">
+        Nothing to install. Onboard in hours.
+      </p>
+      <p class="sub">
+        Runs alongside AMOS, Seahub, IDEA, ShipManager — nothing to replace, nothing to migrate.
+        Unlimited seats, priced per vessel.
+      </p>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       FOUNDER restated (first person) before the hard CTA — no photo.
+       ==================================================================== -->
+  <section class="section section--tight" id="founder">
+    <div class="container--narrow quote">
+      <p class="quote__body" style="font-size: var(--fs-h3);">
+        I built CelesteOS so the next engineer walks aboard to a vessel that already remembers —
+        not a year of knowledge I happened to take with me.
+      </p>
+      <span class="quote__cite"><strong>Alex Short</strong> — Founder, former ETO</span>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       HARD CTA — page foot only. No urgency, no sticky bar. The soft CTA is
+       the recurring one; the hard ask lives here, at the foot. This section
+       also serves the #walkthrough anchor (the soft CTA's target).
+       ==================================================================== -->
+  <section class="section section--alt section--hairline-top" id="pilot">
+    <div class="container--narrow center stack" id="walkthrough">
+      <span class="eyebrow"><span class="eyebrow__num">09</span>Pilot</span>
+      <h2 class="headline center-x" style="max-width: 24ch; margin-inline: auto;">
+        One vessel. The next rotation. The record starts here and only gets longer.
+      </h2>
+      <p class="sub center-x" style="max-width: 52ch; margin-inline: auto;">
+        See what a signed handover looks like — or take a closer look first.
+      </p>
+      <div class="cta-row" style="justify-content: center;">
+        <a class="btn btn--hard" href="mailto:pilot@celeste7.ai?subject=Pilot%20access%20%E2%80%94%20one%20vessel">Request pilot access — one vessel, next rotation</a>
+        <a class="btn btn--soft" href="mailto:alex@celeste7.ai?subject=Talk%20to%20the%20founder">Talk to the founder</a>
+      </div>
+      <p class="cite center">No signup. No sales call. One vessel at a time.</p>
+    </div>
+  </section>
+
+</main>
+
+<!-- ======================================================================
+     FOOTER — verifier.celeste7.ai lives here ONLY. Operational mail only.
+     ====================================================================== -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__row">
+      <span class="footer__brand">Celeste<b>OS</b></span>
+      <div class="footer__links">
+        <a href="#handover">Handover</a>
+        <a href="#related">The record</a>
+        <a href="#price">Pricing</a>
+        <a href="https://verifier.celeste7.ai">verifier.celeste7.ai</a>
+        <a href="privacy-policy.html">Privacy</a>
+        <a href="trust.html">Trust</a>
+      </div>
+    </div>
+    <p class="footer__legal">© 2026 Celeste7 LTD · operational correspondence only · verifier.celeste7.ai</p>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<title>Audit Trail — bucketed dot timeline — Cloud_PMS prototype</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: #0c0b0a;
+  color: rgba(255,255,255,0.92);
+  font-family: 'DM Sans', -apple-system, sans-serif;
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+  padding: 28px 32px 32px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* Audit trail section — verbatim from AuditTrailSection.tsx visual contract */
+.audit-section { padding: 0; }
+.bucket-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+  margin: 24px 0 14px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.bucket-label:first-of-type { margin-top: 0; }
+
+.timeline {
+  list-style: none;
+  position: relative;
+  padding-left: 18px;
+  margin: 0;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 5px; top: 8px; bottom: 8px;
+  width: 1px;
+  background: rgba(255,255,255,0.10);
+}
+.event {
+  position: relative;
+  padding: 8px 0 8px 16px;
+  font-size: 14px;
+  color: rgba(255,255,255,0.92);
+}
+.event::before {
+  content: '';
+  position: absolute;
+  left: -18px; top: 14px;
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  background: #5AABCC;
+  box-shadow: 0 0 0 3px #0c0b0a;
+}
+.event.deleted { text-decoration: line-through; color: rgba(255,255,255,0.40); }
+.event-action { color: rgba(255,255,255,0.92); }
+.event-meta {
+  display: flex; align-items: center; gap: 6px;
+  margin-top: 4px;
+  font-size: 12px;
+  color: rgba(255,255,255,0.55);
+}
+.event-actor { color: rgba(255,255,255,0.70); }
+.role-chip {
+  display: inline-flex; align-items: center;
+  padding: 2px 7px;
+  border-radius: 3px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: lowercase;
+}
+.role-chip.captain {
+  background: rgba(176,120,40,0.14);
+  color: #C9A66B;
+  border: 1px solid rgba(176,120,40,0.32);
+}
+.role-chip.hod {
+  background: rgba(58,124,157,0.16);
+  color: #5AABCC;
+  border: 1px solid rgba(58,124,157,0.34);
+}
+.role-chip.crew {
+  background: rgba(255,255,255,0.05);
+  color: rgba(255,255,255,0.55);
+  border: 1px solid rgba(255,255,255,0.07);
+}
+.event-ts {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  color: rgba(255,255,255,0.40);
+  margin-left: auto;
+}
+
+.audit-foot {
+  margin-top: 32px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  font-size: 11px;
+  font-family: 'IBM Plex Mono', monospace;
+  letter-spacing: 0.06em;
+  color: rgba(255,255,255,0.40);
+}
+</style>
+</head>
+<body>
+
+<section class="audit-section">
+
+  <div class="bucket-label">Today</div>
+  <ul class="timeline">
+    <li class="event">
+      <div class="event-action">Status changed <strong>Open &rarr; Closed</strong></div>
+      <div class="event-meta">
+        <span class="event-actor">J. Williams</span>
+        <span class="role-chip hod">chief engineer</span>
+        <span class="event-ts">14:38 UTC</span>
+      </div>
+    </li>
+    <li class="event">
+      <div class="event-action">Note added &middot; <em>"Replaced TX3-2A expansion valve. Tested under full load for 30 min."</em></div>
+      <div class="event-meta">
+        <span class="event-actor">J. Williams</span>
+        <span class="role-chip hod">chief engineer</span>
+        <span class="event-ts">14:32 UTC</span>
+      </div>
+    </li>
+  </ul>
+
+  <div class="bucket-label">Past 7 days</div>
+  <ul class="timeline">
+    <li class="event">
+      <div class="event-action">Linked part <strong>P-00412</strong> (TX3-2A expansion valve)</div>
+      <div class="event-meta">
+        <span class="event-actor">J. Williams</span>
+        <span class="role-chip hod">chief engineer</span>
+        <span class="event-ts">2026-03-12 12:32 UTC</span>
+      </div>
+    </li>
+    <li class="event">
+      <div class="event-action">Description edited</div>
+      <div class="event-meta">
+        <span class="event-actor">Alex Short</span>
+        <span class="role-chip captain">captain</span>
+        <span class="event-ts">2026-03-10 09:14 UTC</span>
+      </div>
+    </li>
+    <li class="event">
+      <div class="event-action">Status changed <strong>Not Started &rarr; Open</strong></div>
+      <div class="event-meta">
+        <span class="event-actor">Alex Short</span>
+        <span class="role-chip captain">captain</span>
+        <span class="event-ts">2026-03-09 17:48 UTC</span>
+      </div>
+    </li>
+  </ul>
+
+  <div class="bucket-label">Older</div>
+  <ul class="timeline">
+    <li class="event">
+      <div class="event-action">Linked equipment <strong>EQP-018</strong> (EPIRB Mk II)</div>
+      <div class="event-meta">
+        <span class="event-actor">Alex Short</span>
+        <span class="role-chip captain">captain</span>
+        <span class="event-ts">2026-01-28 08:11 UTC</span>
+      </div>
+    </li>
+    <li class="event deleted">
+      <div class="event-action">Note added <em>(deleted)</em></div>
+      <div class="event-meta">
+        <span class="event-actor">A. Reyes</span>
+        <span class="role-chip crew">deckhand</span>
+        <span class="event-ts">2026-01-28 07:54 UTC</span>
+      </div>
+    </li>
+    <li class="event">
+      <div class="event-action">Work order created</div>
+      <div class="event-meta">
+        <span class="event-actor">Alex Short</span>
+        <span class="role-chip captain">captain</span>
+        <span class="event-ts">2026-01-28 07:42 UTC</span>
+      </div>
+    </li>
+  </ul>
+
+  <div class="audit-foot">8 events &middot; append-only &middot; every row links to its source record</div>
+</section>
+
+</body>
+</html>

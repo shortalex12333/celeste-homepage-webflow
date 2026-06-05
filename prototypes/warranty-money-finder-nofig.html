@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Editorial · Warranty money-finder</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 100%; height: 100%; }
+
+:root {
+  --bg: linear-gradient(160deg, #181614 0%, #14110F 50%, #0C0B0A 100%);
+  --bg-glow: radial-gradient(circle at 25% 20%, rgba(90,171,204,0.04), transparent 55%);
+  --card-bg: rgba(30, 27, 24, 0.85);
+  --card-border: rgba(255,255,255,0.06);
+  --card-border-top: rgba(255,255,255,0.10);
+  --card-shadow: 0 1px 0 rgba(0,0,0,0.40), 0 8px 24px rgba(0,0,0,0.30);
+  --card-radius: 8px;
+  --row-border: rgba(255,255,255,0.04);
+  --txt: rgba(255,255,255,0.92);
+  --txt-dim: rgba(255,255,255,0.55);
+  --txt-ghost: rgba(255,255,255,0.35);
+  --mono-dim: rgba(255,255,255,0.40);
+  --green: #4A9468;
+  --green-bg: rgba(74,148,104,0.12);
+  --green-txt: #6BB885;
+  --teal: #5AABCC;
+  --teal-bg: rgba(90,171,204,0.12);
+  --teal-border: rgba(90,171,204,0.30);
+}
+[data-theme="light"] {
+  --bg: linear-gradient(160deg, #FEFEFE 0%, #FAF8F5 25%, #F2EDE7 65%, #EBE5DE 100%);
+  --bg-glow: none;
+  --card-bg: #FFFFFF;
+  --card-border: rgba(0,0,0,0.05);
+  --card-border-top: rgba(0,0,0,0.05);
+  --card-shadow: 0 1px 2px rgba(0,0,0,0.03), 0 8px 24px rgba(0,0,0,0.05), 0 24px 64px rgba(0,0,0,0.04);
+  --card-radius: 10px;
+  --row-border: rgba(0,0,0,0.025);
+  --txt: #1a1a1a;
+  --txt-dim: #777;
+  --txt-ghost: #999;
+  --mono-dim: #aaa;
+  --green: #3A7A55;
+  --green-bg: rgba(74,148,104,0.10);
+  --green-txt: #3A7A55;
+  --teal: #2B7BA3;
+  --teal-bg: rgba(43,123,163,0.08);
+  --teal-border: rgba(43,123,163,0.22);
+}
+
+body {
+  background: var(--bg);
+  font-family: 'DM Sans', -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  display: flex; align-items: stretch; justify-content: stretch;
+  padding: 16px; width: 520px; height: 360px;
+  overflow: hidden; position: relative;
+}
+body::before {
+  content: ''; position: absolute; inset: 0;
+  background: var(--bg-glow); pointer-events: none;
+}
+
+.card {
+  width: 100%; flex: 1;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-top-color: var(--card-border-top);
+  border-radius: var(--card-radius);
+  box-shadow: var(--card-shadow);
+  overflow: hidden; display: flex; flex-direction: column;
+  position: relative; z-index: 1;
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+}
+
+.c-head {
+  padding: 12px 18px;
+  border-bottom: 1px solid var(--row-border);
+  display: flex; align-items: center; gap: 10px;
+}
+.c-type {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 9px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.10em;
+  color: var(--mono-dim);
+}
+.c-id {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px; color: var(--txt-dim);
+  margin-left: auto;
+}
+
+.eq {
+  padding: 14px 18px 12px;
+  border-bottom: 1px solid var(--row-border);
+}
+.eq-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 9px; letter-spacing: 0.10em; text-transform: uppercase;
+  color: var(--mono-dim); margin-bottom: 4px;
+}
+.eq-name { font-size: 14px; font-weight: 500; color: var(--txt); }
+
+.coverage {
+  display: flex; align-items: center; gap: 14px;
+  padding: 14px 18px;
+  background: var(--teal-bg);
+  border-bottom: 1px solid var(--row-border);
+}
+.coverage-days {
+  display: flex; flex-direction: column; align-items: center;
+  padding-right: 14px;
+  border-right: 1px solid var(--teal-border);
+}
+.coverage-num {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 30px; font-weight: 500;
+  color: var(--green-txt);
+  line-height: 1;
+}
+.coverage-unit {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 9px; letter-spacing: 0.10em; text-transform: uppercase;
+  color: var(--txt-dim); margin-top: 3px;
+}
+.coverage-meta { flex: 1; min-width: 0; font-size: 12px; color: var(--txt); line-height: 1.5; }
+.coverage-meta .strong { color: var(--txt); font-weight: 500; }
+.coverage-meta .mono {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px; color: var(--teal); letter-spacing: 0.04em;
+  text-transform: uppercase; display: block; margin-bottom: 3px;
+}
+
+.claim {
+  flex: 1;
+  padding: 12px 18px;
+  display: flex; flex-direction: column;
+}
+.claim-h {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 9px; letter-spacing: 0.10em; text-transform: uppercase;
+  color: var(--teal); margin-bottom: 8px;
+}
+.claim-list {
+  list-style: none;
+  display: flex; flex-direction: column; gap: 4px;
+  margin: 0 0 10px;
+  font-size: 11px; font-family: 'IBM Plex Mono', monospace;
+  color: var(--txt-dim);
+}
+.claim-list li::before {
+  content: '✓'; color: var(--green); font-weight: 600; margin-right: 8px;
+}
+.claim-cta {
+  margin-top: auto;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px;
+}
+.claim-btn {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px; font-weight: 500;
+  color: #fff; background: var(--teal);
+  padding: 7px 12px; border-radius: 4px;
+  border: 1px solid var(--teal);
+}
+.claim-amt {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px; color: var(--green-txt); font-weight: 500;
+}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="c-head">
+    <div class="c-type">Warranty</div>
+    <div class="c-id">WRN-412</div>
+  </div>
+  <div class="eq">
+    <div class="eq-label">EQP-018 · BCS Panel</div>
+    <div class="eq-name">Battery management system</div>
+  </div>
+  <div class="coverage">
+    <div class="coverage-days">
+      <div class="coverage-num">428</div>
+      <div class="coverage-unit">days</div>
+    </div>
+    <div class="coverage-meta">
+      <span class="mono">Active · expires 2027-03-14</span>
+      <span class="strong">This replacement is claimable.</span>
+    </div>
+  </div>
+  <div class="claim">
+    <div class="claim-h">Claim pack ready</div>
+    <ul class="claim-list">
+      <li>FLT-1843 · fault record</li>
+      <li>WO-0142 · work order + labour</li>
+      <li>P-00781 · part + serial</li>
+      <li>DOC-0046 · OEM service bulletin</li>
+    </ul>
+    <div class="claim-cta">
+      <span class="claim-btn">Generate claim pack</span>
+      <span class="claim-amt">Drafted · ready to confirm</span>
+    </div>
+  </div>
+</div>
+</body>
+</html>

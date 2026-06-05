@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<title>Suggested Documents — section — Cloud_PMS prototype</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --surface-base: #0c0b0a;
+  --surface:      #181614;
+  --surface-el:   #1e1b18;
+  --surface-hover: rgba(255,255,255,0.045);
+  --border-sub:   rgba(255,255,255,0.07);
+  --border-top:   rgba(255,255,255,0.11);
+  --border-faint: rgba(255,255,255,0.05);
+  --txt:          rgba(255,255,255,0.92);
+  --txt2:         rgba(255,255,255,0.55);
+  --txt3:         rgba(255,255,255,0.70);
+  --txt-ghost:    rgba(255,255,255,0.40);
+  --mark:         #5AABCC;
+  --mark-hover:   rgba(58,124,157,0.22);
+  --teal-bg:      rgba(58,124,157,0.12);
+  --green:        #4A9468;
+  --green-bg:     rgba(74,148,104,0.10);
+  --green-border: rgba(74,148,104,0.32);
+  --red:          #C0503A;
+  --red-bg:       rgba(192,80,58,0.08);
+  --red-border:   rgba(192,80,58,0.30);
+  --font-body:    'DM Sans', -apple-system, sans-serif;
+  --font-mono:    'IBM Plex Mono', ui-monospace, monospace;
+}
+body {
+  background: var(--surface-base);
+  color: var(--txt);
+  font-family: var(--font-body);
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+  padding: 24px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* CollapsibleSection chrome — matches lens.module.css .section */
+.section {
+  border-top: 1px solid var(--border-sub);
+  padding: 14px 0 4px;
+}
+.sec-hdr {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px 4px;
+  cursor: pointer;
+  user-select: none;
+}
+.sec-icon {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 20px; height: 20px;
+  color: var(--txt2);
+}
+.sec-title {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--txt2);
+}
+.sec-count {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--txt3);
+  margin-left: auto;
+}
+.sec-chev {
+  color: var(--txt-ghost);
+}
+.sec-chev svg { width: 12px; height: 12px; }
+
+/* Rows */
+.list { list-style: none; padding: 4px 0 6px; display: flex; flex-direction: column; gap: 2px; }
+.row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 14px;
+  border-radius: 6px;
+  min-height: 44px;
+  transition: background 80ms ease;
+}
+.row:hover { background: var(--surface-hover); }
+
+.icon-box {
+  width: 28px; height: 28px;
+  border-radius: 6px;
+  background: var(--teal-bg);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  color: var(--mark);
+}
+.icon-box svg { width: 14px; height: 14px; }
+
+.info { flex: 1; min-width: 0; }
+.prompt {
+  font-size: 12px;
+  color: var(--txt3);
+  margin: 0;
+  line-height: 1.3;
+}
+.title-line {
+  display: flex; align-items: baseline; gap: 10px;
+  margin-top: 3px; flex-wrap: wrap;
+}
+.title {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--mark);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  cursor: pointer;
+}
+.title:hover { color: var(--mark-hover); }
+.match {
+  display: inline-flex; align-items: center;
+  height: 18px;
+  padding: 0 8px;
+  border-radius: 2px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--txt3);
+  background: var(--surface-el);
+  border: 1px solid var(--border-faint);
+}
+.meta {
+  display: flex; gap: 8px; flex-wrap: wrap;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--txt3);
+  margin-top: 4px;
+}
+.meta > span + span::before {
+  content: "·"; margin-right: 8px; color: var(--txt-ghost);
+}
+
+.actions { display: flex; gap: 4px; align-items: center; flex-shrink: 0; }
+.icon-btn {
+  width: 28px; height: 28px;
+  border-radius: 6px;
+  background: transparent;
+  border: 1px solid var(--border-sub);
+  color: var(--txt3);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  transition: background 60ms ease, color 60ms ease, border-color 60ms ease;
+}
+.icon-btn:hover { background: var(--surface-hover); color: var(--txt); border-color: var(--border-top); }
+.icon-btn svg { width: 14px; height: 14px; }
+.icon-btn-accept:hover {
+  background: var(--green-bg);
+  border-color: var(--green-border);
+  color: var(--green);
+}
+.icon-btn-deny:hover {
+  background: var(--red-bg);
+  border-color: var(--red-border);
+  color: var(--red);
+}
+
+.show-more {
+  display: inline-block;
+  margin: 10px 14px 4px;
+  background: none; border: none;
+  font: 500 13px var(--font-body);
+  color: var(--mark);
+  cursor: pointer;
+  padding: 4px 0;
+}
+.show-more:hover { color: var(--mark-hover); }
+
+.foot {
+  margin-top: 18px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border-faint);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  color: var(--txt-ghost);
+}
+</style>
+</head>
+<body>
+
+<div class="section" data-testid="suggested-docs-tab" data-entity-type="equipment" data-entity-id="EQP-002">
+  <div class="sec-hdr">
+    <div class="sec-icon">
+      <svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
+        <path d="M9 1H4a1 1 0 00-1 1v12a1 1 0 001 1h8a1 1 0 001-1V5L9 1z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/>
+        <path d="M9 1v4h4" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <div class="sec-title">Suggested Documents</div>
+    <div class="sec-count">3</div>
+    <div class="sec-chev">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6l5 5 5-5"/></svg>
+    </div>
+  </div>
+
+  <ul class="list">
+
+    <li class="row" data-testid="suggested-doc-card" data-doc-id="DOC-0046">
+      <div class="icon-box">
+        <svg viewBox="0 0 16 16" fill="none"><path d="M9 1H4a1 1 0 00-1 1v12a1 1 0 001 1h8a1 1 0 001-1V5L9 1z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/><path d="M9 1v4h4" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="info">
+        <p class="prompt">Want to add this document to the Main Generator?</p>
+        <div class="title-line">
+          <a class="title" data-testid="suggested-doc-link">Cummins QSK60 — Service &amp; Overhaul Manual</a>
+          <span class="match" aria-label="Match score 94%">94%</span>
+        </div>
+        <div class="meta">
+          <span>OEM Manual</span><span>Cummins</span><span>QSK60-MCD</span>
+        </div>
+      </div>
+      <div class="actions">
+        <button class="icon-btn icon-btn-deny" data-testid="suggested-doc-deny" aria-label="Deny suggestion" title="Deny suggestion">
+          <svg viewBox="0 0 16 16" fill="none"><path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </button>
+        <button class="icon-btn icon-btn-accept" data-testid="suggested-doc-accept" aria-label="Accept suggestion" title="Accept suggestion">
+          <svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3 3 7-7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+    </li>
+
+    <li class="row" data-testid="suggested-doc-card" data-doc-id="DOC-0218">
+      <div class="icon-box">
+        <svg viewBox="0 0 16 16" fill="none"><path d="M9 1H4a1 1 0 00-1 1v12a1 1 0 001 1h8a1 1 0 001-1V5L9 1z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/><path d="M9 1v4h4" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="info">
+        <p class="prompt">Want to add this document to the Main Generator?</p>
+        <div class="title-line">
+          <a class="title" data-testid="suggested-doc-link">Service Bulletin SB-2024-03 — Fuel filter element supersession</a>
+          <span class="match">87%</span>
+        </div>
+        <div class="meta">
+          <span>Service Bulletin</span><span>Cummins</span><span>2024-03</span>
+        </div>
+      </div>
+      <div class="actions">
+        <button class="icon-btn icon-btn-deny" data-testid="suggested-doc-deny" aria-label="Deny suggestion" title="Deny suggestion">
+          <svg viewBox="0 0 16 16" fill="none"><path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </button>
+        <button class="icon-btn icon-btn-accept" data-testid="suggested-doc-accept" aria-label="Accept suggestion" title="Accept suggestion">
+          <svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3 3 7-7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+    </li>
+
+    <li class="row" data-testid="suggested-doc-card" data-doc-id="DOC-0184">
+      <div class="icon-box">
+        <svg viewBox="0 0 16 16" fill="none"><path d="M9 1H4a1 1 0 00-1 1v12a1 1 0 001 1h8a1 1 0 001-1V5L9 1z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/><path d="M9 1v4h4" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="info">
+        <p class="prompt">Want to add this document to the Main Generator?</p>
+        <div class="title-line">
+          <a class="title" data-testid="suggested-doc-link">Parts catalogue — MG-RTL Mk II</a>
+          <span class="match">71%</span>
+        </div>
+        <div class="meta">
+          <span>Parts Catalogue</span><span>Hempel</span><span>MG-RTL-MkII</span>
+        </div>
+      </div>
+      <div class="actions">
+        <button class="icon-btn icon-btn-deny" data-testid="suggested-doc-deny" aria-label="Deny suggestion" title="Deny suggestion">
+          <svg viewBox="0 0 16 16" fill="none"><path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </button>
+        <button class="icon-btn icon-btn-accept" data-testid="suggested-doc-accept" aria-label="Accept suggestion" title="Accept suggestion">
+          <svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3 3 7-7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+    </li>
+
+  </ul>
+
+  <button class="show-more" data-testid="suggested-docs-show-more">Show more</button>
+
+  <div class="foot">3 of N &middot; +3 per "Show more" &middot; accepted rows vanish &middot; BE filters via pms_entity_doc_decisions</div>
+</div>
+
+</body>
+</html>

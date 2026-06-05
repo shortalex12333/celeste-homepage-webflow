@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<title>Link Document — L1 Confirm popup — Cloud_PMS prototype</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --surface-base:  #0c0b0a;
+  --surface:       #181614;
+  --surface-el:    #1e1b18;
+  --surface-hover: rgba(255,255,255,0.045);
+  --border-sub:    rgba(255,255,255,0.07);
+  --border-top:    rgba(255,255,255,0.11);
+  --border-faint:  rgba(255,255,255,0.05);
+  --txt:           rgba(255,255,255,0.92);
+  --txt2:          rgba(255,255,255,0.55);
+  --txt3:          rgba(255,255,255,0.70);
+  --txt-ghost:     rgba(255,255,255,0.40);
+  --mark:          #5AABCC;
+  --mark-underline:rgba(90,171,204,0.45);
+  --teal-bg:       rgba(58,124,157,0.16);
+  --red:           #C0503A;
+  --font-sans:     'DM Sans', -apple-system, sans-serif;
+  --font-mono:     'IBM Plex Mono', ui-monospace, monospace;
+}
+body {
+  background: var(--surface-base);
+  color: var(--txt);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  padding: 28px 24px;
+  display: flex; justify-content: center;
+}
+
+.popup {
+  width: 100%; max-width: 620px;
+  background: var(--surface);
+  border-top:    1px solid var(--border-top);
+  border-right:  1px solid var(--border-sub);
+  border-bottom: 1px solid var(--border-sub);
+  border-left:   1px solid var(--border-sub);
+  border-radius: 12px;
+  box-shadow: 0 0 0 1px rgba(0,0,0,0.50), 0 32px 100px rgba(0,0,0,0.70);
+  overflow: hidden;
+}
+
+.popup-hdr {
+  display: flex; align-items: flex-start; gap: 14px;
+  padding: 20px 24px 16px;
+  border-bottom: 1px solid var(--border-sub);
+}
+.popup-icon {
+  width: 36px; height: 36px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  background: var(--teal-bg);
+  color: var(--mark);
+  display: flex; align-items: center; justify-content: center;
+}
+.popup-icon svg { width: 18px; height: 18px; }
+.popup-titles { flex: 1; min-width: 0; }
+.popup-title {
+  font-size: 18px; font-weight: 600;
+  color: var(--txt);
+  letter-spacing: -0.005em;
+  margin-bottom: 4px;
+}
+.popup-subtitle {
+  font-size: 13px;
+  color: var(--txt2);
+  line-height: 1.45;
+}
+.popup-close {
+  width: 32px; height: 32px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  background: transparent; border: none; cursor: pointer;
+  color: var(--txt-ghost);
+  border-radius: 6px;
+  margin-top: -2px; margin-right: -4px;
+}
+.popup-close:hover { background: var(--surface-hover); color: var(--txt2); }
+.popup-close svg { width: 16px; height: 16px; }
+
+.popup-body { padding: 8px 24px 18px; }
+
+.field {
+  display: grid;
+  grid-template-columns: 130px 1fr;
+  gap: 14px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border-faint);
+}
+.field:last-child { border-bottom: none; }
+.field-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.10em;
+  color: var(--txt3);
+  text-transform: uppercase;
+  padding-top: 2px;
+}
+.field-value {
+  font-size: 13.5px;
+  color: var(--txt);
+  line-height: 1.5;
+}
+.field-value .mono {
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  color: var(--mark);
+}
+.field-value .sub {
+  display: block;
+  margin-top: 4px;
+  font-size: 12px;
+  color: var(--txt3);
+  line-height: 1.45;
+}
+.field-value .entity-ref {
+  color: var(--mark);
+  text-decoration: underline;
+  text-decoration-color: var(--mark-underline);
+  text-underline-offset: 2px;
+}
+.match-pill {
+  display: inline-flex; align-items: center;
+  height: 18px;
+  padding: 0 8px;
+  border-radius: 2px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--txt3);
+  background: var(--surface-el);
+  border: 1px solid var(--border-faint);
+  margin-right: 8px;
+}
+
+.popup-foot {
+  display: flex; align-items: center; justify-content: flex-end; gap: 10px;
+  padding: 16px 24px 20px;
+  border-top: 1px solid var(--border-faint);
+  background: rgba(255,255,255,0.015);
+}
+.btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 9px 18px;
+  border-radius: 6px;
+  font: 500 13.5px var(--font-sans);
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: background 80ms ease, color 80ms ease, border-color 80ms ease;
+}
+.btn-ghost {
+  background: transparent;
+  color: var(--txt2);
+  border-color: var(--border-sub);
+}
+.btn-ghost:hover { background: var(--surface-hover); color: var(--txt); }
+.btn-primary {
+  background: var(--teal-bg);
+  color: var(--mark);
+  border-color: var(--mark-underline);
+  font-weight: 600;
+  padding: 9px 16px;
+}
+.btn-primary:hover { background: rgba(58,124,157,0.28); }
+</style>
+</head>
+<body>
+
+<div class="popup" role="dialog" aria-modal="true" aria-labelledby="lnk-title">
+
+  <div class="popup-hdr">
+    <div class="popup-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M9 17H7a5 5 0 0 1 0-10h2"/>
+        <path d="M15 7h2a5 5 0 1 1 0 10h-2"/>
+        <line x1="8" y1="12" x2="16" y2="12"/>
+      </svg>
+    </div>
+    <div class="popup-titles">
+      <div class="popup-title" id="lnk-title">Link document to Main Generator?</div>
+      <div class="popup-subtitle">SigL1 fires inline &middot; the row vanishes once linked</div>
+    </div>
+    <button class="popup-close" aria-label="Close">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 4l8 8M12 4l-8 8"/></svg>
+    </button>
+  </div>
+
+  <div class="popup-body">
+
+    <div class="field">
+      <span class="field-label">Document</span>
+      <span class="field-value">
+        <span class="mono">DOC-0046</span> &middot; Cummins QSK60 &mdash; Service &amp; Overhaul Manual
+      </span>
+    </div>
+
+    <div class="field">
+      <span class="field-label">Type</span>
+      <span class="field-value">OEM Manual</span>
+    </div>
+
+    <div class="field">
+      <span class="field-label">Match score</span>
+      <span class="field-value">
+        <span class="match-pill">94%</span>match to Main Generator
+      </span>
+    </div>
+
+    <div class="field">
+      <span class="field-label">Entity</span>
+      <span class="field-value">
+        <span class="entity-ref">Main Generator</span>
+        <span class="mono">&nbsp;(EQP-002)</span>
+      </span>
+    </div>
+
+    <div class="field">
+      <span class="field-label">Action</span>
+      <span class="field-value">
+        <span class="mono">executeAction('link_document_to_entity')</span>
+        <span class="sub">Links this document to Main Generator.</span>
+      </span>
+    </div>
+
+  </div>
+
+  <div class="popup-foot">
+    <button class="btn btn-ghost" type="button">Cancel</button>
+    <button class="btn btn-primary" type="submit">Link document</button>
+  </div>
+
+</div>
+
+</body>
+</html>

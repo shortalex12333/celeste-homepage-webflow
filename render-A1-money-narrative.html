@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CelesteOS — the one record on your vessel that gives back more the longer it runs</title>
+<meta name="description" content="Every fault logged makes the record denser — and the denser it gets, the more it gives back. The vessel's memory, kept in the vessel, not in the crew that leaves.">
+<link rel="icon" href="/favicon.png">
+<link rel="stylesheet" href="render-shared.css">
+<style>
+  /* A1-only, on-token additions. Layout glue + one media-frame variant. */
+  .hero-stills {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: var(--space-8);
+    align-items: stretch;
+  }
+  @media (max-width: 860px) { .hero-stills { grid-template-columns: 1fr; } }
+
+  .moment {
+    border-left: 2px solid var(--teal-ambient);
+    padding-left: var(--space-6);
+    max-width: 60ch;
+  }
+  .moment p { color: var(--txt3); margin: 0; }
+
+  .feature-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-12);
+    align-items: center;
+  }
+  .feature-row--flip { grid-template-columns: 1fr 1fr; }
+  @media (max-width: 860px) {
+    .feature-row, .feature-row--flip { grid-template-columns: 1fr; gap: var(--space-8); }
+    .feature-row--flip .feature-row__media { order: -1; }
+  }
+  .feature-row__copy { max-width: 46ch; }
+
+  .moment-list {
+    list-style: none;
+    margin: var(--space-6) 0 0;
+    padding: 0;
+    display: grid;
+    gap: var(--space-6);
+  }
+  .moment-list > li {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: var(--space-4);
+    align-items: start;
+  }
+  .moment-list__num {
+    font-family: var(--font-mono);
+    font-size: var(--fs-eyebrow);
+    color: var(--teal-ambient);
+    letter-spacing: 0.08em;
+    padding-top: 0.2em;
+  }
+  .moment-list__body { color: var(--txt3); font-size: var(--fs-body); }
+  .moment-list__body strong { color: var(--txt); font-weight: var(--fw-medium); }
+
+  .ineq {
+    display: grid;
+    gap: var(--space-3);
+    max-width: 64ch;
+    margin-inline: auto;
+  }
+  .ineq__row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: var(--space-6);
+    align-items: baseline;
+    padding-block: var(--space-3);
+    border-bottom: 1px solid var(--hairline);
+  }
+  .ineq__row:last-child { border-bottom: 0; }
+  .ineq__term { font-family: var(--font-mono); font-size: var(--fs-small); color: var(--txt3); }
+  .ineq__fig  { font-family: var(--font-mono); font-size: var(--fs-small); color: var(--txt2); text-align: right; white-space: nowrap; }
+  .ineq__op {
+    font-family: var(--font-mono);
+    font-size: var(--fs-eyebrow);
+    color: var(--teal-ambient);
+    text-align: center;
+    letter-spacing: 0.2em;
+    padding-block: var(--space-1);
+  }
+  .ineq__row--price .ineq__term,
+  .ineq__row--price .ineq__fig { color: var(--txt); font-weight: var(--fw-medium); }
+
+  .pmsline {
+    display: flex; flex-wrap: wrap; gap: var(--space-2);
+    font-family: var(--font-mono); font-size: var(--fs-small);
+    color: var(--txt3);
+  }
+  .pmsline span { white-space: nowrap; }
+  .pmsline .sep { color: var(--txt-ghost); }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a class="nav__brand" href="/">Celeste<b>OS</b></a>
+  <div class="nav__links">
+    <a href="#compounds">Records</a>
+    <a href="#receiving">Receiving</a>
+    <a href="#price">Pricing</a>
+    <a href="#pilot">Pilot</a>
+  </div>
+</nav>
+
+<main class="page">
+
+  <!-- ====================================================================
+       HERO A — money-first, honesty-bound, figure-free
+       Filter test: a fault on in-window equipment already has its history
+       assembled into a claim pack, drafted to confirm. No figure anywhere.
+  ===================================================================== -->
+  <section class="section">
+    <div class="container stack">
+      <span class="eyebrow"><span class="eyebrow__num">01</span>The record compounds</span>
+      <h1 class="display display--wide">The one record on your vessel that <em class="weight">gives back more</em> the longer it runs.</h1>
+      <p class="lead">Every fault logged makes the record denser — and the denser it gets, the more it gives back.</p>
+
+      <div class="moment">
+        <p>A fault lands on equipment still inside its warranty window. Before anyone opens a manual, the history is already there — the fault, the work order, the part serial, the OEM bulletin — assembled into a claim pack, drafted for the engineer to confirm.</p>
+      </div>
+
+      <div class="cta-row">
+        <a class="btn btn--soft" href="#walkthrough">Watch the 2-minute walkthrough</a>
+        <span class="mono-label">No signup. No sales call.</span>
+      </div>
+
+      <!-- Two stills: the figure-free money moment + the density that pays it back -->
+      <div class="hero-stills">
+        <div class="still-frame still-frame--wide">
+          <div class="still-frame__chrome">
+            <span class="still-frame__dots"><span class="still-frame__dot"></span><span class="still-frame__dot"></span><span class="still-frame__dot"></span></span>
+            <span class="still-frame__label">warranty-money-finder-nofig.html</span>
+          </div>
+          <div class="still-frame__viewport">
+            <iframe src="prototypes/warranty-money-finder-nofig.html" loading="lazy" title="A warranty still in window — claim pack drafted for the engineer to confirm"></iframe>
+          </div>
+        </div>
+        <div class="still-frame still-frame--tall">
+          <div class="still-frame__chrome">
+            <span class="still-frame__label">ledger-history.html</span>
+          </div>
+          <div class="still-frame__viewport">
+            <iframe src="prototypes/ledger-history.html" loading="lazy" title="Entries accumulating — the density that pays the record back"></iframe>
+          </div>
+        </div>
+      </div>
+      <p class="cite">Beside the claim pack: <span class="pill pill--green"><span class="pill__dot"></span>in date · claimable</span> — and the stack of entries it was assembled from.</p>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       FOUNDER — first person, no photo. Placed near the hero per spine.
+  ===================================================================== -->
+  <section class="section section--tight section--alt section--hairline-top">
+    <div class="container--narrow quote">
+      <p class="quote__body">I spent five years as an ETO on yachts up to 122 metres — Maryah, Legend, Freedom, Nero, Whisper — and watched a year of knowledge walk off the gangway with every handover. CelesteOS keeps it in the vessel.</p>
+      <span class="quote__cite"><strong>Alex Short</strong> — Founder, former ETO</span>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       S2 — SHOW RELATED (the LIVE compounds proof)
+       Filter test: opening today's fault surfaces a 2024 WO + the part that
+       fixed it + who closed it, unasked. Age = value. A generic PMS stores
+       these; it does not surface the old one against the new fault.
+  ===================================================================== -->
+  <section class="section" id="compounds">
+    <div class="container stack-loose">
+      <div class="stack">
+        <span class="eyebrow"><span class="eyebrow__num">02</span>Age is the asset</span>
+        <h2 class="headline">Open today's fault. The vessel's older self is already in the room.</h2>
+        <p class="sub">You open the fault you're working now. Surfaced beside it, unasked — a work order the vessel completed in 2024, the part that fixed it, and the engineer who closed it. The older the record, the more it has to say.</p>
+      </div>
+
+      <div class="feature-row">
+        <div class="feature-row__copy stack">
+          <span class="pill pill--blue"><span class="pill__dot"></span>9 related entities · surfaced unasked</span>
+          <p class="sub">Nothing here is a guess and nothing here is new prose. Each line is a real record with its own ID — a completed work order, an open fault next door, the certificate that governs the space — shown against the fault in front of you so the vessel answers before you ask.</p>
+          <p class="cite">Every line cites its own record. If it can't find a source, it says so.</p>
+        </div>
+        <div class="feature-row__media still-frame still-frame--tall">
+          <div class="still-frame__chrome">
+            <span class="still-frame__label">show-related.html</span>
+          </div>
+          <div class="still-frame__viewport">
+            <iframe src="prototypes/show-related.html" loading="lazy" title="Show related — a completed 2024 work order surfacing against today's fault"></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       S3 — HANDOVER (continuity backbone, two moments, max 2 stills)
+       Filter test: (1) closing a fault offers one prompt to add it to the
+       handover draft, assembled by rotation; (2) a handover line clicks
+       straight to the original work order, not a summary.
+  ===================================================================== -->
+  <section class="section section--alt" id="handover">
+    <div class="container stack-loose">
+      <div class="stack">
+        <span class="eyebrow"><span class="eyebrow__num">03</span>Continuity</span>
+        <h2 class="headline">A handover that assembles itself — and links back to the truth.</h2>
+        <ol class="moment-list">
+          <li>
+            <span class="moment-list__num">01</span>
+            <span class="moment-list__body"><strong>Low effort.</strong> You close a fault. One prompt — "Add to handover draft?" The draft is assembled by rotation as you work. You read it and sign it; you never write it from a blank page at 2am on the last night.</span>
+          </li>
+          <li>
+            <span class="moment-list__num">02</span>
+            <span class="moment-list__body"><strong>The wormhole.</strong> A line in the handover clicks straight through to the original record — the actual work order, with its part, its labour and its sign-off — not a paraphrase someone typed about it.</span>
+          </li>
+        </ol>
+      </div>
+
+      <div class="two-up">
+        <div class="pane">
+          <span class="pane__label">Moment 01 — assembled by rotation</span>
+          <div class="still-frame still-frame--wide">
+            <div class="still-frame__chrome"><span class="still-frame__label">handover-prompt.html</span></div>
+            <div class="still-frame__viewport">
+              <iframe src="prototypes/handover-prompt.html" loading="lazy" title="Closing a fault — one prompt to add it to the handover draft"></iframe>
+            </div>
+          </div>
+        </div>
+        <div class="pane">
+          <span class="pane__label">Moment 02 — clicks to the original record</span>
+          <div class="still-frame still-frame--wide">
+            <div class="still-frame__chrome"><span class="still-frame__label">lens-work-order.html</span></div>
+            <div class="still-frame__viewport">
+              <iframe src="prototypes/lens-work-order.html" loading="lazy" title="A handover line opening the original work order, not a summary"></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       S4 — TRUST BEAT (in-flow, small, felt, NOT a hero)
+       Filter test: sign → acknowledge → notify → seal; an assembled handover
+       can't be quietly rewritten behind you. No forensic/legal/crypto words.
+  ===================================================================== -->
+  <section class="section section--tight">
+    <div class="container stack-loose">
+      <div class="feature-row feature-row--flip">
+        <div class="feature-row__media still-frame still-frame--wide">
+          <div class="still-frame__chrome"><span class="still-frame__label">handover-signoff.html</span></div>
+          <div class="still-frame__viewport">
+            <iframe src="prototypes/handover-signoff.html" loading="lazy" title="Sign, acknowledge, notify, seal — a handover that can't be rewritten behind you"></iframe>
+          </div>
+        </div>
+        <div class="feature-row__copy stack">
+          <span class="eyebrow"><span class="eyebrow__num">04</span>Settled</span>
+          <h3>Sign. Acknowledge. Notify. Sealed.</h3>
+          <p class="sub">Once an outgoing engineer signs and the incoming one acknowledges, the handover is sealed and everyone who should know is notified. From that point it can't be rewritten behind your back — what you signed is what stays.</p>
+          <p class="cite">A sealed handover is the version of record. <span class="accent">Settled, not editable.</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       S5 — RECEIVING (the one fully-defensible money moment)
+       Filter test: photograph the packing list at the passerelle → matched
+       against PO + inventory → a QUANTITY short flagged "−2 · short-shipped
+       · reject + claim". A factual count, never a computed £.
+  ===================================================================== -->
+  <section class="section section--alt" id="receiving">
+    <div class="container stack-loose">
+      <div class="stack">
+        <span class="eyebrow"><span class="eyebrow__num">05</span>At the passerelle</span>
+        <h2 class="headline">Photograph the packing list. The discrepancy flags itself.</h2>
+        <p class="sub">Crew photographs the packing list as the delivery comes aboard. It's matched against the purchase order and what inventory was expecting. When the count doesn't agree, the short line is flagged as a plain fact — before the truck has left and before anyone has signed for it.</p>
+      </div>
+
+      <div class="feature-row">
+        <div class="feature-row__media still-frame still-frame--wide">
+          <div class="still-frame__chrome"><span class="still-frame__label">receiving-ocr-nofig.html</span></div>
+          <div class="still-frame__viewport">
+            <iframe src="prototypes/receiving-ocr-nofig.html" loading="lazy" title="Packing list matched to PO and inventory — a short-shipped line flagged at receiving"></iframe>
+          </div>
+        </div>
+        <div class="feature-row__copy stack">
+          <span class="pill pill--red"><span class="pill__dot"></span>−2 · short-shipped · reject + claim</span>
+          <p class="sub">Two short of the purchase order. That's a quantity, not an estimate — a count the delivery note and the PO disagree on, caught at the gangway instead of three weeks later when the part is needed and the supplier has moved on.</p>
+          <p class="cite">Flag cites the PO line and the inventory expectation it was matched against.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       S6 — SEARCH (demoted to body, not hero)
+       Filter test: ask a plain question, it answers from the vessel's own
+       history and shows the source; every search is a draft the crew
+       confirms. No idle-search loop.
+  ===================================================================== -->
+  <section class="section">
+    <div class="container stack-loose">
+      <div class="feature-row feature-row--flip">
+        <div class="feature-row__media still-frame still-frame--wide">
+          <div class="still-frame__chrome"><span class="still-frame__label">elegant-results.html</span></div>
+          <div class="still-frame__viewport">
+            <iframe src="prototypes/elegant-results.html" loading="lazy" title="Ask the vessel a plain question — it answers from its own history and shows the source"></iframe>
+          </div>
+        </div>
+        <div class="feature-row__copy stack">
+          <span class="eyebrow"><span class="eyebrow__num">06</span>Ask the vessel</span>
+          <h3>A plain question. An answer from its own history.</h3>
+          <p class="sub">Ask in plain words. The answer comes back from the vessel's own records — and shows you the manual page, the work order ID or the email thread it came from. Every answer is a draft the crew confirms, never an assertion made on its own.</p>
+          <p class="cite">If it can't find a source, it says so rather than inventing one.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       S7 — PMS REASSURANCE (state ONCE)
+  ===================================================================== -->
+  <section class="section section--tight section--alt section--hairline-top">
+    <div class="container stack">
+      <span class="eyebrow eyebrow--muted"><span class="eyebrow__num">07</span>Alongside, not instead of</span>
+      <h3>Nothing to install. Onboard in hours.</h3>
+      <p class="sub">CelesteOS runs alongside the PMS you already keep — nothing to replace, nothing to migrate. Unlimited seats, priced per vessel. Denser on day one.</p>
+      <div class="pmsline">
+        <span>Runs alongside</span><span class="sep">·</span>
+        <span>AMOS</span><span class="sep">·</span>
+        <span>Seahub</span><span class="sep">·</span>
+        <span>IDEA</span><span class="sep">·</span>
+        <span>ShipManager</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       S8 — PRICE ANCHOR + GUARANTEE
+       Anchor against the LOSS only. Typeset inequality. No $15k line.
+  ===================================================================== -->
+  <section class="section" id="price">
+    <div class="container stack-loose">
+      <div class="stack center">
+        <span class="eyebrow"><span class="eyebrow__num">08</span>Anchored against the loss</span>
+        <h2 class="headline center-x">Measured against what one missed thing costs.</h2>
+        <p class="sub center-x" style="max-width:60ch;margin-inline:auto;">A denied warranty on a major rebuild can exceed £500,000. A class detention runs £5,000–£50,000 a day. CelesteOS is $450 for 28 days.</p>
+      </div>
+
+      <!-- Typeset inequality: the price sits far left of every loss it guards against -->
+      <div class="ineq">
+        <div class="ineq__row ineq__row--price">
+          <span class="ineq__term">CelesteOS</span>
+          <span class="ineq__fig">$450 / 28 days</span>
+        </div>
+        <div class="ineq__op">≪</div>
+        <div class="ineq__row">
+          <span class="ineq__term">one caught discrepancy at receiving</span>
+          <span class="ineq__fig">a part you'd have paid for twice</span>
+        </div>
+        <div class="ineq__op">≪</div>
+        <div class="ineq__row">
+          <span class="ineq__term">one denied warranty on a major rebuild</span>
+          <span class="ineq__fig">&gt; £500,000</span>
+        </div>
+        <div class="ineq__op">≪</div>
+        <div class="ineq__row">
+          <span class="ineq__term">one class detention</span>
+          <span class="ineq__fig">£5,000 – £50,000 / day</span>
+        </div>
+      </div>
+
+      <div class="price">
+        <div class="price__amount">$450<span class="price__period">/ vessel / 28 days</span></div>
+        <ul class="price__list">
+          <li>Unlimited seats — whole crew, every rotation</li>
+          <li>Runs alongside your existing PMS</li>
+          <li>Onboard in hours, nothing to migrate</li>
+          <li>Denser every day it runs</li>
+        </ul>
+        <p class="price__note">Priced per vessel, not per seat.</p>
+      </div>
+
+      <div class="stack">
+        <div class="guarantee">
+          <span class="guarantee__label">First-Finding Commitment · subject to attorney review</span>
+          <p class="guarantee__body">If, in the first 28 days, CelesteOS does not flag at least one warranty still in window, one discrepancy at receiving, or one certificate inside 60 days, that period is not invoiced.</p>
+        </div>
+        <div class="guarantee">
+          <span class="guarantee__label">Records are yours</span>
+          <p class="guarantee__body">Cancel anytime, export everything. The record you build belongs to the vessel.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       FOUNDER (second placement) + S9 HARD CTA (page-foot only)
+  ===================================================================== -->
+  <section class="section section--alt" id="pilot">
+    <div class="container--narrow stack-loose">
+      <div class="quote">
+        <p class="quote__body">A year of knowledge used to walk off the gangway with every handover. CelesteOS keeps it in the vessel — denser each rotation, not lighter.</p>
+        <span class="quote__cite"><strong>Alex Short</strong> — Founder, former ETO</span>
+      </div>
+
+      <div class="stack center">
+        <span class="eyebrow"><span class="eyebrow__num">09</span>Next rotation</span>
+        <h2 class="headline center-x">One vessel. Your next crew change.</h2>
+        <div class="cta-row" style="justify-content:center;">
+          <a class="btn btn--hard" href="mailto:alex@celeste7.ai?subject=Pilot%20access%20%E2%80%94%20one%20vessel">Request pilot access</a>
+          <a class="btn btn--soft" href="mailto:alex@celeste7.ai?subject=Talk%20to%20the%20founder">Talk to the founder</a>
+        </div>
+        <p class="cite center-x">Or first — <a class="btn--text" href="#walkthrough">see what a sealed handover looks like</a>. No signup.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer__row">
+      <span class="footer__brand">Celeste<b>OS</b></span>
+      <div class="footer__links">
+        <a href="#compounds">Records</a>
+        <a href="#receiving">Receiving</a>
+        <a href="#price">Pricing</a>
+        <a href="/trust.html">Trust</a>
+        <a href="/privacy-policy.html">Privacy</a>
+        <a href="https://verifier.celeste7.ai">verifier.celeste7.ai</a>
+      </div>
+    </div>
+    <p class="footer__legal">© 2026 Celeste7 LTD · operational correspondence only · verifier.celeste7.ai</p>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CelesteOS — landing variants · cold review index</title>
+<meta name="description" content="The honest data-continuity rebuild. Two built variants (C1, C2) lead on why the product exists — the vessel's memory stays in the vessel. The money-first variants are retired.">
+<link rel="icon" href="/favicon.png">
+<link rel="stylesheet" href="render-shared.css">
+<style>
+  /* Index-only, on-token layout glue. No new design language. */
+  .index-head { max-width: 60ch; }
+
+  .dir-group { margin-top: var(--space-16); }
+  .dir-group__title {
+    font-family: var(--font-display);
+    font-weight: var(--fw-regular);
+    font-size: var(--fs-h2);
+    line-height: var(--lh-snug);
+    letter-spacing: -0.01em;
+    color: var(--txt);
+    margin: 0 0 var(--space-2);
+  }
+  .dir-group__hero {
+    font-size: var(--fs-small);
+    color: var(--txt2);
+    max-width: 64ch;
+    margin: 0 0 var(--space-8);
+  }
+
+  .variant-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-6);
+  }
+  @media (max-width: 760px) { .variant-grid { grid-template-columns: 1fr; } }
+
+  /* A variant card reads like an instrument panel, not a marketing tile. */
+  .variant-card {
+    display: block;
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius-md);
+    padding: var(--space-8);
+    text-decoration: none;
+    color: inherit;
+    transition: border-color var(--dur-fast) var(--ease),
+                background-color var(--dur-fast) var(--ease);
+  }
+  .variant-card:hover {
+    border-color: var(--hairline-strong);
+    background: var(--surface-elevated);
+    text-decoration: none;
+  }
+  .variant-card__id {
+    font-family: var(--font-mono);
+    font-size: var(--fs-eyebrow);
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    color: var(--teal-ambient);
+    display: block;
+    margin: 0 0 var(--space-3);
+  }
+  .variant-card__name {
+    font-family: var(--font-display);
+    font-weight: var(--fw-regular);
+    font-size: var(--fs-h3);
+    line-height: var(--lh-snug);
+    color: var(--txt);
+    margin: 0 0 var(--space-3);
+  }
+  .variant-card__crossing {
+    font-size: var(--fs-small);
+    color: var(--txt3);
+    line-height: var(--lh-body);
+    margin: 0;
+  }
+  .variant-card__file {
+    font-family: var(--font-mono);
+    font-size: var(--fs-cite);
+    letter-spacing: 0.02em;
+    color: var(--txt-ghost);
+    display: block;
+    margin-top: var(--space-6);
+  }
+
+  /* The retired group reads quieter than the primary — dimmed, never deleted. */
+  .superseded { margin-top: var(--space-20); }
+  .superseded .variant-card { opacity: 0.62; }
+  .superseded .variant-card:hover { opacity: 1; }
+  .superseded .variant-card__id { color: var(--txt3); }
+
+  /* Quiet, bordered note — never urgent. */
+  .ata {
+    border: 1px solid var(--hairline);
+    border-left: 2px solid var(--teal-ambient);
+    border-radius: var(--radius-md);
+    padding: var(--space-8);
+    max-width: 72ch;
+    margin-top: var(--space-12);
+  }
+  .ata__label {
+    font-family: var(--font-mono);
+    font-size: var(--fs-eyebrow);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--txt2);
+    margin: 0 0 var(--space-3);
+    display: block;
+  }
+  .ata p { color: var(--txt3); font-size: var(--fs-small); margin: 0; }
+  .ata code { color: var(--txt); }
+
+  /* The retired-group divider carries its own quiet label. */
+  .retired-label {
+    font-family: var(--font-mono);
+    font-size: var(--fs-eyebrow);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--txt-ghost);
+    display: block;
+    margin: 0 0 var(--space-2);
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a class="nav__brand" href="/">Celeste<b>OS</b></a>
+  <div class="nav__links">
+    <a href="#primary">Live direction</a>
+    <a href="#superseded">Superseded</a>
+    <a href="RENDER-COLD-REVIEW.md">Cold review</a>
+  </div>
+</nav>
+
+<main class="page">
+
+  <section class="section">
+    <div class="container">
+      <span class="eyebrow"><span class="eyebrow__num">00</span> Landing variants — cold review</span>
+      <h1 class="display display--wide">The honest rebuild.<br>Lead on why it exists.</h1>
+      <p class="lead index-head">Two built variants, C1 and C2, are the live direction. Both lead on the one thing the product genuinely does today — the vessel's memory stays in the vessel — and both are fully honest about what is and isn't live yet. Open them side by side. The only thing that differs between them is register: warmer narrative or calmer editorial.</p>
+      <p class="sub index-head">The earlier money-first variants are retired below — they led on a capability that is not live. No recommendation lives on this page; the read is in the <a href="RENDER-COLD-REVIEW.md">cold review</a> and the call is the founder's.</p>
+    </div>
+  </section>
+
+  <hr class="hairline">
+
+  <!-- ===================== PRIMARY — DATA CONTINUITY (C1/C2) ===================== -->
+  <section class="section" id="primary">
+    <div class="container">
+      <div class="dir-group" style="margin-top:0">
+        <span class="eyebrow"><span class="eyebrow__num">C</span> Live direction — data-continuity, why-hero</span>
+        <h2 class="dir-group__title">The vessel's memory stays in the vessel.</h2>
+        <p class="dir-group__hero">Leads on the why: a year of operational history shouldn't walk down the gangway with the chief who rotates off. Suggested-documents is shown as a live capability. Receiving is gone (beta). Money-finder is one quiet roadmap line, no figure. The guarantee is a value-promise, not a savings promise.</p>
+
+        <div class="variant-grid">
+          <a class="variant-card" href="render-C1-continuity-narrative.html">
+            <span class="variant-card__id">C1 — continuity · narrative</span>
+            <h3 class="variant-card__name">Why-hero, long-scroll narrative</h3>
+            <p class="variant-card__crossing">Long-scroll narrative · warmer-operational · the why breathes and each moment gets room. The fuller, more human read — built to be felt page by page.</p>
+            <span class="variant-card__file">render-C1-continuity-narrative.html</span>
+          </a>
+
+          <a class="variant-card" href="render-C2-continuity-editorial.html">
+            <span class="variant-card__id">C2 — continuity · editorial</span>
+            <h3 class="variant-card__name">Why-hero, near-editorial restraint</h3>
+            <p class="variant-card__crossing">Tightened one-beat-per-viewport · maximal-restraint near-editorial · calmer, denser. The same honest story held in fewer words and more white space.</p>
+            <span class="variant-card__file">render-C2-continuity-editorial.html</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="ata">
+        <span class="ata__label">The cleanest C1-vs-C2 read</span>
+        <p><code>C1 ↔ C2</code> tell the same honest story and make the same claims. Nothing structural moves between them — only the register. Open both: whatever feels different is tone alone, warmer narrative against calmer editorial. The decision is which voice the page should speak in.</p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="hairline">
+
+  <!-- ===================== SUPERSEDED — MONEY-FIRST (RETIRED) ===================== -->
+  <section class="section superseded" id="superseded">
+    <div class="container">
+      <div class="dir-group" style="margin-top:0">
+        <span class="retired-label">Superseded</span>
+        <h2 class="dir-group__title">Money-first — retired.</h2>
+        <p class="dir-group__hero">Kept for reference, not for shipping. These led on the money-finder, which is not yet live, and on the receiving capability, which is beta. The honest rebuild (C1/C2) replaces them. Linked so the reasoning is auditable — not because either is a candidate.</p>
+
+        <div class="variant-grid">
+          <a class="variant-card" href="render-A1-money-narrative.html">
+            <span class="variant-card__id">A1 — money · narrative · retired</span>
+            <h3 class="variant-card__name">Money hero, long-scroll narrative</h3>
+            <p class="variant-card__crossing">Led on the not-yet-live money-finder. Retired: money-finder not live.</p>
+            <span class="variant-card__file">render-A1-money-narrative.html</span>
+          </a>
+
+          <a class="variant-card" href="render-A2-money-editorial.html">
+            <span class="variant-card__id">A2 — money · editorial · retired</span>
+            <h3 class="variant-card__name">Money hero, near-editorial restraint</h3>
+            <p class="variant-card__crossing">Calmer money hero, same not-yet-live lead. Retired: money-finder not live.</p>
+            <span class="variant-card__file">render-A2-money-editorial.html</span>
+          </a>
+
+          <a class="variant-card" href="render-B1-record-narrative.html">
+            <span class="variant-card__id">B1 — record · narrative · retired</span>
+            <h3 class="variant-card__name">Record hero, long-scroll narrative</h3>
+            <p class="variant-card__crossing">Money-via-real-receipt hero; leaned on the receiving discrepancy. Retired: receiving is beta.</p>
+            <span class="variant-card__file">render-B1-record-narrative.html</span>
+          </a>
+
+          <a class="variant-card" href="render-B2-record-editorial.html">
+            <span class="variant-card__id">B2 — record · editorial · retired</span>
+            <h3 class="variant-card__name">Record hero, near-editorial restraint</h3>
+            <p class="variant-card__crossing">Editorial record hero, same receiving lean. Retired: receiving is beta.</p>
+            <span class="variant-card__file">render-B2-record-editorial.html</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer__row">
+      <span class="footer__brand">Celeste<b>OS</b></span>
+      <div class="footer__links">
+        <a href="render-C1-continuity-narrative.html">C1</a>
+        <a href="render-C2-continuity-editorial.html">C2</a>
+        <a href="render-A1-money-narrative.html">A1·retired</a>
+        <a href="render-A2-money-editorial.html">A2·retired</a>
+        <a href="render-B1-record-narrative.html">B1·retired</a>
+        <a href="render-B2-record-editorial.html">B2·retired</a>
+        <a href="RENDER-COLD-REVIEW.md">Cold review</a>
+      </div>
+    </div>
+    <p class="footer__legal">© 2026 Celeste7 LTD · internal cold-review index · not a published page</p>
+  </div>
+</footer>
+
+</body>
+</html>
