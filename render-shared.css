@@ -1,755 +1,259 @@
-/* ============================================================================
-   render-shared.css  —  CelesteOS landing-variant shared stylesheet
-   ----------------------------------------------------------------------------
-   ONE stylesheet every landing variant <link>s. No build step. Static.
-   Satellite-friendly: Eloquia self-hosted via @font-face from /fonts/;
-   the three fallback/system families (DM Sans, IBM Plex Mono, Cormorant
-   Garamond) are the ONLY external request, from Google Fonts — and only
-   because the digest's type system names them. Everything else is local.
+/* ============================================================
+   CelesteOS landing — shared stylesheet (brand-faithful re-skin)
+   Light · airy · editorial. Matches the live celeste7.ai treatment:
+   Eloquia Display headings, Cormorant Garamond italic cursive accent,
+   IBM Plex Mono system voice, #2B7BA3 teal, generous breathing room.
+   Authored from the live site's real tokens (celeste7homepage.webflow.css
+   + hp-tokens.css). Preserves the class contract C1/C2 depend on.
+   ============================================================ */
 
-   Dark-first. Light mode is a trivial [data-theme="light"] override.
-   Tokens are the ONLY source of truth — do not hardcode hex in markup.
-   A builder composes a full page from the component classes below WITHOUT
-   writing new CSS. See the class list / usage notes returned by the agent.
-   ============================================================================ */
+/* ---- Eloquia Display (self-hosted) ---- */
+@font-face{font-family:'Eloquia Display';src:url('/fonts/Eloquia-Display-Light.woff2') format('woff2');font-weight:300;font-style:normal;font-display:swap}
+@font-face{font-family:'Eloquia Display';src:url('/fonts/Eloquia-Display-Light-Italic.woff2') format('woff2');font-weight:300;font-style:italic;font-display:swap}
+@font-face{font-family:'Eloquia Display';src:url('/fonts/Eloquia-Display-Regular.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'Eloquia Display';src:url('/fonts/Eloquia-Display-Italic.woff2') format('woff2');font-weight:400;font-style:italic;font-display:swap}
+@font-face{font-family:'Eloquia Display';src:url('/fonts/Eloquia-Display-Medium.woff2') format('woff2');font-weight:500;font-style:normal;font-display:swap}
+@font-face{font-family:'Eloquia Display';src:url('/fonts/Eloquia-Display-Medium-Italic.woff2') format('woff2');font-weight:500;font-style:italic;font-display:swap}
+/* Cormorant (cursive accent) + IBM Plex Mono (system voice) + DM Sans (fallback) */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;1,400;1,500&family=IBM+Plex+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap');
 
-/* ---------------------------------------------------------------------------
-   1. FONTS  —  Eloquia self-hosted (VERBATIM @font-face block from digest)
-   --------------------------------------------------------------------------- */
-@font-face {
-  font-family: 'Eloquia Display';
-  src: url('/fonts/Eloquia-Display-Light.woff2') format('woff2');
-  font-weight: 300;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Eloquia Display';
-  src: url('/fonts/Eloquia-Display-Light-Italic.woff2') format('woff2');
-  font-weight: 300;
-  font-style: italic;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Eloquia Display';
-  src: url('/fonts/Eloquia-Display-Regular.woff2') format('woff2');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Eloquia Display';
-  src: url('/fonts/Eloquia-Display-Italic.woff2') format('woff2');
-  font-weight: 400;
-  font-style: italic;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Eloquia Display';
-  src: url('/fonts/Eloquia-Display-Medium.woff2') format('woff2');
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Eloquia Display';
-  src: url('/fonts/Eloquia-Display-Medium-Italic.woff2') format('woff2');
-  font-weight: 500;
-  font-style: italic;
-  font-display: swap;
-}
+/* ---- Tokens (light, from the live site) ---- */
+:root{
+  --surface:#fafafa;
+  --surface-2:#f3f3f1;
+  --card:#ffffff;
+  --ink:rgba(0,0,0,0.87);
+  --ink-muted:rgba(0,0,0,0.55);
+  --ink-faint:rgba(0,0,0,0.40);
+  --hairline:rgba(0,0,0,0.10);
+  --hairline-soft:rgba(0,0,0,0.06);
+  --accent:#2B7BA3;
+  --accent-hover:#1f5f80;
+  --accent-wash:rgba(43,123,163,0.07);
+  --ok:#3f7d57; --warn:#9a6a1c; --bad:#a8472f;
 
-/* Fallback / system families. The ONLY external request in this file.
-   If satellite/offline, the @import simply fails silently and the stacks
-   below fall back to -apple-system / ui-monospace / Georgia. Eloquia,
-   self-hosted, is unaffected. Keep this import here (not @import-from-HTML)
-   so a single <link> wires the whole type system. */
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap');
+  --font-display:'Eloquia Display',system-ui,-apple-system,sans-serif;
+  --font-body:'Eloquia Display','DM Sans',system-ui,-apple-system,sans-serif;
+  --font-accent:'Cormorant Garamond',Georgia,serif;
+  --font-mono:'IBM Plex Mono',ui-monospace,monospace;
 
-/* ---------------------------------------------------------------------------
-   2. TOKENS  —  every colour / spacing / radius / type value from the digest
-   --------------------------------------------------------------------------- */
-:root {
-  /* --- Surfaces (warm blacks, brown/amber undertone — NEVER #000 / #111) --- */
-  --surface-base:     #0c0b0a;   /* page background, deepest layer */
-  --surface:          #181614;   /* card / panel backgrounds */
-  --surface-elevated: #1e1b18;   /* modals, popovers */
-  --surface-hover:    #242424;   /* hover state for interactive surfaces */
+  /* product stills are dark UI — framed as a card on the light page */
+  --frame-bg:#0c0b0a; --frame-chrome:#161513; --frame-edge:rgba(0,0,0,0.12);
 
-  /* --- Text (rgba for warmth from surface beneath — use these, not hex) --- */
-  --txt:        rgba(255, 255, 255, 0.92);  /* primary: titles, body */
-  --txt2:       rgba(255, 255, 255, 0.55);  /* secondary: section headers, labels */
-  --txt3:       rgba(255, 255, 255, 0.70);  /* tertiary: timestamps, metadata */
-  --txt-ghost:  rgba(255, 255, 255, 0.40);  /* placeholders, disabled */
+  --maxw:1160px; --maxw-narrow:720px;
+  --pad-section:clamp(96px,11vh,164px);   /* the breathing room */
+  --pad-x:clamp(22px,5vw,48px);
 
-  /* --- Teal = interactive affordance ONLY (never status) --- */
-  --teal-mark:        #5AABCC;                  /* primary interactive on dark */
-  --teal-on-light:    #2B7BA3;                  /* teal on light backgrounds */
-  --teal-ambient:     #3A7C9D;                  /* quiet brand, section numbers */
-  --teal-bg:          rgba(58, 124, 157, 0.12); /* selected / active tint */
-  --teal-hover:       rgba(58, 124, 157, 0.22); /* hover bg on interactive */
-
-  /* --- Status signals ONLY (text must always accompany — never colour-alone) --- */
-  --status-green: #4A9468;  /* good / valid / complete / compliant */
-  --status-amber: #C4893B;  /* warning / pending / expiring soon */
-  --status-red:   #C0503A;  /* critical / fault / expired / destructive */
-  --status-blue:  #5B8DEF;  /* informational: verified, non-urgent notice */
-
-  /* --- Brand gradient: brand-only contexts (hero/launch/collateral) --- */
-  /* FORBIDDEN in product UI, cards, buttons, backgrounds. Use sparingly. */
-  --brand-grad-a: #BADDE9;
-  --brand-grad-b: #2FB9E8;
-  --brand-gradient: linear-gradient(135deg, #BADDE9 0%, #2FB9E8 100%);
-
-  /* --- Light-mode raw values (consumed by [data-theme="light"] below) --- */
-  --lm-bg:       #FFFFFF;
-  --lm-surface:  #F8F8F8;
-  --lm-txt:      rgba(0, 0, 0, 0.87);
-  --lm-txt2:     rgba(0, 0, 0, 0.55);
-
-  /* --- Type families (4-font system) --- */
-  --font-display: 'Eloquia Display', 'DM Sans', -apple-system, BlinkMacSystemFont,
-                  'Segoe UI', system-ui, sans-serif;          /* headings + body */
-  --font-body:    'Eloquia Display', 'DM Sans', -apple-system, BlinkMacSystemFont,
-                  'Segoe UI', system-ui, sans-serif;          /* same — Eloquia is body too */
-  --font-sans:    'DM Sans', -apple-system, BlinkMacSystemFont,
-                  'Segoe UI', system-ui, sans-serif;          /* explicit fallback sans */
-  --font-mono:    'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo,
-                  monospace;                                  /* system / IDs / timestamps */
-  --font-accent:  'Cormorant Garamond', Georgia, 'Times New Roman', serif; /* sparing accent */
-
-  /* --- Type weights (weight + opacity create hierarchy, NOT size) --- */
-  --fw-light:   300;
-  --fw-regular: 400;
-  --fw-medium:  500;
-
-  /* --- Fluid type scale (small size deltas — weight does the hierarchy) --- */
-  --fs-display: clamp(2.75rem, 1.6rem + 4.2vw, 4.5rem);  /* hero headline */
-  --fs-h1:      clamp(2rem, 1.3rem + 2.6vw, 3rem);       /* section headline */
-  --fs-h2:      clamp(1.5rem, 1.1rem + 1.4vw, 2rem);
-  --fs-h3:      clamp(1.2rem, 1rem + 0.7vw, 1.5rem);
-  --fs-lead:    clamp(1.125rem, 1rem + 0.5vw, 1.375rem); /* lead / sub */
-  --fs-body:    1.0625rem;                                /* 17px */
-  --fs-small:   0.9375rem;                                /* 15px */
-  --fs-eyebrow: 0.8125rem;                                /* 13px mono labels */
-  --fs-cite:    0.75rem;                                  /* 12px citation/meta */
-
-  --lh-tight: 1.08;
-  --lh-snug:  1.25;
-  --lh-body:  1.6;
-
-  /* --- Spacing: 4px base grid (digest --space-{n}) --- */
-  --space-1:  4px;
-  --space-2:  8px;
-  --space-3:  12px;
-  --space-4:  16px;
-  --space-6:  24px;
-  --space-8:  32px;
-  --space-12: 48px;
-  --space-16: 64px;
-  --space-section: 100px;   /* section padding top/bottom — breathing room */
-
-  /* --- Radius (larger containers get larger radii) --- */
-  --radius-pill: 6px;     /* status pills, small tags */
-  --radius-sm:   8px;     /* close buttons, toggle groups */
-  --radius-md:   10px;    /* buttons, inputs, cards, nav, screenshots */
-  --radius-lg:   16px;    /* modals */
-  --radius-xl:   24px;    /* large containers */
-  --radius-full: 9999px;  /* status dots, avatars */
-
-  /* --- Structure (borders are structural only, never decorative) --- */
-  --hairline:        rgba(255, 255, 255, 0.08);  /* default structural border */
-  --hairline-strong: rgba(255, 255, 255, 0.14);  /* frame / device chrome */
-  --shadow-frame:    0 1px 2px rgba(0,0,0,0.4), 0 8px 28px rgba(0,0,0,0.32);
-
-  /* --- Motion: Apple-level restraint, near-zero, finite, deliberate --- */
-  --ease: cubic-bezier(0.2, 0, 0.2, 1);
-  --dur-fast: 120ms;   /* button bg/transform */
-  --dur-fade: 300ms;   /* logo / opacity fade-in */
-
-  /* --- Layout --- */
-  --maxw: 1080px;       /* page container max width */
-  --maxw-narrow: 720px; /* prose / quote column */
+  /* ---- legacy-compat aliases (C1/C2 inline styles use these names) ----
+     Remap the old dark-mode text tokens onto the light-mode ink. */
+  --txt:var(--ink);
+  --txt2:var(--ink-muted);
+  --txt3:var(--ink-faint);
+  --txt-ghost:var(--hairline);
+  --teal-ambient:var(--accent-wash);
+  --fw-light:300; --fw-regular:400; --fw-medium:500;
+  --lh-snug:1.2;
+  --radius-pill:100px;
+  --fs-eyebrow:11.5px;
+  --fs-cite:12px;
+  --fs-h3:clamp(1.25rem,1rem+1vw,1.55rem);
+  --fs-h2:clamp(1.85rem,1.2rem+2.2vw,2.6rem);
+  /* 4px spacing scale, generous at the top end for breathing room */
+  --space-1:4px; --space-2:8px; --space-3:12px; --space-4:16px;
+  --space-5:20px; --space-6:24px; --space-8:40px; --space-10:56px; --space-12:72px;
 }
 
-/* --- Light mode: trivial override. Design dark-first; this is review-second --- */
-[data-theme="light"] {
-  --surface-base:     var(--lm-bg);
-  --surface:          var(--lm-surface);
-  --surface-elevated: #FFFFFF;
-  --surface-hover:    #F0F0F0;
-  --txt:        var(--lm-txt);
-  --txt2:       var(--lm-txt2);
-  --txt3:       rgba(0, 0, 0, 0.62);
-  --txt-ghost:  rgba(0, 0, 0, 0.40);
-  --teal-mark:  var(--teal-on-light);   /* darker teal for legibility on light */
-  --hairline:        rgba(0, 0, 0, 0.10);
-  --hairline-strong: rgba(0, 0, 0, 0.16);
-  --shadow-frame:    0 1px 2px rgba(0,0,0,0.08), 0 8px 28px rgba(0,0,0,0.10);
+/* ---- Reset / base ---- */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{
+  font-family:var(--font-body);
+  font-weight:400;
+  font-size:17px;
+  line-height:1.65;
+  color:var(--ink);
+  background:var(--surface);
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+img{max-width:100%;display:block}
+a{color:var(--accent);text-decoration:none}
+a:hover{color:var(--accent-hover)}
+
+/* ---- Layout ---- */
+.page{overflow-x:hidden}
+.container{width:100%;max-width:var(--maxw);margin-inline:auto;padding-inline:var(--pad-x)}
+.container--narrow{max-width:var(--maxw-narrow)}
+.section{padding-block:var(--pad-section)}
+.section--tight{padding-block:clamp(56px,7vh,96px)}
+.section--alt{background:var(--surface-2)}
+.section--hairline-top{border-top:1px solid var(--hairline-soft)}
+.center{text-align:center}
+.center-x{margin-inline:auto}
+
+/* ---- Vertical rhythm helpers (generous spacing = airy) ---- */
+.stack>*+*{margin-top:1.5rem}
+.stack-loose>*+*{margin-top:2.75rem}
+.stack-tight>*+*{margin-top:.7rem}
+
+/* ---- Type ---- */
+.eyebrow{
+  font-family:var(--font-mono);
+  font-size:11.5px;font-weight:500;
+  letter-spacing:.16em;text-transform:uppercase;
+  color:var(--accent);
+  display:inline-flex;align-items:center;gap:.6em;
+  margin-bottom:1.4rem;
+}
+.eyebrow--muted{color:var(--ink-faint)}
+.eyebrow__num{
+  font-variant-numeric:tabular-nums;color:var(--ink-faint);
+  border:1px solid var(--hairline);border-radius:2px;
+  padding:.15em .45em;font-size:.85em;
+}
+.mono,.mono-label{font-family:var(--font-mono)}
+.mono-label{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint)}
+
+.display,.headline{
+  font-family:var(--font-display);
+  font-weight:400;            /* Eloquia regular — refined, never bold-shouty */
+  color:var(--ink);
+  letter-spacing:-0.014em;
+  line-height:1.12;
+  text-wrap:balance;
+}
+.display{font-size:clamp(2.4rem,1.5rem+3.4vw,3.5rem)}   /* hero ~56px */
+.display--wide{max-width:14ch}
+.headline{font-size:clamp(1.85rem,1.2rem+2.2vw,2.6rem)} /* section ~42px */
+
+/* THE cursive accent — one word/phrase per headline, like the live site */
+.display em,.headline em,.weight,.display .weight,.headline .weight{
+  font-family:var(--font-accent);
+  font-style:italic;
+  font-weight:400;
+  color:var(--accent);
+  letter-spacing:0;
 }
 
-/* ---------------------------------------------------------------------------
-   3. RESET + BASE ELEMENTS
-   --------------------------------------------------------------------------- */
-*, *::before, *::after { box-sizing: border-box; }
+.lead{
+  font-size:clamp(1.15rem,1rem+.5vw,1.35rem);
+  line-height:1.6;font-weight:300;
+  color:var(--ink-muted);
+  max-width:42ch;
+}
+.sub{font-size:1.0625rem;line-height:1.6;color:var(--ink-muted);max-width:46ch}
+.muted{color:var(--ink-muted)}
+.ghost{color:var(--ink-faint)}
+.accent{color:var(--accent)}      /* teal sentence-opener, live-site grammar */
+.hairline{height:1px;background:var(--hairline-soft);border:0;margin-block:2.5rem}
+.cite{font-family:var(--font-mono);font-size:12px;color:var(--ink-faint);letter-spacing:.02em}
 
-html {
-  -webkit-text-size-adjust: 100%;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
-}
+/* ---- Nav ---- */
+.nav{position:sticky;top:0;z-index:20;background:rgba(250,250,250,.82);
+  backdrop-filter:saturate(1.1) blur(8px);border-bottom:1px solid var(--hairline-soft)}
+.nav .container{display:flex;align-items:center;justify-content:space-between;padding-block:18px}
+.nav__brand{font-family:var(--font-display);font-weight:500;font-size:18px;color:var(--ink);letter-spacing:-.01em}
+.nav__brand .accent{color:var(--accent)}
+.nav__links{display:flex;gap:28px;font-size:14px;color:var(--ink-muted)}
+.nav__links a{color:var(--ink-muted)}.nav__links a:hover{color:var(--ink)}
 
-body {
-  margin: 0;
-  background: var(--surface-base);
-  color: var(--txt);
-  font-family: var(--font-body);
-  font-weight: var(--fw-regular);
-  font-size: var(--fs-body);
-  line-height: var(--lh-body);
-  font-feature-settings: 'kern' 1;
+/* ---- Product still-frame (dark UI as a premium card on light) ---- */
+.still-frame{
+  background:var(--frame-bg);
+  border:1px solid var(--frame-edge);
+  border-radius:12px;overflow:hidden;
+  box-shadow:0 1px 2px rgba(0,0,0,.04),0 22px 50px -28px rgba(0,0,0,.28);
 }
+.still-frame__chrome{
+  display:flex;align-items:center;gap:10px;
+  padding:10px 14px;background:var(--frame-chrome);
+  border-bottom:1px solid rgba(255,255,255,.05);
+}
+.still-frame__dots{display:inline-flex;gap:6px}
+.still-frame__dot{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.16)}
+.still-frame__label{font-family:var(--font-mono);font-size:11px;color:rgba(255,255,255,.34);letter-spacing:.02em;margin-left:4px}
+.still-frame__viewport{position:relative;width:100%;background:var(--frame-bg)}
+.still-frame__viewport iframe{display:block;width:100%;border:0}
+.still-frame--wide .still-frame__viewport iframe{height:440px}
+.still-frame--tall .still-frame__viewport iframe{height:560px}
+.still-frame--square .still-frame__viewport iframe{height:420px}
 
-/* Eloquia for all headings. Weight creates hierarchy, not size. */
-h1, h2, h3, h4 {
-  font-family: var(--font-display);
-  font-weight: var(--fw-light);  /* Light is the display default; bump to 400/500 per element */
-  line-height: var(--lh-tight);
-  letter-spacing: -0.01em;
-  color: var(--txt);
-  margin: 0;
-}
-h1 { font-size: var(--fs-h1); }
-h2 { font-size: var(--fs-h2); font-weight: var(--fw-regular); line-height: var(--lh-snug); }
-h3 { font-size: var(--fs-h3); font-weight: var(--fw-medium); line-height: var(--lh-snug); }
+/* ---- Two-up (side-by-side moments / panes) ---- */
+.two-up{display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,3vw,40px)}
+.pane{background:var(--card);border:1px solid var(--hairline-soft);border-radius:12px;padding:clamp(22px,3vw,34px)}
+.pane--quiet{background:transparent;border-color:var(--hairline-soft)}
+.pane__label{font-family:var(--font-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem}
 
-p { margin: 0 0 var(--space-4); color: var(--txt); }
+/* ---- Pills (status, used inside copy sparingly) ---- */
+.pill{display:inline-flex;align-items:center;gap:.5em;font-family:var(--font-mono);
+  font-size:11px;letter-spacing:.04em;padding:.3em .7em;border-radius:100px;
+  border:1px solid var(--hairline);color:var(--ink-muted);background:var(--card)}
+.pill__dot{width:7px;height:7px;border-radius:50%;background:currentColor}
+.pill--green{color:var(--ok);border-color:rgba(63,125,87,.3)}
+.pill--blue{color:var(--accent);border-color:rgba(43,123,163,.3)}
+.pill--amber{color:var(--warn);border-color:rgba(154,106,28,.3)}
+.pill--red{color:var(--bad);border-color:rgba(168,71,47,.3)}
 
-/* Read links: same colour as body text, underline only — no hover colour shift. */
-a { color: inherit; text-decoration: underline; text-underline-offset: 0.18em;
-    text-decoration-color: var(--hairline-strong);
-    transition: text-decoration-color var(--dur-fast) var(--ease); }
-a:hover { text-decoration-color: var(--txt2); }
+/* ---- Value anchor (price ≪ loss inequality) ---- */
+.value-anchor{display:flex;align-items:center;justify-content:center;gap:clamp(14px,3vw,38px);flex-wrap:wrap;margin-block:2.5rem}
+.value-anchor__side{text-align:center}
+.value-anchor__figure{font-family:var(--font-display);font-weight:400;font-size:clamp(1.4rem,1rem+1.4vw,2rem);color:var(--ink)}
+.value-anchor__side--right .value-anchor__figure{color:var(--accent)}
+.value-anchor__caption{font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);margin-top:.5rem}
+.value-anchor__op{font-family:var(--font-display);font-weight:300;font-size:1.6rem;color:var(--ink-faint)}
 
-/* System-generated content is ALWAYS mono: IDs, timestamps, dates, sizes,
-   serials, part numbers, stock counts, emails, filenames. */
-code, kbd, samp, pre, time, .mono { font-family: var(--font-mono); }
+/* ---- Price ---- */
+.price{background:var(--card);border:1px solid var(--hairline);border-radius:14px;padding:clamp(28px,4vw,44px);max-width:440px}
+.price__amount{font-family:var(--font-display);font-weight:300;font-size:clamp(2.6rem,2rem+2vw,3.4rem);color:var(--ink);line-height:1}
+.price__period{font-family:var(--font-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint);margin-top:.4rem}
+.price__list{list-style:none;margin-top:1.6rem;display:grid;gap:.7rem}
+.price__list li{position:relative;padding-left:1.4em;color:var(--ink-muted);font-size:15px}
+.price__list li::before{content:"";position:absolute;left:0;top:.6em;width:6px;height:6px;border-radius:50%;background:var(--accent)}
+.price__note{font-size:13px;color:var(--ink-faint);margin-top:1.2rem;line-height:1.55}
 
-img, svg, iframe { display: block; max-width: 100%; }
+/* ---- Guarantee (value-promise) ---- */
+.guarantee{border-left:2px solid var(--accent);padding:.4rem 0 .4rem 1.6rem;max-width:54ch}
+.guarantee__label{font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:.8rem}
+.guarantee__body{font-size:1.1rem;line-height:1.55;color:var(--ink)}
+.guarantee__body em{font-family:var(--font-accent);font-style:italic;color:var(--accent)}
 
-::selection { background: var(--teal-hover); color: var(--txt); }
+/* ---- Quote (founder voice) ---- */
+.quote{max-width:60ch}
+.quote__body{font-family:var(--font-display);font-weight:300;font-size:clamp(1.3rem,1rem+1vw,1.7rem);line-height:1.5;color:var(--ink);letter-spacing:-.01em}
+.quote__body em{font-family:var(--font-accent);font-style:italic;color:var(--accent)}
+.quote__cite{margin-top:1.4rem;font-family:var(--font-mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-faint)}
 
-:focus-visible {
-  outline: 2px solid var(--teal-mark);   /* teal = focus indicator */
-  outline-offset: 2px;
-  border-radius: var(--radius-sm);
-}
+/* ---- Buttons (calm, never urgent) ---- */
+.cta-row{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:.5em;font-family:var(--font-mono);font-size:13px;
+  letter-spacing:.04em;padding:.85em 1.4em;border-radius:8px;transition:all .15s ease;line-height:1;cursor:pointer}
+.btn--hard{background:var(--accent);color:#fff;border:1px solid var(--accent)}
+.btn--hard:hover{background:var(--accent-hover);border-color:var(--accent-hover);color:#fff}
+.btn--soft{background:transparent;color:var(--ink);border:1px solid var(--hairline)}
+.btn--soft:hover{border-color:var(--accent);color:var(--accent)}
+.btn--text{padding:0;border:0;background:none;color:var(--accent);font-size:14px}
+.btn--text:hover{color:var(--accent-hover);text-decoration:underline}
 
-/* Motion: honour prefers-reduced-motion — kill all transitions/animations. */
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.001ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.001ms !important;
-    scroll-behavior: auto !important;
-  }
-}
+/* ---- Footer ---- */
+.footer{border-top:1px solid var(--hairline-soft);padding-block:clamp(48px,7vh,80px);background:var(--surface)}
+.footer__row{display:flex;justify-content:space-between;gap:32px;flex-wrap:wrap;align-items:flex-start}
+.footer__brand{font-family:var(--font-display);font-weight:500;font-size:17px;color:var(--ink)}
+.footer__brand .accent{color:var(--accent)}
+.footer__links{display:flex;gap:24px;font-size:14px}
+.footer__links a{color:var(--ink-muted)}.footer__links a:hover{color:var(--ink)}
+.footer__legal{margin-top:1.8rem;font-family:var(--font-mono);font-size:11px;color:var(--ink-faint);letter-spacing:.02em}
 
-/* ===========================================================================
-   4. COMPONENT VOCABULARY
-   Compose a full landing page from these classes WITHOUT writing new CSS.
-   =========================================================================== */
+/* ---- Motion (restrained) ---- */
+.fade-in{opacity:0;transform:translateY(14px);animation:fade .7s ease forwards}
+@keyframes fade{to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.fade-in{animation:none;opacity:1;transform:none}}
 
-/* --- 4.1 Page container --------------------------------------------------- */
-.page {
-  width: 100%;
-  margin: 0 auto;
-  overflow-x: hidden;
-}
+/* gradient text guard (brand uses flat teal, not gradients) */
+.brand-gradient-text{color:var(--accent)}
 
-/* Centred content column. Put inside .section. Use --narrow for prose. */
-.container {
-  width: 100%;
-  max-width: var(--maxw);
-  margin-inline: auto;
-  padding-inline: var(--space-6);
-}
-.container--narrow { max-width: var(--maxw-narrow); }
-
-/* --- 4.2 Section ---------------------------------------------------------- */
-/* 100px top/bottom breathing room. More empty space than content (desktop). */
-.section {
-  padding-block: var(--space-section);
-  position: relative;
-}
-.section--tight { padding-block: var(--space-16); }           /* 64px when needed */
-.section--alt { background: var(--surface); }                 /* alternating panel */
-.section--hairline-top { border-top: 1px solid var(--hairline); }
-
-/* Vertical rhythm helper for stacking children inside a section. */
-.stack > * + * { margin-top: var(--space-6); }
-.stack-tight > * + * { margin-top: var(--space-3); }
-.stack-loose > * + * { margin-top: var(--space-12); }
-
-/* --- 4.3 Section eyebrow (mono label, citation-first UI) ------------------- */
-/* System voice: uppercase mono, quiet teal-ambient or secondary text. */
-.eyebrow {
-  font-family: var(--font-mono);
-  font-weight: var(--fw-regular);
-  font-size: var(--fs-eyebrow);
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--teal-ambient);
-  margin: 0 0 var(--space-4);
-  display: block;
-}
-.eyebrow--muted { color: var(--txt2); }
-/* Optional leading section number, e.g. "01 — Records". */
-.eyebrow__num { color: var(--teal-ambient); margin-right: var(--space-2); }
-
-/* --- 4.4 Display / hero headline ------------------------------------------ */
-.display {
-  font-family: var(--font-display);
-  font-weight: var(--fw-light);
-  font-size: var(--fs-display);
-  line-height: var(--lh-tight);
-  letter-spacing: -0.02em;
-  color: var(--txt);
-  margin: 0 0 var(--space-6);
-  max-width: 16ch;             /* keep hero lines short, deliberate */
-}
-.display--wide { max-width: 22ch; }
-/* Medium-weight emphasis word inside a Light display line (hierarchy by weight). */
-.display em.weight { font-style: normal; font-weight: var(--fw-medium); }
-
-/* Section headline (smaller than hero display). */
-.headline {
-  font-family: var(--font-display);
-  font-weight: var(--fw-regular);
-  font-size: var(--fs-h1);
-  line-height: var(--lh-snug);
-  letter-spacing: -0.01em;
-  color: var(--txt);
-  margin: 0 0 var(--space-4);
-  max-width: 24ch;
-}
-
-/* --- 4.5 Lead / sub ------------------------------------------------------- */
-.lead {
-  font-family: var(--font-body);
-  font-weight: var(--fw-regular);
-  font-size: var(--fs-lead);
-  line-height: var(--lh-body);
-  color: var(--txt3);
-  margin: 0 0 var(--space-8);
-  max-width: 56ch;
-}
-.sub {
-  font-size: var(--fs-body);
-  color: var(--txt2);
-  max-width: 60ch;
-  margin: 0;
-}
-
-/* --- 4.6 Cormorant accent (SPARING editorial flourish ONLY) --------------- */
-/* Teal-coloured serif italic. Accent words in editorial/philosophy context.
-   NEVER for UI labels, buttons, or system content. */
-.accent {
-  font-family: var(--font-accent);
-  font-weight: var(--fw-light);
-  font-style: italic;
-  color: var(--teal-mark);
-}
-
-/* --- 4.7 Still-frame (bordered device frame holding a prototype iframe) ---- */
-/* Reads like a real screenshot, NOT a mockup: subtle chrome bar, fixed
-   sizing, dark bg. Embed a real prototype HTML via the iframe inside. */
-.still-frame {
-  background: var(--surface);
-  border: 1px solid var(--hairline-strong);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-frame);
-  overflow: hidden;
-  width: 100%;
-  margin-inline: auto;
-}
-/* Chrome bar — quiet, instrument-grade. No traffic-light dots by default;
-   a single mono label reads as a real window title, not decoration. */
-.still-frame__chrome {
-  display: flex;
-  align-items: center;
-  gap: var(--space-3);
-  height: 36px;
-  padding-inline: var(--space-4);
-  background: var(--surface-elevated);
-  border-bottom: 1px solid var(--hairline);
-}
-.still-frame__dots { display: inline-flex; gap: var(--space-2); }
-.still-frame__dot {
-  width: 9px; height: 9px;
-  border-radius: var(--radius-full);
-  background: var(--hairline-strong);
-}
-.still-frame__label {
-  font-family: var(--font-mono);
-  font-size: var(--fs-cite);
-  letter-spacing: 0.04em;
-  color: var(--txt-ghost);
-  margin-inline: auto;          /* centred window title */
-}
-/* The viewport that holds the iframe. Fixed aspect = stable, screenshot-like. */
-.still-frame__viewport {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 16 / 10;
-  background: var(--surface-base);
-}
-.still-frame__viewport iframe,
-.still-frame__viewport > img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  border: 0;
-}
-/* Aspect modifiers for different prototype shapes. */
-.still-frame--tall .still-frame__viewport { aspect-ratio: 4 / 5; }
-.still-frame--wide .still-frame__viewport { aspect-ratio: 16 / 9; }
-.still-frame--square .still-frame__viewport { aspect-ratio: 1 / 1; }
-
-/* --- 4.8 Two-up split (input/output, old/new, before/after) ---------------- */
-.two-up {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--space-8);
-  align-items: stretch;
-}
-@media (max-width: 768px) { .two-up { grid-template-columns: 1fr; } }
-/* A single pane within the split. */
-.pane {
-  background: var(--surface);
-  border: 1px solid var(--hairline);
-  border-radius: var(--radius-md);
-  padding: var(--space-8);
-}
-.pane__label {
-  font-family: var(--font-mono);
-  font-size: var(--fs-eyebrow);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--txt2);
-  margin: 0 0 var(--space-4);
-  display: block;
-}
-.pane--quiet { background: transparent; }   /* "before / old" side reads quieter */
-
-/* --- 4.9 Value-anchor inequality block ------------------------------------ */
-/* "What it costs you  <  What it costs to fix" — structural, not urgent. */
-.value-anchor {
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  align-items: center;
-  gap: var(--space-8);
-  padding: var(--space-12) 0;
-}
-@media (max-width: 640px) {
-  .value-anchor { grid-template-columns: 1fr; gap: var(--space-6); text-align: center; }
-}
-.value-anchor__side { display: flex; flex-direction: column; gap: var(--space-2); }
-.value-anchor__side--right { text-align: right; }
-@media (max-width: 640px) { .value-anchor__side--right { text-align: center; } }
-.value-anchor__figure {
-  font-family: var(--font-mono);          /* a figure is system-generated */
-  font-size: var(--fs-h1);
-  font-weight: var(--fw-medium);
-  color: var(--txt);
-  line-height: 1;
-}
-.value-anchor__caption {
-  font-size: var(--fs-small);
-  color: var(--txt2);
-}
-.value-anchor__op {
-  font-family: var(--font-display);
-  font-weight: var(--fw-light);
-  font-size: var(--fs-display);
-  color: var(--teal-ambient);
-  line-height: 1;
-  text-align: center;
-}
-
-/* --- 4.10 Price block ----------------------------------------------------- */
-.price {
-  background: var(--surface);
-  border: 1px solid var(--hairline);
-  border-radius: var(--radius-xl);
-  padding: var(--space-12);
-  max-width: 480px;
-  margin-inline: auto;
-  text-align: center;
-}
-.price__amount {
-  font-family: var(--font-mono);          /* the number is system-generated */
-  font-size: var(--fs-display);
-  font-weight: var(--fw-medium);
-  color: var(--txt);
-  line-height: 1;
-  display: flex;
-  align-items: baseline;
-  justify-content: center;
-  gap: var(--space-2);
-}
-.price__period {
-  font-family: var(--font-mono);
-  font-size: var(--fs-small);
-  color: var(--txt2);
-  font-weight: var(--fw-regular);
-}
-.price__note {
-  font-size: var(--fs-small);
-  color: var(--txt3);
-  margin: var(--space-4) 0 0;
-}
-/* Bulleted plain inclusion list — no checkmark emoji, no colour celebration. */
-.price__list {
-  list-style: none;
-  padding: 0;
-  margin: var(--space-8) 0 0;
-  text-align: left;
-  display: grid;
-  gap: var(--space-3);
-}
-.price__list li {
-  position: relative;
-  padding-left: var(--space-6);
-  color: var(--txt3);
-  font-size: var(--fs-small);
-}
-.price__list li::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0.62em;
-  width: 6px; height: 6px;
-  border-radius: var(--radius-full);
-  background: var(--teal-ambient);
-}
-
-/* --- 4.11 Quiet-guarantee block ------------------------------------------- */
-/* Trust through accuracy, not reassurance language. Plain, bordered, calm. */
-.guarantee {
-  border: 1px solid var(--hairline);
-  border-radius: var(--radius-md);
-  padding: var(--space-8);
-  background: transparent;
-  max-width: 60ch;
-  margin-inline: auto;
-}
-.guarantee__label {
-  font-family: var(--font-mono);
-  font-size: var(--fs-eyebrow);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--txt2);
-  margin: 0 0 var(--space-3);
-  display: block;
-}
-.guarantee__body { color: var(--txt3); font-size: var(--fs-small); margin: 0; }
-
-/* --- 4.12 CTA (soft + hard variants — NON-urgent) ------------------------- */
-/* Buttons: solid teal-flat or hairline-ghost. NO gradient fills in product.
-   Mechanical 120ms bg/transform only. No pulse, no urgency. */
-.btn {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-2);
-  font-family: var(--font-body);
-  font-size: var(--fs-body);
-  font-weight: var(--fw-medium);
-  line-height: 1;
-  padding: var(--space-3) var(--space-6);
-  border-radius: var(--radius-md);
-  border: 1px solid transparent;
-  text-decoration: none;
-  cursor: pointer;
-  background: transparent;
-  color: var(--txt);
-  transition: background-color var(--dur-fast) var(--ease),
-              transform var(--dur-fast) var(--ease),
-              border-color var(--dur-fast) var(--ease);
-}
-.btn:active { transform: translateY(1px); }
-.btn:hover { text-decoration: none; }
-
-/* HARD CTA — primary action. Flat teal surface, body-text foreground.
-   Teal here = interactive affordance, not status. No gradient. */
-.btn--hard {
-  background: var(--teal-bg);
-  border-color: var(--teal-ambient);
-  color: var(--teal-mark);
-}
-.btn--hard:hover { background: var(--teal-hover); }
-
-/* SOFT CTA — secondary. Hairline ghost, body text. Reads quiet. */
-.btn--soft {
-  background: transparent;
-  border-color: var(--hairline-strong);
-  color: var(--txt3);
-}
-.btn--soft:hover { background: var(--surface-hover); border-color: var(--txt-ghost); }
-
-/* Inline text CTA — underline affordance, teal, no button chrome. */
-.btn--text {
-  padding: 0;
-  background: none;
-  border: none;
-  color: var(--teal-mark);
-  text-decoration: underline;
-  text-underline-offset: 0.18em;
-  text-decoration-color: var(--teal-ambient);
-}
-.btn--text:hover { text-decoration: underline; text-decoration-color: var(--teal-mark); }
-
-/* Row of CTAs with consistent gap. */
-.cta-row { display: flex; flex-wrap: wrap; gap: var(--space-4); align-items: center; }
-
-/* --- 4.13 Founder / quote block (no avatar) ------------------------------- */
-.quote {
-  max-width: var(--maxw-narrow);
-  margin-inline: auto;
-  padding-block: var(--space-8);
-}
-.quote__body {
-  font-family: var(--font-display);
-  font-weight: var(--fw-light);
-  font-size: var(--fs-h2);
-  line-height: var(--lh-snug);
-  letter-spacing: -0.01em;
-  color: var(--txt);
-  margin: 0 0 var(--space-6);
-  text-wrap: balance;
-}
-/* Attribution: mono, system-voice. No avatar, no portrait (people add subjectivity). */
-.quote__cite {
-  font-family: var(--font-mono);
-  font-size: var(--fs-cite);
-  letter-spacing: 0.04em;
-  color: var(--txt2);
-  font-style: normal;
-  display: block;
-}
-.quote__cite strong { color: var(--txt3); font-weight: var(--fw-regular); }
-
-/* --- 4.14 Citation / cite line (citation-first UI) ------------------------ */
-/* Show the source, not a summary. Mono, quiet, attaches under a claim/figure. */
-.cite {
-  font-family: var(--font-mono);
-  font-size: var(--fs-cite);
-  letter-spacing: 0.02em;
-  color: var(--txt-ghost);
-  margin: var(--space-2) 0 0;
-  display: block;
-}
-.cite a { color: var(--txt3); text-decoration-color: var(--hairline-strong); }
-
-/* --- 4.15 Status pill (status signal ONLY — text always present) ---------- */
-.pill {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-2);
-  font-family: var(--font-mono);
-  font-size: var(--fs-cite);
-  letter-spacing: 0.04em;
-  padding: var(--space-1) var(--space-3);
-  border-radius: var(--radius-pill);
-  border: 1px solid var(--hairline);
-  color: var(--txt3);
-  background: var(--surface);
-}
-.pill__dot { width: 7px; height: 7px; border-radius: var(--radius-full); background: currentColor; }
-.pill--green { color: var(--status-green); border-color: rgba(74,148,104,0.35); }
-.pill--amber { color: var(--status-amber); border-color: rgba(196,137,59,0.35); }
-.pill--red   { color: var(--status-red);   border-color: rgba(192,80,58,0.35); }
-.pill--blue  { color: var(--status-blue);  border-color: rgba(91,141,239,0.35); }
-
-/* --- 4.16 Navigation (minimal, blur-on-scroll friendly) ------------------- */
-.nav {
-  position: sticky;
-  top: 0;
-  z-index: 50;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-6);
-  padding: var(--space-4) var(--space-6);
-  background: color-mix(in srgb, var(--surface-base) 82%, transparent);
-  backdrop-filter: saturate(140%) blur(12px);
-  border-bottom: 1px solid var(--hairline);
-}
-.nav__brand {
-  font-family: var(--font-display);
-  font-weight: var(--fw-regular);
-  font-size: var(--fs-body);
-  letter-spacing: 0.01em;
-  text-decoration: none;
-  color: var(--txt);
-}
-/* Two-tone wordmark: "Celeste" 400 white + "OS" 500 teal. */
-.nav__brand b { font-weight: var(--fw-medium); color: var(--teal-mark); }
-.nav__links { display: flex; gap: var(--space-6); align-items: center; }
-.nav__links a {
-  font-size: var(--fs-small);
-  color: var(--txt2);
-  text-decoration: none;
-}
-.nav__links a:hover { color: var(--txt); }
-
-/* --- 4.17 Footer ---------------------------------------------------------- */
-.footer {
-  border-top: 1px solid var(--hairline);
-  padding-block: var(--space-12);
-  color: var(--txt2);
-}
-.footer__row {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: var(--space-6);
-  align-items: center;
-}
-.footer__brand { font-family: var(--font-display); color: var(--txt3); }
-.footer__brand b { font-weight: var(--fw-medium); color: var(--teal-mark); }
-.footer__links { display: flex; flex-wrap: wrap; gap: var(--space-6); }
-.footer__links a { font-size: var(--fs-small); color: var(--txt2); text-decoration: none; }
-.footer__links a:hover { color: var(--txt); }
-.footer__legal {
-  font-family: var(--font-mono);
-  font-size: var(--fs-cite);
-  color: var(--txt-ghost);
-  margin-top: var(--space-6);
-}
-
-/* --- 4.18 Small utilities (composition helpers, no decoration) ------------- */
-.hairline { border: 0; border-top: 1px solid var(--hairline); margin: 0; }
-.center { text-align: center; }
-.center-x { margin-inline: auto; }
-.muted { color: var(--txt2); }
-.ghost { color: var(--txt-ghost); }
-.mono-label {
-  font-family: var(--font-mono);
-  font-size: var(--fs-eyebrow);
-  letter-spacing: 0.06em;
-  color: var(--txt2);
-}
-.fade-in { opacity: 0; animation: fade-in var(--dur-fade) var(--ease) forwards; }
-@keyframes fade-in { to { opacity: 1; } }
-
-/* Brand-gradient text — RESTRICTED to brand-only hero/launch contexts.
-   Never on product UI, cards, buttons, or as a background. Use deliberately. */
-.brand-gradient-text {
-  background: var(--brand-gradient);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+/* ---- Responsive ---- */
+@media (max-width:760px){
+  .two-up{grid-template-columns:1fr}
+  .value-anchor{gap:18px}
+  .nav__links{display:none}
 }
