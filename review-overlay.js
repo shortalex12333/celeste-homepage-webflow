@@ -71,8 +71,10 @@
   var bar = document.createElement('div'); bar.className = 'cr-bar';
   var toggle = document.createElement('button'); toggle.textContent = '✎ Review: ON';
   var exportBtn = document.createElement('button'); exportBtn.className = 'cr-primary'; exportBtn.textContent = '⬇ Export (0)';
+  var clearBtn = document.createElement('button'); clearBtn.textContent = '✕ Clear';
+  clearBtn.onclick = function () { if (confirm('Clear ALL comments on this page and start fresh?')) { Object.keys(store).forEach(function (k) { delete store[k]; }); save(); } };
   var hint = document.createElement('span'); hint.textContent = 'click a block · Alt-click = parent';
-  bar.appendChild(toggle); bar.appendChild(exportBtn); bar.appendChild(hint);
+  bar.appendChild(toggle); bar.appendChild(exportBtn); bar.appendChild(clearBtn); bar.appendChild(hint);
   document.body.appendChild(bar);
 
   toggle.onclick = function () { on = !on; toggle.textContent = '✎ Review: ' + (on ? 'ON' : 'OFF'); toggle.classList.toggle('cr-off', !on); if (hovered) { hovered.classList.remove('cr-hl'); hovered = null; } };
