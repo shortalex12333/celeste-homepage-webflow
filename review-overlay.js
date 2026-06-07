@@ -10,6 +10,7 @@
   var COMMENTABLE = 'section,[class],h1,h2,h3,p,.iframe-product-wrap';
   var store = {};
   try { store = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch (e) {}
+  if (/[?&]review=(fresh|new|clear)/.test(location.search)) { store = {}; localStorage.removeItem(KEY); }   // start clean
   var on = true, hovered = null, current = null;
 
   // assign stable ids to every page block up-front (before overlay elements exist) so saved comments re-resolve on reload
