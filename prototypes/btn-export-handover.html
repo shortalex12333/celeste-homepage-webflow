@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<title>Export Handover — button only — Cloud_PMS prototype</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --surface-base:  #0c0b0a;
+  --mark:          #5AABCC;
+  --teal-bg:       rgba(58,124,157,0.18);
+  --mark-underline:rgba(90,171,204,0.45);
+  --txt2:          rgba(255,255,255,0.55);
+  --txt-ghost:     rgba(255,255,255,0.40);
+  --font-sans:     'DM Sans', -apple-system, sans-serif;
+  --font-mono:     'IBM Plex Mono', ui-monospace, monospace;
+}
+body {
+  background: var(--surface-base);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  min-height: 100vh;
+  gap: 22px;
+  padding: 60px 24px;
+}
+
+/* Export Handover button — production scale ×2.6 for slide visibility.
+   Recipe from HandoverDraftPanel.tsx :734-741 (button) + AppShell.tsx Subbar primary action. */
+.export-btn {
+  display: inline-flex; align-items: center; gap: 12px;
+  padding: 18px 32px;
+  border-radius: 10px;            /* prod 6 */
+  background: var(--teal-bg);
+  color: var(--mark);
+  font-size: 26px;                /* prod 12-13, ×2 */
+  font-weight: 600;
+  border: 1px solid var(--mark-underline);
+  font-family: var(--font-sans);
+  cursor: pointer;
+}
+.export-btn svg { width: 26px; height: 26px; }
+
+.cite {
+  font-family: var(--font-mono);
+  font-size: 10px; letter-spacing: 0.10em;
+  color: var(--txt-ghost);
+  text-align: center;
+}
+.cite strong { color: var(--mark); }
+</style>
+</head>
+<body>
+
+<button class="export-btn" aria-label="Export Handover">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+    <polyline points="17 8 12 3 7 8"/>
+    <line x1="12" y1="3" x2="12" y2="15"/>
+  </svg>
+  Export Handover
+</button>
+
+<div class="cite">Trigger &middot; <strong>HandoverDraftPanel.tsx:734</strong> &middot; also the Subbar primary action (AppShell.tsx Subbar.tsx:56)</div>
+
+</body>
+</html>
