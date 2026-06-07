@@ -122,6 +122,324 @@
       font-weight: 300;
       color: var(--_colors---accent);
     }
+
+    /* ──────────────────────────────────────────────────────────────
+       BENEFITS — handover journey (review #8–#13)
+       #8  The Webflow scroll-scrub interaction cross-fades the four
+           tiles, leaving tile 1 ("Add a note") hidden before the
+           reader arrives. The data-w-id trigger is removed in the
+           markup so nothing auto-advances; here the four steps are
+           re-laid as a static, fully-readable two-column read,
+           tile 1 first.
+       #9  .text-benefits matched to the site's body-text format
+           (18px / 1.4) + Pattern A (first sentence drawn forward).
+       #10–#13  Pattern B — each media is cropped tight to its ONE
+           focal control, free-floating (no card chrome), label above.
+       ────────────────────────────────────────────────────────────── */
+
+    /* #9 — supporting line matches the other body copy + Pattern A */
+    .benefits-section .text-benefits {
+      font-size: var(--_size---bodytext-2);     /* 18px, up from 14px */
+      line-height: var(--_size---line-height3); /* 1.4em */
+      color: var(--_colors---text-muted);
+      width: 100%;
+      max-width: 640px;
+    }
+    .benefits-section .text-benefits .lead { color: var(--_colors---text-color); }
+
+    /* #8 — static two-column read: focal media left, its copy right,
+       one row per step, tile 1 at the top, everything forced visible. */
+    .benefits-section .benefits-sticky {
+      flex-flow: row;
+      align-items: flex-start;
+      justify-content: center;
+      gap: 56px;
+      max-width: 1040px;
+      margin: 2.5rem auto 0;
+      padding: 0 20px;
+    }
+    .benefits-section .wrapper-benefits-item,
+    .benefits-section .wrapper-benefits-text {
+      position: static; flex-flow: column;
+      align-items: flex-start; justify-content: flex-start;
+      width: auto; height: auto; max-height: none;
+      grid-row-gap: 0; grid-column-gap: 0; overflow: visible; margin: 0;
+    }
+    .benefits-section .wrapper-benefits-item { flex: 0 0 460px; }
+    .benefits-section .wrapper-benefits-text { flex: 1 1 0; max-width: 460px; }
+    /* override the Webflow 9-col node placement so items just stack */
+    #w-node-ca7e175e-9ec1-37be-6940-9add9fb15574-0851e0d1,
+    #w-node-_74598e68-4139-623d-2ffc-50be0a09c183-0851e0d1,
+    #w-node-dbfb85b3-fbc4-8829-f48d-9d7dbc8a423a-0851e0d1,
+    #w-node-ccd324b3-964a-bd77-df16-b42fd4d3ace2-0851e0d1 { grid-area: auto !important; }
+    /* de-stack + force every step visible (beats the interaction inline opacity) */
+    .benefits-section .benefits-item1, .benefits-section .benefits-item2,
+    .benefits-section .benefits-item3, .benefits-section .benefits-item4,
+    .benefits-section .benefits-text1, .benefits-section .benefits-text2,
+    .benefits-section .benefits-text3, .benefits-section .benefits-text4 {
+      position: static; inset: auto;
+      opacity: 1 !important; transform: none !important;
+      width: 100%; max-width: none; margin: 0; box-sizing: border-box;
+    }
+    /* one uniform row height per step → media row N aligns with copy row N */
+    .benefits-section .benefits-item1, .benefits-section .benefits-text1 { min-height: 150px; padding-bottom: 56px; }
+    .benefits-section .benefits-item2, .benefits-section .benefits-text2 { min-height: 480px; padding-bottom: 56px; }
+    .benefits-section .benefits-item3, .benefits-section .benefits-text3 { min-height: 474px; padding-bottom: 56px; }
+    .benefits-section .benefits-item4, .benefits-section .benefits-text4 { min-height: 150px; padding-bottom: 0; }
+    .benefits-section .benefits-text1, .benefits-section .benefits-text2,
+    .benefits-section .benefits-text3, .benefits-section .benefits-text4 {
+      background: transparent; padding-left: 0; padding-right: 0; padding-top: 0;
+      text-align: left; align-items: flex-start; justify-content: flex-start;
+    }
+    .benefits-section .bnf-text1, .benefits-section .bnf-text2,
+    .benefits-section .bnf-text3, .benefits-section .bnf-text4 {
+      font-size: var(--_size---bodytext-2); line-height: var(--_size---line-height3);
+      text-align: left; color: var(--_colors---text-muted);
+    }
+    .benefits-section .bnf-text1 .lead, .benefits-section .bnf-text2 .lead,
+    .benefits-section .bnf-text3 .lead, .benefits-section .bnf-text4 .lead { color: var(--_colors---text-color); }
+    /* step label ("1 · Add a note.") → teal mono eyebrow ABOVE its media */
+    .benefits-section .benefits-item1, .benefits-section .benefits-item2,
+    .benefits-section .benefits-item3, .benefits-section .benefits-item4 {
+      flex-flow: column; align-items: flex-start; grid-row-gap: 16px;
+    }
+    .benefits-section .benefits-item1-text, .benefits-section .benefits-item2-text,
+    .benefits-section .benefits-item3-text, .benefits-section .benefits-item4-text {
+      background: transparent; padding: 0;
+    }
+    .benefits-section .bnf-i1-text, .benefits-section .bnf-i2-text,
+    .benefits-section .bnf-i3-text, .benefits-section .bnf-i4-text {
+      color: var(--_colors---accent);
+      font-family: var(--_size---font-family-mono, 'IBM Plex Mono', monospace);
+      font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase;
+    }
+
+    /* #10–#13 — Pattern B: free-floating focal crops (no card chrome) */
+    .benefits-section .iframe-crop--benefit {
+      background: transparent; border: none; box-shadow: none; border-radius: 0; margin: 0;
+    }
+    .benefits-section .iframe-crop--benefit::after { display: none; }
+    /* #10 — just the "Add to handover draft?" prompt + Yes/Dismiss */
+    .benefits-section .bnf-crop-1 { width: 430px; height: 96px; }
+    .benefits-section .bnf-crop-1 iframe { margin-left: -15px !important; margin-top: -180px !important; }
+    /* #11 — the whole "Link document?" confirm popup, legible as one card */
+    .benefits-section .bnf-crop-2 { width: 624px; height: 436px; max-width: 100%; }
+    .benefits-section .bnf-crop-2 iframe { margin-left: -48px !important; margin-top: -26px !important; }
+    /* #12 — the handover-draft drawer: header + the first day's drafts */
+    .benefits-section .bnf-crop-3 { width: 462px; height: 430px; max-width: 100%; }
+    .benefits-section .bnf-crop-3 iframe { margin-left: -260px !important; margin-top: 0 !important; }
+    /* #13 — just the "Export Handover" button */
+    .benefits-section .bnf-crop-4 { width: 340px; height: 100px; }
+    .benefits-section .bnf-crop-4 iframe { margin-left: -190px !important; margin-top: -929px !important; }
+
+    @media screen and (max-width: 991px) {
+      .benefits-section .benefits-sticky { flex-flow: column; align-items: center; gap: 12px; max-width: 560px; }
+      .benefits-section .wrapper-benefits-item, .benefits-section .wrapper-benefits-text {
+        flex: 0 0 auto; width: 100%; max-width: 460px; align-items: center;
+      }
+      .benefits-section .benefits-item1, .benefits-section .benefits-item2,
+      .benefits-section .benefits-item3, .benefits-section .benefits-item4,
+      .benefits-section .benefits-text1, .benefits-section .benefits-text2,
+      .benefits-section .benefits-text3, .benefits-section .benefits-text4 {
+        min-height: 0; padding-bottom: 24px;
+      }
+    }
+
+    /* ─────────────────────────────────────────────────────────────
+       BENEFITS — handover journey (review #8–#13)
+       #8  The Webflow scroll-scrub interaction cross-fades the four
+           tiles, leaving tile 1 ("Add a note") hidden before the
+           reader arrives. The data-w-id trigger is removed in the
+           markup so nothing auto-advances; here the four steps are
+           re-laid as a single static, fully-readable column-pair,
+           tile 1 first.
+       #9  .text-benefits matched to the site's body-text format
+           (18px / 1.4) + Pattern A (first sentence drawn forward).
+       #10–#13  Pattern B — each media is cropped tight to its ONE
+           focal control, free-floating (no card chrome), label above.
+       ───────────────────────────────────────────────────────────── */
+
+    /* #9 — supporting line matches the other body copy + Pattern A */
+    .benefits-section .text-benefits {
+      font-size: var(--_size---bodytext-2);     /* 18px, up from 14px */
+      line-height: var(--_size---line-height3); /* 1.4em */
+      color: var(--_colors---text-muted);
+      width: 100%;
+      max-width: 640px;
+    }
+    .benefits-section .text-benefits .lead {
+      color: var(--_colors---text-color);
+    }
+
+    /* #8 — kill the absolute cross-fade stack. The four steps become a
+       static two-column read: focal media on the left, its copy on the
+       right, one row per step, tile 1 ("Add a note") at the top. Every
+       step is forced visible so nothing is hidden before the reader
+       arrives. Uniform per-row height keeps each media aligned with its
+       own copy across the two independent columns. */
+    .benefits-section .benefits-sticky {
+      flex-flow: row;
+      align-items: flex-start;
+      justify-content: center;
+      gap: 56px;
+      max-width: 1040px;
+      margin: 2.5rem auto 0;
+      padding: 0 20px;
+    }
+    .benefits-section .wrapper-benefits-item,
+    .benefits-section .wrapper-benefits-text {
+      position: static;
+      flex-flow: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      width: auto;
+      height: auto;
+      max-height: none;
+      grid-row-gap: 0;
+      grid-column-gap: 0;
+      overflow: visible;
+      margin: 0;
+    }
+    .benefits-section .wrapper-benefits-item { flex: 0 0 460px; }
+    .benefits-section .wrapper-benefits-text { flex: 1 1 0; max-width: 460px; }
+    /* override the Webflow 9-col node placement so items just stack */
+    #w-node-ca7e175e-9ec1-37be-6940-9add9fb15574-0851e0d1,
+    #w-node-_74598e68-4139-623d-2ffc-50be0a09c183-0851e0d1,
+    #w-node-dbfb85b3-fbc4-8829-f48d-9d7dbc8a423a-0851e0d1,
+    #w-node-ccd324b3-964a-bd77-df16-b42fd4d3ace2-0851e0d1 {
+      grid-area: auto !important;
+    }
+    /* de-stack + force every step visible (beats the interaction inline opacity) */
+    .benefits-section .benefits-item1,
+    .benefits-section .benefits-item2,
+    .benefits-section .benefits-item3,
+    .benefits-section .benefits-item4,
+    .benefits-section .benefits-text1,
+    .benefits-section .benefits-text2,
+    .benefits-section .benefits-text3,
+    .benefits-section .benefits-text4 {
+      position: static;
+      inset: auto;
+      opacity: 1 !important;
+      transform: none !important;
+      width: 100%;
+      max-width: none;
+      margin: 0;
+      box-sizing: border-box;
+    }
+    /* one uniform row height per step → media row N aligns with copy row N */
+    .benefits-section .benefits-item1,
+    .benefits-section .benefits-text1 { min-height: 150px; padding-bottom: 56px; }
+    .benefits-section .benefits-item2,
+    .benefits-section .benefits-text2 { min-height: 480px; padding-bottom: 56px; }
+    .benefits-section .benefits-item3,
+    .benefits-section .benefits-text3 { min-height: 474px; padding-bottom: 56px; }
+    .benefits-section .benefits-item4,
+    .benefits-section .benefits-text4 { min-height: 150px; padding-bottom: 0; }
+    .benefits-section .benefits-text1,
+    .benefits-section .benefits-text2,
+    .benefits-section .benefits-text3,
+    .benefits-section .benefits-text4 {
+      background: transparent;
+      padding-left: 0;
+      padding-right: 0;
+      padding-top: 0;
+      text-align: left;
+      align-items: flex-start;
+      justify-content: flex-start;
+    }
+    .benefits-section .bnf-text1,
+    .benefits-section .bnf-text2,
+    .benefits-section .bnf-text3,
+    .benefits-section .bnf-text4 {
+      font-size: var(--_size---bodytext-2);     /* 18px */
+      line-height: var(--_size---line-height3); /* 1.4em */
+      text-align: left;
+      color: var(--_colors---text-muted);
+    }
+    .benefits-section .bnf-text1 .lead,
+    .benefits-section .bnf-text2 .lead,
+    .benefits-section .bnf-text3 .lead,
+    .benefits-section .bnf-text4 .lead {
+      color: var(--_colors---text-color);
+    }
+    /* step label ("1 · Add a note.") sits ABOVE its media */
+    .benefits-section .benefits-item1,
+    .benefits-section .benefits-item2,
+    .benefits-section .benefits-item3,
+    .benefits-section .benefits-item4 {
+      flex-flow: column;
+      align-items: flex-start;
+      grid-row-gap: 16px;
+    }
+    .benefits-section .benefits-item1-text,
+    .benefits-section .benefits-item2-text,
+    .benefits-section .benefits-item3-text,
+    .benefits-section .benefits-item4-text {
+      background: transparent;
+      padding: 0;
+    }
+    .benefits-section .bnf-i1-text,
+    .benefits-section .bnf-i2-text,
+    .benefits-section .bnf-i3-text,
+    .benefits-section .bnf-i4-text {
+      color: var(--_colors---accent);                    /* teal eyebrow */
+      font-family: var(--_size---font-family-mono, 'IBM Plex Mono', monospace);
+      font-size: 13px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    /* #10–#13 — Pattern B: free-floating focal crops (no card chrome) */
+    .benefits-section .iframe-crop--benefit {
+      background: transparent;
+      border: none;
+      box-shadow: none;
+      border-radius: 0;
+      margin: 0;
+    }
+    .benefits-section .iframe-crop--benefit::after { display: none; }
+
+    /* #10 — just the "Add to handover draft?" prompt + Yes/Dismiss */
+    .benefits-section .bnf-crop-1 { width: 430px; height: 96px; }
+    .benefits-section .bnf-crop-1 iframe { margin-left: -15px !important; margin-top: -180px !important; }
+    /* #11 — the whole "Link document?" confirm popup, legible as one card */
+    .benefits-section .bnf-crop-2 { width: 624px; height: 436px; max-width: 100%; }
+    .benefits-section .bnf-crop-2 iframe { margin-left: -48px !important; margin-top: -26px !important; }
+    /* #12 — the handover-draft drawer: header + the first day's drafts */
+    .benefits-section .bnf-crop-3 { width: 462px; height: 430px; max-width: 100%; }
+    .benefits-section .bnf-crop-3 iframe { margin-left: -260px !important; margin-top: 0 !important; }
+    /* #13 — just the "Export Handover" button */
+    .benefits-section .bnf-crop-4 { width: 340px; height: 100px; }
+    .benefits-section .bnf-crop-4 iframe { margin-left: -190px !important; margin-top: -929px !important; }
+
+    @media screen and (max-width: 991px) {
+      /* single column — media tile then its copy, step by step */
+      .benefits-section .benefits-sticky {
+        flex-flow: column;
+        align-items: center;
+        gap: 12px;
+        max-width: 560px;
+      }
+      .benefits-section .wrapper-benefits-item,
+      .benefits-section .wrapper-benefits-text {
+        flex: 0 0 auto;
+        width: 100%;
+        max-width: 460px;
+        align-items: center;
+      }
+      .benefits-section .benefits-item1,
+      .benefits-section .benefits-item2,
+      .benefits-section .benefits-item3,
+      .benefits-section .benefits-item4,
+      .benefits-section .benefits-text1,
+      .benefits-section .benefits-text2,
+      .benefits-section .benefits-text3,
+      .benefits-section .benefits-text4 {
+        min-height: 0;
+        padding-bottom: 24px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -172,7 +490,7 @@
         <div style="-webkit-transform:translate3d(0, -100%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, -100%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, -100%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, -100%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="hero-text">
           <div class="hero-heading">
             <h1 class="heading">The vessel’s knowledge<br>stays in the <em>vessel.</em></h1>
-            <div class="hero-subhead" style="font-family:var(--_size---font-family-display,'Eloquia Display',sans-serif);font-weight:400;font-size:clamp(1.8rem,1.2rem+1.8vw,2.6rem);line-height:1.2;letter-spacing:-0.01em;color:#8c8c8c;margin-top:0.9rem;">Data continuity</div>
+            <div class="hero-subhead" style="font-family:var(--_size---font-family-display,'Eloquia Display',sans-serif);font-weight:500;font-size:clamp(2.3rem,1.5rem+2.4vw,3.4rem);line-height:1.12;letter-spacing:-0.015em;color:var(--_colors---text-muted);margin-top:1rem;">Data continuity</div>
           </div>
           <div class="hero-texr">
             <div class="text-hero1"><span class="accent">On most vessels</span>, operational knowledge lives in the crew, not the vessel. When the chief engineer leaves, a year of fault history, supplier context, and system understanding leaves with them. The next engineer inherits equipment, not context.</div>
@@ -189,10 +507,7 @@
               <div class="proof-item"><div class="proof-dot"></div>Used during handovers, eight months of operational context, not two days of verbal briefing</div>
               <div class="proof-item"><div class="proof-dot"></div>Used when decisions cannot be reversed, every action explicit, signed, permanently recorded</div>
             </div>
-            <!-- Verifier reference, deliberately understated. Not a CTA, a credibility marker. -->
-            <a href="https://verifier.celeste7.ai" target="_blank" rel="noopener" class="hero-verifier-anchor" style="display:inline-block;margin-top:1.6rem;padding-top:0.9rem;border-top:1px solid rgba(127,127,127,0.18);font-family:'IBM Plex Mono',monospace;font-size:0.72rem;letter-spacing:0.04em;color:inherit;text-decoration:none;opacity:0.55;">
-              Every record independently verifiable <span style="opacity:0.7;">→ verifier.celeste7.ai</span>
-            </a>
+
           </div>
         </div>
       </div>
@@ -226,8 +541,8 @@
                 </div>
               </div>
             </div>
-            <div class="about-text2" style="margin-top:3.2rem;">
-              <div style="font-family:'IBM Plex Mono',monospace;font-size:0.74rem;letter-spacing:0.08em;text-transform:uppercase;opacity:0.6;margin-bottom:0.6rem;">How it's used in practice</div>
+            <div class="about-text2" style="margin-top:3.2rem;color:var(--_colors---text-muted);">
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:0.74rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--_colors---accent);margin-bottom:0.6rem;">How it's used in practice</div>
               Ask. Review the source. Act.
             </div>
           </div>
@@ -239,25 +554,51 @@
   <!-- THE PROBLEM / costs (plan §3). Text-led, one beat. Reuses the live impact-section shell + w-container + IBM Plex Mono eyebrow + accent token, matching the #sits-alongside additive-block pattern. No media: the quiet foundational beat before the handover journey. -->
   <section id="problem" class="impact-section" style="padding:7rem 2rem;">
     <div class="w-layout-blockcontainer w-container" style="max-width:920px;">
-      <div style="font-family:'IBM Plex Mono',monospace;font-size:0.74rem;letter-spacing:0.08em;text-transform:uppercase;opacity:0.6;margin-bottom:1.4rem;">The cost of forgetting</div>
-      <h2 style="font-size:clamp(1.9rem,3.8vw,2.8rem);line-height:1.18;letter-spacing:-0.01em;margin:0 0 1.6rem 0;font-weight:500;max-width:760px;">Every rotation, the vessel forgets. The next engineer inherits <span class="accent">equipment, not context.</span></h2>
-      <p style="font-size:1.08rem;line-height:1.6;opacity:0.86;max-width:680px;margin:0 0 3.2rem 0;">A year of fault history, supplier relationships, and the reasons behind every decision leaves on the last flight. What stays is a folder no one can search and a verbal briefing that ends when the gangway lifts. The new crew pays, in the owner&rsquo;s time and the owner&rsquo;s money, to re-learn what the vessel already knew.</p>
-      <div class="problem-cost-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:2.4rem 3rem;border-top:1px solid rgba(127,127,127,0.16);padding-top:2.8rem;">
-        <div class="problem-cost">
-          <div style="font-family:'IBM Plex Mono',monospace;font-size:0.7rem;letter-spacing:0.06em;text-transform:uppercase;opacity:0.55;margin-bottom:0.7rem;">Time</div>
-          <div style="font-size:1.02rem;line-height:1.55;opacity:0.9;">The handover written at 1am on the last night, from memory, because there was never a moment to write it as the work was done.</div>
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:0.74rem;letter-spacing:0.08em;text-transform:uppercase;opacity:0.6;margin-bottom:1.4rem;">The cost of forgetting</div><style>
+        /* #7 cost-grid: one horizontal row, label-only, reveal detail on hover (desktop) / tap-focus (mobile). Light/dark safe via tokens. */
+        .problem-cost-grid .problem-cost{position:relative;padding:0 1.6rem;cursor:pointer;outline:none;}
+        .problem-cost-grid .problem-cost:not(:first-child){border-left:1px solid rgba(127,127,127,0.16);}
+        .problem-cost-grid .pc-label{font-family:'IBM Plex Mono',monospace;font-size:0.82rem;letter-spacing:0.04em;text-transform:uppercase;color:var(--_colors---accent);transition:color .2s ease;}
+        .problem-cost-grid .pc-detail{font-size:0.98rem;line-height:1.5;color:var(--_colors---text-muted);max-height:0;opacity:0;overflow:hidden;margin-top:0;transition:max-height .35s ease,opacity .25s ease,margin-top .35s ease;}
+        .problem-cost-grid .problem-cost:hover .pc-detail,
+        .problem-cost-grid .problem-cost:focus .pc-detail,
+        .problem-cost-grid .problem-cost:focus-within .pc-detail{max-height:18rem;opacity:1;margin-top:0.9rem;}
+        .problem-cost-grid .problem-cost:hover .pc-label,
+        .problem-cost-grid .problem-cost:focus .pc-label,
+        .problem-cost-grid .problem-cost:focus-within .pc-label{color:var(--_colors---text-color);}
+        @media (max-width:860px){
+          .problem-cost-grid{grid-template-columns:repeat(2,1fr) !important;gap:0 !important;}
+          .problem-cost-grid .problem-cost{padding:1.4rem 1.2rem;}
+          .problem-cost-grid .problem-cost:nth-child(2n)~.problem-cost,
+          .problem-cost-grid .problem-cost:nth-child(3),
+          .problem-cost-grid .problem-cost:nth-child(4){border-top:1px solid rgba(127,127,127,0.16);}
+          .problem-cost-grid .problem-cost:nth-child(odd){border-left:none;}
+        }
+        @media (max-width:520px){
+          .problem-cost-grid{grid-template-columns:1fr !important;}
+          .problem-cost-grid .problem-cost{border-left:none !important;padding:1.2rem 0;}
+          .problem-cost-grid .problem-cost:not(:first-child){border-top:1px solid rgba(127,127,127,0.16);}
+        }
+      </style>
+      <h2 style="font-size:clamp(1.9rem,3.8vw,2.8rem);line-height:1.18;letter-spacing:-0.01em;margin:0 0 0.7rem 0;font-weight:500;max-width:760px;">Every rotation, the vessel forgets.</h2>
+      <div style="font-size:clamp(1.15rem,2.2vw,1.5rem);line-height:1.3;letter-spacing:-0.005em;font-weight:400;color:var(--_colors---text-muted);max-width:680px;margin:0 0 1.6rem 0;">The next engineer inherits <span class="accent">equipment, not context.</span></div>
+      <p style="font-size:1.08rem;line-height:1.6;color:var(--_colors---text-muted);max-width:680px;margin:0 0 3.2rem 0;"><span style="color:var(--_colors---text-color)">A year of fault history,</span> supplier relationships, and the reasons behind every decision leaves on the last flight. What stays is a folder no one can search and a verbal briefing that ends when the gangway lifts. The new crew pays, in the owner&rsquo;s time and the owner&rsquo;s money, to re-learn what the vessel already knew.</p>
+      <div class="problem-cost-grid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid rgba(127,127,127,0.16);padding-top:2.8rem;">
+        <div class="problem-cost" tabindex="0">
+          <div class="pc-label">Time</div>
+          <div class="pc-detail">The handover written at 1am on the last night, from memory, because there was never a moment to write it as the work was done.</div>
         </div>
-        <div class="problem-cost">
-          <div style="font-family:'IBM Plex Mono',monospace;font-size:0.7rem;letter-spacing:0.06em;text-transform:uppercase;opacity:0.55;margin-bottom:0.7rem;">Knowledge</div>
-          <div style="font-size:1.02rem;line-height:1.55;opacity:0.9;">A year of context walks down the gangway with the chief. The next engineer starts from the equipment, not from what was already learned about it.</div>
+        <div class="problem-cost" tabindex="0">
+          <div class="pc-label">Knowledge</div>
+          <div class="pc-detail">A year of context walks down the gangway with the chief. The next engineer starts from the equipment, not from what was already learned about it.</div>
         </div>
-        <div class="problem-cost">
-          <div style="font-family:'IBM Plex Mono',monospace;font-size:0.7rem;letter-spacing:0.06em;text-transform:uppercase;opacity:0.55;margin-bottom:0.7rem;">Repeat faults</div>
-          <div style="font-size:1.02rem;line-height:1.55;opacity:0.9;">The same fault re-diagnosed from zero because last year&rsquo;s diagnosis left with last year&rsquo;s engineer. A vendor callout to confirm it runs &euro;2k&ndash;&euro;5k.</div>
+        <div class="problem-cost" tabindex="0">
+          <div class="pc-label">Repeat faults</div>
+          <div class="pc-detail">The same fault re-diagnosed from zero because last year&rsquo;s diagnosis left with last year&rsquo;s engineer. A vendor callout to confirm it runs &euro;2k&ndash;&euro;5k.</div>
         </div>
-        <div class="problem-cost">
-          <div style="font-family:'IBM Plex Mono',monospace;font-size:0.7rem;letter-spacing:0.06em;text-transform:uppercase;opacity:0.55;margin-bottom:0.7rem;">The binder</div>
-          <div style="font-size:1.02rem;line-height:1.55;opacity:0.9;">The warranty still open that nobody knew about. The record that exists somewhere in a binder no one can search at the moment it is needed.</div>
+        <div class="problem-cost" tabindex="0">
+          <div class="pc-label">The binder</div>
+          <div class="pc-detail">The warranty still open that nobody knew about. The record that exists somewhere in a binder no one can search at the moment it is needed.</div>
         </div>
       </div>
     </div>
@@ -265,13 +606,13 @@
     <section class="benefits-section">
       <div class="benefit-vertical-line"></div>
       <div class="benefit-circle"></div>
-      <div data-w-id="6b53e8cb-16f0-2eb3-9684-2cb7c78e05b9" class="w-layout-blockcontainer benefits-container w-container">
+      <div class="w-layout-blockcontainer benefits-container w-container">
         <div class="benefits-wrapper">
           <div class="benefits-heading">
             <h2 class="heading--benefits">What the vessel keeps when the crew leaves.</h2>
             <div class="number-benefits">(02)</div>
           </div>
-          <div class="text-benefits">Four taps, spread across the rotation. This is all the crew does. At handover it&rsquo;s compiled from the jobs they actually did, signed by the engineer who did the work, countersigned by the Head of Department.</div>
+          <div class="text-benefits"><span class="lead">Four taps, spread across the rotation.</span> This is all the crew does. At handover it&rsquo;s compiled from the jobs they actually did, signed by the engineer who did the work, countersigned by the Head of Department.</div>
         </div>
         <div class="benefits-sticky">
           <div class="wrapper-benefits-item">
@@ -279,8 +620,8 @@
               <div class="benefits-item1-text">
                 <div class="bnf-i1-text">1 &middot; Add a note.</div>
               </div>
-              <div class="iframe-product-wrap iframe-crop--benefit">
-                <iframe src="prototypes/handover-prompt.html" loading="lazy" title="CelesteOS, add a closed fault to the handover draft in one tap" style="margin-top: 0px"></iframe>
+              <div class="iframe-product-wrap iframe-crop--benefit bnf-crop-1">
+                <iframe src="prototypes/handover-prompt.html" loading="lazy" title="CelesteOS, add a closed fault to the handover draft in one tap"></iframe>
               </div>
               <img src="images/benefit-1.webp" loading="lazy" alt="CelesteOS, add a closed fault to the handover draft in one tap" class="benefits-img-1 iframe-fallback">
             </div>
@@ -288,8 +629,8 @@
               <div class="benefits-item2-text">
                 <div class="bnf-i2-text">2 &middot; Link an item.</div>
               </div>
-              <div class="iframe-product-wrap iframe-crop--benefit">
-                <iframe src="prototypes/popup-link-document.html" loading="lazy" title="CelesteOS, link a work order or record to the handover" style="margin-top: 0px"></iframe>
+              <div class="iframe-product-wrap iframe-crop--benefit bnf-crop-2">
+                <iframe src="prototypes/popup-link-document.html" loading="lazy" title="CelesteOS, link a work order or record to the handover"></iframe>
               </div>
               <img src="images/benefit-2.webp" loading="lazy" alt="CelesteOS, link a work order or record to the handover" class="benefits-img-2 iframe-fallback">
             </div>
@@ -297,8 +638,8 @@
               <div class="benefits-item3-text">
                 <div class="bnf-i3-text">3 &middot; See every draft.</div>
               </div>
-              <div class="iframe-product-wrap iframe-crop--benefit">
-                <iframe src="prototypes/handover-draft-drawer.html" loading="lazy" title="CelesteOS, every handover draft captured this rotation in one drawer" style="margin-top: 0px"></iframe>
+              <div class="iframe-product-wrap iframe-crop--benefit bnf-crop-3">
+                <iframe src="prototypes/handover-draft-drawer.html" loading="lazy" title="CelesteOS, every handover draft captured this rotation in one drawer"></iframe>
               </div>
               <img src="images/benefit-3.webp" loading="lazy" alt="CelesteOS, every handover draft captured this rotation in one drawer" class="benefits-img-3 iframe-fallback">
             </div>
@@ -306,24 +647,24 @@
               <div class="benefits-item4-text">
                 <div class="bnf-i4-text">4 &middot; Export, one button.</div>
               </div>
-              <div class="iframe-product-wrap iframe-crop--benefit">
-                <iframe src="prototypes/btn-export-handover.html" loading="lazy" title="CelesteOS, export the compiled handover with one button" style="margin-top: 0px"></iframe>
+              <div class="iframe-product-wrap iframe-crop--benefit bnf-crop-4">
+                <iframe src="prototypes/btn-export-handover.html" loading="lazy" title="CelesteOS, export the compiled handover with one button"></iframe>
               </div>
               <img src="images/benefit-4.webp" loading="lazy" alt="CelesteOS, export the compiled handover with one button" class="benefits-img-4 iframe-fallback">
             </div>
           </div>
           <div class="wrapper-benefits-text">
             <div class="benefits-text1">
-              <div class="bnf-text1">When you close a fault or finish a job, one tap adds it to the handover draft. Nothing to write up after — you mark what matters in the moment, from the work in front of you.</div>
+              <div class="bnf-text1"><span class="lead">When you close a fault or finish a job, one tap adds it to the handover draft.</span> Nothing to write up after — you mark what matters in the moment, from the work in front of you.</div>
             </div>
             <div class="benefits-text2">
-              <div class="bnf-text2">Attach the work order, the part, the manual page, the email thread — the actual records behind the job. The handover line stays linked to the original, so whoever inherits the vessel can open the source, not a paraphrase typed at midnight.</div>
+              <div class="bnf-text2"><span class="lead">Attach the work order, the part, the manual page, the email thread — the actual records behind the job.</span> The handover line stays linked to the original, so whoever inherits the vessel can open the source, not a paraphrase typed at midnight.</div>
             </div>
             <div class="benefits-text3">
-              <div class="bnf-text3">Every draft sits in one drawer — the faults, jobs, and records gathered across the whole rotation. Open it any time to see what the handover already holds, and add what&rsquo;s missing before you leave.</div>
+              <div class="bnf-text3"><span class="lead">Every draft sits in one drawer — the faults, jobs, and records gathered across the whole rotation.</span> Open it any time to see what the handover already holds, and add what&rsquo;s missing before you leave.</div>
             </div>
             <div class="benefits-text4">
-              <div class="bnf-text4">At rotation, the draft is compiled and exported in one step. You review it, the Head of Department countersigns, and it hands over signed by the engineer who did the work — sourced, dated, and searchable for whoever comes next. That&rsquo;s the work.</div>
+              <div class="bnf-text4"><span class="lead">At rotation, the draft is compiled and exported in one step.</span> You review it, the Head of Department countersigns, and it hands over signed by the engineer who did the work — sourced, dated, and searchable for whoever comes next. That&rsquo;s the work.</div>
             </div>
           </div>
         </div>
@@ -332,7 +673,7 @@
   </div>
   <section id="wormhole" class="oc-section" style="min-height:auto;padding:7rem 0 5rem;">
     <div class="w-layout-blockcontainer w-container" style="max-width:1200px;padding:0 80px;margin:0 auto 4.5rem;">
-      <div style="font-family:'IBM Plex Mono',monospace;font-size:0.74rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--_colors---accent);margin-bottom:1.2rem;">From the handover to the source</div>
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:0.74rem;letter-spacing:0.08em;text-transform:uppercase;opacity:0.6;margin-bottom:1.2rem;">From the handover to the source</div>
       <h2 style="font-size:clamp(1.9rem,3.8vw,2.8rem);line-height:1.18;letter-spacing:-0.015em;margin:0;max-width:780px;font-weight:400;color:var(--_colors---text-color);">Every line is one click from the original record.</h2>
       <p style="font-size:1.05rem;line-height:1.6;max-width:640px;margin:1.4rem 0 0;color:var(--_colors---text-color);opacity:0.82;">The exported handover is not a paraphrase someone typed at midnight. Each line in it opens the work order, the part, the fault it was built from — attributed to the engineer who logged the work.</p>
     </div>
@@ -365,8 +706,55 @@
         </div>
       </div>
     </div>
+    <!-- #16 STAGGERED OVERLAY (replaces the old side-by-side oc-pair above; the orchestrator should DELETE that block so only this composition renders). Founder sketch: exported handover doc BEHIND/upper-left, the work-order entity card OVERLAID front-right and dropped lower, overlapping the doc's corner. #15: the whole thing is a single bounded media frame at the section's own width (max-width 1200, padding 0 80px) — proportioned, not centred-floating. Entity card forced to LIGHT mode via same-origin iframe onload (the prototype defaults to dark; setting data-theme="light" flips its tokens). Labels live OUTSIDE the iframe wraps so they survive the <=767px mobile rule that hides .iframe-product-wrap. -->
+    <div style="max-width:1200px;margin:0 auto;padding:0 80px;">
+      <div style="position:relative;width:100%;max-width:760px;margin:0 auto;height:600px;">
+        <!-- DOC, behind, upper-left -->
+        <div style="position:absolute;left:0;top:0;width:60%;max-width:430px;z-index:1;">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--_colors---text-color);opacity:0.55;margin-bottom:0.7rem;">The exported handover</div>
+          <div class="iframe-product-wrap iframe-crop--oc" style="width:100%;height:460px;position:relative;">
+            <iframe src="prototypes/handover-cover.html" loading="lazy" title="CelesteOS exported handover, 147 linked records across 6 domains" style="margin-top:0"></iframe>
+            <div style="position:absolute;left:0;right:0;bottom:0;height:96px;pointer-events:none;background:linear-gradient(180deg,rgba(0,0,0,0) 0%,var(--_colors---card-bg) 92%);z-index:2;"></div>
+            <div style="position:absolute;left:0;right:0;bottom:12px;text-align:center;z-index:3;font-family:'IBM Plex Mono',monospace;font-size:0.64rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--_colors---text-color);opacity:0.6;">147 linked records · 6 domains</div>
+          </div>
+        </div>
+        <!-- ENTITY CARD, front-right, dropped lower, LIGHT mode -->
+        <div style="position:absolute;right:0;top:140px;width:58%;max-width:420px;z-index:3;">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--_colors---accent);margin-bottom:0.7rem;display:inline-flex;align-items:center;gap:0.5rem;"><span style="font-size:0.9rem;line-height:1;">→</span> opens the original record</div>
+          <div class="iframe-product-wrap iframe-crop--oc-related" style="position:relative;width:100%;height:440px;background:#F8F8F8;box-shadow:0 18px 60px rgba(0,0,0,0.28);">
+            <iframe src="prototypes/lens-work-order.html" loading="lazy" title="CelesteOS work order WO-1042, the original record the handover line links to — light mode" style="margin-left:-72px;background:#F8F8F8;" onload="try{this.contentDocument.documentElement.setAttribute('data-theme','light');}catch(e){}"></iframe>
+            <div style="position:absolute;left:14px;top:50px;z-index:4;padding:8px 12px;border-radius:6px;background:#FFFFFF;border:1px solid var(--_colors---accent);box-shadow:0 8px 28px rgba(0,0,0,0.18);pointer-events:none;">
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:0.62rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--_colors---accent);margin-bottom:3px;">WO-1042 · live link</div>
+              <div style="font-size:0.82rem;line-height:1.35;color:rgba(0,0,0,0.82);">Logged by the Chief Engineer who did the work</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="w-layout-blockcontainer w-container" style="max-width:1200px;padding:0 80px;margin:3.5rem auto 0;">
       <p class="accent" style="font-size:clamp(1.35rem,2.6vw,1.9rem);line-height:1.3;max-width:760px;margin:0;">The distance between what the handover says and what happened is zero.</p>
+      <a href="#how" class="w-inline-block" style="display:inline-flex;align-items:baseline;gap:0.5rem;text-decoration:none;margin-top:1.6rem;font-family:var(--_size---font-family-mono,'IBM Plex Mono',monospace);font-size:0.8rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--_colors---accent);">Watch the 2-minute walkthrough <span style="opacity:0.7;">&middot; no signup &rarr;</span></a>
+    </div>
+    <!-- #17 distance-shrink timeline. Centres the accent line and adds an inline SVG: a long horizontal rail with 6 numbered stops = the traditional navigation steps, and ONE CelesteOS arrow that jumps the whole span in a single hop. Shows navigation distance collapsing to one step. currentColor + var(--_colors---accent) → light/dark safe; viewBox scales fluidly. -->
+    <div class="w-layout-blockcontainer w-container" style="max-width:1100px;padding:0 80px;margin:5rem auto 0;">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:0.66rem;letter-spacing:0.1em;text-transform:uppercase;opacity:0.55;text-align:center;margin-bottom:1.4rem;">The old way to reach the record</div>
+      <svg viewBox="0 0 1000 200" role="img" aria-label="Traditional handover navigation took six steps — open Word, search the database, find the old manual, old notes, handover emails, open the handover. CelesteOS jumps the whole span in one step." style="width:100%;height:auto;display:block;color:var(--_colors---text-color);">
+        <!-- CelesteOS single-hop arc above the rail -->
+        <path d="M70 86 C 320 4, 680 4, 930 86" fill="none" stroke="var(--_colors---accent)" stroke-width="2" stroke-linecap="round"/>
+        <path d="M930 86 l -11 -8 m 11 8 l -8 11" fill="none" stroke="var(--_colors---accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <text x="500" y="22" text-anchor="middle" font-family="var(--_size---font-family-accent,'Cormorant Garamond',serif)" font-style="italic" font-size="22" fill="var(--_colors---accent)">CelesteOS — one step</text>
+        <!-- the rail -->
+        <line x1="70" y1="110" x2="930" y2="110" stroke="currentColor" stroke-width="1.5" opacity="0.28"/>
+        <!-- 6 stops -->
+        <g font-family="'IBM Plex Mono',monospace" font-size="11" letter-spacing="0.02em">
+          <g><circle cx="70" cy="110" r="6" fill="currentColor" opacity="0.5"/><text x="70" y="100" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor" opacity="0.8">1</text><text x="70" y="140" text-anchor="middle" fill="currentColor" opacity="0.6">open Word</text></g>
+          <g><circle cx="242" cy="110" r="6" fill="currentColor" opacity="0.5"/><text x="242" y="100" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor" opacity="0.8">2</text><text x="242" y="140" text-anchor="middle" fill="currentColor" opacity="0.6">search the database</text></g>
+          <g><circle cx="414" cy="110" r="6" fill="currentColor" opacity="0.5"/><text x="414" y="100" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor" opacity="0.8">3</text><text x="414" y="140" text-anchor="middle" fill="currentColor" opacity="0.6">find the old manual</text></g>
+          <g><circle cx="586" cy="110" r="6" fill="currentColor" opacity="0.5"/><text x="586" y="100" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor" opacity="0.8">4</text><text x="586" y="140" text-anchor="middle" fill="currentColor" opacity="0.6">old notes</text></g>
+          <g><circle cx="758" cy="110" r="6" fill="currentColor" opacity="0.5"/><text x="758" y="100" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor" opacity="0.8">5</text><text x="758" y="140" text-anchor="middle" fill="currentColor" opacity="0.6">handover emails</text></g>
+          <g><circle cx="930" cy="110" r="6" fill="var(--_colors---accent)"/><text x="930" y="100" text-anchor="middle" font-size="13" font-weight="600" fill="var(--_colors---accent)">6</text><text x="930" y="140" text-anchor="middle" fill="currentColor" opacity="0.6">open the handover</text></g>
+        </g>
+      </svg>
     </div>
   </section>
   <section id="product" class="services-section">
@@ -377,11 +765,87 @@
           <div style="-webkit-transform:translate3d(0, 100%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 100%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 100%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 100%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="number-service">(03)</div>
         </div>
         <div class="service-item-wrapper">
-          <div class="service-item1">
-            <div class="iframe-product-wrap iframe-crop--service-hero">
-              <iframe src="prototypes/elegant-idle.html" loading="lazy" title="CelesteOS Search, idle state" style="margin-top: -40px"></iframe>
+        <!-- search-services KIT (#18,#22,#23 layout + #18 light search-bar component). Scoped to .ss-* only;
+             uses live tokens so it tracks light/dark. The search-bar block is FORCED light (opposite of
+             the visitor's theme) per review #18 via fixed token values, not theme vars. -->
+        <style id="search-services-kit">
+          /* free-float: drop the 2-col grid, centre one column, kill any leftover crop box */
+          .ss-float { display:block !important; width:100%; max-width:760px; margin-left:auto; margin-right:auto; text-align:center; }
+          .ss-float .iframe-product-wrap { background:transparent; border:0; box-shadow:none; border-radius:0; }
+          .ss-float .service-line { margin-left:auto; margin-right:auto; }
+          /* media block — free floating, actual size, centred, one focus */
+          .ss-media { display:flex; justify-content:center; width:100%; margin:0 auto; }
+          .ss-float--below .ss-media { margin-bottom:2.6rem; }   /* #18: media above, text beneath */
+          .ss-float--above .ss-media { margin-top:2.6rem; }      /* #22/#23: text above, media beneath */
+          .ss-float--above > .div-block-75,
+          .ss-float--above > .div-block-79 { text-align:left; max-width:560px; margin:0 auto; }
+          /* one-focus tight crop for the floating prototype media (box-less) */
+          .ss-media--crop { overflow:hidden; border-radius:10px; width:100%; max-width:480px; height:300px; }
+          .ss-media--crop iframe { width:720px; height:2000px; border:0; display:block; pointer-events:none; }
+
+          /* #18 LIGHT-MODE search-bar component — fixed light values so it stays light in dark mode */
+          .ss-media--searchbar { width:100%; }
+          .ss-searchbar {
+            width:100%; max-width:480px; margin:0 auto; text-align:left;
+            background:#FFFFFF;
+            border:1px solid rgba(15,23,32,0.10);
+            border-radius:12px;
+            box-shadow:0 1px 0 rgba(15,23,32,0.04), 0 18px 50px rgba(15,23,32,0.14);
+            overflow:hidden;
+            font-family:'DM Sans', system-ui, sans-serif;
+          }
+          .ss-searchbar-row { display:flex; align-items:center; gap:11px; padding:0 16px; height:54px; }
+          .ss-searchbar-icon { width:17px; height:17px; flex:0 0 auto; color:#9aa3ab; }
+          .ss-searchbar-text { flex:1; font-size:16px; color:#6b7178; letter-spacing:-0.005em; }
+          .ss-searchbar-kbd {
+            flex:0 0 auto; font-family:'IBM Plex Mono', monospace; font-size:11px;
+            color:#8b9097; background:#f3f4f6; border:1px solid rgba(15,23,32,0.08);
+            border-radius:5px; padding:3px 7px;
+          }
+          .ss-searchbar-divider { height:1px; background:linear-gradient(90deg, transparent, var(--_colors---accent) 18%, var(--_colors---accent) 82%, transparent); opacity:0.55; }
+          .ss-searchbar-footer {
+            display:flex; align-items:center; gap:10px; height:36px; padding:0 16px;
+            background:#fafbfc; border-top:1px solid rgba(15,23,32,0.05);
+            font-family:'IBM Plex Mono', monospace; font-size:10.5px; letter-spacing:0.02em; color:#9aa3ab;
+          }
+          .ss-searchbar-footer > span { display:inline-flex; align-items:center; gap:5px; }
+          .ss-key {
+            display:inline-flex; align-items:center; justify-content:center; min-width:16px; height:16px;
+            padding:0 4px; font-size:10px; color:#6b7178; background:#fff;
+            border:1px solid rgba(15,23,32,0.12); border-radius:4px;
+          }
+          .ss-foot-sep { width:1px; height:12px; background:rgba(15,23,32,0.10); }
+
+          @media screen and (max-width:767px) {
+            .ss-media--crop { max-width:100%; height:240px; }
+            .ss-searchbar { max-width:100%; }
+          }
+        </style>
+
+          <div class="service-item1 ss-float ss-float--below">
+            <!-- #18 — free-floating, centred, text BENEATH. The search bar is imported as JUST the
+                 component (no app frame), built actual-size in inline HTML/SVG so it can be forced
+                 LIGHT regardless of the visitor's theme (opposite of what they selected). Self-contained
+                 = renders identically on mobile, so the heavy iframe-crop box + fallback img are dropped. -->
+            <div class="ss-media ss-media--searchbar">
+              <div class="ss-searchbar" role="img" aria-label="CelesteOS search bar: Find anything, or tell me what to do">
+                <div class="ss-searchbar-row">
+                  <svg class="ss-searchbar-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                    <circle cx="6.5" cy="6.5" r="4.5"></circle><path d="M10 10l3 3"></path>
+                  </svg>
+                  <span class="ss-searchbar-text">Find anything, or tell me what to do&hellip;</span>
+                  <span class="ss-searchbar-kbd">&#8984;K</span>
+                </div>
+                <div class="ss-searchbar-divider"></div>
+                <div class="ss-searchbar-footer">
+                  <span><span class="ss-key">&uarr;</span><span class="ss-key">&darr;</span> Navigate</span>
+                  <span class="ss-foot-sep"></span>
+                  <span><span class="ss-key">&crarr;</span> Open</span>
+                  <span class="ss-foot-sep"></span>
+                  <span><span class="ss-key">Esc</span> Clear</span>
+                </div>
+              </div>
             </div>
-            <img src="images/service-1.webp" loading="lazy" alt="CelesteOS search, idle state" class="service-item1-img iframe-fallback">
             <div id="w-node-_9a8ecae0-0308-f09f-ecd9-3c72666535b6-0851e0d1" class="service-item1-text">
               <div class="service-line"></div>
               <div class="service-item1-heading">
@@ -413,15 +877,14 @@
               </div>
               <div class="text-service-item2">
                 <div class="margin-srv2-text"></div>
-                <div class="txt-service-item2">Open a fault and the eight-months-ago note nobody thought to link is already there, beside the prior work order, the part, the handover line that mentioned it. The record the last engineer wrote, surfaced without you asking for it.</div>
+                <div class="txt-service-item2" style="color:var(--_colors---text-muted);"><span style="color:var(--_colors---text-color);">Open a fault and the eight-months-ago note nobody thought to link is already there, beside the prior work order, the part, the handover line that mentioned it.</span> The record the last engineer wrote, surfaced without you asking for it.</div>
               </div>
             </div>
           </div>
-          <div class="div-block-63">
-            <div class="iframe-product-wrap iframe-crop--service">
-              <iframe src="prototypes/suggested-docs-tab.html" loading="lazy" title="CelesteOS Suggested documents, the SOP surfaced where it is needed" style="margin-top: 0px;"></iframe>
-            </div>
-            <img src="images/service-3.webp" loading="lazy" alt="CelesteOS suggested documents, the manual surfaced where it is needed" class="image-9 iframe-fallback">
+          <div class="div-block-63 ss-float ss-float--above">
+            <!-- #22 — pattern B: no heavy media box, free-floating, centred, text ABOVE. One focus =
+                 the suggested-documents card itself, tightly cropped from the prototype (transparent
+                 wrap, no border/shadow). Text block moved first in source order so it reads above. -->
             <div class="div-block-75">
               <div class="service-line"></div>
               <div class="div-block-74">
@@ -438,12 +901,17 @@
                 </div>
               </div>
             </div>
-          </div>
-          <div class="div-block-64">
-            <div class="iframe-product-wrap iframe-crop--service">
-              <iframe src="prototypes/warranty-money-finder-nofig.html" loading="lazy" title="CelesteOS warranty window flag on a logged fault" style="margin-top: 0px"></iframe>
+            <!-- #22 — the one focal component, free-floating below the text. No heavy media box:
+                 a box-less, tightly-cropped view of the suggested-documents card (one point of focus). -->
+            <div class="ss-media">
+              <div class="iframe-product-wrap ss-media--crop">
+                <iframe src="prototypes/suggested-docs-tab.html" loading="lazy" title="CelesteOS suggested documents, the manual surfaced where it is needed" style="margin-top:0"></iframe>
+              </div>
             </div>
-            <img src="images/oc-ledger.webp" loading="lazy" alt="CelesteOS warranty window flag on a logged fault" class="image-10 iframe-fallback">
+          </div>
+          <div class="div-block-64 ss-float ss-float--above">
+            <!-- #23 — pattern B, same as #22: no media box, free-floating, centred, text ABOVE,
+                 one focus = the warranty-window flag tightly cropped from the prototype. -->
             <div class="div-block-79">
               <div class="service-line"></div>
               <div class="div-block-78">
@@ -460,6 +928,13 @@
                 </div>
               </div>
             </div>
+            <!-- #23 — the one focal component, free-floating below the text. Box-less tight crop of the
+                 warranty-window flag (one point of focus). -->
+            <div class="ss-media">
+              <div class="iframe-product-wrap ss-media--crop">
+                <iframe src="prototypes/warranty-money-finder-nofig.html" loading="lazy" title="CelesteOS warranty window flag on a logged fault" style="margin-top:0"></iframe>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -474,42 +949,57 @@
     <div class="w-layout-blockcontainer w-container" style="max-width:1040px;">
       <div style="font-family:'IBM Plex Mono',monospace;font-size:0.74rem;letter-spacing:0.08em;text-transform:uppercase;opacity:0.6;margin-bottom:1.2rem;">Positioning</div>
       <h2 style="font-size:clamp(1.8rem,3.6vw,2.6rem);line-height:1.2;margin:0 0 2.4rem 0;font-weight:500;max-width:760px;">Keep the PMS. CelesteOS holds what it structurally <em>can't.</em></h2>
-      <div style="display:flex;flex-wrap:wrap;gap:3.2rem 4rem;align-items:flex-start;">
-        <div style="flex:1 1 380px;min-width:300px;">
-          <p style="font-size:1.05rem;line-height:1.62;opacity:0.86;margin:0 0 1.1rem 0;">
-            Keep AMOS, Seahub, IDEA, ShipManager. Their class society approvals, their workflows, and the crew familiarity stay exactly where they are. CelesteOS is the layer that holds what a PMS structurally can't hold &mdash; the email, the note, the handover line, the comment.
-          </p>
-          <p style="font-size:1.05rem;line-height:1.62;opacity:0.86;margin:0 0 1.5rem 0;">
-            <span style="color:var(--_colors---accent);font-weight:500;">No transfer. No migration. No double-entry.</span> It reads what your crew already produces and never touches the original.
-          </p>
-          <div style="display:flex;gap:1.4rem;flex-wrap:wrap;font-family:'IBM Plex Mono',monospace;font-size:0.72rem;letter-spacing:0.04em;text-transform:uppercase;opacity:0.62;">
-            <span>No transfer</span><span>No migration</span><span>No double-entry</span>
-          </div>
+      <div style="max-width:760px;margin:0 0 3.2rem 0;">
+        <p style="font-size:1.05rem;line-height:1.62;color:var(--_colors---text-muted);margin:0 0 1.1rem 0;">
+          <span style="color:var(--_colors---text-color)">Keep AMOS, Seahub, IDEA, ShipManager.</span> Their class society approvals, their workflows, and the crew familiarity stay exactly where they are. CelesteOS is the layer that holds what a PMS structurally can't hold &mdash; the email, the note, the handover line, the comment.
+        </p>
+        <p style="font-size:1.05rem;line-height:1.62;color:var(--_colors---text-muted);margin:0 0 1.5rem 0;">
+          <span style="color:var(--_colors---accent);font-weight:500;">No transfer. No migration. No double-entry.</span> It reads what your crew already produces and never touches the original.
+        </p>
+        <div style="display:flex;gap:1.4rem;flex-wrap:wrap;font-family:'IBM Plex Mono',monospace;font-size:0.72rem;letter-spacing:0.04em;text-transform:uppercase;color:var(--_colors---text-muted);">
+          <span>No transfer</span><span>No migration</span><span>No double-entry</span>
         </div>
-        <div style="flex:1 1 360px;min-width:300px;">
-          <div style="font-family:'IBM Plex Mono',monospace;font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;opacity:0.6;margin-bottom:1rem;">Days to onboard</div>
-          <!-- On-brand inline-SVG line graph: CelesteOS (hours) vs a new PMS rollout (weeks).
-               Behaviour/effort comparison only, no fabricated figures. currentColor = muted PMS line + axis,
-               var(--_colors---accent) = the CelesteOS line; both resolve correctly in light and dark. -->
-          <svg viewBox="0 0 420 220" role="img" aria-label="Days to onboard: CelesteOS in hours versus a new PMS rollout in weeks" style="width:100%;height:auto;display:block;overflow:visible;">
-            <!-- baseline / axis -->
-            <line x1="24" y1="176" x2="408" y2="176" stroke="currentColor" stroke-width="1" opacity="0.22"></line>
-            <line x1="24" y1="24" x2="24" y2="176" stroke="currentColor" stroke-width="1" opacity="0.22"></line>
-            <!-- new-PMS rollout: long, slow climb over weeks (muted) -->
-            <path d="M24,170 C150,168 210,150 300,96 C350,66 384,44 400,34" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.34" stroke-linecap="round"></path>
-            <circle cx="400" cy="34" r="3" fill="currentColor" opacity="0.4"></circle>
-            <text x="388" y="24" text-anchor="end" font-family="'IBM Plex Mono',monospace" font-size="10" letter-spacing="0.06em" fill="currentColor" opacity="0.5">New PMS · weeks</text>
-            <!-- CelesteOS: near-vertical, ready almost at once (accent) -->
-            <path d="M24,170 C36,150 46,96 54,70" fill="none" stroke="var(--_colors---accent)" stroke-width="2.25" stroke-linecap="round"></path>
-            <circle cx="54" cy="70" r="3.5" fill="var(--_colors---accent)"></circle>
-            <text x="64" y="62" font-family="'IBM Plex Mono',monospace" font-size="10" letter-spacing="0.06em" fill="var(--_colors---accent)">CelesteOS · hours</text>
-            <!-- axis labels -->
-            <text x="24" y="196" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="9" letter-spacing="0.04em" fill="currentColor" opacity="0.45">Day 0</text>
-            <text x="400" y="196" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="9" letter-spacing="0.04em" fill="currentColor" opacity="0.45">Week 6</text>
-            <text x="14" y="30" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="9" letter-spacing="0.04em" fill="currentColor" opacity="0.45" transform="rotate(-90 14 100)">Ready to use</text>
-          </svg>
-          <div style="margin-top:0.9rem;font-size:0.86rem;line-height:1.55;opacity:0.72;">It runs on what already exists onboard. Nothing to install, nothing to reformat &mdash; the vessel's record is searchable the same day.</div>
-        </div>
+      </div>
+
+      <!-- #24 DUAL GRAPH (below text, enlarged, centered). The record the vessel keeps compounds
+           upward over a rotation; a PMS without that layer drifts down by natural entropy as crew
+           rotate and context leaves. Two crossing lines, no fabricated figures. Theme-safe:
+           currentColor + opacity for the decaying line/axis, var(--_colors---accent) for the
+           CelesteOS line. Grow-on-scroll reuses the existing .scroll-reveal → .visible observer
+           (hp-scroll.js); stroke-dashoffset draws each line as it enters view. -->
+      <div class="scroll-reveal pms-dualgraph" style="max-width:880px;margin:1rem auto 0;">
+        <style>
+          .pms-dualgraph .pms-line{stroke-dasharray:1100;stroke-dashoffset:1100;}
+          .pms-dualgraph .pms-endpoint,.pms-dualgraph .pms-endlabel{opacity:0;transition:opacity 600ms ease 900ms;}
+          .pms-dualgraph.visible .pms-line{transition:stroke-dashoffset 1500ms cubic-bezier(0.33,0.05,0.2,1);stroke-dashoffset:0;}
+          .pms-dualgraph.visible .pms-line--pms{transition-delay:120ms;}
+          .pms-dualgraph.visible .pms-endpoint,.pms-dualgraph.visible .pms-endlabel{opacity:1;}
+          @media (prefers-reduced-motion: reduce){
+            .pms-dualgraph .pms-line{stroke-dashoffset:0;}
+            .pms-dualgraph .pms-endpoint,.pms-dualgraph .pms-endlabel{opacity:1;transition:none;}
+          }
+        </style>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--_colors---text-muted);margin-bottom:1.4rem;text-align:center;">What the record does over a rotation</div>
+        <svg viewBox="0 0 960 380" role="img" aria-label="Over a rotation the CelesteOS record compounds upward while a PMS without that layer drifts down as crew rotate and context leaves" style="width:100%;height:auto;display:block;overflow:visible;">
+          <!-- axes -->
+          <line x1="60" y1="330" x2="912" y2="330" stroke="currentColor" stroke-width="1" opacity="0.18"></line>
+          <line x1="60" y1="40" x2="60" y2="330" stroke="currentColor" stroke-width="1" opacity="0.18"></line>
+          <!-- crossing marker -->
+          <line x1="486" y1="40" x2="486" y2="330" stroke="currentColor" stroke-width="1" stroke-dasharray="3 5" opacity="0.14"></line>
+          <!-- other software: starts ahead, decays by entropy as context leaves (muted) -->
+          <path class="pms-line pms-line--pms" d="M60,120 C220,150 360,200 486,232 C620,266 760,292 912,308" fill="none" stroke="currentColor" stroke-width="2" opacity="0.4" stroke-linecap="round"></path>
+          <circle class="pms-endpoint" cx="912" cy="308" r="4" fill="currentColor" opacity="0.45"></circle>
+          <text class="pms-endlabel" x="898" y="296" text-anchor="end" font-family="'IBM Plex Mono',monospace" font-size="13" letter-spacing="0.04em" fill="currentColor" opacity="0.55">PMS alone · context leaves</text>
+          <!-- CelesteOS: the record compounds, every rotation adds to it (accent) -->
+          <path class="pms-line pms-line--celeste" d="M60,300 C220,288 360,256 486,220 C620,180 760,128 912,72" fill="none" stroke="var(--_colors---accent)" stroke-width="3" stroke-linecap="round"></path>
+          <circle class="pms-endpoint" cx="912" cy="72" r="5" fill="var(--_colors---accent)"></circle>
+          <text class="pms-endlabel" x="898" y="60" text-anchor="end" font-family="'IBM Plex Mono',monospace" font-size="13" letter-spacing="0.04em" fill="var(--_colors---accent)">CelesteOS · the record compounds</text>
+          <!-- axis labels -->
+          <text x="60" y="356" text-anchor="start" font-family="'IBM Plex Mono',monospace" font-size="11" letter-spacing="0.04em" fill="currentColor" opacity="0.4">Rotation 1</text>
+          <text x="486" y="356" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="11" letter-spacing="0.04em" fill="currentColor" opacity="0.4">Crew change</text>
+          <text x="912" y="356" text-anchor="end" font-family="'IBM Plex Mono',monospace" font-size="11" letter-spacing="0.04em" fill="currentColor" opacity="0.4">Rotation 4</text>
+        </svg>
+        <div style="margin-top:1.6rem;font-size:0.92rem;line-height:1.6;color:var(--_colors---text-muted);max-width:600px;margin-left:auto;margin-right:auto;text-align:center;"><span style="color:var(--_colors---text-color)">It runs on what already exists onboard.</span> Nothing to install, nothing to reformat &mdash; the vessel's record is searchable the same day, and every rotation adds to it instead of starting over.</div>
       </div>
     </div>
   </section>
@@ -548,7 +1038,7 @@
               </div>
             </div>
           </div>
-          <div class="impact-disclosure" style="margin-top:2.5rem;font-size:0.78rem;line-height:1.6;opacity:0.62;letter-spacing:0.01em;font-family:'IBM Plex Mono',monospace;font-style:italic;">
+          <div class="impact-disclosure" style="margin-top:2.5rem;font-size:0.78rem;line-height:1.6;opacity:0.7;letter-spacing:0.02em;font-family:'IBM Plex Mono',monospace;">
             Full regulatory mapping including MLC 2006 and IMO MSC.428(98) → <a href="/trust" style="color:var(--_colors---accent,#2B7BA3);text-decoration:none;">/trust</a>
           </div>
         </div>
@@ -567,9 +1057,9 @@
     <div class="oc-pair scroll-reveal" style="min-height:auto;align-items:end;padding-bottom:0;">
       <div class="oc-col oc-col--left">
         <div class="oc-text">
-          <div class="single-item-client">The record (05)</div>
+          <div class="single-item-client" style="color:var(--_colors---accent)">The record (05)</div>
           <div class="single-item-title">The record that answers the surveyor.</div>
-          <div class="single-item-desc">When the question comes — who did this, when, on whose authority — the answer is already on the page. Every read, every write, every signature is timestamped against the vessel and attributable to the person. The record is append-only: it only ever grows. Nothing is edited away after the fact.</div>
+          <div class="single-item-desc" style="color:var(--_colors---text-muted)"><span style="color:var(--_colors---text-color)">When the question comes — who did this, when, on whose authority — the answer is already on the page.</span> Every read, every write, every signature is timestamped against the vessel and attributable to the person. The record is append-only: it only ever grows. Nothing is edited away after the fact.</div>
         </div>
       </div>
       <div class="oc-col oc-col--right"></div>
@@ -586,9 +1076,9 @@
       </div>
       <div class="oc-col oc-col--right">
         <div class="oc-text oc-sticky">
-          <div class="single-item-client">Every action, on the record</div>
+          <div class="single-item-client" style="color:var(--_colors---accent)">Every action, on the record</div>
           <div class="single-item-title">Who, what, when — already written down.</div>
-          <div class="single-item-desc">Each entity carries its own trail. A status change, a note, a linked part — each one stamped with the person who did it and the moment it happened. Nothing is reconstructed from memory at the survey. The trail was written as the work was done.</div>
+          <div class="single-item-desc" style="color:var(--_colors---text-muted)"><span style="color:var(--_colors---text-color)">Each entity carries its own trail.</span> A status change, a note, a linked part — each one stamped with the person who did it and the moment it happened. Nothing is reconstructed from memory at the survey. The trail was written as the work was done.</div>
         </div>
       </div>
     </div>
@@ -597,9 +1087,9 @@
     <div class="oc-pair scroll-reveal">
       <div class="oc-col oc-col--left">
         <div class="oc-text oc-sticky">
-          <div class="single-item-client">Append-only</div>
+          <div class="single-item-client" style="color:var(--_colors---accent)">Append-only</div>
           <div class="single-item-title">It only ever grows.</div>
-          <div class="single-item-desc">The ledger is one running history of the vessel — documents read, work orders moved, handovers signed off — in the order it happened. Entries are added, never overwritten. The record you show a surveyor next year is the same record that was written today.</div>
+          <div class="single-item-desc" style="color:var(--_colors---text-muted)"><span style="color:var(--_colors---text-color)">The ledger is one running history of the vessel</span> — documents read, work orders moved, handovers signed off — in the order it happened. Entries are added, never overwritten. The record you show a surveyor next year is the same record that was written today.</div>
         </div>
       </div>
       <div class="oc-col oc-col--right">
@@ -622,10 +1112,9 @@
       </div>
       <div class="oc-col oc-col--right">
         <div class="oc-text oc-sticky">
-          <div class="single-item-client">Attributable</div>
+          <div class="single-item-client" style="color:var(--_colors---accent)">Attributable</div>
           <div class="single-item-title">Signed by the person who did the work.</div>
-          <div class="single-item-desc">A handover closes with a signature against the engineer who held the work and the head of department who reviewed it. Authority is on the page, not assumed. When someone asks on whose say-so a decision was made, the name is already there.</div>
-          <div class="single-item-desc" style="margin-top:1.4rem;opacity:0.78;">A certificate expiring inside 60 days surfaces before it lapses; opening an expired manual links you to the current revision. Half-finished work is waiting where you left it.</div>
+          <div class="single-item-desc" style="color:var(--_colors---text-muted)"><span style="color:var(--_colors---text-color)">A handover closes with a signature against the engineer who held the work and the head of department who reviewed it.</span> Authority is on the page, not assumed. When someone asks on whose say-so a decision was made, the name is already there.</div>
         </div>
       </div>
     </div>
@@ -748,11 +1237,12 @@
         <div class="cta-image">
           <div data-w-id="79de7aa3-7a98-0ebc-6d60-150d14b02321" class="cta-text">
             <div class="cta-heading-col">
-              <div style="font-family:var(--_size---font-family-mono);font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:18px;">What it costs to not have the record</div>
-              <h2 class="cta-heading" style="margin-bottom:0;line-height:1.12;letter-spacing:-0.015em;font-weight:300;font-size:clamp(34px,5vw,62px);">One denied warranty claim is <em>€20k&ndash;€100k.</em> One failed inspection is <em>€50k+.</em> One delayed departure is <em>€10k a day.</em></h2>
+              <div style="font-family:var(--_size---font-family-mono);font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:18px;">The pilot cohort</div>
+              <h2 class="cta-heading" style="margin-bottom:0;line-height:1.18;letter-spacing:-0.01em;font-weight:300;font-size:clamp(26px,3.4vw,40px);">Three to five vessels this cohort. <em>The rate is locked at signature</em>&thinsp;&mdash;&thinsp;it holds for as long as you stay.</h2>
+              <div style="margin-top:14px;font-size:0.95rem;line-height:1.55;color:rgba(255,255,255,0.62);max-width:46ch;">The record is cheaper than the first claim it settles. We don&rsquo;t lead with that number &mdash; it&rsquo;s the one you already know.</div>
               <div style="margin-top:26px;display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;">
                 <span style="font-weight:200;font-size:clamp(52px,7vw,96px);line-height:1;letter-spacing:-0.02em;">$450</span>
-                <span style="font-family:var(--_size---font-family-mono);font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.5);">per 28 days &middot; per vessel</span>
+                <span style="font-family:var(--_size---font-family-mono);font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.5);">per month &middot; per vessel</span>
               </div>
               <div class="cta-text1" style="margin-top:10px;opacity:0.78;max-width:30ch;">Unlimited seats. No per-module tiering. The pilot rate is low by intent &mdash; you give feedback and a case study.</div>
             </div>
