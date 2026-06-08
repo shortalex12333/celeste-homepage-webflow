@@ -1,0 +1,2054 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>CelesteOS · Landing Render B3 · Eloquia + ULTRA radius + multi-tempo motion</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=Cormorant+Garamond:ital,wght@1,300;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+/* ═══════════════════════════════════════════════════════════════════════════
+   FONT FACE — Eloquia Display (self-hosted)
+   ═══════════════════════════════════════════════════════════════════════════ */
+@font-face {
+  font-family: 'Eloquia Display';
+  src: url('../../fonts/Eloquia-Display-Light.woff2') format('woff2');
+  font-weight: 300; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'Eloquia Display';
+  src: url('../../fonts/Eloquia-Display-Light-Italic.woff2') format('woff2');
+  font-weight: 300; font-style: italic; font-display: swap;
+}
+@font-face {
+  font-family: 'Eloquia Display';
+  src: url('../../fonts/Eloquia-Display-Regular.woff2') format('woff2');
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'Eloquia Display';
+  src: url('../../fonts/Eloquia-Display-Italic.woff2') format('woff2');
+  font-weight: 400; font-style: italic; font-display: swap;
+}
+@font-face {
+  font-family: 'Eloquia Display';
+  src: url('../../fonts/Eloquia-Display-Medium.woff2') format('woff2');
+  font-weight: 500; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'Eloquia Display';
+  src: url('../../fonts/Eloquia-Display-Medium-Italic.woff2') format('woff2');
+  font-weight: 500; font-style: italic; font-display: swap;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   TOKENS — brand canon (homepage, dark default)
+   ═══════════════════════════════════════════════════════════════════════════ */
+:root {
+  /* Surfaces · warm blacks per Visual Guide §5 */
+  --surface-base: #0a0a0a;
+  --surface:      #131110;
+  --surface-el:   #1a1815;
+  --surface-mute: #0f0d0c;
+
+  /* Text · rgba per frontend_ux.md */
+  --txt:          rgba(255,255,255,0.92);
+  --txt2:         rgba(255,255,255,0.55);
+  --txt3:         rgba(255,255,255,0.40);
+  --txt-ghost:    rgba(255,255,255,0.22);
+
+  /* Teal · interactive affordance ONLY per colour-system §3 */
+  --mark:         #5AABCC;
+  --teal:         #3A7C9D;
+  --teal-bg:      rgba(58,124,157,0.10);
+  --teal-trace:   rgba(90,171,204,0.18);
+
+  /* Signal · status ONLY */
+  --red:    #C0503A;
+  --amber:  #C4893B;
+  --green:  #4A9468;
+  --blue:   #5B8DEF;
+
+  /* Borders · ambient light physics */
+  --bdr-top:    rgba(255,255,255,0.09);
+  --bdr-side:   rgba(255,255,255,0.05);
+  --bdr-bot:    rgba(255,255,255,0.02);
+  --bdr-sub:    rgba(255,255,255,0.06);
+  --bdr-faint:  rgba(255,255,255,0.035);
+
+  /* ULTRA radius scale (CEO 2026-05-15) · 1-4px · flat instrument grade */
+  --r-pill:  1px;
+  --r-sm:    2px;
+  --r-md:    2px;
+  --r-lg:    3px;
+  --r-xl:    4px;
+  --r-full:  9999px;
+
+  /* Spacing · 4px base */
+  --s-1:  4px; --s-2:  8px; --s-3: 12px; --s-4: 16px;
+  --s-5: 20px; --s-6: 24px; --s-8: 32px; --s-10: 40px;
+  --s-12: 48px; --s-16: 64px; --s-20: 80px; --s-24: 96px;
+  --s-32: 128px; --s-40: 160px;
+
+  /* Typography · 4-font system */
+  --font-display: 'Eloquia Display', 'DM Sans', system-ui, -apple-system, sans-serif;
+  --font-body:    'DM Sans', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-accent:  'Cormorant Garamond', Georgia, serif;
+  --font-mono:    'IBM Plex Mono', 'SF Mono', ui-monospace, monospace;
+
+  /* Motion · multi-tempo */
+  --t-fast:    120ms;   /* commit · hover · micro */
+  --t-medium:  280ms;   /* state transitions */
+  --t-slow:    720ms;   /* survey · scroll fade */
+  --t-very-slow: 1200ms;/* page-level reveal */
+  --ease-out:  cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Spine rail */
+  --rail-x: 32px;
+  --rail-w: 1px;
+}
+
+* { box-sizing: border-box; }
+html { background: var(--surface-base); }
+body {
+  margin: 0; padding: 0;
+  background: var(--surface-base);
+  color: var(--txt2);
+  font-family: var(--font-body);
+  font-size: 16px; line-height: 1.6;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Cormorant accent · only for italic emphasis */
+.accent {
+  font-family: var(--font-accent);
+  font-style: italic;
+  font-weight: 300;
+  color: var(--mark);
+}
+.accent--regular {
+  font-family: var(--font-accent);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--mark);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   SPINE RAIL · the constant left-edge thread (hubtown-inspired, restrained)
+   ═══════════════════════════════════════════════════════════════════════════ */
+.spine {
+  position: fixed;
+  top: 0; bottom: 0;
+  left: var(--rail-x);
+  width: var(--rail-w);
+  background: linear-gradient(180deg,
+    transparent 0%,
+    var(--bdr-faint) 8%,
+    var(--bdr-faint) 92%,
+    transparent 100%);
+  z-index: 40;
+  pointer-events: none;
+}
+.spine-glow {
+  position: fixed;
+  left: calc(var(--rail-x) - 2px);
+  width: 5px;
+  height: 80px;
+  background: radial-gradient(ellipse 30px 60px at center,
+    var(--mark), transparent 70%);
+  opacity: 0.50;
+  z-index: 41;
+  pointer-events: none;
+  transition: top var(--t-medium) var(--ease-out), opacity var(--t-slow) var(--ease-out);
+  top: 50vh;
+}
+.spine-marker {
+  position: absolute;
+  left: -3px;
+  width: 7px;
+  height: 7px;
+  border-radius: var(--r-full);
+  background: var(--surface-base);
+  border: 1px solid var(--bdr-sub);
+  transition: background var(--t-fast) var(--ease-out), border-color var(--t-fast) var(--ease-out);
+}
+.spine-marker.is-active {
+  background: var(--mark);
+  border-color: var(--mark);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   HEADER · minimal, glass, always present
+   ═══════════════════════════════════════════════════════════════════════════ */
+.hdr {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 50; height: 64px;
+  padding: 0 var(--s-10) 0 var(--s-12);
+  display: flex; justify-content: space-between; align-items: center;
+  background: rgba(10,10,10,0.72);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--bdr-faint);
+}
+.hdr .lockup { display: flex; align-items: center; gap: var(--s-3); }
+.hdr .wm {
+  font-family: var(--font-display);
+  font-weight: 500; font-size: 15px;
+  letter-spacing: -0.01em; color: var(--txt);
+}
+.hdr nav { display: flex; gap: var(--s-6); }
+.hdr nav a {
+  font-family: var(--font-mono);
+  font-weight: 500; font-size: 11px;
+  letter-spacing: 0.10em; text-transform: uppercase;
+  color: var(--txt3); text-decoration: none;
+  transition: color var(--t-fast) var(--ease-out);
+}
+.hdr nav a:hover { color: var(--txt); }
+.hdr .right { display: flex; align-items: center; gap: var(--s-6); }
+.hdr .pilot-btn {
+  font-family: var(--font-body); font-weight: 500;
+  font-size: 12px; padding: 8px 16px;
+  background: var(--surface);
+  color: var(--txt);
+  border: 1px solid var(--bdr-sub);
+  border-radius: var(--r-sm);
+  text-decoration: none;
+  transition: border-color var(--t-fast) var(--ease-out), color var(--t-fast) var(--ease-out);
+}
+.hdr .pilot-btn:hover { border-color: var(--mark); color: var(--mark); }
+.seal { color: var(--mark); }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   SECTION FRAME
+   ═══════════════════════════════════════════════════════════════════════════ */
+section {
+  position: relative;
+  padding: 0 var(--s-12) 0 calc(var(--rail-x) + var(--s-12));
+}
+.wrap {
+  max-width: 1280px; margin: 0 auto;
+  width: 100%;
+  position: relative;
+}
+.section-no {
+  position: absolute;
+  left: calc(var(--rail-x) + var(--s-4) - var(--s-12));
+  top: 18vh;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.20em;
+  text-transform: uppercase;
+  color: var(--mark);
+  font-weight: 500;
+  z-index: 5;
+}
+.section-no .dim { color: var(--txt3); }
+
+/* Scroll-triggered fade-in · slow tempo (720ms ease-out) */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity var(--t-slow) var(--ease-out),
+              transform var(--t-slow) var(--ease-out);
+}
+.fade-in.is-visible {
+  opacity: 1;
+  transform: none;
+}
+.fade-in-delay-1 { transition-delay: 80ms; }
+.fade-in-delay-2 { transition-delay: 160ms; }
+.fade-in-delay-3 { transition-delay: 240ms; }
+
+/* Disclosure */
+details {
+  margin-top: var(--s-6);
+  max-width: 540px;
+}
+details summary {
+  cursor: pointer; list-style: none;
+  color: var(--mark);
+  font-family: var(--font-mono);
+  font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase;
+  font-weight: 500;
+  display: inline-flex; align-items: center; gap: var(--s-2);
+  padding: var(--s-2) 0;
+  transition: color var(--t-fast) var(--ease-out);
+}
+details summary::-webkit-details-marker { display: none; }
+details summary::before {
+  content: '+';
+  font-family: var(--font-mono);
+  display: inline-block; width: 12px;
+  transition: transform var(--t-medium) var(--ease-out);
+}
+details[open] summary::before { content: '−'; }
+details p {
+  font-family: var(--font-body);
+  font-size: 15px; font-weight: 400;
+  color: var(--txt2); line-height: 1.7;
+  margin: var(--s-4) 0 0;
+  border-left: 1px solid var(--bdr-faint);
+  padding-left: var(--s-5);
+}
+
+/* CTA · primary + ghost */
+.cta {
+  display: inline-flex; align-items: center; gap: var(--s-2);
+  background: var(--txt);
+  color: var(--surface-base);
+  font-family: var(--font-body);
+  font-weight: 500; font-size: 14px;
+  padding: 11px 22px;
+  border: 0; border-radius: var(--r-sm);
+  text-decoration: none; cursor: pointer;
+  transition: background var(--t-fast) var(--ease-out), transform var(--t-fast) var(--ease-out);
+}
+.cta:hover { background: #ffffff; }
+.cta:active { transform: translateY(0.5px); }
+.cta--ghost {
+  background: transparent; color: var(--mark);
+  border: 1px solid var(--bdr-sub);
+}
+.cta--ghost:hover { border-color: var(--mark); background: var(--teal-bg); }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   HERO · 100vh, Eloquia 300, Cormorant accent
+   ═══════════════════════════════════════════════════════════════════════════ */
+.hero {
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: flex-start;
+  padding-top: 88px; padding-bottom: 6vh;
+}
+.hero .eyebrow {
+  font-family: var(--font-mono);
+  font-size: 10.5px; font-weight: 500;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--mark);
+  margin-bottom: var(--s-8);
+}
+.hero h1 {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(48px, 7.2vw, 112px);
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+  color: var(--txt);
+  margin: 0 0 var(--s-10);
+  max-width: 980px;
+}
+.hero h1 .accent {
+  /* Cormorant 300 italic teal — must match the hero size */
+  font-size: 1em;
+  letter-spacing: -0.01em;
+}
+.hero .sub {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: clamp(17px, 1.6vw, 21px);
+  color: var(--txt2);
+  max-width: 620px;
+  line-height: 1.55;
+  margin: 0 0 var(--s-12);
+}
+.hero .cta-row { display: flex; gap: var(--s-3); }
+.hero .below {
+  position: absolute; bottom: var(--s-10); left: var(--s-12);
+  font-family: var(--font-mono);
+  font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--txt-ghost);
+  display: flex; align-items: center; gap: var(--s-3);
+}
+.hero .below .line { width: 32px; height: 1px; background: currentColor; }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   SCORE SECTION · the hook (Carfax / Zillow analogy)
+   ═══════════════════════════════════════════════════════════════════════════ */
+.score {
+  min-height: 100vh;
+  padding-top: 22vh; padding-bottom: 22vh;
+}
+.score h2 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(36px, 4.6vw, 64px);
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+  color: var(--txt);
+  margin: 0 0 var(--s-6);
+  max-width: 880px;
+}
+.score .lede {
+  font-family: var(--font-body);
+  font-size: 18px;
+  color: var(--txt2);
+  max-width: 640px;
+  line-height: 1.55;
+  margin: 0 0 var(--s-16);
+}
+.score-layout {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: var(--s-20);
+  align-items: start;
+}
+.score-meter {
+  position: relative;
+  width: 280px; height: 280px;
+}
+.score-meter svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+.score-meter .center {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center;
+}
+.score-meter .num {
+  font-family: var(--font-display);
+  font-weight: 300; font-size: 84px;
+  line-height: 1;
+  color: var(--txt);
+  letter-spacing: -0.05em;
+}
+.score-meter .label {
+  font-family: var(--font-mono);
+  font-size: 9.5px; font-weight: 500;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--txt3);
+  margin-top: var(--s-3);
+}
+.score-meter .private {
+  font-family: var(--font-accent);
+  font-style: italic;
+  font-size: 13px;
+  color: var(--mark);
+  margin-top: var(--s-1);
+}
+.score-explain {
+  display: flex; flex-direction: column; gap: var(--s-10);
+  padding-top: var(--s-6);
+}
+.score-explain .row {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: var(--s-5);
+  align-items: baseline;
+}
+.score-explain .lbl {
+  font-family: var(--font-mono);
+  font-size: 10.5px; font-weight: 500;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--mark);
+}
+.score-explain .body {
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: var(--txt2);
+  line-height: 1.6;
+}
+.score-explain .body b { color: var(--txt); font-weight: 500; }
+.score-analogy {
+  margin-top: var(--s-16);
+  padding: var(--s-8) 0 0;
+  border-top: 1px solid var(--bdr-faint);
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: var(--txt2);
+  max-width: 720px;
+  line-height: 1.6;
+}
+.score-analogy b { color: var(--txt); font-weight: 500; }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   GENERIC ARTEFACT FRAME · used by handover, search, money, crypto, related
+   ═══════════════════════════════════════════════════════════════════════════ */
+.artefact {
+  background: var(--surface);
+  border-top:    1px solid var(--bdr-top);
+  border-left:   1px solid var(--bdr-side);
+  border-right:  1px solid var(--bdr-side);
+  border-bottom: 1px solid var(--bdr-bot);
+  border-radius: var(--r-md);
+  padding: var(--s-5);
+  width: 100%;
+  position: relative;
+  box-shadow: 0 16px 48px rgba(0,0,0,0.35);
+}
+.artefact-chrome {
+  font-family: var(--font-mono);
+  font-size: 9.5px; font-weight: 500;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--txt3);
+  padding: 0 0 var(--s-3);
+  margin: 0 0 var(--s-3);
+  border-bottom: 1px solid var(--bdr-faint);
+  display: flex; justify-content: space-between; align-items: baseline;
+}
+.artefact-chrome b { color: var(--txt2); font-weight: 500; }
+.artefact-chrome .mark { color: var(--mark); }
+.artefact-step {
+  position: absolute; top: -10px; left: var(--s-4);
+  background: var(--surface-base);
+  font-family: var(--font-mono);
+  font-size: 9.5px; font-weight: 500;
+  letter-spacing: 0.20em; text-transform: uppercase;
+  color: var(--mark);
+  padding: 0 var(--s-2);
+}
+.artefact-caption {
+  margin-top: var(--s-4);
+  padding-top: var(--s-3);
+  border-top: 1px solid var(--bdr-faint);
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--txt2);
+  line-height: 1.55;
+}
+.artefact-caption b { color: var(--txt); font-weight: 500; }
+
+/* Asymmetric flow rows */
+.flow {
+  display: grid;
+  align-items: stretch;
+  gap: var(--s-5);
+  margin-top: var(--s-12);
+}
+.flow--3 {
+  grid-template-columns: 1fr auto 1fr auto 1fr;
+}
+.flow--2 {
+  grid-template-columns: 1fr auto 1fr;
+  max-width: 920px;
+}
+.flow-arrow {
+  align-self: center; position: relative;
+  padding-top: 18px;
+}
+.flow-arrow .ln {
+  width: 28px; height: 1px;
+  background: var(--bdr-top);
+}
+.flow-arrow .ln::after {
+  content: ''; position: absolute; right: -1px; top: 16px;
+  width: 0; height: 0;
+  border-left: 4px solid var(--mark);
+  border-top: 3px solid transparent;
+  border-bottom: 3px solid transparent;
+}
+.flow-arrow .lbl {
+  position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+  font-family: var(--font-mono); font-size: 9.5px;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--mark); white-space: nowrap; font-weight: 500;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   ALT (alternating) section base
+   ═══════════════════════════════════════════════════════════════════════════ */
+.alt {
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  justify-content: center;
+  padding-top: 20vh; padding-bottom: 20vh;
+}
+.alt .grid {
+  display: grid;
+  grid-template-columns: 1fr 1.05fr;
+  gap: var(--s-24);
+  align-items: center;
+  max-width: 1280px; margin: 0 auto;
+  width: 100%;
+}
+.alt .grid--flip > .text { order: 2; }
+.alt .grid--flip > .media { order: 1; }
+.alt .text { max-width: 540px; }
+.alt h2 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(36px, 4.4vw, 60px);
+  line-height: 1.06;
+  letter-spacing: -0.025em;
+  color: var(--txt);
+  margin: 0 0 var(--s-6);
+}
+.alt h2 .accent {
+  font-size: 1em;
+}
+.alt .body {
+  font-family: var(--font-body);
+  font-size: 16px;
+  color: var(--txt2);
+  line-height: 1.65;
+  margin: 0 0 var(--s-8);
+  max-width: 480px;
+}
+.alt .media {
+  display: flex; justify-content: center; align-items: center;
+}
+
+/* Centered section base */
+.centered {
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  justify-content: center;
+  padding-top: 22vh; padding-bottom: 22vh;
+}
+.centered .head { max-width: 920px; }
+.centered h2 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(36px, 4.4vw, 56px);
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+  color: var(--txt);
+  margin: 0 0 var(--s-6);
+}
+.centered .body {
+  font-family: var(--font-body);
+  font-size: 17px;
+  color: var(--txt2);
+  max-width: 620px;
+  line-height: 1.6;
+  margin: 0 0 0;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   PILL / DOT / SEAL (used inside mocks)
+   ═══════════════════════════════════════════════════════════════════════════ */
+.pill {
+  display: inline-flex; align-items: center; gap: 5px;
+  height: 18px; padding: 0 8px;
+  border-radius: var(--r-pill);
+  font-family: var(--font-mono); font-weight: 500;
+  font-size: 9.5px; letter-spacing: 0.04em; text-transform: uppercase;
+}
+.pill .d { width: 5px; height: 5px; border-radius: var(--r-full); }
+.pill--warn { background: rgba(196,137,59,0.10); color: var(--amber); border: 1px solid rgba(196,137,59,0.22); }
+.pill--warn .d { background: var(--amber); }
+.pill--ok { background: rgba(74,148,104,0.10); color: var(--green); border: 1px solid rgba(74,148,104,0.22); }
+.pill--ok .d { background: var(--green); }
+.pill--open { background: rgba(91,141,239,0.10); color: var(--blue); border: 1px solid rgba(91,141,239,0.22); }
+.pill--open .d { background: var(--blue); }
+
+/* Search components */
+.ms-input {
+  background: var(--surface-el);
+  border: 1px solid var(--bdr-sub);
+  border-radius: var(--r-sm);
+  padding: 10px 14px;
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: var(--txt);
+  display: flex; align-items: center; gap: var(--s-3);
+}
+.ms-input .pr { color: var(--mark); font-family: var(--font-mono); font-size: 13px; }
+.ms-input .cur {
+  color: var(--mark);
+  animation: blink 1.5s steps(2, jump-none) infinite;
+}
+@keyframes blink { 50% { opacity: 0; } }
+
+.ms-result {
+  background: transparent;
+  border-bottom: 1px solid var(--bdr-faint);
+  padding: 9px 0;
+  display: grid;
+  grid-template-columns: 76px 1fr auto;
+  gap: var(--s-3); align-items: baseline;
+  transition: background var(--t-fast) var(--ease-out);
+}
+.ms-result:hover { background: var(--bdr-faint); }
+.ms-result:last-child { border-bottom: 0; }
+.ms-result .k {
+  font-family: var(--font-mono); font-weight: 500;
+  font-size: 9.5px; letter-spacing: 0.10em; text-transform: uppercase;
+  color: var(--txt3);
+}
+.ms-result .t {
+  font-family: var(--font-body); font-size: 13px;
+  color: var(--txt);
+}
+.ms-result .c {
+  font-family: var(--font-mono); font-size: 10.5px;
+  color: var(--mark);
+}
+
+/* Entity card (compact, in flow) */
+.ec { font-family: var(--font-body); }
+.ec .ov {
+  font-family: var(--font-mono); font-size: 9px; font-weight: 500;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--txt3); margin-bottom: 3px;
+}
+.ec .ti {
+  font-family: var(--font-display); font-weight: 500; font-size: 15px;
+  color: var(--txt); margin-bottom: var(--s-2);
+  letter-spacing: -0.005em;
+}
+.ec .mt {
+  font-family: var(--font-mono); font-size: 10.5px;
+  color: var(--txt2); margin-bottom: var(--s-3);
+}
+.ec .mt b { color: var(--mark); font-weight: 500; }
+
+/* Toast prompt */
+.toast {
+  background: var(--surface-el);
+  border: 1px solid var(--bdr-sub);
+  border-radius: var(--r-sm);
+  padding: 9px 12px;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: var(--s-4);
+  font-family: var(--font-body); font-size: 12.5px;
+  color: var(--txt);
+  margin-top: var(--s-3);
+}
+.toast .q { color: var(--txt); }
+.toast .ax { display: flex; gap: 3px; }
+.toast .b {
+  font-family: var(--font-body); font-weight: 500; font-size: 10.5px;
+  padding: 4px 10px;
+  background: var(--surface);
+  color: var(--txt2);
+  border: 1px solid var(--bdr-sub);
+  border-radius: var(--r-sm);
+}
+.toast .b--y { background: var(--mark); color: #0a1216; border-color: var(--mark); }
+
+/* Related panel */
+.related {
+  background: var(--surface-el);
+  border: 1px solid var(--bdr-sub);
+  border-radius: var(--r-sm);
+  padding: var(--s-3) var(--s-4);
+  margin-top: var(--s-3);
+}
+.related .rh {
+  font-family: var(--font-mono); font-size: 9.5px; font-weight: 500;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--mark);
+  padding-bottom: var(--s-2); margin-bottom: var(--s-2);
+  border-bottom: 1px solid var(--bdr-faint);
+  display: flex; justify-content: space-between;
+}
+.related .rh .ct { color: var(--txt3); }
+.related .ri {
+  display: grid; grid-template-columns: 68px 1fr auto;
+  gap: var(--s-3); padding: 5px 0;
+  font-family: var(--font-body); font-size: 12px;
+  align-items: center;
+}
+.related .ri .k {
+  font-family: var(--font-mono); font-size: 9.5px; font-weight: 500;
+  letter-spacing: 0.10em; text-transform: uppercase; color: var(--txt3);
+}
+.related .ri .t { color: var(--txt); }
+.related .ri .c { color: var(--mark); font-family: var(--font-mono); font-size: 10px; }
+
+/* Handover doc preview */
+.hp .hp-head {
+  display: flex; justify-content: space-between; align-items: baseline;
+  font-family: var(--font-mono); font-size: 9.5px; font-weight: 500;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--txt3);
+  padding-bottom: var(--s-2); margin-bottom: var(--s-3);
+  border-bottom: 1px solid var(--bdr-faint);
+}
+.hp .hp-head b { color: var(--txt2); font-weight: 500; }
+.hp .hp-body { display: grid; grid-template-columns: 32px 1fr; gap: var(--s-2); }
+.hp .hp-chain {
+  border-right: 1px solid var(--bdr-faint);
+  padding: 4px 0;
+  display: flex; flex-direction: column; align-items: center;
+  gap: var(--s-3);
+}
+.hp .hp-chain .lk { width: 1px; height: 12px; background: var(--mark); opacity: 0.4; }
+.hp .hp-chain .lk:first-child, .hp .hp-chain .lk:last-child { display: none; }
+.hp .hp-content { padding: 0 0 0 var(--s-3); }
+.hp .hp-entry { margin-bottom: var(--s-3); }
+.hp .hp-entry:last-child { margin-bottom: 0; }
+.hp .hp-id {
+  font-family: var(--font-mono); font-size: 9.5px;
+  color: var(--mark); font-weight: 500;
+}
+.hp .hp-t { font-size: 12.5px; color: var(--txt); font-weight: 500; margin-top: 2px; font-family: var(--font-body); }
+.hp .hp-foot {
+  margin-top: var(--s-3); padding-top: var(--s-2);
+  border-top: 1px solid var(--bdr-faint);
+  font-family: var(--font-mono); font-size: 9.5px; font-weight: 500;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--txt3);
+  display: flex; justify-content: space-between;
+}
+.hp .hp-foot .sl { color: var(--green); }
+
+/* Sealed PDF mini (light surface inside the artefact) */
+.pdf-mini {
+  background: #fafafa; color: rgba(0,0,0,0.87);
+  padding: var(--s-4); border-radius: var(--r-sm);
+}
+.pdf-mini .ph {
+  font-family: var(--font-mono); font-size: 9.5px;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: rgba(0,0,0,0.50);
+  display: flex; justify-content: space-between;
+  margin-bottom: var(--s-2);
+}
+.pdf-mini .pt {
+  font-family: var(--font-display); font-weight: 500; font-size: 14px;
+  margin-bottom: 4px;
+}
+.pdf-mini .pid {
+  font-family: var(--font-mono); font-size: 10px;
+  color: #2B7BA3; font-weight: 500;
+}
+.pdf-mini .pln { height: 4px; background: rgba(0,0,0,0.07); border-radius: var(--r-pill); margin: var(--s-2) 0; }
+.pdf-mini .pln.w90 { width: 90%; }
+.pdf-mini .pln.w70 { width: 70%; }
+.pdf-mini .pln.w50 { width: 50%; }
+.pdf-mini .ps {
+  margin-top: var(--s-3); padding-top: var(--s-2);
+  border-top: 1px solid rgba(0,0,0,0.08);
+  font-family: var(--font-mono); font-size: 9px;
+  color: rgba(0,0,0,0.55);
+  display: flex; justify-content: space-between;
+}
+.pdf-mini .ps .id { color: #2B7BA3; font-weight: 500; }
+
+/* Verifier check grid */
+.vchecks {
+  display: grid; grid-template-columns: repeat(5, 1fr);
+  gap: 3px; margin-top: var(--s-3);
+}
+.vchecks .v {
+  background: var(--surface-el);
+  border: 1px solid var(--bdr-faint);
+  border-radius: var(--r-sm);
+  padding: 8px 6px;
+  display: flex; flex-direction: column; gap: 4px; align-items: center;
+}
+.vchecks .vn {
+  font-family: var(--font-mono); font-size: 8.5px; font-weight: 500;
+  letter-spacing: 0.10em; text-transform: uppercase; color: var(--txt3);
+}
+.vchecks .vr {
+  font-family: var(--font-body); font-size: 10.5px; font-weight: 500;
+  color: var(--green);
+  display: flex; align-items: center; gap: 4px;
+}
+.vchecks .vd {
+  width: 5px; height: 5px; border-radius: var(--r-full); background: var(--green);
+  animation: pulse-soft 2.4s ease-in-out infinite;
+}
+@keyframes pulse-soft {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   MONEY FINDER · cursor-illumination (lunchlab-inspired)
+   The amounts hide behind a soft dark overlay. Mouse position drives a
+   spotlight that reveals what's underneath. Has to WANT to see.
+   ═══════════════════════════════════════════════════════════════════════════ */
+.illuminate {
+  position: relative;
+  isolation: isolate;
+}
+.illuminate::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(
+    circle 380px at var(--mx, 50%) var(--my, 50%),
+    transparent 0%,
+    rgba(10,10,10,0.18) 35%,
+    rgba(10,10,10,0.55) 70%);
+  pointer-events: none;
+  z-index: 1;
+  transition: opacity var(--t-medium) var(--ease-out);
+}
+.illuminate.illuminated::before { opacity: 1; }
+.illuminate > * { position: relative; z-index: 0; }
+.illuminate .reveal {
+  font-family: var(--font-display);
+  font-weight: 300;
+  color: var(--mark);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   AGENTIC LIST · vertical narrative, NOT a card grid
+   ═══════════════════════════════════════════════════════════════════════════ */
+.agentic {
+  margin-top: var(--s-12);
+  border-top: 1px solid var(--bdr-faint);
+}
+.ag-item {
+  display: block;
+  position: relative;
+  border-bottom: 1px solid var(--bdr-faint);
+  transition: background var(--t-medium) var(--ease-out);
+}
+.ag-item:hover { background: rgba(255,255,255,0.015); }
+.ag-row {
+  display: grid;
+  grid-template-columns: 56px 1fr 320px 28px;
+  gap: var(--s-10);
+  padding: var(--s-10) 0;
+  align-items: start;
+  cursor: pointer;
+}
+.ag-num {
+  font-family: var(--font-mono);
+  font-size: 10.5px; font-weight: 500;
+  letter-spacing: 0.18em; color: var(--txt3);
+  padding-top: 8px;
+}
+.ag-body h3 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(22px, 2.4vw, 32px);
+  line-height: 1.15;
+  letter-spacing: -0.018em;
+  color: var(--txt);
+  margin: 0 0 var(--s-3);
+}
+.ag-body h3 .accent { font-size: 1em; }
+.ag-body p {
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: var(--txt2);
+  line-height: 1.6;
+  margin: 0;
+  max-width: 540px;
+}
+.ag-side {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--txt3);
+  padding-top: 8px;
+  display: flex; flex-direction: column; gap: 4px;
+}
+.ag-side .lbl { color: var(--txt3); }
+.ag-side .val { color: var(--mark); font-weight: 500; }
+.ag-toggle {
+  align-self: center;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--txt-ghost);
+  text-align: center;
+  transition: color var(--t-fast) var(--ease-out), transform var(--t-medium) var(--ease-out);
+  user-select: none;
+}
+.ag-item:hover .ag-toggle,
+.ag-item.is-open .ag-toggle { color: var(--mark); }
+.ag-item.is-open .ag-toggle { transform: rotate(45deg); }
+
+/* Hover-reveal media */
+.ag-media {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  padding: 0 0 0 calc(56px + var(--s-10));
+  transition: max-height var(--t-slow) var(--ease-out),
+              opacity var(--t-medium) var(--ease-out),
+              padding-bottom var(--t-medium) var(--ease-out);
+}
+@media (hover: hover) {
+  .ag-item:hover .ag-media { max-height: 680px; opacity: 1; padding-bottom: var(--s-10); }
+}
+.ag-item.is-open .ag-media { max-height: 680px; opacity: 1; padding-bottom: var(--s-10); }
+.ag-media .proto-wrap { max-width: 100%; margin: 0; }
+.ag-media .proto-frame { height: 580px; }
+
+@media (max-width: 1024px) {
+  .ag-row { grid-template-columns: 40px 1fr 24px; gap: var(--s-5); }
+  .ag-row .ag-side { display: none; }
+  .ag-media { padding-left: calc(40px + var(--s-5)); }
+  .ag-media .proto-frame { height: 420px; }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   CONSOLIDATE · asymmetric before/after
+   ═══════════════════════════════════════════════════════════════════════════ */
+.consolidate {
+  display: grid;
+  grid-template-columns: 0.95fr auto 1.15fr;
+  gap: var(--s-12);
+  align-items: center;
+  margin-top: var(--s-16);
+}
+.con-before, .con-after { padding: var(--s-6) 0; }
+.con-lbl {
+  font-family: var(--font-mono);
+  font-size: 10px; font-weight: 500;
+  letter-spacing: 0.20em; text-transform: uppercase;
+  color: var(--txt3);
+  margin-bottom: var(--s-5);
+}
+.con-after .con-lbl { color: var(--mark); }
+.con-before .scatter {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--s-2);
+}
+.con-before .scatter > div {
+  background: var(--surface-mute);
+  border: 1px solid var(--bdr-faint);
+  border-radius: var(--r-sm);
+  padding: var(--s-3) var(--s-2);
+  font-family: var(--font-mono);
+  font-size: 10px; font-weight: 500;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--txt3); text-align: center;
+}
+.con-arrow {
+  display: flex; flex-direction: column; align-items: center; gap: var(--s-2);
+  color: var(--mark);
+}
+.con-arrow svg { width: 32px; height: 32px; }
+.con-arrow .l {
+  font-family: var(--font-mono); font-size: 9.5px; font-weight: 500;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--txt3);
+}
+.con-after .one {
+  background: var(--surface-el);
+  border: 1px solid var(--bdr-sub);
+  border-radius: var(--r-sm);
+  padding: var(--s-4) var(--s-5);
+  display: flex; align-items: center; gap: var(--s-3);
+  font-family: var(--font-body); font-size: 15px; color: var(--txt);
+  margin-bottom: var(--s-5);
+}
+.con-after .one .pr { color: var(--mark); font-family: var(--font-mono); }
+.con-after .one .cur { color: var(--mark); animation: blink 1.5s steps(2, jump-none) infinite; }
+.con-after .note {
+  font-family: var(--font-body); font-size: 14px;
+  color: var(--txt2); line-height: 1.6;
+}
+.con-after .note b { color: var(--txt); font-weight: 500; }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   ONBOARDING TIMELINE
+   ═══════════════════════════════════════════════════════════════════════════ */
+.timeline {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  margin-top: var(--s-16);
+  border-top: 1px solid var(--bdr-sub);
+  position: relative;
+}
+.timeline::before {
+  content: '';
+  position: absolute; top: -1px; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, var(--mark) 0%, var(--mark) 75%, var(--green) 100%);
+  opacity: 0.55;
+}
+.t-step {
+  position: relative;
+  padding: var(--s-6) var(--s-4) 0 0;
+}
+.t-step::before {
+  content: '';
+  position: absolute; top: -5px; left: 0;
+  width: 9px; height: 9px;
+  background: var(--mark);
+  border-radius: var(--r-full);
+}
+.t-step.fin::before { background: var(--green); }
+.t-when {
+  font-family: var(--font-mono);
+  font-size: 10.5px; font-weight: 500;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--mark);
+  margin-bottom: var(--s-3);
+}
+.t-step.fin .t-when { color: var(--green); }
+.t-title {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 19px;
+  letter-spacing: -0.012em;
+  color: var(--txt);
+  margin: 0 0 var(--s-2);
+}
+.t-body {
+  font-family: var(--font-body);
+  font-size: 13.5px;
+  color: var(--txt2);
+  line-height: 1.55;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   ALONGSIDE diagram
+   ═══════════════════════════════════════════════════════════════════════════ */
+.alongside-diagram {
+  max-width: 880px; margin: var(--s-12) auto 0;
+}
+.alongside-diagram svg { width: 100%; height: auto; }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   TRUST · NOT a card grid · three full-width paragraphs separated by rules
+   ═══════════════════════════════════════════════════════════════════════════ */
+.trust-list {
+  margin-top: var(--s-16);
+  max-width: 980px;
+}
+.trust-row {
+  display: grid;
+  grid-template-columns: 200px 1fr 200px;
+  gap: var(--s-8);
+  padding: var(--s-10) 0;
+  border-top: 1px solid var(--bdr-faint);
+  align-items: baseline;
+}
+.trust-row:last-child { border-bottom: 1px solid var(--bdr-faint); }
+.trust-row .lbl {
+  font-family: var(--font-mono);
+  font-size: 10.5px; font-weight: 500;
+  letter-spacing: 0.20em; text-transform: uppercase;
+  color: var(--mark);
+}
+.trust-row h3 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+  color: var(--txt);
+  margin: 0 0 var(--s-3);
+}
+.trust-row p {
+  font-family: var(--font-body);
+  font-size: 14.5px;
+  color: var(--txt2);
+  line-height: 1.6;
+  margin: 0;
+  max-width: 540px;
+}
+.trust-row .status {
+  font-family: var(--font-mono);
+  font-size: 10px; font-weight: 500;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--txt3);
+  text-align: right;
+}
+.trust-row .status b { color: var(--amber); font-weight: 500; }
+.trust-row .status b.live { color: var(--green); }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   FOUNDER · ultra-restrained
+   ═══════════════════════════════════════════════════════════════════════════ */
+.founder { padding: 20vh var(--s-12) 20vh calc(var(--rail-x) + var(--s-12)); }
+.founder .wrap { text-align: left; max-width: 720px; }
+.founder h2 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(30px, 3.6vw, 44px);
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  color: var(--txt);
+  margin: 0 0 var(--s-6);
+}
+.founder h2 .accent { font-size: 1em; }
+.founder p {
+  font-family: var(--font-body);
+  font-size: 17px;
+  color: var(--txt2);
+  line-height: 1.65;
+  margin: 0;
+  max-width: 620px;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   PRICING
+   ═══════════════════════════════════════════════════════════════════════════ */
+.pricing { padding: 20vh var(--s-12) 20vh calc(var(--rail-x) + var(--s-12)); }
+.pricing .wrap { text-align: left; }
+.pricing .num {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(96px, 14vw, 200px);
+  line-height: 0.95;
+  color: var(--txt);
+  letter-spacing: -0.06em;
+  margin: 0;
+}
+.pricing .unit {
+  font-family: var(--font-mono);
+  font-size: 11px; font-weight: 500;
+  letter-spacing: 0.20em; text-transform: uppercase;
+  color: var(--txt3);
+  margin: var(--s-5) 0 var(--s-6);
+}
+.pricing .qualifier {
+  font-family: var(--font-body);
+  font-size: 17px;
+  color: var(--txt2);
+  max-width: 480px;
+  line-height: 1.55;
+  margin: 0 0 var(--s-10);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   FINAL CTA
+   ═══════════════════════════════════════════════════════════════════════════ */
+.final { padding: 16vh var(--s-12) 16vh calc(var(--rail-x) + var(--s-12)); }
+.final .wrap { text-align: left; max-width: 900px; }
+.final h2 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(30px, 3.6vw, 48px);
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  color: var(--txt);
+  margin: 0 0 var(--s-10);
+}
+.final h2 .accent { font-size: 1em; }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   FOOTER
+   ═══════════════════════════════════════════════════════════════════════════ */
+footer {
+  border-top: 1px solid var(--bdr-sub);
+  padding: var(--s-12) var(--s-12) var(--s-12) calc(var(--rail-x) + var(--s-12));
+  margin-top: var(--s-20);
+}
+footer .row {
+  max-width: 1280px; margin: 0 auto;
+  display: flex; justify-content: space-between; align-items: center;
+}
+footer .lockup { display: flex; align-items: center; gap: var(--s-3); }
+footer .wm {
+  font-family: var(--font-display); font-weight: 500; font-size: 14px;
+  letter-spacing: -0.01em; color: var(--txt);
+}
+footer nav { display: flex; gap: var(--s-6); }
+footer nav a {
+  font-family: var(--font-mono); font-size: 10px; font-weight: 500;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--txt3); text-decoration: none;
+  transition: color var(--t-fast) var(--ease-out);
+}
+footer nav a:hover { color: var(--mark); }
+footer .verify-line {
+  max-width: 1280px; margin: var(--s-8) auto 0;
+  padding-top: var(--s-5);
+  border-top: 1px solid var(--bdr-faint);
+  font-family: var(--font-body); font-size: 13px;
+  color: var(--txt2);
+}
+footer .verify-line a { color: var(--mark); text-decoration: none; }
+footer .verify-line a:hover { text-decoration: underline; }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════════════════════════════════════════════ */
+@media (max-width: 1024px) {
+  .alt .grid { grid-template-columns: 1fr; gap: var(--s-12); }
+  .alt .grid--flip > .text, .alt .grid--flip > .media { order: 0; }
+  .flow--3 { grid-template-columns: 1fr; }
+  .flow--3 .flow-arrow { transform: rotate(90deg); }
+  .flow--2 { grid-template-columns: 1fr; }
+  .flow--2 .flow-arrow { transform: rotate(90deg); }
+  .score-layout { grid-template-columns: 1fr; gap: var(--s-12); }
+  .ag-item { grid-template-columns: 40px 1fr; }
+  .ag-item .ag-side { grid-column: 2; }
+  .consolidate { grid-template-columns: 1fr; gap: var(--s-8); }
+  .consolidate .con-arrow { transform: rotate(90deg); }
+  .timeline { grid-template-columns: 1fr 1fr; gap: var(--s-8); }
+  .trust-row { grid-template-columns: 1fr; gap: var(--s-3); }
+  .trust-row .status { text-align: left; }
+}
+@media (max-width: 640px) {
+  body { font-size: 15px; }
+  section { padding: 0 var(--s-6) 0 var(--s-10); }
+  .hero { padding-top: 80px; padding-left: var(--s-4); }
+  :root { --rail-x: 20px; }
+  .timeline { grid-template-columns: 1fr; }
+  .hdr nav { display: none; }
+  .hdr { padding: 0 var(--s-5); }
+}
+
+/* Reduce motion */
+@media (prefers-reduced-motion: reduce) {
+  .fade-in, .fade-in.is-visible { opacity: 1; transform: none; transition: none; }
+  .spine-glow, .ms-input .cur, .vchecks .vd { animation: none; transition: none; }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   PROTOTYPE IFRAMES · real product UI from Cloud_PMS prototypes
+   ═══════════════════════════════════════════════════════════════════════════ */
+.proto-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 760px;
+  border-radius: var(--r-sm);
+  overflow: hidden;
+  background: var(--surface);
+  border-top:    1px solid var(--bdr-top);
+  border-left:   1px solid var(--bdr-side);
+  border-right:  1px solid var(--bdr-side);
+  border-bottom: 1px solid var(--bdr-bot);
+  box-shadow: 0 32px 80px rgba(0,0,0,0.5), 0 4px 12px rgba(0,0,0,0.4);
+}
+.proto-wrap .proto-chrome {
+  background: rgba(0,0,0,0.30);
+  padding: 8px 14px;
+  border-bottom: 1px solid var(--bdr-faint);
+  display: flex; align-items: center; gap: var(--s-3);
+  font-family: var(--font-mono);
+  font-size: 9.5px; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--txt3);
+}
+.proto-wrap .proto-chrome .dots { display: flex; gap: 5px; }
+.proto-wrap .proto-chrome .dots span { width: 7px; height: 7px; border-radius: var(--r-full); background: var(--bdr-sub); }
+.proto-wrap .proto-chrome .crumb { color: var(--txt2); font-weight: 500; }
+.proto-wrap .proto-chrome .crumb b { color: var(--mark); font-weight: 500; }
+.proto-frame {
+  display: block;
+  width: 100%;
+  border: 0;
+  background: var(--surface-base);
+}
+.proto-frame--lg { height: 720px; }
+.proto-frame--md { height: 600px; }
+.proto-frame--sm { height: 480px; }
+.proto-frame--tall { height: 820px; }
+
+/* Full-bleed prototype variant (Money Finder + Show Related) */
+.proto-bleed {
+  width: 100%;
+  max-width: 1180px;
+  margin: var(--s-12) auto 0;
+  position: relative;
+  border-radius: var(--r-sm);
+  overflow: hidden;
+  background: var(--surface);
+  border: 1px solid var(--bdr-sub);
+  box-shadow: 0 32px 80px rgba(0,0,0,0.5);
+}
+.proto-bleed .proto-frame { height: 720px; }
+.proto-bleed.illuminate::before {
+  z-index: 2;
+  pointer-events: none;
+  border-radius: var(--r-sm);
+}
+
+/* Archetype-driven section variants */
+.alt--asymmetric .grid { grid-template-columns: 0.45fr 0.55fr; }
+.alt--asymmetric.alt--flip .grid { grid-template-columns: 0.55fr 0.45fr; }
+
+@media (max-width: 1024px) {
+  .alt--asymmetric .grid,
+  .alt--asymmetric.alt--flip .grid { grid-template-columns: 1fr; }
+  .proto-frame--lg, .proto-frame--md, .proto-frame--tall { height: 540px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ════════════════════ SPINE RAIL ════════════════════ -->
+<div class="spine">
+  <span class="spine-marker" data-section="hero" style="top: 64px;"></span>
+  <span class="spine-marker" data-section="score" style="top: calc(100vh + 22vh);"></span>
+  <span class="spine-marker" data-section="handover" style="top: calc(200vh + 22vh);"></span>
+</div>
+<div class="spine-glow" id="spine-glow"></div>
+
+<!-- ════════════════════ HEADER ════════════════════ -->
+<header class="hdr">
+  <div class="lockup">
+    <svg class="seal" width="20" height="20" viewBox="0 0 22 22">
+      <circle cx="11" cy="11" r="9" stroke="currentColor" stroke-width="1.2" fill="none"/>
+      <line x1="11" y1="2" x2="11" y2="6" stroke="currentColor" stroke-width="1.2"/>
+      <circle cx="11" cy="11" r="2" fill="currentColor"/>
+    </svg>
+    <span class="wm">CelesteOS</span>
+  </div>
+  <div class="right">
+    <nav>
+      <a href="#handover">Product</a>
+      <a href="#score">Score</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#trust">Trust</a>
+    </nav>
+    <a class="pilot-btn" href="mailto:pilot@celeste7.ai">Request pilot</a>
+  </div>
+</header>
+
+<!-- ════════════════════ HERO ════════════════════ -->
+<section class="hero" id="hero" data-section="hero">
+  <div class="wrap">
+    <div class="eyebrow fade-in">CelesteOS · 30m+</div>
+    <h1 class="fade-in fade-in-delay-1">The vessel's knowledge stays <span class="accent">in the vessel.</span></h1>
+    <p class="sub fade-in fade-in-delay-2">Manuals, work orders, faults, handovers, emails — one searchable surface. The next handover writes itself.</p>
+    <div class="cta-row fade-in fade-in-delay-3">
+      <a class="cta" href="mailto:pilot@celeste7.ai">Request pilot access</a>
+      <a class="cta cta--ghost" href="#handover">See how it works</a>
+    </div>
+  </div>
+  <div class="below">
+    <span class="line"></span>
+    <span>scroll</span>
+  </div>
+</section>
+
+<!-- ════════════════════ HANDOVER · archetype B · iframe lens-handover ════════════════════ -->
+<section class="alt alt--asymmetric" id="handover" data-section="handover">
+  <div class="section-no fade-in">02 <span class="dim">/ the painkiller</span></div>
+  <div class="grid">
+    <div class="text fade-in">
+      <h2>The next handover <span class="accent">writes itself.</span></h2>
+      <p class="body">Every record you touch becomes a handover entry — as you work. Eight months of context, not two days of verbal briefing.</p>
+      <details>
+        <summary>How it accumulates</summary>
+        <p>Every CUD action prompts a single yes/no: "Add to handover draft?" — never re-prompted, never logged if dismissed. The draft accumulates silently. At sign-off you review, edit, sign across. Sealed · ledger-stamped · visible only to your back-to-back.</p>
+      </details>
+    </div>
+    <div class="media fade-in fade-in-delay-1">
+      <div class="proto-wrap">
+        <div class="proto-chrome">
+          <div class="dots"><span></span><span></span><span></span></div>
+          <span class="crumb">M/Y Hypothetical · <b>lens · handover</b></span>
+          <span style="margin-left: auto;">live product</span>
+        </div>
+        <iframe class="proto-frame proto-frame--lg"
+                src="file:///Users/celeste7/Documents/Cloud_PMS/apps/web/public/prototypes/lens-handover.html"
+                title="Handover lens prototype"
+                loading="lazy"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════ MONEY FINDER · archetype C · full-bleed iframe + cursor reveal ════════════════════ -->
+<section class="centered" data-section="money" style="min-height: 120vh;">
+  <div class="section-no fade-in">03 <span class="dim">/ money found</span></div>
+  <div class="wrap">
+    <div class="head fade-in">
+      <h2>The supplier pays. <span class="accent">Not you.</span></h2>
+      <p class="body">Items still under manufacturer warranty surface the moment a fault is raised. Mouse over to reveal what's already been drafted into a forward-ready claim pack.</p>
+    </div>
+
+    <div class="proto-bleed illuminate fade-in fade-in-delay-1" id="money-flow">
+      <div class="proto-chrome" style="background: rgba(0,0,0,0.30); padding: 8px 14px; border-bottom: 1px solid var(--bdr-faint); display: flex; align-items: center; gap: var(--s-3); font-family: var(--font-mono); font-size: 9.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--txt3);">
+        <div class="dots" style="display: flex; gap: 5px;"><span style="width: 7px; height: 7px; border-radius: 50%; background: var(--bdr-sub);"></span><span style="width: 7px; height: 7px; border-radius: 50%; background: var(--bdr-sub);"></span><span style="width: 7px; height: 7px; border-radius: 50%; background: var(--bdr-sub);"></span></div>
+        <span style="color: var(--txt2); font-weight: 500;">M/Y Hypothetical · <b style="color: var(--mark); font-weight: 500;">lens · warranty</b></span>
+        <span style="margin-left: auto;">live product</span>
+      </div>
+      <iframe class="proto-frame"
+              src="file:///Users/celeste7/Documents/Cloud_PMS/apps/web/public/prototypes/lens-warranty.html"
+              title="Warranty lens prototype"
+              loading="lazy"
+              style="height: 720px;"></iframe>
+    </div>
+
+    <details class="fade-in" style="margin: var(--s-12) auto 0;">
+      <summary>"Operator error" — the supplier's negotiating position</summary>
+      <p>When the manufacturer says operator error, your work order from March says otherwise. Both are in the system. Both cited. Both sealed. Warranty disputes are won on evidence — not memory.</p>
+    </details>
+  </div>
+</section>
+
+<!-- ════════════════════ SEARCH · archetype B-flip · iframe elegant.html ════════════════════ -->
+<section class="alt alt--asymmetric alt--flip" data-section="search">
+  <div class="section-no fade-in">04 <span class="dim">/ search</span></div>
+  <div class="grid grid--flip">
+    <div class="text fade-in">
+      <h2>Type what you know. Find <span class="accent">the source.</span></h2>
+      <p class="body">Manuals, faults, parts, work orders, certificates, email, warranty terms — one question, every domain. Every result cites where it came from.</p>
+      <details>
+        <summary>Never paraphrased</summary>
+        <p>CelesteOS does not summarise. Clicking any result opens the original document, unedited. The source is the answer.</p>
+      </details>
+    </div>
+    <div class="media fade-in fade-in-delay-1">
+      <div class="proto-wrap">
+        <div class="proto-chrome">
+          <div class="dots"><span></span><span></span><span></span></div>
+          <span class="crumb"><b>spotlight · search across anywhere</b></span>
+          <span style="margin-left: auto;">⌘K</span>
+        </div>
+        <iframe class="proto-frame proto-frame--md"
+                src="file:///Users/celeste7/Documents/Cloud_PMS/apps/web/public/prototypes/elegant.html"
+                title="Spotlight search prototype"
+                loading="lazy"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════ SHOW RELATED · archetype C · full-bleed iframe ════════════════════ -->
+<section class="centered" data-section="related" style="min-height: 110vh;">
+  <div class="section-no fade-in">05 <span class="dim">/ show related</span></div>
+  <div class="wrap">
+    <div class="head fade-in">
+      <h2>One press. Every record that <span class="accent">ever touched.</span></h2>
+      <p class="body">The NLP search runs in reverse from any record — pulling matched faults, related emails, prior work orders, manual pages. Cited verbatim. Unedited.</p>
+    </div>
+
+    <div class="proto-bleed fade-in fade-in-delay-1">
+      <div class="proto-chrome" style="background: rgba(0,0,0,0.30); padding: 8px 14px; border-bottom: 1px solid var(--bdr-faint); display: flex; align-items: center; gap: var(--s-3); font-family: var(--font-mono); font-size: 9.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--txt3);">
+        <div class="dots" style="display: flex; gap: 5px;"><span style="width: 7px; height: 7px; border-radius: 50%; background: var(--bdr-sub);"></span><span style="width: 7px; height: 7px; border-radius: 50%; background: var(--bdr-sub);"></span><span style="width: 7px; height: 7px; border-radius: 50%; background: var(--bdr-sub);"></span></div>
+        <span style="color: var(--txt2); font-weight: 500;">F-2026-0014 · <b style="color: var(--mark); font-weight: 500;">show related drawer</b></span>
+        <span style="margin-left: auto;">GraphRAG discovery</span>
+      </div>
+      <iframe class="proto-frame"
+              src="file:///Users/celeste7/Documents/Cloud_PMS/apps/web/public/prototypes/show-related.html"
+              title="Show Related drawer prototype"
+              loading="lazy"
+              style="height: 720px;"></iframe>
+    </div>
+
+    <details class="fade-in" style="margin: var(--s-12) auto 0;">
+      <summary>Moment-anchored button — never an empty search box</summary>
+      <p>Clicking <em>Show Related</em> on any record pre-populates the query from the record's context — equipment, symptom, cluster, date — and lands you on results, never on an empty input. Retrieval, not search. Every link opens the original document, unedited.</p>
+    </details>
+  </div>
+</section>
+
+<!-- ════════════════════ AGENTIC LIST · not a card grid ════════════════════ -->
+<section class="centered" data-section="agentic" style="padding-bottom: 22vh;">
+  <div class="section-no fade-in">06 <span class="dim">/ without being asked</span></div>
+  <div class="wrap">
+    <div class="head fade-in">
+      <h2>Searches CelesteOS runs <span class="accent">for you.</span></h2>
+      <p class="body">Five quiet missions running in the background. Each one drafts. You decide.</p>
+    </div>
+
+    <div class="agentic fade-in fade-in-delay-1">
+
+      <div class="ag-item" data-proto="lens-warranty.html">
+        <div class="ag-row">
+          <span class="ag-num">01</span>
+          <div class="ag-body">
+            <h3>Money <span class="accent">about to be spent.</span></h3>
+            <p>Items still under manufacturer warranty surface the moment a fault is raised against them — with a forward-ready claim pack drafted. You forward. The supplier pays.</p>
+          </div>
+          <div class="ag-side">
+            <span class="lbl">Maps to · Warranty MVP</span>
+            <span class="val">money found</span>
+          </div>
+          <span class="ag-toggle" aria-hidden="true">+</span>
+        </div>
+        <div class="ag-media">
+          <div class="proto-wrap">
+            <div class="proto-chrome">
+              <div class="dots"><span></span><span></span><span></span></div>
+              <span class="crumb"><b>lens · warranty</b></span>
+              <span style="margin-left: auto;">hover · live product</span>
+            </div>
+            <iframe class="proto-frame"
+                    data-src="file:///Users/celeste7/Documents/Cloud_PMS/apps/web/public/prototypes/lens-warranty.html"
+                    title="Warranty lens prototype"
+                    loading="lazy"></iframe>
+          </div>
+        </div>
+      </div>
+
+      <div class="ag-item" data-proto="lens-certificate.html">
+        <div class="ag-row">
+          <span class="ag-num">02</span>
+          <div class="ag-body">
+            <h3>Certificates <span class="accent">before they expire.</span></h3>
+            <p>Class survey 60 days out. Every certificate the surveyor will ask for — gathered, with the ones expiring inside the window flagged — in one signed bundle.</p>
+          </div>
+          <div class="ag-side">
+            <span class="lbl">Maps to · Certificate gathering</span>
+            <span class="val">catastrophe avoided</span>
+          </div>
+          <span class="ag-toggle" aria-hidden="true">+</span>
+        </div>
+        <div class="ag-media">
+          <div class="proto-wrap">
+            <div class="proto-chrome">
+              <div class="dots"><span></span><span></span><span></span></div>
+              <span class="crumb"><b>lens · certificate</b></span>
+              <span style="margin-left: auto;">hover · live product</span>
+            </div>
+            <iframe class="proto-frame"
+                    data-src="file:///Users/celeste7/Documents/Cloud_PMS/apps/web/public/prototypes/lens-certificate.html"
+                    title="Certificate lens prototype"
+                    loading="lazy"></iframe>
+          </div>
+        </div>
+      </div>
+
+      <div class="ag-item" data-proto="lens-receiving.html">
+        <div class="ag-row">
+          <span class="ag-num">03</span>
+          <div class="ag-body">
+            <h3>Discrepancies <span class="accent">on the dock.</span></h3>
+            <p>A photo of the packing list goes in. Matched PO lines, the inventory delta, and a drafted discrepancy email come out. The shipment goes back before it's signed for.</p>
+          </div>
+          <div class="ag-side">
+            <span class="lbl">Maps to · Receiving OCR</span>
+            <span class="val">loss prevented</span>
+          </div>
+          <span class="ag-toggle" aria-hidden="true">+</span>
+        </div>
+        <div class="ag-media">
+          <div class="proto-wrap">
+            <div class="proto-chrome">
+              <div class="dots"><span></span><span></span><span></span></div>
+              <span class="crumb"><b>lens · receiving</b></span>
+              <span style="margin-left: auto;">hover · live product</span>
+            </div>
+            <iframe class="proto-frame"
+                    data-src="file:///Users/celeste7/Documents/Cloud_PMS/apps/web/public/prototypes/lens-receiving.html"
+                    title="Receiving lens prototype"
+                    loading="lazy"></iframe>
+          </div>
+        </div>
+      </div>
+
+      <div class="ag-item" data-proto="lens-fault.html">
+        <div class="ag-row">
+          <span class="ag-num">04</span>
+          <div class="ag-body">
+            <h3>Faults <span class="accent">already diagnosed.</span></h3>
+            <p>The same fault, on the same equipment, three rotations ago. The diagnosis is in the record. Surfaced before the marine technician's callout is booked.</p>
+          </div>
+          <div class="ag-side">
+            <span class="lbl">Maps to · Repeat-fault detection</span>
+            <span class="val">time saved</span>
+          </div>
+          <span class="ag-toggle" aria-hidden="true">+</span>
+        </div>
+        <div class="ag-media">
+          <div class="proto-wrap">
+            <div class="proto-chrome">
+              <div class="dots"><span></span><span></span><span></span></div>
+              <span class="crumb"><b>lens · fault</b></span>
+              <span style="margin-left: auto;">hover · live product</span>
+            </div>
+            <iframe class="proto-frame"
+                    data-src="file:///Users/celeste7/Documents/Cloud_PMS/apps/web/public/prototypes/lens-fault.html"
+                    title="Fault lens prototype"
+                    loading="lazy"></iframe>
+          </div>
+        </div>
+      </div>
+
+      <div class="ag-item" data-proto="email-thread.html">
+        <div class="ag-row">
+          <span class="ag-num">05</span>
+          <div class="ag-body">
+            <h3>Answers across <span class="accent">email and manuals.</span></h3>
+            <p>"Which generator setting did the manufacturer recommend after last summer's overheating?" — answered, with the email thread and the manual page beside the answer. Every result cited.</p>
+          </div>
+          <div class="ag-side">
+            <span class="lbl">Maps to · Cross-domain search</span>
+            <span class="val">noise removed</span>
+          </div>
+          <span class="ag-toggle" aria-hidden="true">+</span>
+        </div>
+        <div class="ag-media">
+          <div class="proto-wrap">
+            <div class="proto-chrome">
+              <div class="dots"><span></span><span></span><span></span></div>
+              <span class="crumb"><b>email · thread view</b></span>
+              <span style="margin-left: auto;">hover · live product</span>
+            </div>
+            <iframe class="proto-frame"
+                    data-src="file:///Users/celeste7/Documents/Cloud_PMS/apps/web/public/prototypes/email-thread.html"
+                    title="Email thread prototype"
+                    loading="lazy"></iframe>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <details class="fade-in" style="margin: var(--s-12) 0 0;">
+      <summary>Every search is a draft, not an action</summary>
+      <p>You read the citation. You decide. CelesteOS records what you decided. It never auto-files, never auto-sends, never auto-asserts.</p>
+    </details>
+  </div>
+</section>
+
+<!-- ════════════════════ CONSOLIDATE · asymmetric ════════════════════ -->
+<section class="centered" data-section="consolidate">
+  <div class="section-no fade-in">07 <span class="dim">/ consolidate</span></div>
+  <div class="wrap">
+    <div class="head fade-in">
+      <h2>One surface for everything <span class="accent">the boat knows.</span></h2>
+      <p class="body">Manuals on a shared drive. Faults in the PMS. Emails in the inbox. Parts in a spreadsheet. CelesteOS reads them where they live — and answers from one bar.</p>
+    </div>
+
+    <div class="consolidate fade-in fade-in-delay-1">
+      <div class="con-before">
+        <div class="con-lbl">Before · fragmented</div>
+        <div class="scatter">
+          <div>Manuals · USB</div>
+          <div>Faults · PMS</div>
+          <div>Emails · inbox</div>
+          <div>Parts · Excel</div>
+          <div>Drawings · share</div>
+          <div>Warranty · PDF</div>
+          <div>Handover · paper</div>
+          <div>Certs · folder</div>
+          <div>Receiving · ?</div>
+        </div>
+      </div>
+
+      <div class="con-arrow">
+        <span class="l">CelesteOS reads</span>
+        <svg viewBox="0 0 32 32" fill="none">
+          <path d="M2 16 H26" stroke="currentColor" stroke-width="1.4"/>
+          <path d="M19 9 L26 16 L19 23" stroke="currentColor" stroke-width="1.4" fill="none"/>
+        </svg>
+      </div>
+
+      <div class="con-after">
+        <div class="con-lbl">After · one surface</div>
+        <div class="one">
+          <span class="pr">›</span>
+          <span>ask the vessel anything</span>
+          <span class="cur">▎</span>
+        </div>
+        <div class="note">
+          <b>Your existing files stay where they are.</b> Nothing migrates. Nothing changes ownership. CelesteOS sits above — reading, indexing, citing.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════ ALONGSIDE ════════════════════ -->
+<section class="centered" data-section="alongside">
+  <div class="section-no fade-in">08 <span class="dim">/ where it sits</span></div>
+  <div class="wrap">
+    <div class="head fade-in">
+      <h2>Keep AMOS. Keep Seahub. <span class="accent">Keep IDEA.</span></h2>
+      <p class="body">CelesteOS reads what your PMS already holds and adds what it doesn't — manuals, supplier emails, handover notes, scanned drawings. Nothing to migrate.</p>
+    </div>
+
+    <div class="alongside-diagram fade-in fade-in-delay-1">
+      <svg viewBox="0 0 880 320" preserveAspectRatio="xMidYMid meet">
+        <rect x="180" y="20" width="520" height="76" rx="2"
+              fill="rgba(58,124,157,0.05)" stroke="var(--mark)" stroke-width="1.3"/>
+        <text x="440" y="52" text-anchor="middle" fill="var(--txt)"
+              font-family="Eloquia Display, system-ui, sans-serif" font-weight="500" font-size="20">CelesteOS</text>
+        <text x="440" y="76" text-anchor="middle" fill="var(--txt3)"
+              font-family="IBM Plex Mono, monospace" font-size="10" letter-spacing="2">SEARCH · CITATION · SEAL</text>
+
+        <line x1="280" y1="96" x2="200" y2="190" stroke="var(--bdr-top)" stroke-width="1"/>
+        <line x1="440" y1="96" x2="440" y2="190" stroke="var(--bdr-top)" stroke-width="1"/>
+        <line x1="600" y1="96" x2="680" y2="190" stroke="var(--bdr-top)" stroke-width="1"/>
+
+        <rect x="100" y="190" width="200" height="64" rx="2" fill="none" stroke="var(--bdr-sub)" stroke-width="1"/>
+        <text x="200" y="218" text-anchor="middle" fill="var(--txt2)" font-family="Eloquia Display, system-ui, sans-serif" font-weight="500" font-size="15">AMOS</text>
+        <text x="200" y="240" text-anchor="middle" fill="var(--txt3)" font-family="IBM Plex Mono, monospace" font-size="9" letter-spacing="1.5">SYSTEM OF RECORD</text>
+
+        <rect x="340" y="190" width="200" height="64" rx="2" fill="none" stroke="var(--bdr-sub)" stroke-width="1"/>
+        <text x="440" y="218" text-anchor="middle" fill="var(--txt2)" font-family="Eloquia Display, system-ui, sans-serif" font-weight="500" font-size="15">Seahub</text>
+        <text x="440" y="240" text-anchor="middle" fill="var(--txt3)" font-family="IBM Plex Mono, monospace" font-size="9" letter-spacing="1.5">SYSTEM OF RECORD</text>
+
+        <rect x="580" y="190" width="200" height="64" rx="2" fill="none" stroke="var(--bdr-sub)" stroke-width="1"/>
+        <text x="680" y="218" text-anchor="middle" fill="var(--txt2)" font-family="Eloquia Display, system-ui, sans-serif" font-weight="500" font-size="15">IDEA</text>
+        <text x="680" y="240" text-anchor="middle" fill="var(--txt3)" font-family="IBM Plex Mono, monospace" font-size="9" letter-spacing="1.5">SYSTEM OF RECORD</text>
+
+        <text x="440" y="296" text-anchor="middle" fill="var(--txt3)" font-family="Cormorant Garamond, Georgia, serif" font-style="italic" font-size="15">reads what they hold · adds what they don't</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════ ONBOARDING TIMELINE ════════════════════ -->
+<section class="centered" data-section="onboarding">
+  <div class="section-no fade-in">09 <span class="dim">/ onboarding</span></div>
+  <div class="wrap">
+    <div class="head fade-in">
+      <h2>In <span class="accent">hours.</span> Not weeks.</h2>
+      <p class="body">No migration. No data ownership transfer. No three-month implementation. Upload what you have; CelesteOS does the rest while the crew sleeps.</p>
+    </div>
+
+    <div class="timeline fade-in fade-in-delay-1">
+      <div class="t-step">
+        <div class="t-when">Hour 00</div>
+        <div class="t-title">Upload</div>
+        <div class="t-body">Drag and drop manuals, scans, drawings, certificate folders. Connect mailbox.</div>
+      </div>
+      <div class="t-step">
+        <div class="t-when">Hour 02</div>
+        <div class="t-title">Index</div>
+        <div class="t-body">OCR, embedding, classification, RLS scope binding. Per-vessel partition.</div>
+      </div>
+      <div class="t-step">
+        <div class="t-when">Hour 06</div>
+        <div class="t-title">Linked</div>
+        <div class="t-body">Cross-domain relations built. Show Related works on every record.</div>
+      </div>
+      <div class="t-step fin">
+        <div class="t-when">Morning</div>
+        <div class="t-title">Searchable</div>
+        <div class="t-body">Crew opens the vessel. Asks. Gets cited answers across the full corpus.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════ CRYPTOGRAPHY · archetype B · iframe ledger-drawer ════════════════════ -->
+<section class="alt alt--asymmetric" data-section="crypto">
+  <div class="section-no fade-in">10 <span class="dim">/ proof, when proof matters</span></div>
+  <div class="grid">
+    <div class="text fade-in">
+      <h2>Every record <span class="accent">independently verifiable.</span></h2>
+      <p class="body">HMAC + Merkle root + RFC 3161 timestamp. Five public checks, recomputable by anyone, without a CelesteOS account, without our involvement.</p>
+      <details>
+        <summary>Why cryptographic, not just digital</summary>
+        <p>"Digital" means a vendor's database says so. Cryptographic means the customer can prove it without trusting the vendor — even if the vendor is offline, compromised, or has ceased to exist. The 2023 DNV ShipManager outage left 1,000 vessels without access to their own records for two months. CelesteOS records survive that failure mode by design.</p>
+      </details>
+    </div>
+    <div class="media fade-in fade-in-delay-1">
+      <div class="proto-wrap">
+        <div class="proto-chrome">
+          <div class="dots"><span></span><span></span><span></span></div>
+          <span class="crumb"><b>ledger drawer · sealed record</b></span>
+          <span style="margin-left: auto;">verify.celeste7.ai</span>
+        </div>
+        <iframe class="proto-frame proto-frame--lg"
+                src="file:///Users/celeste7/Documents/Cloud_PMS/apps/web/public/prototypes/ledger-drawer.html"
+                title="Ledger drawer prototype"
+                loading="lazy"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════ TRUST · rule-separated rows ════════════════════ -->
+<section class="centered" id="trust" data-section="trust" style="padding-bottom: 22vh;">
+  <div class="section-no fade-in">11 <span class="dim">/ trust</span></div>
+  <div class="wrap">
+    <div class="head fade-in">
+      <h2>The vessel's record <span class="accent">is the vessel's.</span></h2>
+      <p class="body">Compliance posture, data continuity, independent verification. No black boxes.</p>
+    </div>
+
+    <div class="trust-list fade-in fade-in-delay-1">
+
+      <div class="trust-row">
+        <span class="lbl">Compliance</span>
+        <div>
+          <h3>Aligned with the frameworks your auditors already know.</h3>
+          <p>ISM Code data handling, Tokyo MOU evidentiary requirements, IMO Resolution A.1155(32). GDPR + SOC 2 in mapping. We do not claim certifications we do not hold.</p>
+        </div>
+        <span class="status"><b>In progress</b><br/>Audit Q3 2026</span>
+      </div>
+
+      <div class="trust-row">
+        <span class="lbl">Continuity</span>
+        <div>
+          <h3>Your data leaves with you.</h3>
+          <p>Customer exports — every fault, work order, handover, linked document — produced on request in CSV, PDF, signed JSON. Documented escrow ensures continuity if CelesteOS the company ceases to operate. The vessel's data is the vessel's data.</p>
+        </div>
+        <span class="status"><b class="live">Live</b><br/>Portable from day one</span>
+      </div>
+
+      <div class="trust-row">
+        <span class="lbl">Verifier</span>
+        <div>
+          <h3>Independently verifiable.</h3>
+          <p>Every sealed record is verifiable at <a href="https://verify.celeste7.ai" style="color: var(--mark); text-decoration: none; border-bottom: 1px dotted var(--mark);">verify.celeste7.ai</a>. Five public checks. Without an account. Without our involvement. Survive vendor outages by design.</p>
+        </div>
+        <span class="status"><b class="live">Live</b><br/>Public endpoint</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════ SCORE · the hook ════════════════════ -->
+<section class="score" id="score" data-section="score">
+  <div class="section-no fade-in">12 <span class="dim">/ the score</span></div>
+  <div class="wrap">
+    <h2 class="fade-in">Every vessel gets <span class="accent">a number.</span> Free, all year.</h2>
+    <p class="lede fade-in fade-in-delay-1">A single score for operational truth — combining what the world can see from the outside with what the boat actually feels inside. Yours, always visible, never charged.</p>
+
+    <div class="score-layout fade-in fade-in-delay-2">
+      <div class="score-meter">
+        <svg viewBox="0 0 240 240">
+          <circle cx="120" cy="120" r="100" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="2"/>
+          <circle cx="120" cy="120" r="100" fill="none" stroke="var(--mark)" stroke-width="2"
+                  stroke-dasharray="0 628" stroke-linecap="round" opacity="0.55"/>
+        </svg>
+        <div class="center">
+          <span class="num">—</span>
+          <span class="label">Your score</span>
+          <span class="private">private to your vessel</span>
+        </div>
+      </div>
+
+      <div class="score-explain">
+        <div class="row">
+          <span class="lbl">Care</span>
+          <span class="body">The outside view. <b>Yard time, refit cadence, public AIS</b>. Observed from how the world sees the boat. Cannot be faked by the crew.</span>
+        </div>
+        <div class="row">
+          <span class="lbl">Wear</span>
+          <span class="body">The inside view. <b>Fault frequency, fix velocity, repeats climbing</b>. Computed only from your own data. Yours, never shared.</span>
+        </div>
+        <div class="row">
+          <span class="lbl">Delta</span>
+          <span class="body">The gap. When wear accelerates while care looks normal from outside — that is the decline nobody can see today.</span>
+        </div>
+      </div>
+    </div>
+
+    <p class="score-analogy fade-in fade-in-delay-3">
+      Like a credit score or a Carfax report — the number is <b>free, all year, only ever visible to you</b>. What is sold is the <b>verified, signed export</b>, released by the owner to one counterparty, at one moment. Sale. Renewal. Claim.
+    </p>
+  </div>
+</section>
+
+<!-- ════════════════════ FOUNDER ════════════════════ -->
+<section class="founder fade-in" data-section="founder">
+  <div class="section-no">13 <span class="dim">/ built by</span></div>
+  <div class="wrap">
+    <h2>An engineer who <span class="accent">lived this.</span></h2>
+    <p>Alex Short. Five years as ETO on superyachts up to 122 metres — Maryah, Legend, Freedom, Nero, Whisper. Built CelesteOS because the system should have existed in those moments.</p>
+  </div>
+</section>
+
+<!-- ════════════════════ PRICING ════════════════════ -->
+<section class="pricing fade-in" id="pricing" data-section="pricing">
+  <div class="section-no">14 <span class="dim">/ pricing</span></div>
+  <div class="wrap">
+    <div class="num">$450</div>
+    <div class="unit">per vessel · per 28 days</div>
+    <p class="qualifier">Unlimited seats. Onboard in hours. No migration. For teams who intend to use CelesteOS as <span class="accent">the work surface.</span></p>
+    <a class="cta" href="mailto:pilot@celeste7.ai">Request pilot access</a>
+  </div>
+</section>
+
+<!-- ════════════════════ FINAL CTA ════════════════════ -->
+<section class="final fade-in" data-section="final">
+  <div class="section-no">15 <span class="dim">/ if this describes you</span></div>
+  <div class="wrap">
+    <h2>If this describes your vessel, <span class="accent">we should talk.</span></h2>
+    <a class="cta" href="mailto:pilot@celeste7.ai">Request pilot access</a>
+  </div>
+</section>
+
+<!-- ════════════════════ FOOTER ════════════════════ -->
+<footer>
+  <div class="row">
+    <div class="lockup">
+      <svg class="seal" width="18" height="18" viewBox="0 0 22 22">
+        <circle cx="11" cy="11" r="9" stroke="currentColor" stroke-width="1.2" fill="none"/>
+        <line x1="11" y1="2" x2="11" y2="6" stroke="currentColor" stroke-width="1.2"/>
+        <circle cx="11" cy="11" r="2" fill="currentColor"/>
+      </svg>
+      <span class="wm">CelesteOS</span>
+    </div>
+    <nav>
+      <a href="/sources">Sources</a>
+      <a href="/trust">Trust</a>
+      <a href="https://verify.celeste7.ai">Verifier</a>
+      <a href="mailto:pilot@celeste7.ai">Contact</a>
+    </nav>
+  </div>
+  <div class="verify-line">
+    Verify any sealed record at <a href="https://verify.celeste7.ai">verify.celeste7.ai</a>. Without an account. Without our involvement.
+  </div>
+</footer>
+
+<script>
+// ═══════════════════════════════════════════════════════════════════════════
+// MOTION · multi-tempo
+// 1. Slow (720ms): scroll-fade per section
+// 2. Continuous: spine-glow tracks active section
+// 3. Reactive (50ms): cursor illumination on money-finder section
+// ═══════════════════════════════════════════════════════════════════════════
+
+// Scroll fade-in
+const fadeObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('is-visible');
+      fadeObserver.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.10, rootMargin: '0px 0px -8% 0px' });
+
+document.querySelectorAll('.fade-in').forEach(el => fadeObserver.observe(el));
+
+// Spine glow tracks the currently-active section
+const spineGlow = document.getElementById('spine-glow');
+const sections = Array.from(document.querySelectorAll('section[data-section]'));
+
+const sectionObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting && entry.intersectionRatio > 0.4) {
+      const rect = entry.target.getBoundingClientRect();
+      const targetTop = rect.top + window.scrollY + (rect.height / 2) - 40;
+      const viewportTop = window.scrollY + (window.innerHeight / 2) - 40;
+      // Pin glow to viewport center; gently nudge into section centerline
+      spineGlow.style.top = (window.innerHeight / 2 - 40) + 'px';
+      spineGlow.style.opacity = '0.65';
+    }
+  });
+}, { threshold: [0.4, 0.6] });
+
+sections.forEach(s => sectionObserver.observe(s));
+
+// Money-finder cursor illumination
+const moneyFlow = document.getElementById('money-flow');
+if (moneyFlow) {
+  let isOver = false;
+  moneyFlow.addEventListener('mousemove', (e) => {
+    const rect = moneyFlow.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    moneyFlow.style.setProperty('--mx', x + '%');
+    moneyFlow.style.setProperty('--my', y + '%');
+    if (!isOver) { moneyFlow.classList.add('illuminated'); isOver = true; }
+  });
+  moneyFlow.addEventListener('mouseleave', () => {
+    moneyFlow.classList.remove('illuminated');
+    isOver = false;
+  });
+  // Default to illuminated state (so the spotlight is always visible on the section)
+  moneyFlow.classList.add('illuminated');
+  moneyFlow.style.setProperty('--mx', '50%');
+  moneyFlow.style.setProperty('--my', '50%');
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// AGENTIC LIST · lazy-load iframes on first hover, manage expand state
+// ═══════════════════════════════════════════════════════════════════════════
+document.querySelectorAll('.ag-item').forEach(item => {
+  const frame = item.querySelector('iframe[data-src]');
+  const loadFrame = () => {
+    if (frame && !frame.src) frame.src = frame.dataset.src;
+  };
+  // Lazy-load on first hover (covers desktop pure-hover use)
+  item.addEventListener('mouseenter', loadFrame, { once: false });
+  // Click toggle for touch / sticky-open behaviour
+  const row = item.querySelector('.ag-row');
+  if (row) {
+    row.addEventListener('click', () => {
+      loadFrame();
+      const wasOpen = item.classList.contains('is-open');
+      // Close all siblings (one open at a time)
+      document.querySelectorAll('.ag-item.is-open').forEach(other => {
+        other.classList.remove('is-open');
+      });
+      // Toggle this one
+      if (!wasOpen) item.classList.add('is-open');
+    });
+  }
+});
+</script>
+
+</body>
+</html>

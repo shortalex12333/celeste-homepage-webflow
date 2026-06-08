@@ -1,0 +1,1484 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>CelesteOS · Landing Render B4 · clinical · editorial · multi-theme</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=Cormorant+Garamond:ital,wght@1,300;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+/* ═══════════════════════════════════════════════════════════════════════════
+   FONT FACE — Eloquia Display (self-hosted)
+   ═══════════════════════════════════════════════════════════════════════════ */
+@font-face {
+  font-family: 'Eloquia Display';
+  src: url('../../fonts/Eloquia-Display-Light.woff2') format('woff2');
+  font-weight: 300; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'Eloquia Display';
+  src: url('../../fonts/Eloquia-Display-Light-Italic.woff2') format('woff2');
+  font-weight: 300; font-style: italic; font-display: swap;
+}
+@font-face {
+  font-family: 'Eloquia Display';
+  src: url('../../fonts/Eloquia-Display-Regular.woff2') format('woff2');
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'Eloquia Display';
+  src: url('../../fonts/Eloquia-Display-Medium.woff2') format('woff2');
+  font-weight: 500; font-style: normal; font-display: swap;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   TOKENS — dark default + light theme overrides
+   ═══════════════════════════════════════════════════════════════════════════ */
+:root,
+[data-theme="dark"] {
+  --surface-base: #0A0A0A;
+  --surface:      #131110;
+  --surface-el:   #1a1815;
+  --surface-mute: #0e0d0c;
+
+  --txt:          rgba(255,255,255,0.92);
+  --txt2:         rgba(255,255,255,0.55);
+  --txt3:         rgba(255,255,255,0.38);
+  --txt-ghost:    rgba(255,255,255,0.20);
+
+  --mark:         #5AABCC;
+  --teal-bg:      rgba(58,124,157,0.08);
+
+  --bdr-top:      rgba(255,255,255,0.10);
+  --bdr-side:     rgba(255,255,255,0.05);
+  --bdr-bot:      rgba(255,255,255,0.02);
+  --bdr-sub:      rgba(255,255,255,0.06);
+  --bdr-faint:    rgba(255,255,255,0.035);
+
+  --amber:        #C4893B;
+  --green:        #4A9468;
+  --red:          #C0503A;
+
+  --shadow-card:  0 24px 64px rgba(0,0,0,0.45), 0 2px 8px rgba(0,0,0,0.35);
+}
+
+[data-theme="light"] {
+  --surface-base: #FCFBF7;
+  --surface:      #FFFFFF;
+  --surface-el:   #FFFFFF;
+  --surface-mute: #F4F3EE;
+
+  --txt:          rgba(10,10,10,0.92);
+  --txt2:         rgba(10,10,10,0.55);
+  --txt3:         rgba(10,10,10,0.38);
+  --txt-ghost:    rgba(10,10,10,0.18);
+
+  --mark:         #2B7BA3;
+  --teal-bg:      rgba(43,123,163,0.06);
+
+  --bdr-top:      rgba(0,0,0,0.08);
+  --bdr-side:     rgba(0,0,0,0.05);
+  --bdr-bot:      rgba(0,0,0,0.02);
+  --bdr-sub:      rgba(0,0,0,0.06);
+  --bdr-faint:    rgba(0,0,0,0.04);
+
+  --shadow-card:  0 16px 48px rgba(0,0,0,0.10), 0 2px 6px rgba(0,0,0,0.06);
+}
+
+:root {
+  /* ULTRA radius scale (1-4 px · CEO 2026-05-15) */
+  --r-pill:  1px;
+  --r-sm:    2px;
+  --r-md:    2px;
+  --r-lg:    3px;
+  --r-xl:    4px;
+  --r-full:  9999px;
+
+  /* Spacing · 4 px grid */
+  --s-1:  4px;  --s-2:  8px;  --s-3: 12px; --s-4: 16px;
+  --s-5: 20px;  --s-6: 24px;  --s-8: 32px; --s-10: 40px;
+  --s-12: 48px; --s-16: 64px; --s-20: 80px; --s-24: 96px;
+  --s-32: 128px; --s-40: 160px;
+
+  /* Typography */
+  --font-display: 'Eloquia Display', 'DM Sans', system-ui, -apple-system, sans-serif;
+  --font-body:    'DM Sans', system-ui, -apple-system, sans-serif;
+  --font-accent:  'Cormorant Garamond', Georgia, serif;
+  --font-mono:    'IBM Plex Mono', 'SF Mono', ui-monospace, monospace;
+
+  /* Motion */
+  --t-fast:    120ms;
+  --t-medium:  280ms;
+  --t-slow:    720ms;
+  --ease-out:  cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+* { box-sizing: border-box; }
+html { background: var(--surface-base); transition: background var(--t-medium) var(--ease-out); }
+body {
+  margin: 0; padding: 0;
+  background: var(--surface-base);
+  color: var(--txt2);
+  font-family: var(--font-body);
+  font-size: 15px; line-height: 1.6;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background var(--t-medium) var(--ease-out), color var(--t-medium) var(--ease-out);
+}
+
+/* Cormorant accent — strictly limited (4-6 phrases per page) */
+.accent {
+  font-family: var(--font-accent);
+  font-style: italic;
+  font-weight: 300;
+  color: var(--mark);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   HEADER · minimal · theme toggle · always 60 px
+   ═══════════════════════════════════════════════════════════════════════════ */
+.hdr {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 50; height: 60px;
+  padding: 0 var(--s-10);
+  display: flex; justify-content: space-between; align-items: center;
+  background: color-mix(in srgb, var(--surface-base) 72%, transparent);
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  border-bottom: 1px solid var(--bdr-faint);
+  transition: background var(--t-medium) var(--ease-out), border-color var(--t-medium) var(--ease-out);
+}
+.hdr .lockup { display: flex; align-items: center; gap: var(--s-3); }
+.hdr .wm {
+  font-family: var(--font-display);
+  font-weight: 400; font-size: 14px;
+  letter-spacing: -0.005em;
+  color: var(--txt);
+}
+.hdr nav { display: flex; gap: var(--s-6); }
+.hdr nav a {
+  font-family: var(--font-mono);
+  font-weight: 500; font-size: 10.5px;
+  letter-spacing: 0.10em; text-transform: uppercase;
+  color: var(--txt3); text-decoration: none;
+  transition: color var(--t-fast) var(--ease-out);
+}
+.hdr nav a:hover { color: var(--txt); }
+.hdr .right { display: flex; align-items: center; gap: var(--s-5); }
+
+.theme-toggle {
+  width: 28px; height: 28px;
+  background: transparent; border: 1px solid var(--bdr-sub); border-radius: var(--r-full);
+  color: var(--txt2); cursor: pointer;
+  font-size: 13px; line-height: 1; padding: 0;
+  display: flex; align-items: center; justify-content: center;
+  transition: border-color var(--t-fast) var(--ease-out), color var(--t-fast) var(--ease-out);
+}
+.theme-toggle:hover { border-color: var(--mark); color: var(--mark); }
+
+.pilot-btn {
+  font-family: var(--font-body); font-weight: 500;
+  font-size: 11px; letter-spacing: 0.02em;
+  padding: 7px 14px;
+  background: transparent;
+  color: var(--txt);
+  border: 1px solid var(--bdr-sub);
+  border-radius: var(--r-sm);
+  text-decoration: none;
+  transition: border-color var(--t-fast) var(--ease-out), color var(--t-fast) var(--ease-out);
+}
+.pilot-btn:hover { border-color: var(--mark); color: var(--mark); }
+
+.seal { color: var(--mark); }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   SECTION FRAME · breathing room
+   ═══════════════════════════════════════════════════════════════════════════ */
+section {
+  position: relative;
+  padding: 0 var(--s-20);
+}
+.wrap {
+  max-width: 1240px; margin: 0 auto;
+  position: relative;
+}
+
+.section-no {
+  font-family: var(--font-mono);
+  font-size: 10px; font-weight: 500;
+  letter-spacing: 0.20em; text-transform: uppercase;
+  color: var(--mark);
+  margin-bottom: var(--s-6);
+}
+.section-no .dim { color: var(--txt3); }
+
+/* Headlines — quieter */
+.h-display {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(32px, 4vw, 56px);
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+  color: var(--txt);
+  margin: 0;
+}
+.h-section {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(26px, 2.6vw, 38px);
+  line-height: 1.12;
+  letter-spacing: -0.018em;
+  color: var(--txt);
+  margin: 0;
+}
+.body-lede {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: clamp(14px, 1.1vw, 16px);
+  line-height: 1.6;
+  color: var(--txt2);
+  max-width: 460px;
+  margin: var(--s-5) 0 0;
+}
+
+/* Fade-in (slow tempo) */
+.fade-in {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity var(--t-slow) var(--ease-out),
+              transform var(--t-slow) var(--ease-out);
+}
+.fade-in.is-visible { opacity: 1; transform: none; }
+.fade-in-d1 { transition-delay: 80ms; }
+.fade-in-d2 { transition-delay: 160ms; }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   DISCLOSURE · proper button affordance
+   ═══════════════════════════════════════════════════════════════════════════ */
+.disclose {
+  display: inline-flex; align-items: center; gap: var(--s-3);
+  font-family: var(--font-mono);
+  font-size: 10.5px; font-weight: 500;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--txt2);
+  background: transparent;
+  border: 1px solid var(--bdr-sub);
+  border-radius: var(--r-sm);
+  padding: 8px 14px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: border-color var(--t-fast) var(--ease-out),
+              color var(--t-fast) var(--ease-out),
+              background var(--t-fast) var(--ease-out);
+  margin-top: var(--s-6);
+  user-select: none;
+}
+.disclose:hover {
+  border-color: var(--mark);
+  color: var(--mark);
+  background: var(--teal-bg);
+}
+.disclose .chev {
+  font-family: var(--font-mono); font-size: 13px;
+  transition: transform var(--t-medium) var(--ease-out);
+  display: inline-block;
+}
+.disclose[aria-expanded="true"] .chev { transform: rotate(45deg); color: var(--mark); }
+.disclose[aria-expanded="true"] { border-color: var(--mark); color: var(--mark); }
+
+.disclose-body {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height var(--t-slow) var(--ease-out),
+              opacity var(--t-medium) var(--ease-out);
+}
+.disclose-body.is-open {
+  max-height: 600px;
+  opacity: 1;
+}
+.disclose-body p {
+  font-family: var(--font-body);
+  font-size: 14px; font-weight: 400;
+  color: var(--txt2);
+  line-height: 1.7;
+  margin: var(--s-5) 0 0;
+  max-width: 560px;
+  padding-left: var(--s-4);
+  border-left: 1px solid var(--bdr-faint);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   PRIMARY CTA · understated
+   ═══════════════════════════════════════════════════════════════════════════ */
+.cta {
+  display: inline-flex; align-items: center; gap: var(--s-2);
+  background: var(--txt);
+  color: var(--surface-base);
+  font-family: var(--font-body);
+  font-weight: 500; font-size: 13px;
+  padding: 11px 22px;
+  border: 0; border-radius: var(--r-sm);
+  text-decoration: none; cursor: pointer;
+  transition: background var(--t-fast) var(--ease-out), transform var(--t-fast) var(--ease-out);
+}
+.cta:hover { transform: translateY(-0.5px); }
+.cta--ghost {
+  background: transparent;
+  color: var(--mark);
+  border: 1px solid var(--bdr-sub);
+}
+.cta--ghost:hover { border-color: var(--mark); background: var(--teal-bg); }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   EDITORIAL UI CARD · the workhorse · 2-3 rows · 1 status · max
+   ═══════════════════════════════════════════════════════════════════════════ */
+.ucard {
+  background: linear-gradient(180deg,
+    color-mix(in srgb, var(--surface-el) 100%, transparent) 0%,
+    color-mix(in srgb, var(--surface) 100%, transparent) 100%);
+  border-top:    1px solid var(--bdr-top);
+  border-left:   1px solid var(--bdr-side);
+  border-right:  1px solid var(--bdr-side);
+  border-bottom: 1px solid var(--bdr-bot);
+  border-radius: var(--r-sm);
+  box-shadow: var(--shadow-card);
+  position: relative;
+  overflow: hidden;
+}
+.ucard .uc-head {
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--bdr-faint);
+  display: flex; align-items: center; justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 9.5px; font-weight: 500;
+  letter-spacing: 0.10em; text-transform: uppercase;
+  color: var(--txt3);
+}
+.ucard .uc-head .dot {
+  width: 6px; height: 6px; border-radius: var(--r-full);
+  background: var(--green); margin-right: var(--s-2);
+  display: inline-block; vertical-align: middle;
+}
+.ucard .uc-head b { color: var(--txt2); font-weight: 500; }
+.ucard .uc-row {
+  padding: 11px 16px;
+  border-bottom: 1px solid var(--bdr-faint);
+  display: grid;
+  grid-template-columns: 100px 1fr auto;
+  gap: var(--s-3);
+  align-items: center;
+}
+.ucard .uc-row:last-child { border-bottom: 0; }
+.ucard .uc-row .lbl {
+  font-family: var(--font-body);
+  font-size: 12.5px;
+  color: var(--txt2);
+}
+.ucard .uc-row .val {
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--txt);
+  font-weight: 500;
+}
+.ucard .uc-row .mono {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: var(--mark);
+  text-align: right;
+  letter-spacing: 0.02em;
+}
+.ucard .uc-badge {
+  display: inline-flex; align-items: center; gap: 4px;
+  height: 18px; padding: 0 8px;
+  border-radius: var(--r-pill);
+  font-family: var(--font-mono);
+  font-weight: 500; font-size: 9px;
+  letter-spacing: 0.08em; text-transform: uppercase;
+}
+.ucard .uc-badge .d { width: 5px; height: 5px; border-radius: var(--r-full); }
+.ucard .uc-badge--warn { background: rgba(196,137,59,0.10); color: var(--amber); border: 1px solid rgba(196,137,59,0.18); }
+.ucard .uc-badge--warn .d { background: var(--amber); }
+.ucard .uc-badge--ok   { background: rgba(74,148,104,0.10); color: var(--green); border: 1px solid rgba(74,148,104,0.18); }
+.ucard .uc-badge--ok .d { background: var(--green); }
+.ucard .uc-badge--open { background: rgba(91,141,239,0.10); color: #6FA1F3; border: 1px solid rgba(91,141,239,0.18); }
+.ucard .uc-badge--open .d { background: #6FA1F3; }
+
+/* Edge bleed — card extends beyond its frame, right side */
+.ucard--bleed-right { border-right: 0; border-top-right-radius: 0; border-bottom-right-radius: 0; }
+.ucard--bleed-left  { border-left:  0; border-top-left-radius: 0;  border-bottom-left-radius: 0; }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   HERO · text-left, breathing-right · Eloquia 300 small
+   ═══════════════════════════════════════════════════════════════════════════ */
+.hero {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: minmax(0, 580px) 1fr;
+  gap: var(--s-24);
+  align-items: center;
+  padding-top: 60px;
+  padding-bottom: 8vh;
+}
+.hero .left { max-width: 520px; }
+.hero .eyebrow {
+  font-family: var(--font-mono);
+  font-size: 10px; font-weight: 500;
+  letter-spacing: 0.20em; text-transform: uppercase;
+  color: var(--mark);
+  margin-bottom: var(--s-6);
+}
+.hero h1 {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(36px, 4.4vw, 56px);
+  line-height: 1.04;
+  letter-spacing: -0.028em;
+  color: var(--txt);
+  margin: 0 0 var(--s-6);
+}
+.hero p {
+  font-family: var(--font-body);
+  font-size: 15px; font-weight: 400;
+  color: var(--txt2);
+  line-height: 1.6;
+  margin: 0 0 var(--s-8);
+  max-width: 420px;
+}
+.hero .cta-row { display: flex; gap: var(--s-3); }
+.hero .right {
+  height: 100%;
+  position: relative;
+  min-height: 50vh;
+}
+/* Atmospheric darkness behind the hero right column */
+.hero .right::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 60% 50% at 30% 50%,
+    var(--teal-bg) 0%,
+    transparent 70%);
+  pointer-events: none;
+}
+[data-theme="light"] .hero .right::before {
+  background: radial-gradient(ellipse 60% 50% at 30% 50%,
+    rgba(43,123,163,0.05) 0%,
+    transparent 70%);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   SECTION ARCHETYPES
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* TYPE A · centered manifesto (for Score-like, Founder, Final) */
+.arch-manifesto {
+  padding-top: 22vh; padding-bottom: 22vh;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  max-width: 680px; margin: 0 auto;
+  text-align: left;
+}
+
+/* TYPE B · asymmetric 5/7 grid — text left, card right with right-edge bleed */
+.arch-bleed-right {
+  padding-top: 26vh; padding-bottom: 26vh;
+  display: grid;
+  grid-template-columns: minmax(0, 0.4fr) minmax(0, 0.6fr);
+  gap: var(--s-16);
+  align-items: center;
+  max-width: none; margin-right: 0;
+}
+.arch-bleed-right .left { max-width: 440px; margin-left: auto; }
+.arch-bleed-right .right { padding-right: 0; margin-right: calc(0px - var(--s-20)); }
+.arch-bleed-right .right .ucard { width: 100%; max-width: none; }
+
+/* TYPE B-FLIP · text right, card left with left-edge bleed */
+.arch-bleed-left {
+  padding-top: 26vh; padding-bottom: 26vh;
+  display: grid;
+  grid-template-columns: minmax(0, 0.6fr) minmax(0, 0.4fr);
+  gap: var(--s-16);
+  align-items: center;
+  max-width: none; margin-left: 0;
+}
+.arch-bleed-left .right { max-width: 440px; }
+.arch-bleed-left .left { padding-left: 0; margin-left: calc(0px - var(--s-20)); }
+.arch-bleed-left .left .ucard { width: 100%; max-width: none; }
+
+/* TYPE C · single card centered with enormous breathing room */
+.arch-centered-card {
+  padding-top: 28vh; padding-bottom: 28vh;
+  display: flex; flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.arch-centered-card .head { max-width: 580px; margin: 0 auto var(--s-16); }
+.arch-centered-card .ucard { max-width: 480px; width: 100%; text-align: left; }
+
+/* TYPE D · long-form list (Agentic, Trust) */
+.arch-list {
+  padding-top: 22vh; padding-bottom: 22vh;
+}
+.arch-list .head { max-width: 580px; margin-bottom: var(--s-16); }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   AGENTIC LIST · hover/click expand to one cropped editorial card
+   ═══════════════════════════════════════════════════════════════════════════ */
+.agentic { margin-top: var(--s-12); border-top: 1px solid var(--bdr-faint); }
+.ag-item {
+  display: block;
+  position: relative;
+  border-bottom: 1px solid var(--bdr-faint);
+  transition: background var(--t-medium) var(--ease-out);
+}
+.ag-row {
+  display: grid;
+  grid-template-columns: 48px 1fr 200px 28px;
+  gap: var(--s-8);
+  padding: var(--s-8) 0;
+  align-items: start;
+  cursor: pointer;
+}
+.ag-num {
+  font-family: var(--font-mono);
+  font-size: 10px; font-weight: 500;
+  letter-spacing: 0.18em;
+  color: var(--txt3);
+  padding-top: 8px;
+}
+.ag-body h3 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(18px, 1.8vw, 24px);
+  line-height: 1.2;
+  letter-spacing: -0.012em;
+  color: var(--txt);
+  margin: 0 0 var(--s-2);
+}
+.ag-body p {
+  font-family: var(--font-body);
+  font-size: 13.5px;
+  color: var(--txt2);
+  line-height: 1.6;
+  margin: 0;
+  max-width: 480px;
+}
+.ag-side {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: var(--txt3);
+  padding-top: 8px;
+  display: flex; flex-direction: column; gap: 3px;
+  text-align: right;
+}
+.ag-side .val { color: var(--mark); }
+.ag-toggle {
+  align-self: center;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--txt-ghost);
+  text-align: center;
+  transition: color var(--t-fast) var(--ease-out), transform var(--t-medium) var(--ease-out);
+  user-select: none;
+}
+.ag-item:hover .ag-toggle,
+.ag-item.is-open .ag-toggle { color: var(--mark); }
+.ag-item.is-open .ag-toggle { transform: rotate(45deg); }
+
+.ag-media {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  padding: 0 0 0 calc(48px + var(--s-8));
+  transition: max-height var(--t-slow) var(--ease-out),
+              opacity var(--t-medium) var(--ease-out),
+              padding-bottom var(--t-medium) var(--ease-out);
+}
+@media (hover: hover) {
+  .ag-item:hover .ag-media { max-height: 320px; opacity: 1; padding-bottom: var(--s-8); }
+}
+.ag-item.is-open .ag-media { max-height: 320px; opacity: 1; padding-bottom: var(--s-8); }
+
+.ag-media .ucard { max-width: 440px; }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   TRUST LIST · rule-separated rows
+   ═══════════════════════════════════════════════════════════════════════════ */
+.trust-list { margin-top: var(--s-12); max-width: 880px; }
+.trust-row {
+  display: grid;
+  grid-template-columns: 140px 1fr 140px;
+  gap: var(--s-8);
+  padding: var(--s-8) 0;
+  border-top: 1px solid var(--bdr-faint);
+  align-items: baseline;
+}
+.trust-row:last-child { border-bottom: 1px solid var(--bdr-faint); }
+.trust-row .lbl {
+  font-family: var(--font-mono); font-size: 10px; font-weight: 500;
+  letter-spacing: 0.20em; text-transform: uppercase; color: var(--mark);
+}
+.trust-row h3 {
+  font-family: var(--font-display);
+  font-weight: 400; font-size: 18px;
+  line-height: 1.25;
+  color: var(--txt); margin: 0 0 var(--s-2);
+  letter-spacing: -0.012em;
+}
+.trust-row p {
+  font-family: var(--font-body);
+  font-size: 13.5px;
+  color: var(--txt2);
+  line-height: 1.6;
+  margin: 0; max-width: 480px;
+}
+.trust-row .status {
+  font-family: var(--font-mono); font-size: 10px;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--txt3); text-align: right;
+}
+.trust-row .status b { color: var(--green); font-weight: 500; }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   ONBOARDING TIMELINE · horizontal sparse
+   ═══════════════════════════════════════════════════════════════════════════ */
+.timeline {
+  margin-top: var(--s-12);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  position: relative;
+  max-width: 880px;
+}
+.timeline::before {
+  content: ''; position: absolute; top: -1px; left: 0; right: 0;
+  height: 1px; background: var(--bdr-sub);
+}
+.t-step {
+  position: relative;
+  padding: var(--s-5) var(--s-3) 0 0;
+}
+.t-step::before {
+  content: '';
+  position: absolute; top: -4px; left: 0;
+  width: 7px; height: 7px;
+  background: var(--mark);
+  border-radius: var(--r-full);
+}
+.t-step.fin::before { background: var(--green); }
+.t-when {
+  font-family: var(--font-mono);
+  font-size: 10px; font-weight: 500;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--mark);
+  margin-bottom: var(--s-2);
+}
+.t-step.fin .t-when { color: var(--green); }
+.t-title {
+  font-family: var(--font-display);
+  font-weight: 400; font-size: 15px;
+  letter-spacing: -0.005em;
+  color: var(--txt); margin: 0 0 4px;
+}
+.t-body {
+  font-family: var(--font-body);
+  font-size: 12.5px;
+  color: var(--txt2);
+  line-height: 1.55;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   ALONGSIDE · single diagram
+   ═══════════════════════════════════════════════════════════════════════════ */
+.alongside-diagram {
+  max-width: 720px;
+  margin: var(--s-12) auto 0;
+}
+.alongside-diagram svg { width: 100%; height: auto; }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   CONSOLIDATE · before/after asymmetric
+   ═══════════════════════════════════════════════════════════════════════════ */
+.consolidate {
+  display: grid;
+  grid-template-columns: 0.85fr 50px 1.15fr;
+  gap: var(--s-6);
+  align-items: center;
+  margin-top: var(--s-12);
+  max-width: 1100px;
+}
+.con-before, .con-after { padding: var(--s-4) 0; }
+.con-lbl {
+  font-family: var(--font-mono);
+  font-size: 10px; font-weight: 500;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--txt3);
+  margin-bottom: var(--s-4);
+}
+.con-after .con-lbl { color: var(--mark); }
+.con-before .scatter {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px;
+}
+.con-before .scatter > div {
+  background: var(--surface-mute);
+  border: 1px solid var(--bdr-faint);
+  padding: var(--s-3) var(--s-2);
+  text-align: center;
+  font-family: var(--font-mono); font-size: 9.5px; font-weight: 500;
+  letter-spacing: 0.06em; text-transform: uppercase; color: var(--txt3);
+  border-radius: var(--r-sm);
+}
+.con-arrow {
+  display: flex; flex-direction: column; align-items: center; gap: var(--s-2);
+  color: var(--mark);
+}
+.con-arrow svg { width: 30px; height: 30px; }
+.con-after .one {
+  background: var(--surface-el);
+  border: 1px solid var(--bdr-sub);
+  border-radius: var(--r-sm);
+  padding: 12px 16px;
+  display: flex; align-items: center; gap: var(--s-3);
+  font-family: var(--font-body); font-size: 14px; color: var(--txt);
+}
+.con-after .one .pr { color: var(--mark); font-family: var(--font-mono); }
+.con-after .one .cur { color: var(--mark); animation: blink 1.5s steps(2, jump-none) infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   PRICING · understated
+   ═══════════════════════════════════════════════════════════════════════════ */
+.pricing-num {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(56px, 7vw, 96px);
+  line-height: 1;
+  color: var(--txt);
+  letter-spacing: -0.05em;
+  margin: 0;
+}
+.pricing-unit {
+  font-family: var(--font-mono);
+  font-size: 10.5px; font-weight: 500;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--txt3);
+  margin: var(--s-4) 0 var(--s-6);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   VERIFIER MINI CHECKS · cryptography
+   ═══════════════════════════════════════════════════════════════════════════ */
+.vchecks {
+  display: flex; flex-wrap: wrap; gap: 6px;
+  margin-top: var(--s-5);
+}
+.vchecks .v {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 5px 9px;
+  background: var(--surface);
+  border: 1px solid var(--bdr-faint);
+  border-radius: var(--r-pill);
+  font-family: var(--font-mono); font-size: 9.5px; font-weight: 500;
+  letter-spacing: 0.10em; text-transform: uppercase;
+  color: var(--txt2);
+}
+.vchecks .v .d { width: 5px; height: 5px; border-radius: var(--r-full); background: var(--green); }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   FOOTER
+   ═══════════════════════════════════════════════════════════════════════════ */
+footer {
+  border-top: 1px solid var(--bdr-sub);
+  padding: var(--s-12) var(--s-20);
+  margin-top: var(--s-20);
+}
+footer .row {
+  max-width: 1240px; margin: 0 auto;
+  display: flex; justify-content: space-between; align-items: center;
+}
+footer .lockup { display: flex; align-items: center; gap: var(--s-3); }
+footer .wm {
+  font-family: var(--font-display); font-weight: 400; font-size: 13px;
+  color: var(--txt);
+}
+footer nav { display: flex; gap: var(--s-6); }
+footer nav a {
+  font-family: var(--font-mono); font-size: 10px; font-weight: 500;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--txt3); text-decoration: none;
+  transition: color var(--t-fast) var(--ease-out);
+}
+footer nav a:hover { color: var(--mark); }
+footer .verify-line {
+  max-width: 1240px; margin: var(--s-8) auto 0;
+  padding-top: var(--s-5);
+  border-top: 1px solid var(--bdr-faint);
+  font-family: var(--font-body); font-size: 13px;
+  color: var(--txt2);
+}
+footer .verify-line a { color: var(--mark); text-decoration: none; }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════════════════════════════════════════════ */
+@media (max-width: 1024px) {
+  section { padding: 0 var(--s-10); }
+  .hero { grid-template-columns: 1fr; gap: var(--s-12); padding-top: 80px; }
+  .hero .right { min-height: 30vh; }
+  .arch-bleed-right, .arch-bleed-left {
+    grid-template-columns: 1fr; gap: var(--s-10);
+  }
+  .arch-bleed-right .right { margin-right: 0; }
+  .arch-bleed-left .left { margin-left: 0; }
+  .ag-row { grid-template-columns: 32px 1fr 24px; gap: var(--s-4); }
+  .ag-row .ag-side { display: none; }
+  .ag-media { padding-left: calc(32px + var(--s-4)); }
+  .trust-row { grid-template-columns: 1fr; gap: var(--s-2); }
+  .trust-row .status { text-align: left; }
+  .timeline { grid-template-columns: 1fr 1fr; }
+  .consolidate { grid-template-columns: 1fr; gap: var(--s-6); }
+  .consolidate .con-arrow { transform: rotate(90deg); }
+}
+@media (max-width: 640px) {
+  body { font-size: 14px; }
+  section { padding: 0 var(--s-6); }
+  .hdr { padding: 0 var(--s-5); }
+  .hdr nav { display: none; }
+  .timeline { grid-template-columns: 1fr; }
+}
+
+/* Reduce motion */
+@media (prefers-reduced-motion: reduce) {
+  .fade-in, .fade-in.is-visible { opacity: 1; transform: none; transition: none; }
+  .ucard .uc-row, .disclose, .ag-toggle { transition: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- ════════════════════ HEADER ════════════════════ -->
+<header class="hdr">
+  <div class="lockup">
+    <svg class="seal" width="18" height="18" viewBox="0 0 22 22">
+      <circle cx="11" cy="11" r="9" stroke="currentColor" stroke-width="1.2" fill="none"/>
+      <line x1="11" y1="2" x2="11" y2="6" stroke="currentColor" stroke-width="1.2"/>
+      <circle cx="11" cy="11" r="2" fill="currentColor"/>
+    </svg>
+    <span class="wm">CelesteOS</span>
+  </div>
+  <div class="right">
+    <nav>
+      <a href="#handover">Product</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#trust">Trust</a>
+    </nav>
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">◐</button>
+    <a class="pilot-btn" href="mailto:pilot@celeste7.ai">Pilot</a>
+  </div>
+</header>
+
+<!-- ════════════════════ HERO · 01 ════════════════════ -->
+<section class="hero" data-section="hero">
+  <div class="wrap" style="display: contents;">
+    <div class="left">
+      <div class="eyebrow fade-in">CelesteOS · 30m+</div>
+      <h1 class="fade-in fade-in-d1">The vessel's knowledge stays <span class="accent">in the vessel.</span></h1>
+      <p class="fade-in fade-in-d2">Manuals. Faults. Handovers. One searchable surface.</p>
+      <div class="cta-row fade-in fade-in-d2">
+        <a class="cta" href="mailto:pilot@celeste7.ai">Request pilot</a>
+        <a class="cta cta--ghost" href="#handover">See how</a>
+      </div>
+    </div>
+    <div class="right"></div>
+  </div>
+</section>
+
+<!-- ════════════════════ HANDOVER · 02 · archetype B (text left, card bleeds right) ════════════════════ -->
+<section class="arch-bleed-right" id="handover" data-section="handover">
+  <div class="left fade-in">
+    <div class="section-no">02 <span class="dim">/ painkiller</span></div>
+    <h2 class="h-section">The next handover <span class="accent">writes itself.</span></h2>
+    <p class="body-lede">Every record you touch becomes a handover entry. Sealed at sign-off. Visible only to your back-to-back.</p>
+    <button class="disclose" aria-expanded="false" data-target="d-handover">
+      <span class="chev">+</span>
+      <span>How it accumulates</span>
+    </button>
+    <div class="disclose-body" id="d-handover">
+      <p>Every CUD action prompts a single yes/no: <em>Add to handover draft?</em> — never re-prompted if dismissed. The draft accumulates silently. At sign-off you review, edit, sign across. Sealed, ledger-stamped.</p>
+    </div>
+  </div>
+  <div class="right fade-in fade-in-d1">
+    <div class="ucard ucard--bleed-right">
+      <div class="uc-head">
+        <span><span class="dot"></span>Handover · draft</span>
+        <b>23 entries</b>
+      </div>
+      <div class="uc-row">
+        <span class="lbl">Fault raised</span>
+        <span class="val">#2 chiller short cycling</span>
+        <span class="mono">R-0014</span>
+      </div>
+      <div class="uc-row">
+        <span class="lbl">WO opened</span>
+        <span class="val">against E-0184772</span>
+        <span class="mono">R-0015</span>
+      </div>
+      <div class="uc-row">
+        <span class="lbl">Part used</span>
+        <span class="val">expansion valve</span>
+        <span class="mono">R-0017</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════ MONEY · 03 · archetype B-flip (text right, card bleeds left) ════════════════════ -->
+<section class="arch-bleed-left" data-section="money">
+  <div class="left fade-in fade-in-d1">
+    <div class="ucard ucard--bleed-left">
+      <div class="uc-head">
+        <span><span class="dot" style="background: var(--amber);"></span>Warranty surfaced</span>
+        <b>under window</b>
+      </div>
+      <div class="uc-row">
+        <span class="lbl">Equipment</span>
+        <span class="val">Daikin VRV-IV</span>
+        <span class="mono">E-0184772</span>
+      </div>
+      <div class="uc-row">
+        <span class="lbl">Claim status</span>
+        <span class="val">Pack drafted</span>
+        <span class="mono">
+          <span class="uc-badge uc-badge--warn"><span class="d"></span>claimable</span>
+        </span>
+      </div>
+    </div>
+  </div>
+  <div class="right fade-in">
+    <div class="section-no">03 <span class="dim">/ money found</span></div>
+    <h2 class="h-section">The supplier pays. <span class="accent">Not you.</span></h2>
+    <p class="body-lede">A fault is raised. A matching warranty surfaces. A claim pack is drafted. You forward.</p>
+    <button class="disclose" aria-expanded="false" data-target="d-money">
+      <span class="chev">+</span>
+      <span>Operator-error position</span>
+    </button>
+    <div class="disclose-body" id="d-money">
+      <p>When the manufacturer alleges operator error, your work order from March cites otherwise. Both records, both sealed, both verifiable. Warranty disputes are won on evidence.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════ SEARCH · 04 · archetype B-flip (text right, card left) ════════════════════ -->
+<section class="arch-bleed-left" data-section="search">
+  <div class="left fade-in fade-in-d1">
+    <div class="ucard ucard--bleed-left">
+      <div class="uc-head">
+        <span>Search</span>
+        <b>indexed across 8 domains</b>
+      </div>
+      <div class="uc-row" style="grid-template-columns: 1fr;">
+        <span style="font-family: var(--font-body); font-size: 14px; color: var(--txt); display: flex; align-items: center; gap: var(--s-3);">
+          <span style="color: var(--mark); font-family: var(--font-mono); font-size: 12px;">›</span>
+          generator overheating after summer
+          <span style="color: var(--mark); animation: blink 1.5s steps(2, jump-none) infinite;">▎</span>
+        </span>
+      </div>
+      <div class="uc-row">
+        <span class="lbl">Email</span>
+        <span class="val">MTU support · idle adjustment</span>
+        <span class="mono">#4471</span>
+      </div>
+      <div class="uc-row">
+        <span class="lbl">Manual</span>
+        <span class="val">MTU Series 2000</span>
+        <span class="mono">Rev 4 §7.1</span>
+      </div>
+    </div>
+  </div>
+  <div class="right fade-in">
+    <div class="section-no">04 <span class="dim">/ search</span></div>
+    <h2 class="h-section">Type what you know. <span class="accent">Find the source.</span></h2>
+    <p class="body-lede">One question, every domain. Every result cites where it came from.</p>
+    <button class="disclose" aria-expanded="false" data-target="d-search">
+      <span class="chev">+</span>
+      <span>Never paraphrased</span>
+    </button>
+    <div class="disclose-body" id="d-search">
+      <p>CelesteOS does not summarise. Clicking any result opens the original document, unedited. The source is the answer.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════ SHOW RELATED · 05 · archetype C (single centered card · enormous breathing) ════════════════════ -->
+<section class="arch-centered-card" data-section="related">
+  <div class="head fade-in">
+    <div class="section-no" style="text-align: left;">05 <span class="dim">/ show related</span></div>
+    <h2 class="h-section" style="text-align: left;">One press. <span class="accent">Every linked record.</span></h2>
+    <p class="body-lede" style="text-align: left; margin-left: 0; margin-right: 0;">Pulls matched faults, related emails, prior work orders, manual pages — cited verbatim from any record you open.</p>
+  </div>
+  <div class="ucard fade-in fade-in-d1">
+    <div class="uc-head">
+      <span>Show Related · F-2026-0014</span>
+      <b>4 matched</b>
+    </div>
+    <div class="uc-row">
+      <span class="lbl">Prior fault</span>
+      <span class="val">Same equipment, 2025-11-08</span>
+      <span class="mono">WO-0892</span>
+    </div>
+    <div class="uc-row">
+      <span class="lbl">Manual</span>
+      <span class="val">Expansion valve diagnostics</span>
+      <span class="mono">§4.2 p.247</span>
+    </div>
+    <div class="uc-row">
+      <span class="lbl">Email</span>
+      <span class="val">Daikin support — "watch idle RPM"</span>
+      <span class="mono">#4471</span>
+    </div>
+    <div class="uc-row">
+      <span class="lbl">Part</span>
+      <span class="val">Expansion valve · in stock</span>
+      <span class="mono">P-CHIL-0204</span>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════ AGENTIC · 06 · long list · hover reveals cropped card ════════════════════ -->
+<section class="arch-list" data-section="agentic">
+  <div class="wrap">
+    <div class="head fade-in">
+      <div class="section-no">06 <span class="dim">/ without being asked</span></div>
+      <h2 class="h-section">Searches that run themselves.</h2>
+      <p class="body-lede">Five quiet missions. Each one drafts. You decide.</p>
+    </div>
+
+    <div class="agentic fade-in fade-in-d1">
+
+      <div class="ag-item">
+        <div class="ag-row">
+          <span class="ag-num">01</span>
+          <div class="ag-body">
+            <h3>Money about to be spent.</h3>
+            <p>Items still under manufacturer warranty surface the moment a fault is raised. Forward-ready claim pack attached.</p>
+          </div>
+          <div class="ag-side">
+            <span>Warranty</span>
+            <span class="val">money found</span>
+          </div>
+          <span class="ag-toggle" aria-hidden="true">+</span>
+        </div>
+        <div class="ag-media">
+          <div class="ucard">
+            <div class="uc-head"><span><span class="dot" style="background: var(--amber);"></span>Daikin · warranty</span><b>open</b></div>
+            <div class="uc-row"><span class="lbl">Claim pack</span><span class="val">drafted</span><span class="mono">W-0204</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ag-item">
+        <div class="ag-row">
+          <span class="ag-num">02</span>
+          <div class="ag-body">
+            <h3>Certificates before they expire.</h3>
+            <p>Class survey 60 days out. Every certificate the surveyor will ask for — gathered, flagged, bundled.</p>
+          </div>
+          <div class="ag-side">
+            <span>Certificates</span>
+            <span class="val">catastrophe avoided</span>
+          </div>
+          <span class="ag-toggle" aria-hidden="true">+</span>
+        </div>
+        <div class="ag-media">
+          <div class="ucard">
+            <div class="uc-head"><span><span class="dot" style="background: var(--amber);"></span>Class survey</span><b>58 days</b></div>
+            <div class="uc-row"><span class="lbl">In window</span><span class="val">3 certificates</span><span class="mono">expire ≤60d</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ag-item">
+        <div class="ag-row">
+          <span class="ag-num">03</span>
+          <div class="ag-body">
+            <h3>Discrepancies on the dock.</h3>
+            <p>A photo of the packing list goes in. Matched PO lines, inventory delta, drafted email come out.</p>
+          </div>
+          <div class="ag-side">
+            <span>Receiving</span>
+            <span class="val">loss prevented</span>
+          </div>
+          <span class="ag-toggle" aria-hidden="true">+</span>
+        </div>
+        <div class="ag-media">
+          <div class="ucard">
+            <div class="uc-head"><span><span class="dot" style="background: var(--red);"></span>Receiving · PO-0144</span><b>2 short · 1 wrong</b></div>
+            <div class="uc-row"><span class="lbl">Discrepancy email</span><span class="val">drafted</span><span class="mono">unsent</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ag-item">
+        <div class="ag-row">
+          <span class="ag-num">04</span>
+          <div class="ag-body">
+            <h3>Faults already diagnosed.</h3>
+            <p>The same fault, on the same equipment, three rotations ago. The diagnosis is in the record.</p>
+          </div>
+          <div class="ag-side">
+            <span>Repeat-fault</span>
+            <span class="val">time saved</span>
+          </div>
+          <span class="ag-toggle" aria-hidden="true">+</span>
+        </div>
+        <div class="ag-media">
+          <div class="ucard">
+            <div class="uc-head"><span><span class="dot" style="background: var(--green);"></span>#2 chiller short cycling</span><b>resolved 2025-11-08</b></div>
+            <div class="uc-row"><span class="lbl">Prior occurrence</span><span class="val">expansion valve replaced</span><span class="mono">WO-0892</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ag-item">
+        <div class="ag-row">
+          <span class="ag-num">05</span>
+          <div class="ag-body">
+            <h3>Answers across email and manuals.</h3>
+            <p>"Which setting did the manufacturer recommend after last summer's overheating?" — answered, cited.</p>
+          </div>
+          <div class="ag-side">
+            <span>Cross-domain</span>
+            <span class="val">noise removed</span>
+          </div>
+          <span class="ag-toggle" aria-hidden="true">+</span>
+        </div>
+        <div class="ag-media">
+          <div class="ucard">
+            <div class="uc-head"><span>MTU · idle adjustment</span><b>3 sources cited</b></div>
+            <div class="uc-row"><span class="lbl">Email thread</span><span class="val">MTU support</span><span class="mono">#4471</span></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════ CONSOLIDATE · 07 · before/after ════════════════════ -->
+<section class="arch-list" data-section="consolidate">
+  <div class="wrap">
+    <div class="head fade-in">
+      <div class="section-no">07 <span class="dim">/ consolidate</span></div>
+      <h2 class="h-section">One surface for everything <span class="accent">the boat knows.</span></h2>
+      <p class="body-lede">Your existing files stay where they are. Nothing migrates.</p>
+    </div>
+
+    <div class="consolidate fade-in fade-in-d1">
+      <div class="con-before">
+        <div class="con-lbl">Before · fragmented</div>
+        <div class="scatter">
+          <div>Manuals · USB</div>
+          <div>Faults · PMS</div>
+          <div>Emails · inbox</div>
+          <div>Parts · Excel</div>
+          <div>Drawings · share</div>
+          <div>Warranty · PDF</div>
+          <div>Handover · paper</div>
+          <div>Certs · folder</div>
+          <div>Receiving · ?</div>
+        </div>
+      </div>
+      <div class="con-arrow">
+        <svg viewBox="0 0 30 30" fill="none"><path d="M3 15 H24" stroke="currentColor" stroke-width="1.3"/><path d="M17 8 L24 15 L17 22" stroke="currentColor" stroke-width="1.3" fill="none"/></svg>
+      </div>
+      <div class="con-after">
+        <div class="con-lbl">After · one surface</div>
+        <div class="one">
+          <span class="pr">›</span>
+          <span>ask the vessel anything</span>
+          <span class="cur">▎</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════ ALONGSIDE · 08 · centered diagram ════════════════════ -->
+<section class="arch-list" data-section="alongside">
+  <div class="wrap">
+    <div class="head fade-in">
+      <div class="section-no">08 <span class="dim">/ where it sits</span></div>
+      <h2 class="h-section">Keep AMOS. Keep Seahub. <span class="accent">Keep IDEA.</span></h2>
+      <p class="body-lede">CelesteOS reads what your PMS holds and adds what it doesn't.</p>
+    </div>
+
+    <div class="alongside-diagram fade-in fade-in-d1">
+      <svg viewBox="0 0 720 240" preserveAspectRatio="xMidYMid meet">
+        <rect x="120" y="20" width="480" height="56" rx="2"
+              fill="rgba(58,124,157,0.04)" stroke="var(--mark)" stroke-width="1.2"/>
+        <text x="360" y="46" text-anchor="middle" fill="var(--txt)" font-family="Eloquia Display, system-ui, sans-serif" font-weight="400" font-size="15">CelesteOS</text>
+        <text x="360" y="64" text-anchor="middle" fill="var(--txt3)" font-family="IBM Plex Mono, monospace" font-size="9" letter-spacing="2">SEARCH · CITATION · SEAL</text>
+
+        <line x1="220" y1="76" x2="160" y2="140" stroke="var(--bdr-top)" stroke-width="1"/>
+        <line x1="360" y1="76" x2="360" y2="140" stroke="var(--bdr-top)" stroke-width="1"/>
+        <line x1="500" y1="76" x2="560" y2="140" stroke="var(--bdr-top)" stroke-width="1"/>
+
+        <rect x="80" y="140" width="160" height="48" rx="2" fill="none" stroke="var(--bdr-sub)" stroke-width="1"/>
+        <text x="160" y="166" text-anchor="middle" fill="var(--txt2)" font-family="Eloquia Display, system-ui, sans-serif" font-size="13">AMOS</text>
+        <text x="160" y="180" text-anchor="middle" fill="var(--txt3)" font-family="IBM Plex Mono, monospace" font-size="8" letter-spacing="1.5">SYSTEM OF RECORD</text>
+
+        <rect x="280" y="140" width="160" height="48" rx="2" fill="none" stroke="var(--bdr-sub)" stroke-width="1"/>
+        <text x="360" y="166" text-anchor="middle" fill="var(--txt2)" font-family="Eloquia Display, system-ui, sans-serif" font-size="13">Seahub</text>
+        <text x="360" y="180" text-anchor="middle" fill="var(--txt3)" font-family="IBM Plex Mono, monospace" font-size="8" letter-spacing="1.5">SYSTEM OF RECORD</text>
+
+        <rect x="480" y="140" width="160" height="48" rx="2" fill="none" stroke="var(--bdr-sub)" stroke-width="1"/>
+        <text x="560" y="166" text-anchor="middle" fill="var(--txt2)" font-family="Eloquia Display, system-ui, sans-serif" font-size="13">IDEA</text>
+        <text x="560" y="180" text-anchor="middle" fill="var(--txt3)" font-family="IBM Plex Mono, monospace" font-size="8" letter-spacing="1.5">SYSTEM OF RECORD</text>
+
+        <text x="360" y="220" text-anchor="middle" fill="var(--txt3)" font-family="Cormorant Garamond, Georgia, serif" font-style="italic" font-size="13">reads what they hold · adds what they don't</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════ ONBOARDING · 09 · horizontal timeline ════════════════════ -->
+<section class="arch-list" data-section="onboarding">
+  <div class="wrap">
+    <div class="head fade-in">
+      <div class="section-no">09 <span class="dim">/ onboarding</span></div>
+      <h2 class="h-section">In <span class="accent">hours.</span> Not weeks.</h2>
+      <p class="body-lede">No migration. Upload what you have; the system does the rest while the crew sleeps.</p>
+    </div>
+
+    <div class="timeline fade-in fade-in-d1">
+      <div class="t-step">
+        <div class="t-when">Hour 00</div>
+        <div class="t-title">Upload</div>
+        <div class="t-body">Manuals, scans, drawings, certificate folders.</div>
+      </div>
+      <div class="t-step">
+        <div class="t-when">Hour 02</div>
+        <div class="t-title">Index</div>
+        <div class="t-body">OCR · embedding · classification · scope binding.</div>
+      </div>
+      <div class="t-step">
+        <div class="t-when">Hour 06</div>
+        <div class="t-title">Linked</div>
+        <div class="t-body">Cross-domain relations built. Show Related works on every record.</div>
+      </div>
+      <div class="t-step fin">
+        <div class="t-when">Morning</div>
+        <div class="t-title">Searchable</div>
+        <div class="t-body">Crew opens the vessel. Cited answers across the full corpus.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════ CRYPTOGRAPHY · 10 · archetype B (text left, card right bleed) ════════════════════ -->
+<section class="arch-bleed-right" data-section="crypto">
+  <div class="left fade-in">
+    <div class="section-no">10 <span class="dim">/ proof, when proof matters</span></div>
+    <h2 class="h-section">Every record <span class="accent">independently verifiable.</span></h2>
+    <p class="body-lede">HMAC + Merkle root + RFC 3161 timestamp. Five public checks. No CelesteOS account required.</p>
+    <div class="vchecks">
+      <span class="v"><span class="d"></span>HMAC</span>
+      <span class="v"><span class="d"></span>Merkle</span>
+      <span class="v"><span class="d"></span>RFC 3161</span>
+      <span class="v"><span class="d"></span>Key</span>
+      <span class="v"><span class="d"></span>Ledger</span>
+    </div>
+  </div>
+  <div class="right fade-in fade-in-d1">
+    <div class="ucard ucard--bleed-right">
+      <div class="uc-head">
+        <span><span class="dot"></span>Sealed export · R-2026-0019</span>
+        <b>verifiable</b>
+      </div>
+      <div class="uc-row">
+        <span class="lbl">Hash</span>
+        <span class="val">sha-256</span>
+        <span class="mono">4f7a…c9d1</span>
+      </div>
+      <div class="uc-row">
+        <span class="lbl">Timestamp</span>
+        <span class="val">RFC 3161</span>
+        <span class="mono">2026-05-21</span>
+      </div>
+      <div class="uc-row">
+        <span class="lbl">Verify at</span>
+        <span class="val" style="color: var(--mark);">verify.celeste7.ai</span>
+        <span class="mono">public</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════ TRUST · 11 · rule-separated rows ════════════════════ -->
+<section class="arch-list" id="trust" data-section="trust">
+  <div class="wrap">
+    <div class="head fade-in">
+      <div class="section-no">11 <span class="dim">/ trust</span></div>
+      <h2 class="h-section">The vessel's record <span class="accent">is the vessel's.</span></h2>
+    </div>
+
+    <div class="trust-list fade-in fade-in-d1">
+      <div class="trust-row">
+        <span class="lbl">Compliance</span>
+        <div>
+          <h3>Aligned with the frameworks your auditors already know.</h3>
+          <p>ISM Code data handling, Tokyo MOU evidentiary requirements, IMO Resolution A.1155(32). GDPR + SOC 2 in mapping.</p>
+        </div>
+        <span class="status">In progress · Q3 2026</span>
+      </div>
+      <div class="trust-row">
+        <span class="lbl">Continuity</span>
+        <div>
+          <h3>Your data leaves with you.</h3>
+          <p>Exports in CSV, PDF, signed JSON on request. Documented escrow ensures continuity if CelesteOS ceases to operate.</p>
+        </div>
+        <span class="status"><b>Live</b> · day one</span>
+      </div>
+      <div class="trust-row">
+        <span class="lbl">Verifier</span>
+        <div>
+          <h3>Independently verifiable.</h3>
+          <p>Every sealed record verifiable at <a href="https://verify.celeste7.ai" style="color: var(--mark); text-decoration: none; border-bottom: 1px dotted currentColor;">verify.celeste7.ai</a>. Five public checks. Without an account.</p>
+        </div>
+        <span class="status"><b>Live</b> · public</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════ SCORE · 12 · manifesto (text only, narrow column) ════════════════════ -->
+<section class="arch-manifesto" data-section="score">
+  <div class="section-no fade-in">12 <span class="dim">/ the score</span></div>
+  <h2 class="h-section fade-in">Every vessel gets <span class="accent">a number.</span> Free, all year.</h2>
+  <p class="body-lede fade-in fade-in-d1">A single score combining what the world can see from outside with what the boat actually feels inside. Yours, always visible, never charged. What is sold is the verified export — released at one moment, to one counterparty.</p>
+  <button class="disclose fade-in fade-in-d2" aria-expanded="false" data-target="d-score">
+    <span class="chev">+</span>
+    <span>How it is built</span>
+  </button>
+  <div class="disclose-body" id="d-score">
+    <p>Care — the outside view, observed from public AIS and yard data. Wear — the inside view, computed from your own data: fault frequency, fix velocity, repeats climbing. The score is the delta between them.</p>
+  </div>
+</section>
+
+<!-- ════════════════════ FOUNDER · 13 · manifesto ════════════════════ -->
+<section class="arch-manifesto" data-section="founder">
+  <div class="section-no fade-in">13 <span class="dim">/ built by</span></div>
+  <h2 class="h-section fade-in">An engineer who <span class="accent">lived this.</span></h2>
+  <p class="body-lede fade-in fade-in-d1">Alex Short. Five years as ETO on superyachts up to 122 metres — Maryah, Legend, Freedom, Nero, Whisper. Built CelesteOS because the system should have existed in those moments.</p>
+</section>
+
+<!-- ════════════════════ PRICING · 14 ════════════════════ -->
+<section class="arch-manifesto" id="pricing" data-section="pricing">
+  <div class="section-no fade-in">14 <span class="dim">/ pricing</span></div>
+  <div class="pricing-num fade-in">$450</div>
+  <div class="pricing-unit fade-in">per vessel · per 28 days</div>
+  <p class="body-lede fade-in fade-in-d1">Unlimited seats. Onboard in hours. No migration. For teams who intend to use CelesteOS as the work surface.</p>
+  <div class="cta-row fade-in fade-in-d2" style="display: flex; gap: var(--s-3); margin-top: var(--s-8);">
+    <a class="cta" href="mailto:pilot@celeste7.ai">Request pilot</a>
+  </div>
+</section>
+
+<!-- ════════════════════ FINAL · 15 ════════════════════ -->
+<section class="arch-manifesto" data-section="final">
+  <div class="section-no fade-in">15 <span class="dim">/ if this describes you</span></div>
+  <h2 class="h-section fade-in">If this describes your vessel, <span class="accent">we should talk.</span></h2>
+  <div class="cta-row fade-in fade-in-d1" style="display: flex; gap: var(--s-3); margin-top: var(--s-8);">
+    <a class="cta" href="mailto:pilot@celeste7.ai">Request pilot</a>
+  </div>
+</section>
+
+<!-- ════════════════════ FOOTER ════════════════════ -->
+<footer>
+  <div class="row">
+    <div class="lockup">
+      <svg class="seal" width="16" height="16" viewBox="0 0 22 22">
+        <circle cx="11" cy="11" r="9" stroke="currentColor" stroke-width="1.2" fill="none"/>
+        <line x1="11" y1="2" x2="11" y2="6" stroke="currentColor" stroke-width="1.2"/>
+        <circle cx="11" cy="11" r="2" fill="currentColor"/>
+      </svg>
+      <span class="wm">CelesteOS</span>
+    </div>
+    <nav>
+      <a href="/sources">Sources</a>
+      <a href="/trust">Trust</a>
+      <a href="https://verify.celeste7.ai">Verifier</a>
+      <a href="mailto:pilot@celeste7.ai">Contact</a>
+    </nav>
+  </div>
+  <div class="verify-line">
+    Verify any sealed record at <a href="https://verify.celeste7.ai">verify.celeste7.ai</a>. Without an account. Without our involvement.
+  </div>
+</footer>
+
+<script>
+// ═══════════════════════════════════════════════════════════════════════════
+// THEME TOGGLE · persists in localStorage
+// ═══════════════════════════════════════════════════════════════════════════
+(function() {
+  const root = document.documentElement;
+  const saved = localStorage.getItem('celeste_theme');
+  if (saved === 'light' || saved === 'dark') {
+    root.setAttribute('data-theme', saved);
+  }
+  const btn = document.getElementById('theme-toggle');
+  if (btn) {
+    btn.addEventListener('click', () => {
+      const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      localStorage.setItem('celeste_theme', next);
+    });
+  }
+})();
+
+// ═══════════════════════════════════════════════════════════════════════════
+// FADE-IN · slow scroll-trigger
+// ═══════════════════════════════════════════════════════════════════════════
+const fadeObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('is-visible');
+      fadeObserver.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.10, rootMargin: '0px 0px -8% 0px' });
+document.querySelectorAll('.fade-in').forEach(el => fadeObserver.observe(el));
+
+// ═══════════════════════════════════════════════════════════════════════════
+// DISCLOSURE BUTTONS · click toggles aria-expanded + body
+// ═══════════════════════════════════════════════════════════════════════════
+document.querySelectorAll('.disclose').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const tgt = document.getElementById(btn.dataset.target);
+    const open = btn.getAttribute('aria-expanded') === 'true';
+    btn.setAttribute('aria-expanded', String(!open));
+    if (tgt) tgt.classList.toggle('is-open', !open);
+  });
+});
+
+// ═══════════════════════════════════════════════════════════════════════════
+// AGENTIC LIST · hover/click expand + sticky-open behaviour
+// ═══════════════════════════════════════════════════════════════════════════
+document.querySelectorAll('.ag-item').forEach(item => {
+  const row = item.querySelector('.ag-row');
+  if (!row) return;
+  row.addEventListener('click', () => {
+    const wasOpen = item.classList.contains('is-open');
+    document.querySelectorAll('.ag-item.is-open').forEach(other => {
+      if (other !== item) other.classList.remove('is-open');
+    });
+    if (!wasOpen) item.classList.add('is-open');
+    else item.classList.remove('is-open');
+  });
+});
+</script>
+
+</body>
+</html>
