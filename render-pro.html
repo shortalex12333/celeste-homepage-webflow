@@ -1296,7 +1296,12 @@
   <script>
   (function(){
     if(!window.gsap||!window.ScrollTrigger){return;}
-    if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){return;} // respect reduced motion
+    
+    if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+      document.body.classList.add('reduced-motion');
+      return;
+    } // respect reduced motion completely
+
     gsap.registerPlugin(ScrollTrigger);
     function setOrigin(){
       var doc=document.getElementById('whDoc'),link=document.getElementById('whLink');
