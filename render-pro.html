@@ -1290,9 +1290,12 @@
   <!-- Review/annotation overlay — only activates at ?review (no-op otherwise) -->
   <script src="review-overlay.js" defer></script>
   <!-- Flagship scrollytelling: GSAP ScrollTrigger wormhole zoom-to-link -->
+  <script src="https://unpkg.com/@studio-freight/lenis@1.0.39/dist/lenis.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/CustomEase.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/TextPlugin.min.js"></script>
   <script>
   (function(){
     if(!window.gsap||!window.ScrollTrigger){return;}
@@ -1302,7 +1305,20 @@
       return;
     } // respect reduced motion completely
 
-    gsap.registerPlugin(ScrollTrigger);
+    gsap.registerPlugin(ScrollTrigger, CustomEase, TextPlugin);
+    
+    // --- LENS & PHYSICS ENGINE ---
+    const lenis = new Lenis({
+        duration: 1.2,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        direction: 'vertical',
+        smooth: true
+    });
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add((time) => { lenis.raf(time * 1000); });
+    gsap.ticker.lagSmoothing(0);
+    
+    CustomEase.create("apple", "M0,0 C0.25,0.1 0.25,1 1,1");
     function setOrigin(){
       var doc=document.getElementById('whDoc'),link=document.getElementById('whLink');
       if(!doc||!link)return;
@@ -1328,7 +1344,7 @@
       .to('.wh-doc__line:not(.wh-doc__focus), .wh-doc__bar',{opacity:0,filter:"blur(5px)",duration:1},0)
       .to('#whDoc',{background:'transparent',borderColor:'transparent',boxShadow:'none',duration:1},0)
       .to('.wh-hue',{opacity:0,duration:1},0)
-      .fromTo('#whDoc',{scale:1},{scale:calculateScale,ease:'power2.inOut',duration:2},0);
+      .fromTo('#whDoc',{scale:1},{scale:calculateScale,ease:'apple',duration:2},0);
       
     // Act 2: The Hold
     tl.fromTo('#whStep2',{opacity:0,y:20},{opacity:1,y:0,duration:0.5},2.5)
@@ -1336,8 +1352,8 @@
       
     // Act 3: The Portal (Slide Left)
     tl.to('#whStep2',{opacity:0,y:-20,duration:0.5},4.5)
-      .to('#whDoc',{xPercent:-150,opacity:0,ease:'power2.inOut',duration:1.5},4.5)
-      .fromTo('#whRecord',{xPercent:150,opacity:0,scale:0.9},{xPercent:0,opacity:1,scale:1,ease:'power2.out',duration:1.5},4.5);
+      .to('#whDoc',{xPercent:-150,opacity:0,ease:'apple',duration:1.5},4.5)
+      .fromTo('#whRecord',{xPercent:150,opacity:0,scale:0.9},{xPercent:0,opacity:1,scale:1,ease:'apple',duration:1.5},4.5);
     
     // --- WEBGL GLOW ENGINE ---
     if(window.THREE) {
