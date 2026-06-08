@@ -443,6 +443,7 @@
   </style>
 </head>
 <body>
+  <canvas id="webgl-canvas" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; pointer-events: none;"></canvas>
   <section class="navbar-section">
     <div class="w-layout-blockcontainer navbar-container w-container">
       <div class="navbar-wrapper">
@@ -830,7 +831,7 @@
             </div>
           </div>
           <div class="service-item2">
-            <div class="iframe-product-wrap iframe-crop--service">
+            <div style="width:100%;max-width:480px;margin:0 auto;position:relative;">
               <iframe src="prototypes/show-related.html" loading="lazy" title="CelesteOS Show related, the past surfaced unasked" style="margin-top: -90px"></iframe>
             </div>
             <img src="images/service-2.webp" loading="lazy" alt="CelesteOS show related, past records surfaced unasked" class="service-item2-img iframe-fallback">
@@ -872,8 +873,8 @@
             <!-- #22 — the one focal component, free-floating below the text. No heavy media box:
                  a box-less, tightly-cropped view of the suggested-documents card (one point of focus). -->
             <div class="ss-media">
-              <div class="iframe-product-wrap ss-media--crop">
-                <iframe src="prototypes/suggested-docs-tab.html" loading="lazy" title="CelesteOS suggested documents, the manual surfaced where it is needed" style="margin-top:0"></iframe>
+              <div style="width:100%;max-width:560px;margin:0 auto;position:relative;">
+                <iframe src="prototypes/suggested-docs-tab.html" loading="lazy" title="CelesteOS suggested documents, the manual surfaced where it is needed" style="width: 100%; border: none; height: 400px;"></iframe>
               </div>
             </div>
           </div>
@@ -899,8 +900,8 @@
             <!-- #23 — the one focal component, free-floating below the text. Box-less tight crop of the
                  warranty-window flag (one point of focus). -->
             <div class="ss-media">
-              <div class="iframe-product-wrap ss-media--crop">
-                <iframe src="prototypes/warranty-money-finder-nofig.html" loading="lazy" title="CelesteOS warranty window flag on a logged fault" style="margin-top:0"></iframe>
+              <div style="width:100%;max-width:560px;margin:0 auto;position:relative;">
+                <iframe src="prototypes/warranty-money-finder-nofig.html" loading="lazy" title="CelesteOS warranty window flag on a logged fault" style="width: 100%; border: none; height: 350px;"></iframe>
               </div>
             </div>
           </div>
@@ -1042,7 +1043,7 @@
     <div class="oc-pair scroll-reveal">
       <div class="oc-col oc-col--left">
         <div class="oc-image-wrap">
-          <div class="iframe-product-wrap iframe-crop--oc" style="width:100%;max-width:600px;margin:0 auto;">
+          <div style="width:100%;max-width:600px;margin:0 auto;position:relative;">
           <iframe src="prototypes/audit-trail-only.html" loading="lazy" title="CelesteOS audit trail, every action timestamped and attributable"></iframe>
           </div>
         </div>
@@ -1067,7 +1068,7 @@
       </div>
       <div class="oc-col oc-col--right">
         <div class="oc-image-wrap">
-          <div class="iframe-product-wrap iframe-crop--oc" style="width:100%;max-width:600px;margin:0 auto;">
+          <div style="width:100%;max-width:600px;margin:0 auto;position:relative;">
             <iframe src="prototypes/ledger-history.html" loading="lazy" title="CelesteOS ledger history, append-only record of vessel activity"></iframe>
           </div>
         </div>
@@ -1078,7 +1079,7 @@
     <div class="oc-pair scroll-reveal">
       <div class="oc-col oc-col--left">
         <div class="oc-image-wrap">
-          <div class="iframe-product-wrap iframe-crop--oc" style="width:100%;max-width:600px;margin:0 auto;">
+          <div style="width:100%;max-width:600px;margin:0 auto;position:relative;">
             <iframe src="prototypes/handover-signoff.html" loading="lazy" title="CelesteOS handover sign-off, attributable to the engineer who did the work"></iframe>
           </div>
         </div>
@@ -1289,6 +1290,7 @@
   <!-- Review/annotation overlay — only activates at ?review (no-op otherwise) -->
   <script src="review-overlay.js" defer></script>
   <!-- Flagship scrollytelling: GSAP ScrollTrigger wormhole zoom-to-link -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
   <script>
@@ -1305,11 +1307,80 @@
       gsap.set(doc,{transformOrigin:ox+'% '+oy+'%'});
     }
     setOrigin();
+    function calculateScale() {
+      var doc=document.getElementById('whDoc'),link=document.getElementById('whLink');
+      if(!doc||!link)return 1;
+      var linkWidth = link.getBoundingClientRect().width;
+      var targetWidth = window.innerWidth * 0.60;
+      var scale = targetWidth / linkWidth;
+      return Math.min(scale, 10); // cap scale
+    }
+    
     var tl=gsap.timeline({scrollTrigger:{trigger:'.wormhole-track',start:'top top',end:'bottom bottom',scrub:1,pin:'.wormhole-viewport',invalidateOnRefresh:true,onRefresh:setOrigin,anticipatePin:1}});
+    
+    // Act 1: The Push
     tl.to('#whStep1',{opacity:0,y:-20,duration:1},0)
-      .fromTo('#whDoc',{scale:1,opacity:1},{scale:13,opacity:0,ease:'power2.in',duration:3},0)
-      .fromTo('#whRecord',{scale:0.04,opacity:0},{scale:1,opacity:1,ease:'power2.out',duration:3},1.5)
-      .fromTo('#whStep2',{opacity:0,y:20},{opacity:1,y:0,duration:1},2.6);
+      .to('.wh-doc__line:not(.wh-doc__focus), .wh-doc__bar',{opacity:0,filter:"blur(5px)",duration:1},0)
+      .to('#whDoc',{background:'transparent',borderColor:'transparent',boxShadow:'none',duration:1},0)
+      .to('.wh-hue',{opacity:0,duration:1},0)
+      .fromTo('#whDoc',{scale:1},{scale:calculateScale,ease:'power2.inOut',duration:2},0);
+      
+    // Act 2: The Hold
+    tl.fromTo('#whStep2',{opacity:0,y:20},{opacity:1,y:0,duration:0.5},2.5)
+      .to({}, {duration: 1.5}); // Hold for 1.5s
+      
+    // Act 3: The Portal (Slide Left)
+    tl.to('#whStep2',{opacity:0,y:-20,duration:0.5},4.5)
+      .to('#whDoc',{xPercent:-150,opacity:0,ease:'power2.inOut',duration:1.5},4.5)
+      .fromTo('#whRecord',{xPercent:150,opacity:0,scale:0.9},{xPercent:0,opacity:1,scale:1,ease:'power2.out',duration:1.5},4.5);
+    
+    // --- WEBGL GLOW ENGINE ---
+    if(window.THREE) {
+      var canvas = document.getElementById('webgl-canvas');
+      var scene = new THREE.Scene();
+      var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+      var renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      camera.position.z = 10;
+
+      var glowGeo = new THREE.PlaneGeometry(20, 20);
+      var glowMat = new THREE.ShaderMaterial({
+          uniforms: { u_color: { value: new THREE.Color(0x2B7BA3) }, u_opacity: { value: 0.0 } },
+          vertexShader: 'varying vec2 vUv; void main() { vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }',
+          fragmentShader: 'uniform vec3 u_color; uniform float u_opacity; varying vec2 vUv; void main() { float dist = distance(vUv, vec2(0.5)); float alpha = smoothstep(0.5, 0.0, dist) * u_opacity; gl_FragColor = vec4(u_color, alpha); }',
+          transparent: true, depthWrite: false
+      });
+      var glowMesh = new THREE.Mesh(glowGeo, glowMat);
+      scene.add(glowMesh);
+
+      function animateWebGL() { requestAnimationFrame(animateWebGL); renderer.render(scene, camera); }
+      animateWebGL();
+      window.addEventListener('resize', function() { camera.aspect = window.innerWidth/window.innerHeight; camera.updateProjectionMatrix(); renderer.setSize(window.innerWidth, window.innerHeight); });
+      
+      // Bind glow to specific sections for ominous feel
+      var docSection = document.querySelector('.div-block-63.ss-float');
+      var warrSection = document.querySelector('.div-block-64.ss-float');
+      
+      if(docSection) {
+        gsap.to(glowMat.uniforms.u_opacity, {
+          value: 0.2, // Ominous green/yellow hue intensity
+          scrollTrigger: { trigger: docSection, start: "top center", end: "bottom center", scrub: true }
+        });
+        // Tint yellow for docs
+        ScrollTrigger.create({ trigger: docSection, start: "top center", onEnter: () => glowMat.uniforms.u_color.value.setHex(0xC9A66B), onLeaveBack: () => glowMat.uniforms.u_color.value.setHex(0x2B7BA3) });
+      }
+      
+      if(warrSection) {
+        gsap.to(glowMat.uniforms.u_opacity, {
+          value: 0.2, // Ominous red hue intensity
+          scrollTrigger: { trigger: warrSection, start: "top center", end: "bottom center", scrub: true }
+        });
+        // Tint red for warranty
+        ScrollTrigger.create({ trigger: warrSection, start: "top center", onEnter: () => glowMat.uniforms.u_color.value.setHex(0xC0503A), onLeaveBack: () => glowMat.uniforms.u_color.value.setHex(0xC9A66B) });
+      }
+    }
+
     window.addEventListener('load',function(){ScrollTrigger.refresh();});
   })();
   </script>
