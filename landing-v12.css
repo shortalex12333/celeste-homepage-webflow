@@ -5476,3 +5476,24 @@ body.pin #sd-stage[data-state="4"] .lc-text {
   /* money cite line: micro seal breathes; row wraps cleanly */
   #mf-stage .mfv-cite { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 7px; line-height: 1.5; }
 }
+
+/* ── offer: value anchor beside the number + waiver line + call subtext (Stage-1 pricing reframe) ── */
+.pm-anchor {
+  margin-top: 1rem;
+  font-size: 0.95rem;
+  font-weight: 300;
+  line-height: 1.65;
+  color: var(--txt2);
+}
+.pm-anchor strong { color: var(--txt); font-weight: 500; }
+.pm-line2 strong { color: var(--txt); font-weight: 500; }
+.pm-ctasub {
+  margin-top: 0.7rem;
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.07em;
+  color: var(--txt3);
+}
+/* ── the Outlook mark: small, inline, recognizable; the word stays text ── */
+.ol-mark { display: inline-flex; align-items: center; gap: 0.3em; white-space: nowrap; }
+.ol-mark svg { width: 0.9em; height: 0.9em; flex-shrink: 0; transform: translateY(0.06em); }
