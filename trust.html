@@ -25,20 +25,40 @@
   blockquote { margin: 1.5rem 0; padding-left: 1rem; border-left: 2px solid currentColor; opacity: 0.82; font-style: normal; }
   a { color: inherit; }
   .cta-button { display: inline-flex; align-items: center; gap: 0.5rem; margin-top: 1rem; padding: 0.7rem 1.1rem; border: 1px solid currentColor; border-radius: 2px; font-family: 'IBM Plex Mono', monospace; font-size: 0.82rem; letter-spacing: 0.04em; text-transform: uppercase; text-decoration: none; color: inherit; }
-  nav.top { margin-bottom: 3rem; font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem; letter-spacing: 0.04em; text-transform: uppercase; opacity: 0.6; }
-  nav.top a { color: inherit; text-decoration: none; margin-right: 1.2rem; }
-  nav.top a:hover { opacity: 1; text-decoration: underline; }
   .reg-block { font-family: 'IBM Plex Mono', monospace; font-size: 0.88rem; line-height: 1.55; background: rgba(127,127,127,0.06); border-left: 2px solid currentColor; padding: 1.1rem 1.2rem; margin: 1rem 0; opacity: 0.92; }
   .reg-block strong { display: block; margin-bottom: 0.3rem; }
 </style>
 </head>
 <body>
+<!-- ═══ CelesteOS site header (canonical, self-contained) ═══ -->
+<style>
+  .c7bar { position: fixed; top: 0; left: 0; right: 0; z-index: 900; display: flex; justify-content: space-between; align-items: center;
+    padding: 1.05rem max(2rem, calc((100% - 1140px) / 2 + 2rem));
+    background: rgba(12, 11, 10, 0.88); -webkit-backdrop-filter: blur(14px) saturate(1.05); backdrop-filter: blur(14px) saturate(1.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06); }
+  .c7bar-mark { font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 0.78rem; letter-spacing: 0.16em;
+    text-transform: uppercase; color: rgba(255, 255, 255, 0.55); text-decoration: none; }
+  .c7bar-nav { display: flex; gap: 2rem; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 0.66rem;
+    letter-spacing: 0.12em; text-transform: uppercase; }
+  .c7bar-nav a { color: rgba(255, 255, 255, 0.35); text-decoration: none; transition: color 0.2s ease; }
+  .c7bar-nav a:hover { color: #5AABCC; }
+  @media (max-width: 600px) { .c7bar-nav { flex-wrap: wrap; gap: 0.7rem 1rem; justify-content: flex-end; }
+    .c7bar-nav a { font-size: 0.6rem; } }
+</style>
+<header class="c7bar">
+  <a class="c7bar-mark" href="/">CelesteOS</a>
+  <nav class="c7bar-nav">
+    <a href="/#how">How it works</a>
+    <a href="/#handover">Product</a>
+    <a href="/#pricing">Pricing</a>
+    <a href="/blogs">Blogs</a>
+    <a href="/trust">Trust</a>
+    <a href="mailto:contact@celeste7.ai">Contact</a>
+  </nav>
+</header>
+<div class="c7bar-spacer" style="height: 53px;"></div>
 
-<nav class="top">
-  <a href="/">CelesteOS</a>
-  <a href="/trust" style="opacity:1;">Trust</a>
-  <a href="/sources">Sources</a>
-</nav>
+
 
 <h1>Trust</h1>
 <p class="lede">Credibility belongs in verifiable proof, not claims. This page maps how CelesteOS earns trust at audit, where data lives, and why the product sits alongside your class-approved PMS rather than replacing it.</p>
@@ -106,5 +126,91 @@
   <p>This is deliberate. Adding CelesteOS does not require re-certifying your PMS, re-training your engineers on a new platform, or migrating any data. Your existing approvals remain intact.</p>
 </section>
 
+
+
+<!-- ═══ CelesteOS site footer (canonical, self-contained) ═══ -->
+<style>
+  .c7f { border-top: 1px solid rgba(255,255,255,0.04); margin: 8vh calc(50% - 50vw) 0; background: linear-gradient(180deg, #0A0908, #0C0B0A); }
+  .c7f * { box-sizing: border-box; }
+  .c7f-in { max-width: 1140px; margin: 0 auto; padding: 5rem 2rem 3rem; }
+  .c7f-cols { display: grid; grid-template-columns: repeat(4, 1fr) 1.5fr; gap: 2.5rem; }
+  @media (max-width: 920px) { .c7f-cols { grid-template-columns: 1fr 1fr 1fr; row-gap: 2.6rem; } .c7f-contact { grid-column: 1 / -1; } }
+  @media (max-width: 560px) { .c7f-cols { grid-template-columns: 1fr 1fr; } }
+  .c7f-h { font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 0.6rem; font-weight: 600; letter-spacing: 0.16em;
+    text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 1.1rem; }
+  .c7f-cols a { display: block; font-family: 'DM Sans', system-ui, sans-serif; font-size: 0.88rem; font-weight: 300;
+    color: rgba(255,255,255,0.55); padding: 0.36rem 0; text-decoration: none; transition: color 0.2s ease; }
+  .c7f-cols a:hover { color: #5AABCC; }
+  .c7f-mail { font-size: 1rem !important; font-weight: 400 !important; color: rgba(255,255,255,0.92) !important; }
+  .c7f-note { margin: 0.9rem 0 0; font-family: 'DM Sans', system-ui, sans-serif; font-size: 0.8rem; font-weight: 300;
+    color: rgba(255,255,255,0.35); line-height: 1.65; max-width: 24em; }
+  .c7f-base { display: flex; align-items: center; justify-content: space-between; gap: 1.4rem; flex-wrap: wrap;
+    margin-top: 3.6rem; padding-top: 1.8rem; border-top: 1px solid rgba(255,255,255,0.04); }
+  .c7f-brand { display: flex; align-items: center; gap: 10px; }
+  .c7f-seal { width: 18px; height: 18px; color: rgba(255,255,255,0.35); }
+  .c7f-word { font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 0.7rem; letter-spacing: 0.16em;
+    text-transform: uppercase; color: rgba(255,255,255,0.55); }
+  .c7f-legal { display: flex; gap: 1.4rem; flex-wrap: wrap; font-family: 'IBM Plex Mono', ui-monospace, monospace;
+    font-size: 0.66rem; letter-spacing: 0.06em; color: rgba(255,255,255,0.35); align-items: center; }
+  .c7f-legal a { display: inline; padding: 0; font-family: inherit; font-size: inherit; color: rgba(255,255,255,0.35); text-decoration: none; }
+  .c7f-legal a:hover { color: #5AABCC; }
+  .c7f-soc { font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 0.66rem; letter-spacing: 0.1em;
+    text-transform: uppercase; color: rgba(255,255,255,0.35); white-space: nowrap; text-decoration: none; }
+  .c7f-soc:hover { color: #5AABCC; }
+</style>
+<footer class="c7f">
+  <div class="c7f-in">
+    <div class="c7f-cols">
+      <div>
+        <div class="c7f-h">Product</div>
+        <a href="/#handover">Handover</a>
+        <a href="/#datum">Search</a>
+        <a href="/#show-related">Show Related</a>
+        <a href="/#money">Money-finder</a>
+        <a href="/#onboarding">Onboarding</a>
+      </div>
+      <div>
+        <div class="c7f-h">Trust &amp; proof</div>
+        <a href="/trust">Trust &amp; compliance</a>
+        <a href="https://verifier.celeste7.ai" target="_blank" rel="noopener">Verifier</a>
+        <a href="/#ledger">The ledger</a>
+        <a href="/sources">Sources</a>
+      </div>
+      <div>
+        <div class="c7f-h">Company</div>
+        <a href="/#pilot">The pilot</a>
+        <a href="/blogs">Blog</a>
+        <a href="mailto:contact@celeste7.ai?subject=CelesteOS">Contact</a>
+        <a href="https://www.linkedin.com/company/celesteos/" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+      <div>
+        <div class="c7f-h">Legal</div>
+        <a href="/privacy-policy">Privacy Policy</a>
+        <a href="/terms-of-service">Terms of Service</a>
+        <a href="/trust">Regulatory mapping</a>
+        <a href="/sources">Sources &amp; claims</a>
+      </div>
+      <div class="c7f-contact">
+        <div class="c7f-h">Get in touch</div>
+        <a class="c7f-mail" href="mailto:contact@celeste7.ai?subject=CelesteOS%20Pilot">contact@celeste7.ai</a>
+        <p class="c7f-note">Operational correspondence only. A pilot is three to five vessels. We reply within hours, not days.</p>
+      </div>
+    </div>
+    <div class="c7f-base">
+      <div class="c7f-brand">
+        <svg class="c7f-seal" viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.6"/><line x1="16" y1="0" x2="16" y2="3.5" stroke="currentColor" stroke-width="1.6"/><circle cx="16" cy="16" r="2.6" fill="currentColor"/></svg>
+        <span class="c7f-word">CelesteOS</span>
+      </div>
+      <div class="c7f-legal">
+        <span>© 2026 Celeste7 LTD</span>
+        <a href="/privacy-policy">Privacy</a>
+        <a href="/terms-of-service">Terms</a>
+        <a href="/trust">Trust</a>
+        <a href="/sources">Sources</a>
+      </div>
+      <a class="c7f-soc" href="https://www.linkedin.com/company/celesteos/" target="_blank" rel="noopener" aria-label="CelesteOS on LinkedIn">LinkedIn ↗</a>
+    </div>
+  </div>
+</footer>
 </body>
 </html>
