@@ -22,7 +22,7 @@
 // --date  honest lastmod / "Updated" date (Date is unavailable in some sandbox contexts).
 // --check dry-run: gate + resolve + render in memory, write/copy NOTHING.
 
-import { readFileSync, writeFileSync, existsSync, mkdirSync, copyFileSync, statSync } from 'node:fs';
+import { readFileSync, writeFileSync, existsSync, mkdirSync, copyFileSync, statSync, unlinkSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join, basename, resolve } from 'node:path';
 import { spawnSync } from 'node:child_process';
@@ -176,8 +176,27 @@ if (leftover.length) {
   process.exit(1);
 }
 
+// ─── 4b. FINAL gate on the RENDERED page ─────────────────────────────────────
+// The draft already passed, but the template + footer wrap it. Re-gate the FULL
+// rendered HTML so a template-level overclaim (a roadmap feature in the footer, a
+// missing canonical, a dead host) can NEVER reach production. One gate, one truth.
+{
+  const tmp = join(postDir, '.rendered.tmp.html');
+  writeFileSync(tmp, page, 'utf8');
+  const gf = spawnSync(process.execPath, [join(HERE, 'gate.mjs'), tmp], { stdio: 'inherit' });
+  try { unlinkSync(tmp); } catch {}
+  if (gf.status !== 0) {
+    console.error(`\npublish: ABORTED — the RENDERED page failed the gate. The violation is in the TEMPLATE/footer, not the draft. Fix templates/post.html, then publish.`);
+    process.exit(1);
+  }
+  console.log('publish: rendered-page gate PASSED.\n');
+}
+
 // ─── --check dry-run stops here ──────────────────────────────────────────────
-const outPath = join(BLOGS_DIR, `${slug}.html`);
+// Output file matches the CANONICAL slug, so a REFRESH overwrites the trusted URL
+// instead of spawning a new one (canonical .../blogs/<target> → blogs/<target>.html).
+const outSlug = (canonical.match(/\/blogs\/([^/?#]+)/) || [, slug])[1];
+const outPath = join(BLOGS_DIR, `${outSlug}.html`);
 if (checkOnly) {
   console.log(`publish --check (dry-run):`);
   console.log(`  would write  ${outPath}  (${page.length} bytes)`);

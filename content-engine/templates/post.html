@@ -94,17 +94,10 @@
     <article>
     <a href="/blogs" class="article-back blog-reveal">&larr; All articles</a>
 
-    <header class="article-header blog-reveal">
-      <div class="article-header__meta blog-stagger">Updated {{UPDATED}}</div>
-      <h1 class="article-header__title blog-stagger">{{TITLE}}</h1>
-      <p class="article-header__lede blog-stagger">{{META_DESCRIPTION}}</p>
-    </header>
-
-    <div class="article-body">
-
+    <!-- The draft owns the visible article (header + body + cta), mirroring the existing
+         /blogs posts. The template provides <head> SEO/JSON-LD + nav/footer chrome + the
+         Read-next nav below. meta.title/description drive <title>/<meta>/JSON-LD only. -->
 {{BODY}}
-
-    </div>
 
     <!-- Read next — internal links (drop-in; reuses brand type from blog.css) -->
     <nav class="article-related blog-reveal" aria-label="Related articles"
@@ -183,7 +176,6 @@
         <a href="/#handover">Handover</a>
         <a href="/#datum">Search</a>
         <a href="/#show-related">Show Related</a>
-        <a href="/#money">Money-finder</a>
         <a href="/#onboarding">Onboarding</a>
       </div>
       <div>
