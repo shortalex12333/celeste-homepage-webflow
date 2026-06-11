@@ -1,0 +1,31 @@
+{
+  "title": "Yacht Maintenance Audit Trail — Celeste",
+  "description": "Yacht maintenance audit trail. The ledger is append-only. Nothing is ever overwritten.",
+  "canonical": "https://celeste7.ai/blogs/yacht-maintenance-audit-trail",
+  "slug": "yacht-maintenance-audit-trail",
+  "keyword": "yacht maintenance audit trail",
+  "chapter": "ledger",
+  "jsonld": {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Yacht Maintenance Audit Trail — Celeste",
+    "datePublished": "2026-06-11",
+    "dateModified": "2026-06-11",
+    "author": {
+      "@type": "Organization",
+      "name": "Celeste",
+      "url": "https://celeste7.ai"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Celeste",
+      "url": "https://celeste7.ai"
+    },
+    "mainEntityOfPage": "https://celeste7.ai/blogs/yacht-maintenance-audit-trail"
+  },
+  "updated": "June 2026",
+  "related": [
+    { "href": "/blogs/warranty-claim-documentation", "text": "Verifiable, auditable maintenance records" },
+    { "href": "/blogs/knowledge-crisis-superyachts", "text": "Crew turnover and knowledge loss on superyachts" }
+  ]
+}

@@ -1,0 +1,412 @@
+{
+  "banned_lexicon": [
+    "\\bAI\\b",
+    "artificial intelligence",
+    "machine[ -]?learning",
+    "\\bML\\b",
+    "\\bsmart\\b",
+    "\\bautomat\\w*",
+    "\\bauto[- ]?(generat|add|populat|link|propagat|alert|execut|assembl|compil|writ)\\w*",
+    "\\bseamless\\w*",
+    "\\boptimi[sz]\\w*",
+    "\\bhallucinat\\w*",
+    "\\beffortless\\w*",
+    "\\bmagic\\w*",
+    "\\brevolutio\\w*",
+    "game[- ]chang\\w*",
+    "\\bintelligent\\b"
+  ],
+  "banned_overclaims": [
+    "writes itself",
+    "assembles itself",
+    "(assembled|compiled|generated)\\s+automatically",
+    "not assembled manually",
+    "every (answer|result) cites",
+    "every domain",
+    "all (12|14|twelve|fourteen) domains",
+    "mapped to root cause",
+    "hop back",
+    "chrome[- ]history",
+    "sealed pdf",
+    "money[- ]?finder",
+    "\\[VERIFY\\]",
+    "cascad\\w*",
+    "propagat\\w*",
+    "knowledge graph",
+    "walks the .*graph",
+    "sub[- ]?second",
+    "real[- ]?time",
+    "works? offline",
+    "onboard(ed|ing)? in hours",
+    "read (it )?in full",
+    "measured duration",
+    "for how long",
+    "verify\\.celeste7\\.ai",
+    "SOC[- ]?2 (certified|compliant)",
+    "GDPR compliant",
+    "zero data retention"
+  ],
+  "call_only": [
+    "\\$\\s?\\d",
+    "(EUR|€|£|GBP|USD)\\s?\\d",
+    "per (month|28 days|vessel)\\b",
+    "pilot pricing",
+    "locked for 12 months"
+  ],
+  "chapters": {
+    "search": {
+      "safe": [
+        "Natural-language search across your vessel's records and manuals.",
+        "Type what you'd ask a colleague.",
+        "Search lives at the top of every screen — phone, tablet, laptop.",
+        "Every result is a live record. One click lands on the actual work order — status, history, parts.",
+        "Search returns the record, not a snippet.",
+        "Finds what you mean, not what you typed.",
+        "There is nothing to learn. The engineer types what they need.",
+        "Results open the source record itself.",
+        "Results are scoped to your vessel and role — no filter to set up first."
+      ],
+      "banned": [
+        {
+          "pattern": "\"Every answer cites its source\" / \"every domain cited\"",
+          "why": "Domain-cited gating uncertain in live code (F1 gating vs SEARCH8888 — unconfirmed).",
+          "safe": "Results open the source record itself."
+        },
+        {
+          "pattern": "\"No hallucinated content\" / any \"hallucinat*\"",
+          "why": "Invokes AI-magic framing; banned lexicon territory.",
+          "safe": "If CelesteOS cannot find a record, it says so. (only if live-confirmed; until then omit)"
+        },
+        {
+          "pattern": "\"All 12 domains simultaneously\" / \"All 14 domains\" / \"every domain\"",
+          "why": "Exhaustive-coverage guarantee not live-verified for all domains (faults/certs coverage was historically gated).",
+          "safe": "Across work orders, documents, and the vessel's records. Name only domains you can demo."
+        },
+        {
+          "pattern": "\"Sub-second\" / any latency number",
+          "why": "NEEDS-EVIDENCE — no published measurement.",
+          "safe": "Fast enough to use at 2am. (no number)"
+        },
+        {
+          "pattern": "\"Mapped to root cause\"",
+          "why": "Similarity surfacing, not causal mapping. Nothing maps root cause.",
+          "safe": "Fault history, with prior occurrences surfaced alongside."
+        },
+        {
+          "pattern": "\"Entity extraction + semantic search\" as buyer copy",
+          "why": "Mechanism talk drifts toward ML claims.",
+          "safe": "Finds what you mean, not what you typed."
+        }
+      ]
+    },
+    "handover": {
+      "safe": [
+        "Captured as you work.",
+        "Every record an engineer closes — a fault, a work order, a note — offers a single tap to add it to the handover draft.",
+        "The draft accumulates as the engineer works.",
+        "Months of context accumulate as a by-product of normal work.",
+        "Never asked twice if dismissed.",
+        "The outgoing engineer reviews the draft, then signs. The incoming engineer acknowledges: 'I have read and understood the operational state of this vessel.'",
+        "Both signatures timestamped. Locked after dual signature.",
+        "Every entry resolves back to a live record — one click opens the fault, the work order, the part.",
+        "The handover is a live index into the vessel's operational data, not a static document.",
+        "The incoming engineer inherits context, not chaos.",
+        "Built from one-tap captures as the engineer works — reviewed, then signed by both parties."
+      ],
+      "banned": [
+        {
+          "pattern": "\"The handover writes itself\" / \"writes itself\" (any subject)",
+          "why": "Reality = 1-tap capture from a queue into a draft. Nothing writes itself.",
+          "safe": "Captured as you work."
+        },
+        {
+          "pattern": "\"auto-generated\" / \"auto-generates\" / \"generated automatically\"",
+          "why": "Same.",
+          "safe": "Built from one-tap captures, reviewed before signing."
+        },
+        {
+          "pattern": "\"assembled automatically\" / \"compiled automatically\" / \"assembles itself\" / \"not assembled manually\"",
+          "why": "Same.",
+          "safe": "The draft accumulates as the engineer works."
+        },
+        {
+          "pattern": "\"The departing engineer does not need to remember what to include. The system already has it.\"",
+          "why": "Implies full auto-assembly; capture requires the engineer's tap.",
+          "safe": "Each tap while working is one less thing to remember at rotation."
+        },
+        {
+          "pattern": "\"Rough notes become a structured handover\"",
+          "why": "Implies transformation without the capture step.",
+          "safe": "One-tap captures become the handover draft."
+        },
+        {
+          "pattern": "\"You review, we create\"",
+          "why": "\"We create\" = auto-write framing.",
+          "safe": "You capture as you work. You review. Both sides sign."
+        },
+        {
+          "pattern": "\"Generated from operational data — not memory\"",
+          "why": "\"Generated\" framing.",
+          "safe": "Compiled from the entries the engineer captured — not from memory."
+        }
+      ]
+    },
+    "ledger": {
+      "safe": [
+        "The ledger is append-only. Nothing is ever overwritten.",
+        "Corrections are recorded as new entries referencing the original. The original remains intact.",
+        "Every action — logging a fault, creating a work order, signing a handover — is attributed and timestamped.",
+        "Who acted, what they did, when, and which record was affected.",
+        "Open any record and read its full audit trail.",
+        "Deleted rows are struck through, never purged — the trail is the trail.",
+        "The audit trail is not a feature. It is a legal defence.",
+        "Records that can be retroactively modified cannot serve as evidence.",
+        "Audit prep becomes retrieval, not assembly."
+      ],
+      "banned": [
+        {
+          "pattern": "\"Hop back into anyone's work\" / \"pick a record back up days later\" / any Chrome-history / resume framing",
+          "why": "No resume capability is shipped.",
+          "safe": "Open any record and read its full audit trail — who touched what, when."
+        },
+        {
+          "pattern": "\"Sealed PDF\" / \"audit trail exportable as a structured PDF\"",
+          "why": "Planned (v1.0), not live.",
+          "safe": "Every record's history is available on demand, and independently verifiable at verifier.celeste7.ai."
+        },
+        {
+          "pattern": "\"The system records who opened it, when, and for how long\" / \"measured duration\" / \"whether they read it in full\"",
+          "why": "Read-duration / read-completion tracking is NOT in the verified-shipped set.",
+          "safe": "Actions on records are logged — created, updated, signed, linked. (NEEDS-EVIDENCE before any read-event claim)"
+        },
+        {
+          "pattern": "\"Read events logged — evidence of awareness\"",
+          "why": "Same — NEEDS-EVIDENCE.",
+          "safe": "Omit, or scope to actions."
+        },
+        {
+          "pattern": "\"records interactions automatically\"",
+          "why": "Auto-stem; also implies passive read-tracking.",
+          "safe": "Actions are recorded as the crew works — no checkbox, no extra step."
+        },
+        {
+          "pattern": "\"One click on Generate warranty claim pack\" / \"audit-grade pack in seconds\"",
+          "why": "Money-finder/claim-pack territory — pull-on-open, not buyer-visible; do not depict.",
+          "safe": "Warranty history and its evidence live on the record. (roadmap tease only, clearly labelled)"
+        },
+        {
+          "pattern": "\"named individual\" as a universal claim",
+          "why": "Live attribution defaults to role (Captain/Chief); personal-name display is gated.",
+          "safe": "attributed — by signed-in user and role — and timestamped"
+        }
+      ]
+    },
+    "verifier.celeste7.ai": {
+      "safe": [
+        "Every record independently verifiable → verifier.celeste7.ai",
+        "CelesteOS seals actions — faults, work orders, handovers, signatures — into a cryptographic receipt that anyone can independently verify.",
+        "Verify a sample receipt.",
+        "Proof, when proof matters.",
+        "Few systems produce proof. CelesteOS seals its records."
+      ],
+      "banned": [
+        {
+          "pattern": "\"verify.celeste7.ai\" (any reference)",
+          "why": "NXDOMAIN. The live host is verifier.celeste7.ai.",
+          "safe": "verifier.celeste7.ai"
+        },
+        {
+          "pattern": "\"Sealed PDF\" / \"download the sealed PDF\"",
+          "why": "Planned, not live.",
+          "safe": "Verify the receipt online at verifier.celeste7.ai."
+        },
+        {
+          "pattern": "\"seals every action\" (absolute)",
+          "why": "Sweeping absolute; seal coverage is per-flow.",
+          "safe": "seals key actions — faults, work orders, handovers, signatures"
+        }
+      ]
+    },
+    "suggested documents": {
+      "safe": [
+        "The right manual surfaces on the entity card.",
+        "Suggested documents appear with a match score. The engineer accepts or denies — one tap.",
+        "Accept links the document to the record in front of you.",
+        "Deny is per-record. Every accept and deny is recorded in the ledger.",
+        "Finds the manual even when nobody remembers the filename.",
+        "Documents connected to the work they describe."
+      ],
+      "banned": [
+        {
+          "pattern": "\"Accept once on the equipment. It propagates everywhere.\"",
+          "why": "AUTO-propagation is NOT shipped. Only manual linking + discovery exist.",
+          "safe": "Accept links the document to the record in front of you."
+        },
+        {
+          "pattern": "\"cascade\" / \"cascades to every fault, WO, part\" / \"cascaded to every entity\" / \"walks the equipment graph\"",
+          "why": "Same — cascade not shipped; also graph framing is false (similarity, not graph).",
+          "safe": "Linked documents are discoverable from related records via Show Related."
+        },
+        {
+          "pattern": "\"every fault, every work order opens with its manuals already attached\"",
+          "why": "Depends on the unshipped cascade.",
+          "safe": "Suggestions surface on faults, work orders, parts, and equipment; the engineer links with one tap."
+        },
+        {
+          "pattern": "\"1536-dimension vector\" / \"cosine similarity\" / \"embedded using the same model\" in buyer copy",
+          "why": "Mechanism talk = ML claim drift.",
+          "safe": "Matched by content and metadata."
+        },
+        {
+          "pattern": "\"it learns from the corpus\"",
+          "why": "\"Learns\" = ML/AI product-magic claim.",
+          "safe": "Matched by content and metadata."
+        },
+        {
+          "pattern": "\"auto-link\" (any form)",
+          "why": "Auto-stem + propagation implication.",
+          "safe": "one tap links"
+        }
+      ]
+    },
+    "certificate bundle": {
+      "safe": [
+        "Certificates tracked to expiry, with renewal dates and the source PDF attached.",
+        "Alerts as expiry approaches.",
+        "Cross-linked to the equipment it certifies.",
+        "Certificates current and findable on inspection day."
+      ],
+      "banned": [
+        {
+          "pattern": "\"Auto-alerts\"",
+          "why": "Auto-stem.",
+          "safe": "Alerts as expiry approaches."
+        },
+        {
+          "pattern": "\"Auto-alerts at 30 / 14 / 7 days\" (the schedule)",
+          "why": "Specific schedule NEEDS-EVIDENCE (not live-verified).",
+          "safe": "Alerts as expiry approaches."
+        },
+        {
+          "pattern": "Featuring a certificate-bundle hero section / dedicated chapter page",
+          "why": "Vitamin rule — lines only.",
+          "safe": "One line inside a painkiller chapter."
+        },
+        {
+          "pattern": "\"One-click inspection bundle\" / \"bundle export\"",
+          "why": "Bundle export not in the verified-shipped set.",
+          "safe": "Certificates current and findable on inspection day."
+        }
+      ]
+    },
+    "show related": {
+      "safe": [
+        "Open any record and CelesteOS surfaces what's related — work orders, parts, equipment, handovers, and correspondence.",
+        "See what's connected. Immediately.",
+        "Stay oriented without leaving the page.",
+        "Show Related sits in every record's header.",
+        "Following one record leads to every connected record.",
+        "Documents that should have been linked. Faults the previous chief logged but never closed."
+      ],
+      "banned": [
+        {
+          "pattern": "\"graph\" / \"knowledge graph\" / \"walks the graph\" / \"enters the graph\"",
+          "why": "Show Related is similarity-based; the graph system is built-but-dead code.",
+          "safe": "surfaces related records"
+        },
+        {
+          "pattern": "\"indexed the moment it's written\" / \"the instant\"",
+          "why": "Absolute-latency claim; indexing is worker-driven, not instantaneous-guaranteed.",
+          "safe": "becomes findable as you work"
+        },
+        {
+          "pattern": "\"Mapped to root cause\"",
+          "why": "See Search — no causal mapping.",
+          "safe": "Prior occurrences surfaced alongside."
+        },
+        {
+          "pattern": "\"Everything you do becomes findable\" + enumerating every CRUD type as guaranteed",
+          "why": "Coverage absolutes; keep to what's demonstrable.",
+          "safe": "Notes, photos, handovers, and records become findable as you work."
+        }
+      ]
+    },
+    "cloud-based": {
+      "safe": [
+        "Nothing to install.",
+        "Runs alongside your existing PMS — nothing to replace, nothing to migrate.",
+        "Your existing PMS keeps its class society approvals, its workflows, and its crew familiarity.",
+        "Browser-based. Any modern browser — desktop, tablet, mobile. No app installation.",
+        "Crew on rotation can review records remotely with their existing credentials.",
+        "Your data is yours. Nothing is held hostage.",
+        "Your existing manuals, PDFs, scans, exports, and emails are indexed as they are. No reformatting exercises."
+      ],
+      "banned": [
+        {
+          "pattern": "\"Works offline\" / \"core functions work with intermittent connectivity, and data syncs when the connection is restored\"",
+          "why": "Offline/sync NOT in the verified-shipped set. NEEDS-EVIDENCE.",
+          "safe": "Designed for the connectivity reality of superyachts. (nothing more specific)"
+        },
+        {
+          "pattern": "\"Onboard in hours, not weeks\" as an absolute",
+          "why": "Conflicts with the pilot's own \"import takes 3–5 working days\". NEEDS-EVIDENCE for \"hours\".",
+          "safe": "Onboarding measured in days, not months. or omit the number."
+        },
+        {
+          "pattern": "\"The vessel's record becomes searchable immediately\"",
+          "why": "\"Immediately\" absolute vs import/indexing lead time.",
+          "safe": "The vessel's record becomes searchable as soon as import completes."
+        },
+        {
+          "pattern": "\"real-time\" (any) / \"always current\" / \"live data, always current\"",
+          "why": "Real-time absolutes not guaranteed by worker-driven pipeline.",
+          "safe": "Live data from the vessel's records."
+        }
+      ]
+    },
+    "security": {
+      "safe": [
+        "GDPR — Aligned. EU data processed in the United States under SCCs and UK IDTA. DPA available on request.",
+        "SOC 2 — Aligned with TSC. Controls built against AICPA Trust Services Criteria. Audit not yet commissioned.",
+        "ISM Code — Aligned. Sections 10 and 11. Audit evidence, not class approval.",
+        "Each vessel's data is isolated. Role-based access throughout.",
+        "Row-level security isolates each vessel's data.",
+        "Encrypted at rest and in transit.",
+        "Fleet view aggregates statistics without exposing cross-vessel records.",
+        "Captain handovers visible only to the back-to-back and fleet manager. Role-based throughout."
+      ],
+      "banned": [
+        {
+          "pattern": "\"GDPR compliant\" / \"SOC 2 certified\" / \"SOC 2 compliant\"",
+          "why": "No audit commissioned; \"aligned\" is the honest calibrated word.",
+          "safe": "\"Aligned\" forms above, with the caveat sentence intact."
+        },
+        {
+          "pattern": "\"class approved\" / anything implying class society approval of CelesteOS",
+          "why": "CelesteOS is audit evidence, not class approval. The PMS keeps its approvals.",
+          "safe": "Your existing PMS keeps its class society approvals."
+        },
+        {
+          "pattern": "\"zero data retention\" / \"your data never leaves\" / \"no third party ever sees your data\"",
+          "why": "OpenAI subprocessor: no ZDR at current tier, 30-day abuse retention. Documented in the Sub-Processor Register.",
+          "safe": "Sub-processor register and DPA available on request."
+        },
+        {
+          "pattern": "\"optional two-factor\"",
+          "why": "NEEDS-EVIDENCE — not live-verified.",
+          "safe": "Omit until verified."
+        },
+        {
+          "pattern": "\"military-grade encryption\" / \"bank-level security\"",
+          "why": "Hype lexicon.",
+          "safe": "Encrypted at rest and in transit."
+        },
+        {
+          "pattern": "Caveat-stripping (publishing \"SOC-2\" without \"audit not yet commissioned\", or \"GDPR\" without the SCC/IDTA sentence)",
+          "why": "The caveat IS the claim.",
+          "safe": "Always ship the full calibrated sentence."
+        }
+      ]
+    }
+  }
+}

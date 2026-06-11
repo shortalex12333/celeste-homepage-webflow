@@ -1,0 +1,226 @@
+[
+  {
+    "id": "search-idle",
+    "file": "assets/search-command-bar-idle.png",
+    "chapter": "search",
+    "supports": [
+      "One place to find anything",
+      "the surface shows what needs attention without being asked",
+      "light-mode free-floating search bar (CEO-preferred presentation)"
+    ],
+    "never": [
+      "Do not caption the pointer list as \"AI prioritisation\" — it is a list of open items."
+    ],
+    "alt": "CelesteOS surface in light mode: a single search bar reading \"Find anything, or tell me what to do\", above a short list of items needing attention — an open fault, an overdue service, a low-stock part, an expiring certificate.",
+    "usage": "CEO prefers this light-mode bar on landing. Do not caption the pointer list as \"AI prioritisation\" — it is a list of open items. 1440×900 full-frame."
+  },
+  {
+    "id": "search-results",
+    "file": "assets/search-results-grouped.png",
+    "chapter": "search",
+    "supports": [
+      "Natural-language search across records and manuals",
+      "results grouped by domain with the record reference visible",
+      "keyboard-first (navigate/open/esc)"
+    ],
+    "never": [
+      "Do NOT claim \"every domain cited\" (gating uncertain).",
+      "The \"Understood\" line is interpretation display, not an \"AI\" claim — never caption it with banned words."
+    ],
+    "alt": "Searching \"oil\" in CelesteOS: results grouped into Faults, Inventory and Documents — an engine-room oil leak fault, oil filter stock levels, and the engine oil change procedure from the machinery manual.",
+    "usage": "Strongest search frame. Do NOT claim \"every domain cited\" (gating uncertain). The \"Understood\" line is interpretation display, not an \"AI\" claim — never caption it with banned words."
+  },
+  {
+    "id": "handover-draft",
+    "file": "assets/handover-draft-drawer.png",
+    "chapter": "handover",
+    "supports": [
+      "Handover captured as you work — items collect into a draft day by day",
+      "export when ready",
+      "nothing retyped at crew change"
+    ],
+    "never": [
+      "NEVER \"writes itself\"",
+      "NEVER \"auto-generated\"",
+      "NEVER \"auto-written\""
+    ],
+    "alt": "The handover draft drawer in CelesteOS: seven items grouped by day — a critical coolant fault, an oil-change work order, a watermaker note — each tagged and time-stamped, with an Export Handover button at the top.",
+    "usage": "NEVER \"writes itself\" / \"auto-generated\" / \"auto-written\". Reality: 1-tap capture from a queue into the draft. Tall right-hand drawer crop (460×900); some dark space below the list is the real drawer surface."
+  },
+  {
+    "id": "handover-export",
+    "file": "assets/handover-export-report.png",
+    "chapter": "handover",
+    "supports": [
+      "The draft exports to a formal, dated handover report",
+      "covers N items across departments",
+      "reads like a document a surveyor can hold"
+    ],
+    "never": [
+      "never caption the CONTENT as auto-written",
+      "Do not call the export \"sealed PDF\" (not live)."
+    ],
+    "alt": "Cover page of a CelesteOS technical handover report: document number, generation date, the period covered, and a contents list by department.",
+    "usage": "\"Generated\" on the cover = export timestamp; never caption the CONTENT as auto-written. Do not call the export \"sealed PDF\" (not live). First-page viewport crop of a longer document."
+  },
+  {
+    "id": "handover-signatures",
+    "file": "assets/handover-signature-block.png",
+    "chapter": "handover, verifier.celeste7.ai",
+    "supports": [
+      "Outgoing/incoming two-signature flow (live)",
+      "incoming chief acknowledges in writing",
+      "captain notified at sign-off — no one can claim they weren't told",
+      "receipt independently verifiable on the verifier"
+    ],
+    "never": [
+      "do NOT extend to \"sealed PDF\""
+    ],
+    "alt": "The handover sign-off in CelesteOS: outgoing and incoming chief engineers' signatures side by side, the incoming chief's written acknowledgement above, and a note that the captain was notified at sign-off.",
+    "usage": "Hostname in-image was corrected to verifier.celeste7.ai before capture (source HTML says verify. — dead host; fix upstream before re-rendering). \"Sealed\" here refers to the receipt, which is live — do NOT extend to \"sealed PDF\"."
+  },
+  {
+    "id": "handover-linked",
+    "file": "assets/handover-linked-records.png",
+    "chapter": "handover, show related",
+    "supports": [
+      "The handover wormhole (live): every entry links to the live record",
+      "incoming chief reads, clicks, lands in the fault/WO/part/document itself"
+    ],
+    "never": [],
+    "alt": "A single handover entry in CelesteOS with its linked records panel: the original fault, the work order with labour hours, the replacement part, and the OEM bulletin cited in the diagnosis — each one a link into the live record.",
+    "usage": "The in-image caption \"Every entry in the handover behaves like this\" is approved. Card crop 720×520."
+  },
+  {
+    "id": "ledger",
+    "file": "assets/ledger-activity-drawer.png",
+    "chapter": "ledger",
+    "supports": [
+      "Append-only activity record",
+      "every change attributed to a person and a time",
+      "reads/edits counted per day"
+    ],
+    "never": [
+      "NEVER \"hop back / Chrome-history resume\" (no resume).",
+      "NEVER \"sealed PDF\"."
+    ],
+    "alt": "The CelesteOS ledger drawer: a day-by-day activity timeline — a work order status change, a note added to a fault, a purchase order created — each entry attributed and time-stamped.",
+    "usage": "NEVER \"hop back / Chrome-history resume\" (no resume). NEVER \"sealed PDF\". Append-only is the safe claim. Drawer crop ~467×900."
+  },
+  {
+    "id": "certificate",
+    "file": "assets/certificate-lens.png",
+    "chapter": "certificate bundle",
+    "supports": [
+      "Certificates with expiry and survey windows visible",
+      "per-holder document list with current/expiring/expired status at a glance",
+      "upload renewed version"
+    ],
+    "never": [
+      "do not re-render with [the \"Fields auto-filled from scanned document\" strip] (banned \"auto-\" family, unverified vs shipped code)",
+      "Cert-expiry is a VITAMIN per offer canon: use as supporting line/visual, not a headline feature."
+    ],
+    "alt": "A crew certificate in CelesteOS: an STCW Certificate of Competency marked Valid with renewal due in 92 days, its issuing authority and survey window, and below it the holder's full document list with current, expiring and expired counts.",
+    "usage": "A \"Fields auto-filled from scanned document\" strip was HIDDEN before capture (banned \"auto-\" family, unverified vs shipped code) — do not re-render with it. Cert-expiry is a VITAMIN per offer canon: use as supporting line/visual, not a headline feature."
+  },
+  {
+    "id": "suggested-docs",
+    "file": "assets/suggested-docs-component.png",
+    "chapter": "suggested documents",
+    "supports": [
+      "Documents suggested with a match score — a person confirms every link",
+      "discovery of relevant OEM bulletins/schematics you didn't know you had"
+    ],
+    "never": [
+      "NEVER \"auto-propagation\" / \"cascades\" (not shipped — manual linking + discovery only).",
+      "do not re-render with [spec callout badges and a \"Cascaded from equipment\" meta line]"
+    ],
+    "alt": "The suggested documents panel on a generator in CelesteOS: three Caterpillar documents found for this equipment — a fuel-system bulletin, a cooling diagram, a vibration procedure — each waiting for the engineer to accept or decline.",
+    "usage": "NEVER \"auto-propagation\" / \"cascades\" (not shipped — manual linking + discovery only). Spec callout badges and a \"Cascaded from equipment\" meta line were removed before capture; do not re-render with them."
+  },
+  {
+    "id": "fault-detail",
+    "file": "assets/fault-detail-related.png",
+    "chapter": "show related, search",
+    "supports": [
+      "Show-related (fully live — the strongest moment): from a fault, the related work order, equipment and warranty claim are one click away",
+      "the full corrective-action story lives on the record"
+    ],
+    "never": [],
+    "alt": "A fault record in CelesteOS: a port fuel isolation valve leak under review, the corrective action written out, and its related entities below — the replacement work order, the valve assembly, a warranty claim.",
+    "usage": "Show-related is the strongest verified claim — lead with it. Viewport crop; related list continues below the fold."
+  },
+  {
+    "id": "work-order",
+    "file": "assets/work-order-detail.png",
+    "chapter": "show related, search",
+    "supports": [
+      "Work orders carry their official documents (SOP, ISM procedure, class cert) on the record",
+      "running-hours schedule and time tracking visible"
+    ],
+    "never": [],
+    "alt": "A work order in CelesteOS: an emergency valve replacement in progress, its 500-hour schedule and time estimates, and the official documents attached — the SOP, the ISM isolation procedure, the engine-room fire-safety class certificate.",
+    "usage": "Calm evidence frame for \"the record carries its paperwork\". No banned-word risks in-image."
+  },
+  {
+    "id": "parts",
+    "file": "assets/parts-inventory-lens.png",
+    "chapter": "search, show related",
+    "supports": [
+      "Parts with physical location on board",
+      "stock against minimum visible at a glance",
+      "barcode + purchase order from the same record"
+    ],
+    "never": [
+      "Unit-cost figures in-image are sample part data, not product pricing (pricing stays CALL-ONLY in copy).",
+      "Don't headline \"Recommended Minimum\" as a product capability (unverified) — crop or ignore it in captions."
+    ],
+    "alt": "A part in CelesteOS: an impeller kit for the seawater cooling pump — its box and shelf in the aft mooring locker, six of twelve in stock, OEM part number and supplier, with a barcode and purchase-order button on the record.",
+    "usage": "Unit-cost figures in-image are sample part data, not product pricing (pricing stays CALL-ONLY in copy). Don't headline \"Recommended Minimum\" as a product capability (unverified) — crop or ignore it in captions."
+  },
+  {
+    "id": "vessel-surface",
+    "file": "assets/vessel-surface-command.png",
+    "chapter": "search, cloud-based",
+    "supports": [
+      "The whole boat behind one bar",
+      "what needs attention surfaces without being asked",
+      "keyboard-first"
+    ],
+    "never": [
+      "Dark-mode counterpart of `search-command-bar-idle.png` — pick ONE per page section (one media, one focal point)."
+    ],
+    "alt": "The CelesteOS vessel surface: one search bar over a needs-your-attention list — an oil leak open two days, a generator service five days overdue, a filter at two units, a SOLAS certificate expiring, a parts delivery due today.",
+    "usage": "Demo state-switcher buttons were hidden before capture. Dark-mode counterpart of `search-command-bar-idle.png` — pick ONE per page section (one media, one focal point)."
+  },
+  {
+    "id": "surface-full",
+    "file": "assets/vessel-surface-full.png",
+    "chapter": "cloud-based, search",
+    "supports": [
+      "This is a real, running product (not a mockup)",
+      "the whole vessel state on one surface"
+    ],
+    "never": [
+      "NEVER crop-zoom the certificates/receiving/warranty cards where test strings become legible.",
+      "Use at reduced size only",
+      "Dense multi-card grid — use for \"the whole surface\" context, not as a one-focal-point hero."
+    ],
+    "alt": "The full CelesteOS vessel surface, live: cards for parts below minimum, open work orders, faults, the last handover, certificates, hours of rest, purchase orders and recent documents — the state of the boat on one screen.",
+    "usage": "Real app with TEST-VESSEL data: visible strings include \"Captain Test (MASTER)\", \"E2E Test Vendor\", \"(regression probe)\". Use at reduced size only; NEVER crop-zoom the certificates/receiving/warranty cards where test strings become legible. Dense multi-card grid — use for \"the whole surface\" context, not as a one-focal-point hero."
+  },
+  {
+    "id": "surface-sidebar",
+    "file": "assets/vessel-surface-sidebar.png",
+    "chapter": "cloud-based",
+    "supports": [
+      "The domains CelesteOS covers, in the product's own navigation",
+      "counts of open items"
+    ],
+    "never": [
+      "Counts (3 work orders, 20 faults, 12 parts) are test-vessel data; fine at a glance, don't quote them as customer numbers."
+    ],
+    "alt": "The CelesteOS sidebar: Operations, Inventory & Supply and Compliance sections — work orders, faults, equipment, handover, parts, purchase orders, certificates, documents, warranty.",
+    "usage": "Clean tall crop (306×1119) — good as a quiet \"what it covers\" strip. Counts (3 work orders, 20 faults, 12 parts) are test-vessel data; fine at a glance, don't quote them as customer numbers."
+  }
+]
