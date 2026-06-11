@@ -5355,7 +5355,7 @@ body.pin #sd-stage[data-state="4"] .lc-text {
 /* mobile: the adj-block.cel entrance slides VERTICALLY (its desktop translateX(30)
    converges toward the "+", but stacked on mobile that 30px overflows the viewport
    pre-reveal → 4px horizontal scroll). Rise instead; .in still resolves to none. */
-@media (prefers-reduced-motion: no-preference) and (max-width: 720px) {
+@media (prefers-reduced-motion: no-preference) and (max-width: 880px) {
   body.js .adj-wrap .adj-block.cel { transform: translateY(20px); }
 }
 
@@ -5413,4 +5413,66 @@ body.pin #sd-stage[data-state="4"] .lc-text {
 @media (max-width: 600px) {
   .topbar .nav { flex-wrap: wrap; gap: 0.7rem 1rem; justify-content: flex-end; }
   .topbar .nav a { font-size: 0.6rem; }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   MOBILE + TABLET PIN LAYER (2026-06-11) — the lock-scroll engine now runs at
+   every width. This layer adapts the pinned scenes below 880px.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* mobile URL-bar-safe viewport units for the pinned stages */
+@supports (height: 100dvh) {
+  body.pin .datum-stage { height: 100dvh; }
+  body.pin .lh-stage { height: 100dvh; }
+  .hero { min-height: 100svh; }
+}
+
+@media (max-width: 880px) {
+  /* stage scaffolding: clear the 2-row fixed topbar; tighter sides */
+  body.pin .datum-stage { padding: 5.2rem 1.1rem 2.1rem; }
+  .ds-context { font-size: 9px; gap: 6px; flex-wrap: wrap; }
+  .ds-frame { margin-bottom: 1.1rem; }
+  .ds-frame .big { font-size: clamp(1.05rem, 4.6vw, 1.5rem); }
+  .ds-caption { gap: 0.42rem; margin-top: 1rem; }
+  .ds-caption .cap-text { font-size: 9.5px; letter-spacing: 0.08em; }
+  .cap-prog.pi { height: 12px; }
+  /* cards never exceed the stage */
+  .datum-inner, .pin-stack, .crop { max-width: 100%; }
+  .crop { overflow: hidden; }
+}
+
+@media (max-width: 880px) {
+  /* ── handover sign-off: row fits without the role meta ── */
+  #ho-stage .sig-row { gap: 8px; }
+  #ho-stage .sig-row .who { display: none; }
+  /* ── search: rows clamp; text wraps left-aligned; compress everything ── */
+  .ds-hit { padding: 8px 10px; gap: 8px; }
+  .ds-hit .ds-body { flex: 1 1 0; min-width: 0; }
+  .ds-hit .ds-line { flex-wrap: wrap; justify-content: flex-start; gap: 3px 8px; text-align: left; }
+  .ds-hit .ds-line .main { white-space: normal; }
+  .ds-hit .sub { max-width: 100%; }
+  .ds-results .ds-group { padding: 6px 10px; font-size: 8.5px; }
+  .ds-resfoot { white-space: normal; line-height: 1.5; padding: 8px 10px; }
+  .ds-bar { padding: 0 12px; }
+  .ds-record { padding: 14px 14px 10px; }
+  .ds-record .rname { font-size: 1.05rem; }
+  .ds-record .rmeta { flex-wrap: wrap; }
+  /* ── suggested: cascade + toast compress so state 3 clears the caption ── */
+  #sd-stage .cascade { margin-top: 0.9rem; }
+  #sd-stage .cascade-row { padding: 5px 0; font-size: 0.76rem; line-height: 1.4; }
+  #sd-stage .sd-toast { font-size: 0.74rem; }
+  #sd-stage .sd-row { padding: 9px 10px; }
+}
+
+@media (max-width: 880px) {
+  /* verified bar: wrapped mobile text needs reveal room (desktop 96px clips) */
+  body.pin #pr-stage[data-state="4"] .pr-verified { max-height: 170px; }
+  .pr-verified .sub { white-space: normal; }
+}
+
+@media (max-width: 880px) {
+  /* show-related: time + body keep their gap when wrapping */
+  #sr-stage .sr-body-row { display: flex; flex-wrap: wrap; gap: 2px 8px; }
+  /* money cite line: micro seal breathes; row wraps cleanly */
+  #mf-stage .mfv-cite { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 7px; line-height: 1.5; }
 }
