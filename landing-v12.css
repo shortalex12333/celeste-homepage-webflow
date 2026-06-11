@@ -1,0 +1,5399 @@
+/* ═══════════════════════════════════════════════════════
+   CelesteOS — Landing v11 · Section 1: The Search Datum
+   Hero matches celeste7.ai (smooth, authoritative reveal).
+   Search is the datum; everything branches from it.
+   Colour per colour-system.md: neutral foundation,
+   teal #5AABCC as functional accent only.
+   ═══════════════════════════════════════════════════════ */
+
+:root {
+  --bg:           #0C0B0A;
+  --bg-deep:      #080807;
+  --surface:      #181614;
+  --surface-el:   #1e1b18;
+  --border:       rgba(255,255,255,0.11);
+  --border-sub:   rgba(255,255,255,0.07);
+  --border-ghost: rgba(255,255,255,0.04);
+  --teal:         #5AABCC;
+  --teal-dim:     #1A3040;
+  --teal-bd:      #2A5068;
+  --txt:          rgba(255,255,255,0.92);
+  --txt2:         rgba(255,255,255,0.55);
+  --txt3:         rgba(255,255,255,0.35);
+  --green:        #4A9468;
+  --amber:        #C9A66B;
+  --red:          #C0503A;
+  --font-body:    'DM Sans', 'DM Sans Fallback', -apple-system, sans-serif;
+  --font-mono:    'IBM Plex Mono', monospace;
+  --font-accent:  'Cormorant Garamond', Georgia, serif;
+  --font-display: 'Eloquia Display', 'DM Sans', system-ui, -apple-system, sans-serif;
+}
+
+/* ═══ Eloquia Display — brand headline voice (self-hosted) ═══ */
+@font-face {
+  font-family: 'Eloquia Display';
+  src: url('fonts/Eloquia-Display-Light.woff2') format('woff2');
+  font-weight: 300; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'Eloquia Display';
+  src: url('fonts/Eloquia-Display-Light-Italic.woff2') format('woff2');
+  font-weight: 300; font-style: italic; font-display: swap;
+}
+@font-face {
+  font-family: 'Eloquia Display';
+  src: url('fonts/Eloquia-Display-Regular.woff2') format('woff2');
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'Eloquia Display';
+  src: url('fonts/Eloquia-Display-Italic.woff2') format('woff2');
+  font-weight: 400; font-style: italic; font-display: swap;
+}
+@font-face {
+  font-family: 'Eloquia Display';
+  src: url('fonts/Eloquia-Display-Medium.woff2') format('woff2');
+  font-weight: 500; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'Eloquia Display';
+  src: url('fonts/Eloquia-Display-Medium-Italic.woff2') format('woff2');
+  font-weight: 500; font-style: italic; font-display: swap;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--txt);
+  font-family: var(--font-body);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: var(--teal); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--teal);
+  margin-bottom: 1.2rem;
+}
+.display {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 3.8vw, 3.4rem);
+  font-weight: 300;
+  line-height: 1.16;
+  letter-spacing: -0.012em;
+  color: var(--txt);
+  margin-bottom: 1.5rem;
+  text-wrap: balance;
+}
+.display .accent {
+  font-family: var(--font-accent);
+  font-style: italic;
+  font-weight: 300;
+  color: var(--teal);
+}
+.lead {
+  font-size: 1.12rem;
+  line-height: 1.7;
+  color: var(--txt2);
+  font-weight: 300;
+  max-width: 620px;
+  text-wrap: pretty;
+}
+.lead strong { color: var(--txt); font-weight: 400; }
+
+.section {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 13vh 2rem;
+}
+
+/* handoff connectors */
+.handoff {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  text-align: center;
+}
+.handoff::before {
+  content: '';
+  display: block;
+  width: 1px;
+  height: 72px;
+  margin: 0 auto 2.2rem;
+  background: linear-gradient(to bottom, transparent, var(--teal-bd));
+}
+.handoff p {
+  font-family: var(--font-accent);
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(1.3rem, 2.2vw, 1.7rem);
+  color: var(--txt2);
+  max-width: 26em;
+  margin: 0 auto;
+  text-wrap: balance;
+}
+.handoff p em { color: var(--teal); font-style: italic; }
+
+@media (prefers-reduced-motion: no-preference) {
+  body.js .reveal {
+    opacity: 0;
+    transform: translateY(26px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  body.js .reveal.in { opacity: 1; transform: none; }
+}
+
+/* ═══ HERO — matches celeste7.ai opening ═══ */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+/* full-bleed: the hero background + horizon span the viewport; content stays in the 1140 column */
+.hero-inner { width: 100%; max-width: 1140px; margin: 0 auto; padding: 0 2rem; }
+.topbar {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2.2rem max(2rem, calc((100% - 1140px) / 2 + 2rem));
+}
+.wordmark {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--txt2);
+}
+.topbar .nav {
+  display: flex;
+  gap: 2rem;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.topbar .nav a { color: var(--txt3); }
+.topbar .nav a:hover { color: var(--teal); text-decoration: none; }
+
+/* line-mask reveal — smooth, slow, authoritative */
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 6.4vw, 5.4rem);
+  font-weight: 300;
+  line-height: 1.08;
+  letter-spacing: -0.015em;
+  margin-bottom: 2.4rem;
+}
+.hero h1 .line { display: block; overflow: hidden; }
+.hero h1 .line > span { display: block; }
+.hero h1 .accent {
+  font-family: var(--font-accent);
+  font-style: italic;
+  font-weight: 300;
+  color: var(--teal);
+}
+.hero .lead { max-width: 560px; }
+@media (prefers-reduced-motion: no-preference) {
+  body.js .hero h1 .line > span {
+    transform: translateY(110%);
+    animation: line-up 1.1s cubic-bezier(0.2, 0.65, 0.2, 1) forwards;
+  }
+  body.js .hero h1 .line:nth-child(2) > span { animation-delay: 0.14s; }
+  @keyframes line-up { to { transform: none; } }
+  body.js .hero .fade-in {
+    opacity: 0;
+    animation: soft-in 1.2s ease forwards;
+  }
+  body.js .hero .fade-in.d1 { animation-delay: 0.8s; }
+  body.js .hero .fade-in.d2 { animation-delay: 1.05s; }
+  @keyframes soft-in { to { opacity: 1; } }
+}
+.scroll-cue {
+  position: absolute;
+  bottom: 2.6rem;
+  left: max(2rem, calc((100% - 1140px) / 2 + 2rem));
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--txt3);
+}
+.scroll-cue .line {
+  width: 1px;
+  height: 44px;
+  background: linear-gradient(to bottom, var(--teal), transparent);
+}
+
+/* ═══ PROBLEM — lays the ground ═══ */
+.problem { max-width: 780px; }
+.problem .display { max-width: 17em; }
+
+/* ═══ THE SEARCH DATUM — pinned, scroll-driven ═══ */
+.datum-wrap { position: relative; }
+body.pin .datum-wrap { height: 560vh; }
+.datum-stage {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 3.5rem 2rem 2.6rem;
+  background: var(--bg-deep);
+  overflow: hidden;
+}
+body.pin .datum-stage {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.datum-inner {
+  width: min(680px, 100%);
+  position: relative;
+}
+.datum-halo {
+  position: absolute;
+  inset: -140px;
+  background: radial-gradient(ellipse at center, rgba(90,171,204,0.10), transparent 62%);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+body.pin [data-state="5"] .datum-halo,
+body:not(.pin) .datum-halo { opacity: 1; }
+
+/* context strip — vessel + role, carried automatically */
+.ds-context {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--txt3);
+  margin-bottom: 12px;
+}
+.ds-context .bm { color: var(--teal); font-weight: 600; letter-spacing: 0.16em; }
+
+/* the bar — the instrument in the dark */
+.ds-bar {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px 18px;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.6);
+  transition: border-color 0.8s ease;
+}
+body.pin [data-state="2"] .ds-bar,
+body.pin [data-state="3"] .ds-bar { border-color: var(--teal-bd); }
+.ds-bar svg { flex-shrink: 0; stroke: var(--teal); }
+.ds-typed {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--txt);
+  white-space: nowrap;
+  overflow: hidden;
+}
+.ds-typed .ph { color: var(--txt3); }
+.ds-caret {
+  width: 1.5px;
+  height: 18px;
+  background: var(--teal);
+  flex-shrink: 0;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .ds-caret { animation: blink 1.1s steps(1) infinite; }
+  @keyframes blink { 50% { opacity: 0; } }
+}
+
+/* understood — entity extraction, lifted from the component */
+.ds-understood {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.ds-understood .k {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--txt3);
+}
+.ds-entity {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--teal);
+  background: var(--teal-dim);
+  border: 1px solid var(--teal-bd);
+  border-radius: 3px;
+  padding: 3px 9px;
+  white-space: nowrap;
+}
+.ds-domains {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--txt3);
+  margin-left: auto;
+}
+
+/* results — grouped, ranked */
+.ds-results {
+  margin-top: 14px;
+  background: var(--surface);
+  border: 1px solid var(--border-sub);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.ds-group {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--txt3);
+  padding: 9px 16px 5px;
+}
+.ds-hit {
+  display: flex;
+  gap: 12px;
+  align-items: baseline;
+  padding: 10px 16px;
+  border-top: 1px solid var(--border-ghost);
+  font-size: 13px;
+  color: var(--txt2);
+  line-height: 1.5;
+}
+.ds-hit .id {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--teal);
+  white-space: nowrap;
+}
+.ds-hit .main { color: var(--txt); font-weight: 500; }
+.ds-hit .pill {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 3px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.ds-hit .pill.closed { background: rgba(76,148,104,0.12); color: var(--green); border: 1px solid rgba(76,148,104,0.30); }
+.ds-hit .pill.record { background: rgba(90,171,204,0.12); color: var(--teal); border: 1px solid var(--teal-bd); }
+.ds-resfoot {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  color: var(--txt3);
+  padding: 10px 16px;
+  border-top: 1px solid var(--border-sub);
+}
+.ds-resfoot strong { color: var(--txt2); font-weight: 500; }
+
+/* the record, stepped forward */
+.ds-record {
+  margin-top: 14px;
+  background: var(--surface-el);
+  border: 1px solid var(--teal-bd);
+  border-radius: 10px;
+  padding: 22px 24px;
+  box-shadow: 0 30px 70px rgba(0,0,0,0.6);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.ds-record .rid {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--txt3);
+  margin-bottom: 4px;
+}
+.ds-record .rname {
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--txt);
+  margin-bottom: 10px;
+}
+.ds-record .rbody {
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--txt2);
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
+.ds-record .rbody strong { color: var(--txt); font-weight: 500; }
+.ds-record .rsource {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--teal);
+}
+.ds-record .rproof {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border-sub);
+  font-size: 13px;
+  color: var(--txt2);
+  line-height: 1.6;
+}
+.ds-record .rproof strong { color: var(--txt); font-weight: 500; }
+
+/* state gating (pin mode only) */
+body.pin .datum-inner {
+  will-change: transform;
+  transition: transform 0.7s cubic-bezier(0.2, 0.6, 0.2, 1);
+}
+/* record overlays results — it steps forward, replacing them,
+   so hidden states don't stack the column past viewport height */
+.ds-stack { position: relative; }
+body.pin .ds-record {
+  position: absolute;
+  top: 14px;
+  left: 0;
+  right: 0;
+  margin-top: 0;
+}
+body.pin .ds-understood,
+body.pin .ds-results,
+body.pin .ds-record { opacity: 0; transform: translateY(16px); pointer-events: none; }
+body.pin [data-state="3"] .ds-understood { opacity: 1; transform: none; }
+body.pin [data-state="4"] .ds-understood { opacity: 0.45; transform: none; }
+body.pin [data-state="4"] .ds-results,
+body.pin [data-state="5"] .ds-results { opacity: 1; transform: none; }
+body.pin [data-state="5"] .ds-results { opacity: 0.35; }
+body.pin [data-state="5"] .ds-record { opacity: 1; transform: none; }
+body.pin [data-state="5"] .ds-understood { opacity: 0; }
+
+/* stacked fallback: generous rhythm between beats */
+body:not(.pin) .ds-understood { margin-top: 18px; }
+body:not(.pin) .ds-results,
+body:not(.pin) .ds-record { margin-top: 22px; }
+
+/* caption rail */
+.ds-caption {
+  position: static;
+  flex-shrink: 0;
+  width: 100%;
+  margin-top: 1.3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--txt3);
+}
+.ds-caption .num { color: var(--teal); }
+body:not(.pin) .ds-caption { display: none; }
+
+/* datum intro line above bar */
+.ds-frame {
+  text-align: center;
+  margin-bottom: 2.6rem;
+}
+.ds-frame .big {
+  font-size: clamp(1.5rem, 2.8vw, 2.3rem);
+  font-weight: 300;
+  line-height: 1.3;
+  color: var(--txt);
+  text-wrap: balance;
+  max-width: 24em;
+  margin: 0 auto;
+}
+.ds-frame .big em {
+  font-family: var(--font-accent);
+  font-style: italic;
+  color: var(--teal);
+}
+body.pin [data-state="4"] .ds-frame,
+body.pin [data-state="5"] .ds-frame { opacity: 0.25; }
+.ds-frame { transition: opacity 0.7s ease; }
+
+/* ═══ PINNED LAYER FRAMEWORK (shared by Handover + Search) ═══ */
+.pin-stack { position: relative; }
+body.pin .pin-stack { min-height: 440px; }
+body.pin .pin-layer {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+  pointer-events: none;
+}
+body.pin .pin-layer.active {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+body.pin .pin-layer.past { opacity: 0; transform: translateY(-16px); }
+body:not(.pin) .pin-layer { margin-top: 2rem; }
+body:not(.pin) .pin-layer:first-child { margin-top: 0; }
+
+/* ═══ HANDOVER JOURNEY — the centrepiece ═══ */
+.ho-note {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 18px 20px;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.6);
+}
+.ho-note .t {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--txt3);
+  margin-bottom: 8px;
+}
+.ho-note .body {
+  font-size: 15px;
+  font-weight: 300;
+  color: var(--txt);
+  line-height: 1.6;
+}
+.ho-prompt {
+  margin-top: 14px;
+  background: var(--surface-el);
+  border: 1px solid var(--teal-bd);
+  border-radius: 8px;
+  padding: 16px 18px;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.55);
+}
+.ho-prompt .q { font-size: 14px; color: var(--txt); margin-bottom: 12px; }
+.ho-prompt .acts { display: flex; gap: 10px; }
+.ho-btn {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 8px 18px;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--txt2);
+  cursor: default;
+}
+.ho-btn.primary { background: var(--teal-dim); border-color: var(--teal-bd); color: var(--teal); }
+.ho-prompt .foot {
+  margin-top: 12px;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--txt3);
+}
+
+.ho-draft {
+  background: var(--surface);
+  border: 1px solid var(--border-sub);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.6);
+}
+.ho-draft-head {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border-sub);
+}
+.ho-draft-title {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--txt2);
+}
+.ho-count {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--teal);
+}
+.ho-count strong { font-size: 18px; font-weight: 500; }
+.ho-row {
+  display: flex;
+  gap: 12px;
+  align-items: baseline;
+  padding: 10px 16px;
+  border-top: 1px solid var(--border-ghost);
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--txt2);
+  line-height: 1.5;
+}
+.ho-row .main { color: var(--txt); font-weight: 500; }
+.ho-tag {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 3px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.ho-tag.action  { background: rgba(201,166,107,0.12); color: var(--amber); border: 1px solid rgba(201,166,107,0.30); }
+.ho-tag.monitor { background: rgba(90,171,204,0.12); color: var(--teal); border: 1px solid var(--teal-bd); }
+.ho-tag.done    { background: rgba(76,148,104,0.12); color: var(--green); border: 1px solid rgba(76,148,104,0.30); }
+.ho-fade { position: relative; }
+.ho-fade::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 46px;
+  background: linear-gradient(to bottom, transparent, var(--surface));
+  pointer-events: none;
+}
+.ho-draft-foot {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  color: var(--txt3);
+  padding: 10px 16px;
+  border-top: 1px solid var(--border-sub);
+}
+/* ── entry 3: real Handover-Draft panel anatomy (dissected from render-handover-draft.html) ── */
+.ho-draft-head { gap: 10px; align-items: center; }
+.ho-draft .hd-icon {
+  width: 26px; height: 26px; border-radius: 6px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(90,171,204,0.12); border: 1px solid var(--teal-bd);
+}
+.ho-draft .hd-icon svg { width: 13px; height: 13px; color: var(--teal); }
+.ho-draft .hd-titles { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.ho-draft-title { text-transform: none; letter-spacing: 0.01em; font-size: 13px; color: var(--txt); font-family: var(--font-body); font-weight: 500; }
+.ho-draft-sub { font-family: var(--font-mono); font-size: 11px; color: var(--teal); letter-spacing: 0.02em; }
+.ho-draft-sub strong { font-size: 14px; font-weight: 500; }
+.ho-draft .ho-item {
+  display: flex; gap: 10px; align-items: flex-start;
+  padding: 9px 16px; border-top: 1px solid var(--border-ghost);
+  position: relative;
+}
+.ho-draft .ho-item:first-of-type { border-top: none; }
+.ho-draft .hi-icon { width: 14px; height: 14px; flex-shrink: 0; color: var(--txt3); margin-top: 1px; }
+.ho-draft .ho-item.critical .hi-icon { color: var(--red); }
+.ho-draft .ho-item.critical::before {
+  content: ''; position: absolute; left: 0; top: 5px; bottom: 5px;
+  width: 2px; border-radius: 1px; background: var(--red); opacity: 0.7;
+}
+.ho-draft .hi-body { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px; }
+.ho-draft .hi-title {
+  font-size: 13px; font-weight: 300; color: var(--txt2); line-height: 1.45;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+}
+.ho-draft .hi-title .main { color: var(--txt); font-weight: 500; }
+.ho-draft .hi-meta {
+  display: flex; align-items: center; gap: 8px;
+  font-family: var(--font-mono); font-size: 9.5px; letter-spacing: 0.04em;
+}
+.ho-draft .hi-ref { color: var(--txt3); text-transform: uppercase; }
+.ho-draft .ho-cat {
+  font-family: var(--font-body); font-size: 9px; font-weight: 600;
+  letter-spacing: 0.04em; text-transform: uppercase;
+  padding: 1px 6px; border-radius: 3px; white-space: nowrap;
+}
+.ho-draft .ho-cat.crit { background: rgba(192,80,58,0.14); color: var(--red); border: 1px solid rgba(192,80,58,0.30); }
+.ho-draft .ho-cat.std  { background: rgba(255,255,255,0.05); color: var(--txt3); border: 1px solid var(--border-sub); }
+.ho-draft .ho-cat.low  { background: rgba(76,148,104,0.12); color: var(--green); border: 1px solid rgba(76,148,104,0.30); }
+.ho-draft .ho-act {
+  font-family: var(--font-body); font-size: 9px; font-weight: 600;
+  letter-spacing: 0.04em; text-transform: uppercase; white-space: nowrap;
+}
+.ho-draft .ho-item.action  .ho-act { color: var(--amber); }
+.ho-draft .ho-item.monitor .ho-act { color: var(--teal); }
+.ho-draft .ho-item.done    .ho-act { color: var(--green); }
+.ho-draft .ho-item.critical .ho-act { color: var(--red); }
+.ho-draft .hi-ts {
+  font-family: var(--font-mono); font-size: 10px; color: var(--txt3);
+  flex-shrink: 0; white-space: nowrap; margin-top: 1px;
+}
+
+.ho-seal {
+  background: var(--surface-el);
+  border: 1px solid var(--teal-bd);
+  border-radius: 10px;
+  padding: 22px 24px;
+  box-shadow: 0 30px 70px rgba(0,0,0,0.6);
+}
+.ho-seal .seal-line {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--border-sub);
+  margin-bottom: 12px;
+}
+.seal-mark {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  border: 1.5px solid transparent;   /* the canonical seal SVG draws its own ring — one ring only */
+  color: var(--teal);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  flex-shrink: 0;
+}
+.seal-mark > svg.seal-svg { width: 100%; height: 100%; display: block; }
+.ho-seal .seal-title { font-size: 15px; font-weight: 600; color: var(--txt); }
+.sig-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 8px 0;
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--txt2);
+}
+/* the drawn signature — the believability lift (real signature-block anatomy, dissected to one line) */
+.sig-cursive {
+  font-family: 'Caveat', 'Cormorant Garamond', cursive;
+  font-size: 1.55rem;
+  line-height: 1;
+  color: var(--txt);
+  min-width: 4.6em;
+  flex-shrink: 0;
+}
+.sig-row .who { color: var(--txt2); font-weight: 400; }
+.sig-state {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 3px 9px;
+  border-radius: 3px;
+  white-space: nowrap;
+  background: rgba(74,148,104,0.12);
+  color: var(--green);
+  border: 1px solid rgba(74,148,104,0.30);
+}
+.sig-row .when {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--txt3);
+  white-space: nowrap;
+  min-width: 5.4em;
+  text-align: right;
+}
+.ho-seal .foot {
+  margin-top: 12px;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--teal);
+}
+
+/* the export, teased */
+.ho-export {
+  position: relative;
+  background: linear-gradient(165deg, #191714, #0E0D0C);
+  border: 1px solid var(--border);
+  border-radius: 10px 10px 0 0;
+  border-bottom: none;
+  padding: 16px 16px 0;
+  max-height: 290px;
+  overflow: hidden;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.6);
+}
+.ho-export::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 150px;
+  background: linear-gradient(to bottom, transparent, var(--bg-deep));
+  pointer-events: none;
+}
+.ho-export .doc-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--border-sub);
+  margin-bottom: 14px;
+}
+.ho-export .doc-title { font-size: 17px; font-weight: 600; color: var(--txt); }
+.ho-export .doc-meta {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--txt3);
+}
+.ho-export .doc-sec {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin: 12px 0 4px;
+}
+.ho-export .doc-line {
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--txt2);
+  line-height: 1.65;
+}
+.ho-export .doc-line strong { color: var(--txt); font-weight: 500; }
+.ho-export-cta {
+  text-align: center;
+  padding: 1.4rem 0 0;
+}
+.ho-cta {
+  display: inline-block;
+  background: var(--teal);
+  color: var(--bg);
+  border: none;
+  border-radius: 5px;
+  padding: 1rem 2.6rem;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: -0.005em;
+  cursor: pointer;
+}
+.ho-cta:hover { text-decoration: none; filter: brightness(1.08); }
+.ho-cta-sub {
+  margin-top: 0.8rem;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--txt3);
+}
+
+/* ═══ LEAD MAGNET — your vessel's handover ═══ */
+.magnet-section { background: var(--bg-deep); border-top: 1px solid var(--border-ghost); border-bottom: 1px solid var(--border-ghost); }
+.magnet-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4.5rem;
+  align-items: start;
+}
+@media (max-width: 920px) { .magnet-grid { grid-template-columns: 1fr; gap: 3rem; } }
+.magnet-card {
+  background: var(--surface);
+  border: 1px solid var(--teal-bd);
+  border-radius: 10px;
+  padding: 2.2rem;
+}
+.lm-header {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 1rem;
+}
+.lm-copy {
+  font-size: 0.92rem;
+  color: var(--txt2);
+  font-weight: 300;
+  margin-bottom: 1.6rem;
+  text-wrap: pretty;
+}
+.lm-input {
+  width: 100%;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  padding: 0.8rem 1rem;
+  color: var(--txt);
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  margin-bottom: 0.8rem;
+}
+.lm-input::placeholder { color: var(--txt3); }
+.lm-input:focus { outline: none; border-color: var(--teal); }
+.lm-add {
+  display: inline-block;
+  background: none;
+  border: none;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  letter-spacing: 0;
+  color: var(--teal);
+  cursor: pointer;
+  padding: 0;
+  margin: 0.1rem 0 1rem;
+}
+.lm-add:hover { text-decoration: underline; }
+.lm-btn {
+  width: 100%;
+  background: var(--teal);
+  color: var(--bg);
+  border: none;
+  border-radius: 5px;
+  padding: 1rem;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: -0.005em;
+  cursor: pointer;
+  margin-top: 0.4rem;
+}
+.lm-btn:hover { filter: brightness(1.08); }
+.lm-subtext {
+  text-align: center;
+  font-size: 0.78rem;
+  color: var(--txt3);
+  margin-top: 1rem;
+}
+.lm-confirm { text-align: center; padding: 1.5rem 0; }
+.lm-confirm .seal-mark { width: 36px; height: 36px; margin: 0 auto 1.2rem; font-size: 1rem; }
+.lm-confirm h4 { font-weight: 500; color: var(--txt); margin-bottom: 0.5rem; }
+.lm-confirm p { font-size: 0.9rem; color: var(--txt2); font-weight: 300; }
+
+/* ═══ section markers ═══ */
+.marker-row { text-align: center; padding: 8vh 2rem; }
+
+/* ═══ pilot card ═══ */
+.pilot-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 4.5rem 3rem;
+  text-align: center;
+  max-width: 740px;
+  margin: 0 auto;
+}
+.pilot-card .lead { margin: 0 auto; }
+.price-lockup { font-size: 4.2rem; font-weight: 300; line-height: 1; margin: 2.8rem 0 0.5rem; }
+.price-sub {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--txt3);
+  margin-bottom: 1.4rem;
+}
+.anchor-line {
+  font-family: var(--font-accent);
+  font-style: italic;
+  font-weight: 300;
+  font-size: 1.2rem;
+  color: var(--txt2);
+  margin-bottom: 2.6rem;
+}
+.pilot-params {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1.2rem 2.6rem;
+  margin-bottom: 2.8rem;
+}
+.param-item { font-size: 0.92rem; color: var(--txt2); font-weight: 300; }
+.param-item::before {
+  content: '\2713';
+  color: var(--teal);
+  font-family: var(--font-mono);
+  margin-right: 0.5rem;
+}
+.pilot-cta {
+  display: inline-block;
+  background: var(--teal);
+  color: var(--bg);
+  border-radius: 5px;
+  padding: 1.05rem 2.4rem;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.pilot-cta:hover { text-decoration: none; filter: brightness(1.08); }
+.ask-line { margin-top: 1.6rem; font-size: 0.85rem; font-weight: 300; color: var(--txt3); }
+
+/* ═══ OFFER CLIMAX — monumental price + serif close (matches live celeste7.ai) ═══ */
+.price-monument {
+  display: grid;
+  grid-template-columns: 1fr 35%;
+  gap: 2.5rem 4.5rem;
+  align-items: center;
+  max-width: 1100px;
+  margin: 0 auto;
+  min-height: 460px;
+}
+@media (max-width: 880px) {
+  .price-monument { grid-template-columns: 1fr; gap: 2.4rem; min-height: 0; align-items: start; }
+}
+.pm-amount {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(5rem, 11vw, 11.25rem);   /* 80 → 180px, the monument */
+  line-height: 0.92;
+  letter-spacing: -0.02em;
+  color: var(--txt);
+}
+.pm-sub {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--txt2);
+  margin-top: 1.1rem;
+}
+.pm-body { max-width: 32ch; }
+.pm-line1 {
+  font-size: 1.06rem;
+  font-weight: 300;
+  color: var(--txt);
+  line-height: 1.65;
+  margin-bottom: 1rem;
+  text-wrap: pretty;
+}
+.pm-line2 {
+  font-size: 1.06rem;
+  font-weight: 300;
+  color: var(--txt2);
+  line-height: 1.65;
+  margin-bottom: 2rem;
+  text-wrap: pretty;
+}
+.pm-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: #FAFAFA;
+  color: #0c0b0a;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 1rem 1.9rem;
+  border-radius: 8px;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.7),
+    0 2px 4px rgba(0,0,0,0.5),
+    0 18px 40px -20px rgba(0,0,0,0.8);
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+.pm-cta:hover { text-decoration: none; background: #fff; transform: translateY(-1px); }
+/* the editorial descent — a hairline carries the eye from the monument to the close */
+.offer-close {
+  text-align: center;
+  max-width: 620px;
+  margin: 9vh auto 0;
+}
+.offer-close::before {
+  content: '';
+  display: block;
+  width: 1px;
+  height: 88px;
+  margin: 0 auto 3.2rem;
+  background: linear-gradient(to bottom, transparent, var(--teal-bd));
+}
+.oc-label {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 1.3rem;
+}
+.oc-heading {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  line-height: 1.32;
+  color: var(--txt);
+  margin-bottom: 1.1rem;
+  text-wrap: balance;
+}
+.oc-heading em {
+  font-family: var(--font-accent);
+  font-style: italic;
+  font-weight: 300;
+  color: var(--teal);
+}
+.oc-body {
+  font-size: 0.95rem;
+  font-weight: 300;
+  color: var(--txt2);
+  line-height: 1.7;
+  text-wrap: pretty;
+}
+
+/* ═══ PRODUCT CROPS — token-faithful fragments ═══ */
+.crop {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 30px 70px rgba(0,0,0,0.55);
+  font-size: 13px;
+  text-align: left;
+}
+.crop-topbar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 14px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border-sub);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--txt3);
+}
+.crop-topbar .bm { color: var(--teal); font-weight: 600; letter-spacing: 0.16em; }
+.crop-caption {
+  margin-top: 0.9rem;
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--txt3);
+}
+.pp-pill {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 3px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.pp-pill.closed  { background: rgba(76,148,104,0.12); color: var(--green); border: 1px solid rgba(76,148,104,0.30); }
+.pp-pill.open    { background: rgba(90,171,204,0.12); color: var(--teal); border: 1px solid var(--teal-bd); }
+.pp-pill.overdue { background: rgba(192,80,58,0.10); color: var(--red); border: 1px solid rgba(192,80,58,0.30); }
+.pp-link {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--teal);
+  border-bottom: 1px dashed rgba(90,171,204,0.30);
+  white-space: nowrap;
+}
+.pp-row {
+  display: flex;
+  gap: 12px;
+  align-items: baseline;
+  padding: 10px 16px;
+  border-top: 1px solid var(--border-ghost);
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--txt2);
+  line-height: 1.55;
+}
+.pp-row .pp-main { color: var(--txt); font-weight: 500; }
+.pp-row.hit { background: rgba(90,171,204,0.07); border-left: 2px solid var(--teal); }
+.pp-row .pp-time {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--txt3);
+  white-space: nowrap;
+  min-width: 7.2em;
+}
+.pp-row.struck .pp-what { text-decoration: line-through; color: var(--txt3); }
+.pp-role {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 2px 7px;
+  border-radius: 3px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.pp-role.chief   { background: rgba(90,171,204,0.15); color: var(--teal); }
+.pp-role.captain { background: rgba(201,166,107,0.12); color: var(--amber); }
+.pp-role.crew    { background: rgba(255,255,255,0.07); color: var(--txt2); }
+.pp-tabs {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid var(--border-sub);
+  padding: 0 16px;
+}
+.pp-tab {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 10px 14px;
+  color: var(--txt3);
+  border-bottom: 2px solid transparent;
+}
+.pp-tab.on { color: var(--teal); border-bottom-color: var(--teal); }
+.pp-bucket {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--txt3);
+  padding: 10px 16px 4px;
+}
+.pp-sealbar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 16px;
+  border-top: 1px solid var(--border-sub);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--teal);
+}
+.pp-sealbar .seal-mark { width: 20px; height: 20px; font-size: 9px; }
+
+/* second layer: how + evidence */
+.how-block {
+  margin-top: 2rem;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1rem;
+  align-items: baseline;
+  max-width: 560px;
+}
+.how-block .how-k {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--teal);
+  white-space: nowrap;
+  padding-top: 0.2rem;
+}
+.how-block .how-v {
+  font-size: 0.92rem;
+  font-weight: 300;
+  color: var(--txt2);
+  line-height: 1.65;
+  text-wrap: pretty;
+}
+.how-block .how-v strong { color: var(--txt); font-weight: 400; }
+.evidence {
+  margin-top: 1.8rem;
+  border-left: 2px solid var(--border);
+  padding-left: 1.1rem;
+  max-width: 520px;
+}
+.evidence .ev-quote {
+  font-family: var(--font-accent);
+  font-style: italic;
+  font-weight: 300;
+  font-size: 1.25rem;
+  line-height: 1.45;
+  color: var(--txt);
+  text-wrap: pretty;
+}
+.evidence .ev-who {
+  margin-top: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--txt3);
+}
+.evidence .ev-fact { font-size: 0.92rem; font-weight: 300; color: var(--txt2); line-height: 1.65; }
+.evidence .ev-fact strong { color: var(--txt); font-weight: 400; }
+
+.grid-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: start;
+}
+@media (max-width: 920px) { .grid-split { grid-template-columns: 1fr; gap: 3.5rem; } }
+
+/* ═══ LIGHT BAND — suggested documents breath ═══ */
+:root {
+  --lbg: #F0EDE7;
+  --lsurf: #FAF8F4;
+  --lborder: rgba(30,28,24,0.10);
+  --ltxt: #211F1B;
+  --ltxt2: #6E6960;
+  --lteal: #34708F;
+}
+.light-band { background: var(--lbg); color: var(--ltxt); }
+.light-band .eyebrow { color: var(--lteal); }
+.light-band .display { color: var(--ltxt); }
+.light-band .display .accent { color: var(--lteal); }
+.light-band .lead { color: var(--ltxt2); }
+.light-band .lead strong { color: var(--ltxt); font-weight: 500; }
+.light-band .how-block .how-k { color: var(--lteal); }
+.light-band .how-block .how-v { color: var(--ltxt2); }
+.light-band .how-block .how-v strong { color: var(--ltxt); font-weight: 500; }
+.light-band .handoff p { color: var(--ltxt2); }
+.light-band .handoff::before { background: linear-gradient(to bottom, transparent, rgba(52,112,143,0.5)); }
+.contrast-line {
+  margin-top: 2rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  line-height: 1.9;
+  color: var(--ltxt2);
+  border-left: 2px solid rgba(52,112,143,0.4);
+  padding-left: 1rem;
+  max-width: 30em;
+}
+.contrast-line strong { color: var(--lteal); font-weight: 500; }
+
+/* the shipping suggested-docs row */
+.sd-card {
+  background: var(--lsurf);
+  border: 1px solid var(--lborder);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 18px 44px rgba(30,28,24,0.12);
+  font-size: 13px;
+}
+.sd-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 16px;
+  border-bottom: 1px solid var(--lborder);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ltxt2);
+}
+.sd-head .chev { margin-left: auto; color: var(--lteal); }
+.sd-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(30,28,24,0.06);
+}
+.sd-row:last-child { border-bottom: none; }
+.sd-icon {
+  width: 28px; height: 28px;
+  flex-shrink: 0;
+  border-radius: 6px;
+  background: rgba(52,112,143,0.10);
+  border: 1px solid rgba(52,112,143,0.25);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--lteal);
+}
+.sd-mid { min-width: 0; }
+.sd-prompt { font-size: 12px; color: var(--ltxt2); }
+.sd-name {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--lteal);
+  text-decoration: underline;
+  text-decoration-style: solid;
+  text-underline-offset: 2px;
+}
+.sd-meta {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--ltxt2);
+  margin-top: 2px;
+}
+.sd-match {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--lteal);
+  background: rgba(52,112,143,0.10);
+  border: 1px solid rgba(52,112,143,0.25);
+  border-radius: 3px;
+  padding: 2px 7px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  margin-left: auto;
+}
+.sd-acts { display: flex; gap: 6px; flex-shrink: 0; }
+.sd-btn {
+  width: 28px; height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--lborder);
+  border-radius: 4px;
+  background: transparent;
+  color: var(--ltxt2);
+  font-size: 12px;
+  cursor: pointer;
+}
+.sd-btn.ok { color: var(--lteal); border-color: rgba(52,112,143,0.4); }
+.sd-foot {
+  padding: 10px 16px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--lteal);
+  border-top: 1px solid var(--lborder);
+}
+
+/* cascade fan */
+.cascade { margin-top: 1.6rem; }
+.cascade-row {
+  display: flex;
+  gap: 12px;
+  align-items: baseline;
+  padding: 8px 0;
+  font-size: 0.9rem;
+  font-weight: 300;
+  color: var(--ltxt2);
+}
+.cascade-row .n {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--lteal);
+  border: 1px solid rgba(52,112,143,0.35);
+  border-radius: 50%;
+  width: 20px; height: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.cascade-row strong { color: var(--ltxt); font-weight: 500; }
+
+/* ═══ MONEY-FINDER ═══ */
+.mf-flag {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: rgba(90,171,204,0.07);
+  border-top: 1px solid var(--teal-bd);
+  color: var(--txt);
+  font-size: 13px;
+  flex-wrap: wrap;
+}
+.mf-flag .k {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--teal);
+  white-space: nowrap;
+}
+.mf-flag strong { font-weight: 500; }
+.mf-claim-btn {
+  margin-left: auto;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 8px 16px;
+  background: var(--teal);
+  color: var(--bg);
+  border: none;
+  border-radius: 4px;
+  cursor: default;
+  white-space: nowrap;
+}
+.money-figure { text-align: center; padding: 2.4rem 0 0.4rem; }
+.money-amount {
+  font-size: clamp(3rem, 6vw, 4.6rem);
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  color: var(--txt);
+  line-height: 1;
+}
+.money-caption {
+  margin-top: 0.8rem;
+  font-family: var(--font-accent);
+  font-style: italic;
+  font-weight: 300;
+  font-size: 1.15rem;
+  color: var(--txt2);
+}
+
+/* ═══ LEDGER BAND ═══ */
+.ledger-band {
+  background: var(--bg-deep);
+  border-top: 1px solid var(--border-ghost);
+  border-bottom: 1px solid var(--border-ghost);
+}
+.surveyor-line {
+  font-family: var(--font-accent);
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(1.35rem, 2.4vw, 1.8rem);
+  color: var(--txt2);
+  margin: 3rem auto 0;
+  max-width: 24em;
+  text-align: center;
+  text-wrap: balance;
+}
+.surveyor-line em { color: var(--teal); }
+
+/* ═══ LIGHT PINNED STAGE ═══ */
+.datum-stage.light { background: var(--lbg); }
+.datum-stage.light .ds-frame .big { color: var(--ltxt); }
+.datum-stage.light .ds-frame .big em { color: var(--lteal); }
+.datum-stage.light .ds-context { color: var(--ltxt2); }
+.datum-stage.light .ds-context .bm { color: var(--lteal); }
+.datum-stage.light .ds-caption { color: var(--ltxt2); }
+.datum-stage.light .ds-caption .num { color: var(--lteal); }
+
+/* ═══ SHOW RELATED — pinned lens sequence ═══ */
+.sr-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+}
+.sr-head .eid { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--txt3); }
+.sr-head .ename { font-size: 15px; font-weight: 600; color: var(--txt); margin-top: 2px; }
+.sr-btn {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--teal);
+  border: 1px solid var(--teal-bd);
+  background: var(--teal-dim);
+  border-radius: 4px;
+  padding: 7px 13px;
+  white-space: nowrap;
+  transition: box-shadow 0.7s ease, transform 0.7s ease;
+}
+body.pin #sr-stage[data-state="2"] .sr-btn {
+  box-shadow: 0 0 0 4px rgba(90,171,204,0.22), 0 0 44px rgba(90,171,204,0.38);
+  transform: scale(1.14);
+}
+.sr-body-row {
+  display: flex;
+  gap: 12px;
+  align-items: baseline;
+  padding: 10px 16px;
+  border-top: 1px solid var(--border-ghost);
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--txt2);
+  line-height: 1.55;
+}
+.sr-body-row .pp-time { font-family: var(--font-mono); font-size: 10px; color: var(--txt3); white-space: nowrap; min-width: 7.2em; }
+.sr-drawer { transition: opacity 0.7s ease, transform 0.7s ease; }
+body.pin #sr-stage .sr-drawer { opacity: 0; transform: translateY(14px); }
+body.pin #sr-stage[data-state="3"] .sr-drawer,
+body.pin #sr-stage[data-state="4"] .sr-drawer { opacity: 1; transform: none; }
+#sr-stage .sr-drawer .pp-row { transition: opacity 0.6s ease, background 0.6s ease; }
+body.pin #sr-stage[data-state="4"] .sr-drawer .pp-row:not(.sr-note) { opacity: 0.28; }
+body.pin #sr-stage[data-state="4"] .sr-note { background: rgba(90,171,204,0.12); }
+
+/* ═══ SUGGESTED DOCS — pinned accept + learning curve ═══ */
+body.pin #sd-stage .sd-btn.ok { transition: box-shadow 0.7s ease, transform 0.7s ease; }
+body.pin #sd-stage[data-state="2"] .sd-row.first .sd-btn.ok {
+  box-shadow: 0 0 0 4px rgba(52,112,143,0.22), 0 0 36px rgba(52,112,143,0.40);
+  transform: scale(1.3);
+}
+body.pin #sd-stage[data-state="3"] .sd-row.first { background: rgba(52,112,143,0.08); }
+.sd-toastrow {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.1rem;
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.sd-toast {
+  display: inline-flex;
+  gap: 10px;
+  align-items: center;
+  padding: 10px 16px;
+  background: var(--lsurf);
+  border: 1px solid rgba(52,112,143,0.4);
+  border-radius: 6px;
+  box-shadow: 0 10px 28px rgba(30,28,24,0.12);
+  font-size: 13px;
+  color: var(--ltxt);
+}
+.sd-toast .ck { color: var(--lteal); font-weight: 600; }
+.inner-wide { width: min(880px, 100%); }
+.sd-anim { max-width: 620px; margin: 0 auto; }
+body.pin #sd-stage .sd-toastrow,
+body.pin #sd-stage .cascade {
+  opacity: 0;
+  transform: translateY(12px);
+  max-height: 0;
+  overflow: hidden;
+  transition: opacity 0.7s ease, transform 0.7s ease, max-height 0.7s ease;
+}
+body.pin #sd-stage[data-state="3"] .sd-toastrow { opacity: 1; transform: none; max-height: 90px; }
+body.pin #sd-stage[data-state="3"] .cascade { opacity: 1; transform: none; max-height: 420px; }
+.lc-block { margin-top: 1.8rem; }
+body.pin #sd-stage .lc-block {
+  opacity: 0;
+  transform: translateY(16px);
+  max-height: 0;
+  overflow: hidden;
+  transition: opacity 0.8s ease, transform 0.8s ease, max-height 0.8s ease;
+}
+body.pin #sd-stage[data-state="4"] .lc-block { opacity: 1; transform: none; max-height: 900px; }
+/* state 4 reclaims the frame's space — it's already dimmed out */
+body.pin #sd-stage .ds-frame {
+  overflow: hidden;
+  max-height: 140px;
+  transition: opacity 0.7s ease, max-height 0.7s ease, margin-bottom 0.7s ease;
+}
+body.pin #sd-stage[data-state="4"] .ds-frame {
+  opacity: 0;
+  max-height: 0;
+  margin-bottom: 0;
+}
+/* short viewports: compact the graph so card + graph always fit */
+@media (max-height: 760px) {
+  body.pin #sd-stage .lc-wrap { gap: 1.6rem; align-items: center; }
+  body.pin #sd-stage .lc-graph { max-height: 200px; width: auto; max-width: 100%; margin: 0 auto; }
+  body.pin #sd-stage .lc-text h3 { font-size: 1.15rem; margin-bottom: 0.6rem; }
+  body.pin #sd-stage .lc-text p { font-size: 0.85rem; line-height: 1.55; }
+}
+
+/* learning-curve graph layer */
+.lc-wrap {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 2.6rem;
+  align-items: center;
+}
+@media (max-width: 920px) { .lc-wrap { grid-template-columns: 1fr; gap: 1.8rem; } }
+.lc-graph {
+  width: 100%;
+  height: auto;
+  display: block;
+  background: var(--lsurf);
+  border: 1px solid var(--lborder);
+  border-radius: 10px;
+  box-shadow: 0 18px 44px rgba(30,28,24,0.10);
+}
+.lc-axis { stroke: rgba(30,28,24,0.18); stroke-width: 1; }
+.lc-grid-l { stroke: rgba(30,28,24,0.06); stroke-width: 1; }
+.lc-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  fill: var(--ltxt2);
+}
+.lc-tag { font-family: var(--font-mono); font-size: 10.5px; font-weight: 600; letter-spacing: 0.04em; }
+.lc-tag.decay  { fill: #8A837A; }
+.lc-tag.growth { fill: var(--lteal); }
+.curve { fill: none; stroke-linecap: round; }
+.curve.decay  { stroke: #8A837A; stroke-width: 2; stroke-dasharray: 6 5; }
+.curve.growth { stroke: var(--lteal); stroke-width: 2.6; }
+@media (prefers-reduced-motion: no-preference) {
+  body.pin .curve { stroke-dasharray: 760; stroke-dashoffset: 760; transition: stroke-dashoffset 1.8s ease 0.3s; }
+  body.pin .curve.decay { transition-delay: 0.55s; }
+  body.pin #sd-stage[data-state="4"] .curve { stroke-dashoffset: 0; }
+  body.pin .curve.decay { stroke-dasharray: 760; }
+}
+.lc-text h3 {
+  font-size: clamp(1.3rem, 2.2vw, 1.7rem);
+  font-weight: 400;
+  color: var(--ltxt);
+  line-height: 1.3;
+  margin-bottom: 1rem;
+  text-wrap: balance;
+}
+.lc-text h3 em { font-family: var(--font-accent); font-style: italic; color: var(--lteal); }
+.lc-text p {
+  font-size: 0.95rem;
+  font-weight: 300;
+  color: var(--ltxt2);
+  line-height: 1.7;
+  text-wrap: pretty;
+}
+.lc-text p strong { color: var(--ltxt); font-weight: 500; }
+.lc-text p + p { margin-top: 0.9rem; }
+
+/* ═══ MONEY-FINDER — autoplay vignette ═══ */
+.mfv-stage { position: relative; overflow: hidden; }
+.mfv-scenes { position: relative; height: 330px; }
+.mfv-scene {
+  position: absolute;
+  inset: 0;
+  padding: 18px;
+  opacity: 0;
+  transition: opacity 0.55s ease;
+}
+#mfv[data-scene="1"] .mfv-scene[data-s="1"],
+#mfv[data-scene="2"] .mfv-scene[data-s="2"],
+#mfv[data-scene="3"] .mfv-scene[data-s="3"],
+#mfv[data-scene="4"] .mfv-scene[data-s="4"] { opacity: 1; }
+.mfv-h {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--txt3);
+  margin-bottom: 14px;
+}
+.mfv-kv {
+  display: flex;
+  gap: 14px;
+  align-items: baseline;
+  padding: 9px 0;
+  border-bottom: 1px solid var(--border-ghost);
+  font-size: 13px;
+}
+.mfv-kv .k {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--txt3);
+  min-width: 6.5em;
+}
+.mfv-kv .v { color: var(--txt); font-weight: 400; }
+.mfv-foot { display: flex; justify-content: flex-end; gap: 10px; margin-top: 22px; }
+.mfv-ghost {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 500;
+  padding: 9px 16px;
+  background: transparent;
+  color: var(--txt2);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  cursor: default;
+}
+.mfv-primary {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 9px 18px;
+  background: var(--teal);
+  color: var(--bg);
+  border: none;
+  border-radius: 4px;
+  cursor: default;
+}
+.mfv-subrow {
+  display: flex;
+  gap: 12px;
+  align-items: baseline;
+  padding: 11px 14px;
+  border: 1px solid var(--border-sub);
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--txt2);
+  line-height: 1.5;
+}
+.mfv-subrow .pp-time { font-family: var(--font-mono); font-size: 10px; color: var(--txt3); white-space: nowrap; }
+.mfv-subrow .pp-main { color: var(--txt); font-weight: 500; }
+.mfv-toast {
+  display: inline-flex;
+  gap: 9px;
+  align-items: center;
+  margin-top: 14px;
+  padding: 9px 14px;
+  background: var(--surface-el);
+  border: 1px solid rgba(76,148,104,0.30);
+  border-radius: 6px;
+  font-size: 12px;
+  color: var(--txt);
+}
+.mfv-toast .ck { color: var(--green); font-weight: 600; }
+.mfv-dim { position: absolute; inset: 0; background: rgba(0,0,0,0.45); }
+.mfv-dialog {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(320px, 86%);
+  background: var(--surface);
+  border: 1px solid var(--teal-bd);
+  border-radius: 8px;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.7);
+  padding: 20px;
+}
+.mfv-dialog .t { font-size: 15px; font-weight: 600; color: var(--txt); margin-bottom: 6px; }
+.mfv-dialog .b { font-size: 13px; font-weight: 300; color: var(--txt2); line-height: 1.55; margin-bottom: 16px; }
+.mfv-dialog .b strong { color: var(--txt); font-weight: 500; }
+.mfv-dialog .acts { display: flex; justify-content: flex-end; gap: 8px; }
+.mfv-doc {
+  background: var(--surface);
+  border: 1px solid var(--border-sub);
+  border-radius: 6px;
+  padding: 16px 18px;
+}
+.mfv-doc .dt { font-size: 13px; font-weight: 600; color: var(--txt); margin-bottom: 8px; }
+.mfv-doc .dl { font-size: 12.5px; font-weight: 300; color: var(--txt2); line-height: 1.65; margin: 0 0 7px; }
+.mfv-doc .dl strong { color: var(--txt); font-weight: 500; }
+.mfv-doc mark {
+  background: rgba(90,171,204,0.16);
+  color: var(--txt);
+  border-bottom: 1px solid var(--teal);
+  padding: 1px 3px;
+  border-radius: 2px;
+}
+.mfv-cite {
+  margin-top: 12px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--teal);
+}
+.mfv-dots { margin-left: auto; display: flex; gap: 5px; }
+.mfv-dots span {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--border);
+  transition: background 0.4s ease;
+}
+#mfv[data-scene="1"] .mfv-dots span:nth-child(1),
+#mfv[data-scene="2"] .mfv-dots span:nth-child(2),
+#mfv[data-scene="3"] .mfv-dots span:nth-child(3),
+#mfv[data-scene="4"] .mfv-dots span:nth-child(4) { background: var(--teal); }
+.mfv-cursor {
+  position: absolute;
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255,255,255,0.85);
+  background: rgba(255,255,255,0.18);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+  z-index: 6;
+  top: 50%; left: 50%;
+  transition: top 1.1s cubic-bezier(0.3, 0.7, 0.3, 1), left 1.1s cubic-bezier(0.3, 0.7, 0.3, 1), opacity 0.5s ease;
+}
+#mfv[data-scene="1"] .mfv-cursor { top: 88%; left: 82%; }
+#mfv[data-scene="2"] .mfv-cursor { top: 42%; left: 88%; opacity: 0.45; }
+#mfv[data-scene="3"] .mfv-cursor { top: 70%; left: 66%; }
+#mfv[data-scene="4"] .mfv-cursor { top: 84%; left: 26%; opacity: 0.45; }
+@media (prefers-reduced-motion: no-preference) {
+  #mfv.clicking .mfv-cursor::after {
+    content: '';
+    position: absolute;
+    inset: -8px;
+    border-radius: 50%;
+    border: 1.5px solid var(--teal);
+    animation: mfv-click 0.5s ease both;
+  }
+  @keyframes mfv-click {
+    from { opacity: 1; scale: 0.4; }
+    to   { opacity: 0; scale: 1.3; }
+  }
+}
+
+/* ═══ LEDGER — pinned "your own history" sequence ═══ */
+.lg-away, .lg-fix, .lg-seal { transition: opacity 0.7s ease, transform 0.7s ease, max-height 0.7s ease; }
+body.pin #lg-stage .lg-away,
+body.pin #lg-stage .lg-fix,
+body.pin #lg-stage .lg-seal {
+  opacity: 0;
+  transform: translateY(12px);
+  max-height: 0;
+  overflow: hidden;
+}
+body.pin #lg-stage[data-state="2"] .lg-away,
+body.pin #lg-stage[data-state="3"] .lg-away,
+body.pin #lg-stage[data-state="4"] .lg-away,
+body.pin #lg-stage[data-state="3"] .lg-fix,
+body.pin #lg-stage[data-state="4"] .lg-fix,
+body.pin #lg-stage[data-state="4"] .lg-seal {
+  opacity: 1;
+  transform: none;
+  max-height: 260px;
+}
+body.pin #lg-stage[data-state="4"] .pp-row.mine { background: rgba(90,171,204,0.05); }
+.pp-row.mine { border-left: 2px solid var(--teal-bd); }
+body.pin #lg-stage .ds-frame {
+  overflow: hidden;
+  max-height: 140px;
+  transition: opacity 0.7s ease, max-height 0.7s ease, margin-bottom 0.7s ease;
+}
+body.pin #lg-stage[data-state="4"] .ds-frame { opacity: 0; max-height: 0; margin-bottom: 0; }
+
+/* ═══ LEDGER · HOW IT WORKS — right-to-left strip ═══ */
+body.pin #ledger-how { height: 420vh; position: relative; }
+.lh-stage {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2.6rem;
+  background: var(--bg-deep);
+  overflow: hidden;
+  padding: 4rem 0;
+}
+body.pin .lh-stage {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  padding: 0;
+}
+.lh-head {
+  max-width: 1140px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 2rem;
+}
+.lh-head .eyebrow { margin-bottom: 0; }
+.lh-head .hint {
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--txt3);
+}
+.lh-scroller { width: 100%; }
+body:not(.pin) .lh-scroller {
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+.lh-strip {
+  display: flex;
+  gap: 1.4rem;
+  padding: 0 max(2rem, calc((100vw - 1140px) / 2 + 2rem));
+  width: max-content;
+  will-change: transform;
+}
+.lh-card {
+  width: min(430px, 78vw);
+  flex-shrink: 0;
+  scroll-snap-align: center;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 24px 56px rgba(0,0,0,0.5);
+  display: flex;
+  flex-direction: column;
+}
+.lh-card-label {
+  padding: 16px 18px 4px;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--teal);
+}
+.lh-card-title {
+  padding: 0 18px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--txt);
+}
+.lh-card-sub {
+  padding: 4px 18px 14px;
+  font-size: 0.85rem;
+  font-weight: 300;
+  color: var(--txt2);
+  line-height: 1.55;
+}
+.lh-frag { border-top: 1px solid var(--border-sub); margin-top: auto; }
+
+/* ═══ ONBOARDING — register · export · search ═══ */
+.ob-urlbar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border-sub);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--txt);
+}
+.ob-urlbar svg { flex-shrink: 0; stroke: var(--green); }
+.ob-urlbar .dim { color: var(--txt3); }
+.ob-form { padding: 18px; }
+.ob-form .mfv-kv .v { color: var(--txt); }
+.ob-foot {
+  padding: 10px 16px;
+  border-top: 1px solid var(--border-sub);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  color: var(--txt3);
+}
+.ob-prog {
+  height: 6px;
+  border-radius: 100px;
+  background: var(--surface-el);
+  overflow: hidden;
+  margin: 4px 18px 12px;
+}
+.ob-prog-fill {
+  height: 100%;
+  width: 100%;
+  border-radius: 100px;
+  background: linear-gradient(90deg, var(--teal-bd), var(--teal));
+}
+body.pin #ob-stage .ob-prog-fill { width: 8%; transition: width 1.6s ease 0.2s; }
+body.pin #ob-stage[data-state="3"] .ob-prog-fill,
+body.pin #ob-stage[data-state="4"] .ob-prog-fill { width: 100%; }
+.ob-count {
+  padding: 0 18px 14px;
+  font-size: 13px;
+  color: var(--txt2);
+}
+.ob-count strong { color: var(--txt); font-weight: 600; font-size: 16px; }
+.ob-searchrow { padding: 0 18px 16px; }
+.ob-compare {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 26px 28px;
+  box-shadow: 0 24px 56px rgba(0,0,0,0.5);
+}
+.ob-bar-row { margin-bottom: 18px; }
+.ob-bar-row .lbl {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: 12.5px;
+  font-weight: 300;
+  color: var(--txt2);
+  margin-bottom: 7px;
+}
+.ob-bar-row .lbl .val {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--txt3);
+  white-space: nowrap;
+}
+.ob-bar-row .lbl .val.teal { color: var(--teal); font-weight: 600; }
+.ob-track {
+  height: 10px;
+  border-radius: 100px;
+  background: var(--surface-el);
+  overflow: hidden;
+}
+.ob-fill { height: 100%; border-radius: 100px; }
+.ob-fill.slow { width: 96%; background: #4A453F; }
+.ob-fill.fast { width: 5%; background: var(--teal); }
+body.pin #ob-stage .ob-fill { width: 0; transition: width 1.5s cubic-bezier(0.2, 0.6, 0.2, 1) 0.25s; }
+body.pin #ob-stage[data-state="4"] .ob-fill.slow { width: 96%; }
+body.pin #ob-stage[data-state="4"] .ob-fill.fast { width: 5%; transition-delay: 0.55s; }
+.ob-kpis {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border-sub);
+}
+@media (max-width: 640px) { .ob-kpis { grid-template-columns: 1fr; } }
+.ob-kpi .n { font-size: 1.7rem; font-weight: 300; color: var(--teal); line-height: 1.1; }
+.ob-kpi .d {
+  font-size: 0.78rem;
+  font-weight: 300;
+  color: var(--txt3);
+  margin-top: 4px;
+  line-height: 1.45;
+}
+
+/* ═══ COVERAGE — everything you'd expect ═══ */
+.cov-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+  margin-top: 3.4rem;
+}
+.cov-tile {
+  background: var(--surface);
+  border: 1px solid var(--border-sub);
+  border-radius: 8px;
+  padding: 1.4rem 1.5rem;
+  transition: border-color 0.4s ease, background 0.4s ease;
+}
+.cov-tile:hover { border-color: var(--teal-bd); background: var(--frag, var(--bg-deep)); }
+.cov-tile .cn {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--txt);
+  margin-bottom: 0.35rem;
+}
+.cov-tile .cl {
+  font-size: 0.85rem;
+  font-weight: 300;
+  color: var(--txt2);
+  line-height: 1.55;
+}
+.cov-tile .cd {
+  font-size: 0.78rem;
+  font-weight: 300;
+  color: var(--txt3);
+  line-height: 1.55;
+  margin-top: 0.6rem;
+  padding-top: 0.6rem;
+  border-top: 1px solid var(--border-ghost);
+}
+.cov-plus {
+  margin-top: 2.8rem;
+  font-family: var(--font-accent);
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(1.25rem, 2.2vw, 1.6rem);
+  color: var(--txt2);
+  max-width: 30em;
+  text-wrap: balance;
+}
+.cov-plus em { color: var(--teal); }
+
+/* ═══ OFFER — included · get/need · timeline ═══ */
+.offer-cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  margin-top: 3rem;
+}
+@media (max-width: 760px) { .offer-cols { grid-template-columns: 1fr; gap: 2rem; } }
+.offer-col h3 {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 1rem;
+}
+.offer-col li {
+  list-style: none;
+  font-size: 0.92rem;
+  font-weight: 300;
+  color: var(--txt2);
+  line-height: 1.6;
+  padding: 0.45rem 0;
+  border-bottom: 1px solid var(--border-ghost);
+}
+.offer-col li:last-child { border-bottom: none; }
+.offer-col li::before {
+  content: '—';
+  color: var(--teal-bd);
+  margin-right: 0.7rem;
+}
+.offer-col li strong { color: var(--txt); font-weight: 400; }
+.tl-strip {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0;
+  margin-top: 3rem;
+  border-top: 1px solid var(--border);
+}
+@media (max-width: 920px) { .tl-strip { grid-template-columns: 1fr; border-top: none; border-left: 1px solid var(--border); } }
+.tl-step { padding: 1.4rem 1.2rem 0 0; position: relative; }
+@media (max-width: 920px) { .tl-step { padding: 0.9rem 0 0.9rem 1.4rem; } }
+.tl-step::before {
+  content: '';
+  position: absolute;
+  top: -4px; left: 0;
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--teal);
+}
+@media (max-width: 920px) { .tl-step::before { top: 1.4rem; left: -4px; } }
+.tl-step .td {
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 0.4rem;
+}
+.tl-step .tt { font-size: 0.92rem; font-weight: 500; color: var(--txt); margin-bottom: 0.3rem; }
+.tl-step .tx {
+  font-size: 0.8rem;
+  font-weight: 300;
+  color: var(--txt3);
+  line-height: 1.55;
+}
+
+/* ═══ PROOF — when proof matters ═══ */
+.pr-receipt {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 30px 70px rgba(0,0,0,0.55);
+}
+.pr-row {
+  display: flex;
+  gap: 14px;
+  align-items: baseline;
+  padding: 10px 18px;
+  border-top: 1px solid var(--border-ghost);
+  font-size: 12.5px;
+}
+.pr-row .k {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--txt3);
+  min-width: 8.5em;
+  flex-shrink: 0;
+}
+.pr-row .v { color: var(--txt2); font-weight: 300; line-height: 1.5; }
+.pr-row .v.hash {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--teal);
+  word-break: break-all;
+}
+.pr-row .v strong { color: var(--txt); font-weight: 500; }
+.pr-verified {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 18px;
+  border-top: 1px solid rgba(76,148,104,0.30);
+  background: rgba(76,148,104,0.06);
+  font-size: 13px;
+  color: var(--txt);
+}
+.pr-verified .seal-mark { border-color: var(--green); color: var(--green); width: 22px; height: 22px; font-size: 10px; }
+.pr-verified .sub {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--txt3);
+  margin-left: auto;
+  white-space: nowrap;
+}
+.pr-cta {
+  display: inline-block;
+  margin-top: 1.4rem;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0;
+  color: var(--teal);
+  border: 1px solid var(--teal-bd);
+  background: var(--teal-dim);
+  border-radius: 5px;
+  padding: 0.8rem 1.6rem;
+}
+.pr-cta:hover { text-decoration: none; filter: brightness(1.15); }
+.pr-law {
+  margin-top: 1.8rem;
+  font-family: var(--font-accent);
+  font-style: italic;
+  font-weight: 300;
+  font-size: 1.35rem;
+  line-height: 1.45;
+  color: var(--txt);
+  max-width: 22em;
+  text-wrap: balance;
+}
+.pr-law em { color: var(--teal); }
+
+/* the spine — three backbones */
+.spine-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-top: 4.5rem;
+  padding-top: 2.5rem;
+  border-top: 1px solid var(--border-sub);
+}
+@media (max-width: 760px) { .spine-row { grid-template-columns: 1fr; } }
+.spine-item .sn {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 0.5rem;
+}
+.spine-item .st { font-size: 1rem; font-weight: 600; color: var(--txt); margin-bottom: 0.3rem; }
+.spine-item .sx {
+  font-size: 0.85rem;
+  font-weight: 300;
+  color: var(--txt2);
+  line-height: 1.6;
+}
+
+/* ═══ PROOF — pinned receipt sequence ═══ */
+.pl-meta {
+  display: flex;
+  gap: 14px;
+  padding: 9px 18px;
+  border-top: 1px solid var(--border-ghost);
+  font-size: 12.5px;
+  color: var(--txt2);
+}
+.pl-meta .k {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--txt3);
+  min-width: 4.5em;
+  flex-shrink: 0;
+  padding-top: 2px;
+}
+.pl-meta .v strong { color: var(--txt); font-weight: 500; }
+.pl-quote {
+  font-family: var(--font-accent);
+  font-style: italic;
+  font-weight: 300;
+  font-size: 1.25rem;
+  line-height: 1.5;
+  color: var(--txt);
+  padding: 16px 18px 6px;
+  text-wrap: pretty;
+}
+.pl-stamp {
+  display: inline-block;
+  margin: 10px 18px 16px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--red);
+  border: 1px solid rgba(192,80,58,0.4);
+  background: rgba(192,80,58,0.08);
+  border-radius: 3px;
+  padding: 4px 10px;
+}
+.pr-check {
+  display: flex;
+  gap: 10px;
+  align-items: baseline;
+  padding: 9px 18px;
+  border-top: 1px solid var(--border-ghost);
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  color: var(--txt2);
+}
+.pr-check .tick { color: var(--green); font-weight: 600; flex-shrink: 0; }
+.pr-check strong { color: var(--txt); font-weight: 500; }
+@media (prefers-reduced-motion: no-preference) {
+  body.pin #pr-stage .pr-check { opacity: 0; transform: translateY(8px); transition: opacity 0.5s ease, transform 0.5s ease; }
+  body.pin #pr-stage .pin-layer.active .pr-check { opacity: 1; transform: none; }
+  body.pin #pr-stage .pin-layer.active .pr-checks .pr-check:nth-of-type(2) { transition-delay: 0.25s; }
+  body.pin #pr-stage .pin-layer.active .pr-checks .pr-check:nth-of-type(3) { transition-delay: 0.5s; }
+}
+body.pin #pr-stage .pr-verified {
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  padding-top: 0;
+  padding-bottom: 0;
+  transition: opacity 0.7s ease, max-height 0.7s ease, padding 0.7s ease;
+}
+body.pin #pr-stage[data-state="4"] .pr-verified {
+  opacity: 1;
+  max-height: 96px;
+  padding-top: 14px;
+  padding-bottom: 14px;
+}
+body.pin #pr-stage .ds-frame {
+  overflow: hidden;
+  max-height: 160px;
+  transition: opacity 0.7s ease, max-height 0.7s ease, margin-bottom 0.7s ease;
+}
+body.pin #pr-stage[data-state="4"] .ds-frame { opacity: 0; max-height: 0; margin-bottom: 0; }
+
+/* ═══ next-section marker ═══ */
+.next-marker {
+  text-align: center;
+  padding: 0 2rem 12vh;
+}
+.next-marker .nm {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--txt3);
+  border: 1px dashed var(--border);
+  border-radius: 100px;
+  padding: 0.6rem 1.6rem;
+}
+
+/* ═══ FOOTER — multi-column (Apple/Anthropic-style), reusing the real links ═══ */
+.footer {
+  border-top: 1px solid var(--border-ghost);
+  margin-top: 8vh;
+  background: linear-gradient(180deg, #0A0908, #0C0B0A);
+}
+.footer-inner { max-width: 1140px; margin: 0 auto; padding: 5rem 2rem 3rem; }
+.footer-cols {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr) 1.5fr;
+  gap: 2.5rem;
+}
+@media (max-width: 920px) { .footer-cols { grid-template-columns: 1fr 1fr 1fr; row-gap: 2.6rem; } .fcol-contact { grid-column: 1 / -1; } }
+@media (max-width: 560px) { .footer-cols { grid-template-columns: 1fr 1fr; } }
+.fcol-h {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--txt3);
+  margin-bottom: 1.1rem;
+}
+.fcol a {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  font-weight: 300;
+  color: var(--txt2);
+  padding: 0.36rem 0;
+  transition: color 0.2s ease;
+}
+.fcol a:hover { color: var(--teal); text-decoration: none; }
+.fcol-contact .fmail { font-size: 1rem; font-weight: 400; color: var(--txt); }
+.fcontact-note { margin-top: 0.9rem; font-size: 0.8rem; font-weight: 300; color: var(--txt3); line-height: 1.65; max-width: 24em; }
+.footer-base {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.4rem;
+  flex-wrap: wrap;
+  margin-top: 3.6rem;
+  padding-top: 1.8rem;
+  border-top: 1px solid var(--border-ghost);
+}
+.footer-brand { display: flex; align-items: center; gap: 10px; }
+.footer-seal { width: 18px; height: 18px; color: var(--txt3); }
+.footer-wordmark { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--txt2); }
+.footer-legal { display: flex; gap: 1.4rem; flex-wrap: wrap; font-family: var(--font-mono); font-size: 0.66rem; letter-spacing: 0.06em; color: var(--txt3); align-items: center; }
+.footer-legal a { color: var(--txt3); }
+.footer-legal a:hover { color: var(--teal); text-decoration: none; }
+.footer-social { font-family: var(--font-mono); font-size: 0.66rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--txt3); white-space: nowrap; }
+.footer-social:hover { color: var(--teal); text-decoration: none; }
+
+/* ═══ SEARCH — faithful to the real Spotlight (renders/_prototypes/elegant.html):
+   teal divider, keyboard-hint footer, plain "Understood" entities (no chips),
+   no right-side pills (status lives in the mono sub-line), teal query highlight ═══ */
+.ds-bar .ds-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--teal) 20%, var(--teal) 80%, transparent);
+  opacity: 0.5;
+}
+.ds-footer {
+  display: flex; align-items: center; gap: 4px;
+  height: 34px; padding: 0 14px;
+  border-top: 1px solid var(--border-sub);
+  background: rgba(0,0,0,0.18);
+}
+.ds-hint { display: flex; align-items: center; gap: 5px; font-family: var(--font-mono); font-size: 10px; color: var(--txt3); }
+.ds-hint kbd {
+  font-family: var(--font-mono); font-size: 9px; color: var(--txt2);
+  background: rgba(255,255,255,0.05); border: 1px solid var(--border-sub);
+  border-radius: 3px; padding: 1px 5px; line-height: 1.45;
+}
+.ds-fsep { width: 1px; height: 10px; background: var(--border); margin: 0 6px; }
+
+/* "Understood" — plain teal mono entities with a teal left-rule (matches elegant) */
+.ds-understood { align-items: center; gap: 7px; border-left: 2px solid var(--teal); padding-left: 12px; }
+.ds-understood .k { font-style: italic; font-family: var(--font-accent); text-transform: none; letter-spacing: 0; font-size: 13px; color: var(--txt2); }
+.ds-entity { background: none; border: none; padding: 0; font-family: var(--font-mono); font-size: 11px; color: var(--teal); }
+.ds-entity + .ds-entity::before { content: "·"; color: var(--txt3); margin-right: 7px; }
+.ds-domains { display: none; }
+
+/* results rows — drop the pills (real Spotlight carries status in the sub-line); teal query highlight */
+.ds-hit .pill { display: none; }
+.ds-hit .main mark { background: none; color: var(--teal); font-weight: 500; }
+
+/* ═══════════════════════════════════════════════════════
+   DEPTH & LIGHT PASS — luminance over hue.
+   No new colours. Planes get falloff, cards get a Fresnel
+   rim + ambient occlusion, teal becomes a light source
+   only at moments of operational action.
+   ═══════════════════════════════════════════════════════ */
+
+/* 1 · Planes — monolithic, but lit */
+.hero {
+  background: radial-gradient(110% 80% at 30% 12%, #131210 0%, #0B0A09 50%, #070606 100%);
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  left: 10%; right: 10%;
+  bottom: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #BADDE9 32%, #2FB9E8 68%, transparent);
+  opacity: 0.4;
+  pointer-events: none;
+}
+.datum-stage {
+  background: radial-gradient(95% 75% at 35% 18%, #131110 0%, #0A0908 50%, #050504 100%);
+}
+.datum-stage.light {
+  background: radial-gradient(120% 110% at 50% 35%, #F7F4EE 0%, #EDE9E1 60%, #E4DfD6 100%);
+}
+.light-band { background: linear-gradient(180deg, #F2EFE9 0%, #EBE7DF 100%); }
+.light-band { --lteal: #2B7BA3; }
+.ledger-band {
+  background: radial-gradient(140% 100% at 50% 0%, #0A0908 0%, #070706 70%);
+}
+.lh-stage {
+  background: radial-gradient(95% 75% at 35% 22%, #100F0E 0%, #090808 55%, #050504 100%);
+}
+
+/* 2 · Material — seated panels, directional, no floating. Most cards are
+   QUIET; light privileges are granted per-scene below. */
+.crop, .pr-receipt, .ho-note, .ho-prompt, .ho-draft, .ho-seal, .ho-export,
+.ds-results, .ds-record, .ob-compare, .pilot-card, .magnet-card,
+.mfv-dialog, .mfv-doc, .lh-card {
+  background: linear-gradient(165deg, #191714 0%, #121110 60%, #0E0D0C 100%);
+  border-color: rgba(255,255,255,0.08);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.09),
+    0 2px 4px rgba(0,0,0,0.55),
+    0 28px 70px -34px rgba(0,0,0,0.85);
+}
+.crop-topbar, .as-titlebar {
+  background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.015));
+}
+.cov-tile {
+  background: linear-gradient(180deg, #161513 0%, #11100F 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.05),
+    0 10px 24px -14px rgba(0,0,0,0.5);
+}
+.cov-tile:hover {
+  background: linear-gradient(180deg, #191714 0%, #121110 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.07),
+    0 0 0 1px rgba(90,171,204,0.22),
+    0 0 34px -14px rgba(90,171,204,0.28),
+    0 16px 34px -14px rgba(0,0,0,0.6);
+}
+.pp-pill, .ho-tag, .sd-match { box-shadow: inset 0 1px 0 rgba(255,255,255,0.06); }
+.tl-strip .tl-step::before { box-shadow: 0 0 10px rgba(90,171,204,0.55); }
+
+/* light register cards — paper with weight */
+.sd-card, .lc-graph, .suggest-frag, .sd-toast {
+  background: linear-gradient(180deg, #FBF9F5 0%, #F6F3EC 100%);
+  border-color: rgba(30,28,24,0.12);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.85),
+    0 1px 0 rgba(30,28,24,0.05),
+    0 18px 44px -16px rgba(30,28,24,0.25);
+}
+
+/* 3 · Thermal teal — a light source, only when firing */
+.ds-bar {
+  background: linear-gradient(170deg, #181614 0%, #111010 100%);
+  border-color: rgba(90,171,204,0.30);
+  box-shadow:
+    inset 0 1px 0 rgba(205,239,255,0.30),
+    0 2px 4px rgba(0,0,0,0.5),
+    0 26px 60px -30px rgba(0,0,0,0.85);
+}
+body.pin [data-state="2"] .ds-bar,
+body.pin [data-state="3"] .ds-bar {
+  border-color: rgba(110,190,225,0.55);
+  box-shadow:
+    inset 0 1px 0 rgba(190,230,248,0.20),
+    0 0 0 1px rgba(90,171,204,0.22),
+    0 0 36px -10px rgba(80,180,220,0.5),
+    0 18px 40px -12px rgba(0,0,0,0.65);
+}
+.ds-caret {
+  background: linear-gradient(180deg, #CDEFFF 0%, #5AABCC 100%);
+  box-shadow: 0 0 9px rgba(130,205,240,0.8);
+}
+.datum-halo {
+  background: radial-gradient(ellipse at center,
+    rgba(160,220,248,0.10) 0%,
+    rgba(90,171,204,0.07) 30%,
+    rgba(42,80,104,0.04) 55%,
+    transparent 72%);
+}
+.ds-record, .ho-seal {
+  border-color: rgba(90,171,204,0.45);
+  box-shadow:
+    inset 0 1px 0 rgba(170,220,242,0.12),
+    inset 0 -16px 30px -20px rgba(0,0,0,0.65),
+    0 0 40px -16px rgba(80,170,210,0.35),
+    0 30px 70px -18px rgba(0,0,0,0.7);
+}
+
+/* primary actions — matte plate, one hot machined edge */
+.mfv-primary, .lm-btn, .pilot-cta, .ho-cta {
+  background: #2B8FB3;
+  color: #04181F;
+  box-shadow:
+    inset 0 1px 0 rgba(205,239,255,0.55),
+    inset 0 -6px 12px -8px rgba(2,12,18,0.55),
+    0 2px 4px rgba(0,0,0,0.5);
+}
+.mfv-primary:hover, .lm-btn:hover, .pilot-cta:hover, .ho-cta:hover {
+  filter: none;
+  background: #239AB8;
+}
+.ob-prog-fill, .ob-fill.fast {
+  background: linear-gradient(90deg, #2B8FB3 0%, #7CD0EE 100%);
+  box-shadow: 0 0 14px -3px rgba(110,195,230,0.6);
+}
+.pr-verified {
+  background: linear-gradient(180deg, rgba(76,148,104,0.10), rgba(76,148,104,0.04));
+  box-shadow: inset 0 1px 0 rgba(120,200,150,0.12);
+}
+/* glow only at LIT sites (handover seal + magnet confirm); micro sealbars stay quiet so micro→ignition reads */
+.ho-seal .seal-mark, .lm-confirm .seal-mark { box-shadow: 0 0 16px -6px rgba(90,171,204,0.5); }
+.pr-verified .key-glyph { box-shadow: 0 0 16px -6px rgba(76,148,104,0.55); border-radius: 50%; }
+/* entry 4 — the seal ignites GREEN at the sealed state (the room turns green); rhymes with the Verified bar */
+body.pin #ho-stage[data-state="4"] .ho-seal .seal-mark,
+body.pin #ho-stage[data-state="5"] .ho-seal .seal-mark {
+  color: var(--green);
+  box-shadow: 0 0 20px -5px rgba(74,148,104,0.6);
+}
+body.pin #ho-stage[data-state="4"] .ho-seal,
+body.pin #ho-stage[data-state="5"] .ho-seal { border-color: rgba(74,148,104,0.45); }
+
+/* 4 · Identity gradient — hero only, as the horizon line (see .hero::after) */
+.scroll-cue .line { background: linear-gradient(to bottom, #8FD2EC, rgba(90,171,204,0.05)); }
+
+/* 5 · Thermal red — only where the story already carries stakes */
+.alarm-dot {
+  background: radial-gradient(circle at 35% 35%, #FF8A70 0%, #C0503A 55%, #6E2418 100%);
+  box-shadow: 0 0 12px -2px rgba(192,80,58,0.6);
+}
+.pl-stamp {
+  background: linear-gradient(180deg, rgba(192,80,58,0.15), rgba(192,80,58,0.05));
+  box-shadow: inset 0 1px 0 rgba(255,140,110,0.16);
+}
+.pp-pill.overdue {
+  background: linear-gradient(180deg, rgba(192,80,58,0.14), rgba(192,80,58,0.05));
+  box-shadow: inset 0 1px 0 rgba(255,140,110,0.12);
+}
+
+/* 7 · The bar — a powered instrument: ominous at rest, blooming when fired */
+.ds-bar { border-color: rgba(90,171,204,0.28); }
+.ds-bar::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 10px;
+  pointer-events: none;
+  box-shadow:
+    0 0 22px -6px rgba(90,180,220,0.55),
+    0 0 70px -28px rgba(47,185,232,0.45);
+  opacity: 0.55;
+  transition: opacity 0.8s ease;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .ds-bar::after { animation: bar-breathe 6.5s ease-in-out infinite alternate; }
+  @keyframes bar-breathe {
+    from { opacity: 0.32; }
+    to   { opacity: 0.8; }
+  }
+}
+/* firing — the bloom */
+body.pin [data-state="2"] .ds-bar::after,
+body.pin [data-state="3"] .ds-bar::after {
+  animation: none;
+  opacity: 1;
+}
+/* answer on stage — the instrument recedes */
+body.pin [data-state="4"] .ds-bar::after,
+body.pin [data-state="5"] .ds-bar::after {
+  animation: none;
+  opacity: 0.18;
+}
+
+/* 8 · Section CTAs — quiet, mono, one per section */
+.sec-cta {
+  display: inline-block;
+  margin-top: 1.8rem;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0;
+  color: var(--teal);
+  border: 1px solid var(--teal-bd);
+  border-radius: 5px;
+  padding: 0.7rem 1.4rem;
+  background: rgba(90,171,204,0.06);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.05);
+  white-space: nowrap;
+}
+.sec-cta:hover { text-decoration: none; background: var(--teal-dim); }
+.light-band .sec-cta {
+  color: var(--lteal);
+  border-color: rgba(43,123,163,0.4);
+  background: rgba(43,123,163,0.06);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.5);
+}
+.sec-cta-row { text-align: center; margin-top: 3.5rem; }
+
+/* ═══ TRUST — compact authority band ═══ */
+.trust-band {
+  border-top: 1px solid var(--border-ghost);
+  border-bottom: 1px solid var(--border-ghost);
+  background: linear-gradient(180deg, #0A0908, #0C0B0A);
+}
+.trust-band .section { padding: 9vh 2rem; }
+.trust-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  margin-top: 3rem;
+}
+@media (max-width: 760px) { .trust-grid { grid-template-columns: 1fr; } }
+.trust-col {
+  text-align: center;
+  padding: 0.5rem 2.4rem;
+  border-left: 1px dashed var(--border);
+}
+.trust-col:first-child { border-left: none; }
+@media (max-width: 760px) {
+  .trust-col { border-left: none; border-top: 1px dashed var(--border); padding: 1.6rem 0.5rem; }
+  .trust-col:first-child { border-top: none; }
+}
+.trust-name {
+  font-size: clamp(2rem, 3.6vw, 3rem);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--txt);
+  line-height: 1.1;
+}
+.trust-status {
+  margin-top: 0.9rem;
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--txt2);
+}
+.trust-desc {
+  margin-top: 1.4rem;
+  font-family: var(--font-mono);
+  font-style: italic;
+  font-size: 0.76rem;
+  line-height: 1.8;
+  color: var(--txt3);
+  text-wrap: pretty;
+}
+.trust-foot {
+  margin-top: 3.4rem;
+  font-family: var(--font-mono);
+  font-style: italic;
+  font-size: 0.78rem;
+  color: var(--txt3);
+}
+.trust-foot a { font-style: italic; }
+
+/* ═══ PILOT — adjacency + animated timeline ═══ */
+.adj-wrap { margin-top: 3.2rem; }
+.adj-blocks {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 1.6rem;
+  align-items: stretch;
+  max-width: 780px;
+}
+@media (max-width: 720px) {
+  .adj-blocks { grid-template-columns: 1fr; }
+  .adj-plus { margin: -0.4rem auto; }
+}
+.adj-block { border-radius: 10px; padding: 1.6rem 1.7rem; }
+.adj-block.pms {
+  background: linear-gradient(180deg, #161513, #11100F);
+  border: 1px solid var(--border);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.05), 0 14px 30px -14px rgba(0,0,0,0.5);
+}
+.adj-block.cel {
+  background: linear-gradient(180deg, #14202A, #0F161C);
+  border: 1px solid rgba(90,171,204,0.45);
+  box-shadow:
+    inset 0 1px 0 rgba(170,220,242,0.10),
+    0 0 36px -14px rgba(80,170,210,0.35),
+    0 14px 30px -14px rgba(0,0,0,0.5);
+}
+.adj-block .an { font-size: 1.05rem; font-weight: 600; color: var(--txt); margin-bottom: 0.35rem; }
+.adj-block.cel .an { color: var(--teal); }
+.adj-block .ar { font-size: 0.85rem; font-weight: 300; color: var(--txt2); line-height: 1.6; }
+.adj-block .af {
+  margin-top: 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--txt3);
+}
+.adj-block.cel .af { color: var(--teal); }
+.adj-plus { align-self: center; font-size: 1.7rem; font-weight: 300; color: var(--txt3); }
+.adj-zeros {
+  display: flex;
+  gap: 2.4rem;
+  flex-wrap: wrap;
+  margin-top: 1.8rem;
+  font-size: 0.9rem;
+  font-weight: 300;
+  color: var(--txt2);
+}
+.adj-zeros strong { color: var(--teal); font-weight: 500; font-size: 1.2rem; margin-right: 0.4rem; }
+@media (prefers-reduced-motion: no-preference) {
+  body.js .adj-wrap .adj-block.cel { opacity: 0; transform: translateX(30px); transition: opacity 0.8s ease 0.4s, transform 0.8s ease 0.4s; }
+  body.js .adj-wrap .adj-plus { opacity: 0; transition: opacity 0.6s ease 0.2s; }
+  body.js .adj-wrap.in .adj-block.cel { opacity: 1; transform: none; }
+  body.js .adj-wrap.in .adj-plus { opacity: 1; }
+  body.js .adj-wrap .adj-zeros span { opacity: 0; transform: translateY(10px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  body.js .adj-wrap.in .adj-zeros span { opacity: 1; transform: none; }
+  body.js .adj-wrap.in .adj-zeros span:nth-child(1) { transition-delay: 1.0s; }
+  body.js .adj-wrap.in .adj-zeros span:nth-child(2) { transition-delay: 1.2s; }
+  body.js .adj-wrap.in .adj-zeros span:nth-child(3) { transition-delay: 1.4s; }
+}
+
+/* timeline — the line draws, the steps light in sequence */
+.tl-strip { position: relative; }
+@media (prefers-reduced-motion: no-preference) {
+  body.js .tl-strip .tl-step { opacity: 0; transform: translateY(14px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  body.js .tl-strip.in .tl-step { opacity: 1; transform: none; }
+  body.js .tl-strip.in .tl-step:nth-child(2) { transition-delay: 0.35s; }
+  body.js .tl-strip.in .tl-step:nth-child(3) { transition-delay: 0.7s; }
+  body.js .tl-strip.in .tl-step:nth-child(4) { transition-delay: 1.05s; }
+  body.js .tl-strip.in .tl-step:nth-child(5) { transition-delay: 1.4s; }
+}
+@media (prefers-reduced-motion: no-preference) and (min-width: 921px) {
+  .tl-strip { border-top-color: var(--border-ghost); }
+  body.js .tl-strip::before {
+    content: '';
+    position: absolute;
+    top: -1px; left: 0;
+    height: 1px;
+    width: 100%;
+    background: linear-gradient(90deg, #7CD0EE, rgba(90,171,204,0.30));
+    transform-origin: left;
+    transform: scaleX(0);
+  }
+  body.js .tl-strip.in::before { transition: transform 1.9s cubic-bezier(0.2, 0.6, 0.2, 1) 0.2s; transform: scaleX(1); }
+}
+
+/* ═══ BEAST PASS — mobile design, a11y, perf, track tuning ═══ */
+/* font fallback metrics — kill CLS while DM Sans loads */
+@font-face {
+  font-family: 'DM Sans Fallback';
+  src: local('Helvetica Neue'), local('Arial');
+  size-adjust: 104%;
+  ascent-override: 94%;
+  descent-override: 24%;
+}
+
+/* skip link */
+.skip-link {
+  position: fixed;
+  top: -100px;
+  left: 1rem;
+  z-index: 100;
+  background: var(--surface);
+  color: var(--teal);
+  padding: 0.7rem 1.2rem;
+  border: 1px solid var(--teal-bd);
+  border-radius: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: top 0.2s ease;
+}
+.skip-link:focus { top: 1rem; text-decoration: none; }
+
+
+/* below-fold rendering cost */
+.footer { content-visibility: auto; contain-intrinsic-size: auto 540px; }
+
+/* per-section track lengths — dwell matched to state count */
+body.pin #ledger,
+body.pin #show-related,
+body.pin #proof,
+body.pin #suggested,
+body.pin #onboarding { height: 480vh; }
+body.pin #money { height: 440vh; }
+
+/* stacked mode — a designed sequence, not a flattened deck */
+body:not(.pin) .pin-stack { counter-reset: beat; }
+body:not(.pin) .pin-layer { margin-top: 2.4rem; }
+body:not(.pin) .pin-layer::before {
+  counter-increment: beat;
+  content: 'Step ' counter(beat, decimal-leading-zero);
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 0.7rem;
+}
+body:not(.pin) .datum-stage { min-height: 0; padding: 4.5rem 1.6rem; }
+body:not(.pin) .ds-frame { margin-bottom: 2.2rem; }
+
+/* mobile type + rhythm */
+@media (max-width: 880px) {
+  .section { padding: 9vh 1.4rem; }
+  .display { font-size: clamp(1.65rem, 7.2vw, 2.3rem); font-weight: 400; }
+  .lead { font-size: 1rem; }
+  .hero { padding: 0 1.4rem; }
+  .hero h1 { font-size: clamp(2.1rem, 10.5vw, 3rem); }
+  .hero .lead { font-size: 0.95rem; }
+  .handoff p { font-size: 1.15rem; }
+  .handoff::before { height: 52px; }
+  .ds-frame .big { font-size: 1.2rem; }
+  .grid-split { gap: 2.4rem; }
+  .pilot-card { padding: 3rem 1.6rem; }
+  .price-lockup { font-size: 3.2rem; }
+  .trust-name { font-size: 1.9rem; }
+  .lh-head .hint { display: none; }
+  .crop, .ho-export { font-size: 12px; }
+  .topbar { padding: 1.6rem 1.4rem; }
+  .topbar .nav { gap: 1.2rem; }
+  .scroll-cue { left: 1.4rem; }
+}
+/* hidden layers leave the tab order + accessibility tree */
+body.pin .pin-layer {
+  visibility: hidden;
+  transition: opacity 0.7s ease, transform 0.7s ease, visibility 0s 0.7s;
+}
+body.pin .pin-layer.active {
+  visibility: visible;
+  transition: opacity 0.7s ease, transform 0.7s ease, visibility 0s 0s;
+}
+.mfv-scene {
+  visibility: hidden;
+  transition: opacity 0.55s ease, visibility 0s 0.55s;
+}
+#mfv[data-scene="1"] .mfv-scene[data-s="1"],
+#mfv[data-scene="2"] .mfv-scene[data-s="2"],
+#mfv[data-scene="3"] .mfv-scene[data-s="3"],
+#mfv[data-scene="4"] .mfv-scene[data-s="4"] {
+  visibility: visible;
+  transition: opacity 0.55s ease, visibility 0s 0s;
+}
+/* iOS dynamic viewport — pinned theatre must not jump with the address bar */
+@supports (height: 100dvh) {
+  .hero { min-height: 100dvh; }
+  .datum-stage { min-height: 100dvh; }
+  body.pin .datum-stage { height: 100dvh; }
+  body.pin .lh-stage { height: 100dvh; }
+  .lh-stage { min-height: 100dvh; }
+}
+
+/* ═══ CONTEXTUAL ATMOSPHERE — colour as narrative state (moodboard 05d) ═══
+   The card is the object. The glow is the environment. One beat per scene. */
+.atmo { position: absolute !important; inset: 0; pointer-events: none; }
+.atmo span {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 1.4s ease;
+}
+.atmo .a-red {
+  background: radial-gradient(ellipse 85% 95% at 42% 48%,
+    rgba(192,80,58,0.20) 0%, rgba(130,45,28,0.09) 32%,
+    rgba(60,18,10,0.03) 55%, transparent 78%);
+}
+.atmo .a-green {
+  background: radial-gradient(ellipse 85% 95% at 56% 50%,
+    rgba(74,148,104,0.17) 0%, rgba(50,110,70,0.08) 32%, transparent 75%);
+}
+.atmo .a-amber {
+  background: radial-gradient(ellipse 85% 95% at 50% 50%,
+    rgba(196,137,59,0.16) 0%, rgba(160,100,30,0.07) 30%, transparent 72%);
+}
+/* Proof: danger → resolution */
+body.pin #pr-stage[data-state="1"] .a-red,
+body.pin #pr-stage[data-state="2"] .a-red { opacity: 1; }
+body.pin #pr-stage[data-state="4"] .a-green { opacity: 1; }
+/* Handover: the seal */
+body.pin #ho-stage[data-state="4"] .a-green,
+body.pin #ho-stage[data-state="5"] .a-green { opacity: 1; }
+/* Money-finder: ticking window → vindication */
+body.pin #mf-stage[data-state="3"] .a-amber { opacity: 1; }
+body.pin #mf-stage[data-state="4"] .a-green { opacity: 1; }
+
+/* 6 · Directional key light — the room has a source, shadows pool opposite */
+.datum-stage { position: relative; }
+.datum-stage > * { position: relative; }
+.datum-stage:not(.light)::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(60% 50% at 30% 6%, rgba(170,210,235,0.05), transparent 65%),
+    radial-gradient(85% 65% at 82% 112%, rgba(0,0,0,0.55), transparent 60%);
+}
+
+/* ═══════════════════════════════════════════════════════
+   OVERLAP / FIT PASS (2026-06-10) — pinned scenes must clear
+   the caption rail (.ds-caption, bottom:2.4rem) at the 700px
+   height budget. Root cause: on growing-card stages the scene
+   intro (.ds-frame) stays put while the card expands, so the
+   card collides with the frame above AND the caption below.
+   Fix: the intro recedes as the card grows; tall end-states
+   retire spent content. No hooks touched.
+   ═══════════════════════════════════════════════════════ */
+
+/* Ledger — the audit trail grows from state 2 (while-ashore rows).
+   Collapse the intro from state 2 so the trail clears the caption. */
+body.pin #lg-stage[data-state="2"] .ds-frame,
+body.pin #lg-stage[data-state="3"] .ds-frame {
+  opacity: 0;
+  max-height: 0;
+  margin-bottom: 0;
+}
+
+/* Show Related — the drawer opens at state 3. Make the intro
+   collapsible (it had no collapse rule) and retire it then. */
+body.pin #sr-stage .ds-frame {
+  overflow: hidden;
+  max-height: 200px;
+  transition: opacity 0.6s ease, max-height 0.6s ease, margin-bottom 0.6s ease;
+}
+body.pin #sr-stage[data-state="3"] .ds-frame,
+body.pin #sr-stage[data-state="4"] .ds-frame {
+  opacity: 0;
+  max-height: 0;
+  margin-bottom: 0;
+}
+
+/* Suggested — by state 4 the suggestion is accepted; the learning
+   curve becomes the focus. Retire the suggestion card so the curve
+   has the room (was: card + cascade + curve all stacked = overflow).
+   Also collapse the intro one beat earlier (state 3). */
+body.pin #sd-stage .sd-anim {
+  overflow: hidden;
+  transition: opacity 0.6s ease, max-height 0.7s ease, margin-bottom 0.6s ease;
+}
+body.pin #sd-stage[data-state="4"] .sd-anim {
+  opacity: 0;
+  max-height: 0;
+  margin-bottom: 0;
+}
+body.pin #sd-stage[data-state="3"] .ds-frame {
+  opacity: 0;
+  max-height: 0;
+  margin-bottom: 0;
+}
+
+/* Short-viewport compaction — the pinned scenes must fit the 700px
+   height budget with the caption rail clear. Tighten the rail, the
+   intro, the crop rows and the learning curve when height is scarce. */
+@media (max-height: 820px) {
+  .ds-caption { bottom: 1.25rem; }
+  .ds-frame { margin-bottom: 1.6rem; }
+  .ds-frame .big { font-size: clamp(1.15rem, 2.1vw, 1.65rem); line-height: 1.25; }
+  /* trim row rhythm inside the crops/lists */
+  .crop .pp-row, .sr-body-row, .ho-row, .ds-hit, .lh-frag .pp-row { padding-top: 7px; padding-bottom: 7px; }
+  .ds-results .ds-hit .sub { line-height: 1.35; }
+  .pp-bucket { padding: 7px 16px 3px; }
+  .pp-sealbar { padding-top: 8px; padding-bottom: 8px; }
+  /* learning curve — compact text + graph so it clears the rail */
+  body.pin #sd-stage .lc-block { margin-top: 0.6rem; }
+  body.pin #sd-stage .lc-wrap { gap: 1.6rem; align-items: center; }
+  body.pin #sd-stage .lc-graph { max-height: 178px; width: auto; max-width: 100%; }
+  body.pin #sd-stage .lc-text h3 { font-size: 1.02rem; margin-bottom: 0.45rem; }
+  body.pin #sd-stage .lc-text p { font-size: 0.78rem; line-height: 1.4; }
+  body.pin #sd-stage .lc-text p + p { margin-top: 0.4rem; }
+}
+
+
+/* ═══ swap: handover-export (entries 5) ═══ */
+/* Entry 5 — export-pack tease: paper-light inset (the one print-deliverable surface) seated in the dark .ho-export, watermark behind the header, fade does the mid-sentence crop */
+.ho-export .doc-paper {
+  position: relative;
+  background: #FFFFFF;
+  border: 1px solid rgba(0,0,0,0.10);
+  border-radius: 6px 6px 0 0;
+  border-bottom: none;
+  padding: 20px 22px 0;
+  box-shadow: 0 18px 50px -22px rgba(0,0,0,0.7);
+  overflow: hidden;
+}
+.ho-export .doc-watermark {
+  position: absolute;
+  top: -14px; right: -18px;
+  width: 150px; height: 150px;
+  color: #1A2332;
+  opacity: 0.04;
+  pointer-events: none;
+  z-index: 0;
+}
+.ho-export .doc-head {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #E8EDF1;
+  margin-bottom: 12px;
+}
+.ho-export .doc-title {
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: #1A2332;
+}
+.ho-export .doc-meta {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #8896A6;
+  white-space: nowrap;
+}
+.ho-export .doc-summary {
+  position: relative;
+  z-index: 1;
+  font-size: 11.5px;
+  font-style: italic;
+  line-height: 1.55;
+  color: #4A5568;
+  margin-bottom: 16px;
+}
+.ho-export .doc-summary strong { color: #C53030; font-style: normal; font-weight: 600; }
+.ho-export .doc-sec {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #1A2332;
+  background: #F7F9FA;
+  border-left: 3px solid var(--teal);
+  border-radius: 0 4px 4px 0;
+  padding: 8px 12px;
+  margin: 0 0 12px;
+}
+.ho-export .doc-line {
+  position: relative;
+  z-index: 1;
+  font-size: 12.5px;
+  font-weight: 400;
+  line-height: 1.65;
+  color: #1A2332;
+  text-align: justify;
+}
+.ho-export .doc-line strong { color: #1A2332; font-weight: 600; }
+.ho-export .doc-pill {
+  display: inline-flex;
+  align-items: center;
+  background: #FFF5F5;
+  color: #C53030;
+  border: 1px solid #FEB2B2;
+  border-radius: 10px;
+  padding: 1px 8px;
+  margin-right: 6px;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  vertical-align: 1px;
+}
+
+/* ═══ swap: search-bar (entries 12) ═══ */
+/* entry 12 — Spotlight bar idiom dissected into the dark .ds-bar (elegant.html .search-panel/.search-input-row) */
+/* the glass panel; padding moves to .ds-row so the divider spans edge-to-edge */
+.ds-bar { padding: 0; overflow: hidden; }
+.ds-bar .ds-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 50px;
+  padding: 0 14px;
+}
+/* magnifier reads as ghost — the teal is carried by the caret + divider, not the glyph */
+.ds-bar .ds-mag { display: flex; flex-shrink: 0; }
+.ds-bar .ds-row svg { stroke: var(--txt3); }
+/* typed query keeps the v12 system-voice mono; lift to 15px per elegant .search-input */
+.ds-bar .ds-typed { flex: 1; font-size: 15px; }
+/* canonical ⌘K hint — silent, mono, ghost; never competes with the caret */
+.ds-bar .ds-meta {
+  flex-shrink: 0;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  color: var(--txt3);
+}
+/* the single teal accent at idle — a thin live-instrument rule under the row */
+.ds-bar .ds-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--teal) 20%, var(--teal) 80%, transparent);
+  opacity: 0.5;
+}
+
+/* ═══ swap: search-results (entries 13) ═══ */
+/* Entry 13 — search results: real ranked-row anatomy, recolored dark.
+   Scoped under .ds-results so the onboarding ds-bar echo + global .ds-hit
+   idiom are untouched. Two-line rows: leading icon + title/sub + trailing pill. */
+.ds-results .ds-hit {
+  align-items: flex-start;   /* was baseline — a 14px icon must sit against the title line of a now two-line row */
+  gap: 11px;
+}
+.ds-results .ds-ico {
+  width: 14px; height: 14px;
+  flex-shrink: 0;
+  color: var(--txt3);
+  margin-top: 2px;           /* nudge onto the title baseline, not the row top */
+}
+.ds-results .ds-body {
+  flex: 1; min-width: 0;
+  display: flex; flex-direction: column; gap: 2px;
+}
+.ds-results .ds-line {
+  display: flex; align-items: baseline; gap: 9px;
+  min-width: 0;
+}
+.ds-results .ds-line .main {
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.ds-results .ds-hit .main mark {
+  background: none;          /* color-only highlight — NOT a teal-wash, NOT the .mfv-doc mark */
+  color: var(--teal);
+  font-weight: 600;
+}
+.ds-results .ds-hit .sub {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.03em;
+  color: var(--txt3);
+  line-height: 1.4;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+/* OPEN pill — clones the exact teal recipe of .pill.record / .pp-pill.open */
+.ds-results .ds-hit .pill.open {
+  margin-top: 1px;
+  background: rgba(90,171,204,0.12);
+  color: var(--teal);
+  border: 1px solid var(--teal-bd);
+}
+.ds-results .ds-hit .pill.closed,
+.ds-results .ds-hit .pill.record { margin-top: 1px; }
+/* immutable footer: micro canonical seal, quiet + monochrome, NO glow
+   (own class — never .seal-mark — so it can't inherit the global glyph glow) */
+.ds-results .ds-resfoot {
+  display: flex; align-items: center; gap: 8px;
+}
+.ds-results .ds-seal {
+  width: 14px; height: 14px;
+  flex-shrink: 0;
+  color: var(--txt3);
+  fill: none; stroke: currentColor;
+}
+.ds-results .ds-seal circle[fill] { fill: var(--teal); stroke: none; }
+
+/* ═══ swap: search-record (entries 14) ═══ */
+/* entry 14 — lens identity-strip anatomy ported INLINE onto .ds-record
+   (focal fragment of renders/_prototypes/lens-fault.html; rest dissected to darkness).
+   Scoped under .ds-record so it never touches the live results/bar. */
+.ds-record .rmeta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: -4px 0 12px;
+}
+.ds-record .rcontext {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--txt2);
+  line-height: 1.4;
+}
+.ds-record .rwho { color: var(--txt); font-weight: 500; }
+.ds-record .rpill {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 3px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.ds-record .rpill.closed {
+  background: rgba(76,148,104,0.12);
+  color: var(--green);
+  border: 1px solid rgba(76,148,104,0.30);
+}
+.ds-record .rdetails {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 14px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--border-sub);
+}
+.ds-record .rdetail {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  font-size: 12.5px;
+  line-height: 1.4;
+}
+.ds-record .rk {
+  flex-shrink: 0;
+  min-width: 8.5em;
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--txt3);
+}
+.ds-record .rv { color: var(--txt2); }
+.ds-record .rmono { font-family: var(--font-mono); }
+@media (max-height: 820px) {
+  .ds-record .rmeta { margin-bottom: 10px; }
+  .ds-record .rdetails { margin-bottom: 11px; padding-bottom: 11px; gap: 4px; }
+}
+
+/* ═══ swap: show-related (entries 16,17) ═══ */
+/* ═══ SHOW RELATED — real lens header + RelatedDrawer row anatomy (entries 16/17) ═══ */
+/* Scoped under #sr-stage so the global page is untouched. Page tokens only. */
+#sr-stage .sr-id { display: flex; flex-direction: column; align-items: flex-start; gap: 1px; }
+#sr-stage .sr-type {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--txt2);
+  margin-bottom: 2px;
+}
+/* Real Show Related button — EntityLensPage anatomy at PRODUCTION scale (no 2.4x inflation). */
+#sr-stage .sr-btn { cursor: default; }
+#sr-stage .sr-btn .sr-graph { width: 14px; height: 14px; flex-shrink: 0; }
+#sr-stage .sr-btn > span:not(.sr-count) { letter-spacing: 0.1em; }
+#sr-stage .sr-count {
+  padding: 1px 6px;
+  border-radius: 4px;
+  background: rgba(90,171,204,0.16);
+  color: var(--teal);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+/* Drawer rows: real two-line RelatedDrawer grammar (icon + title/id + meta), re-skinned to canonical data. */
+#sr-stage .sr-drawer .pp-row { align-items: flex-start; gap: 11px; }
+#sr-stage .result-icon { width: 14px; height: 14px; flex-shrink: 0; color: var(--txt3); margin-top: 2px; }
+#sr-stage .result-icon svg { display: block; }
+#sr-stage .result-text { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+#sr-stage .result-title { font-size: 13px; font-weight: 500; color: var(--txt); line-height: 1.4; }
+#sr-stage .result-id { font-family: var(--font-mono); font-size: 11px; color: var(--teal); margin-right: 3px; }
+#sr-stage .result-body { font-size: 12.5px; font-weight: 300; color: var(--txt2); line-height: 1.5; }
+#sr-stage .result-sub {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  color: var(--txt3);
+  margin-top: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+/* Brand-law mark reset: NEVER yellow. Teal weight only (mirrors lens-base.css:291). */
+#sr-stage mark { background: none; color: var(--teal); font-weight: 600; }
+#sr-stage .result-sub mark { font-family: inherit; font-weight: 600; }
+/* The .sr-note is the focal lit row — keep its title fully lit even while siblings dim at state 4. */
+#sr-stage .sr-note .result-title { color: var(--txt); }
+
+/* ═══ swap: ledger-how-cards (entries 7) ═══ */
+/* Entry 7 — card 5 dissected live-trail crop (replaces the dashed render-slot).
+   Scoped under #lh-strip; reuses .pp-row / .pp-link / .pp-role tokens. */
+#lh-strip .lh-card .lh-live { display: flex; flex-direction: column; }
+#lh-strip .lh-card .lh-day {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: 10px 16px 4px;
+  font-family: var(--font-mono);
+}
+#lh-strip .lh-card .lh-day-label {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--txt3);
+}
+#lh-strip .lh-card .lh-day-counts {
+  display: flex;
+  gap: 12px;
+  font-size: 9px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+#lh-strip .lh-card .lh-day-mut { color: var(--green); }
+#lh-strip .lh-card .lh-day-read { color: var(--amber); }
+#lh-strip .lh-card .lh-live .pp-row:first-of-type { border-top: none; }
+
+/* ═══ swap: suggested-docs (entries 18) ═══ */
+/* entry 18 — suggested-docs row anatomy rebuilt from renders/_prototypes/suggested-docs-tab.html.
+   Source SVGs ship attribute-less (sized in CSS), and the chevron/✕/✓ are now real stroke paths —
+   so scope sizing here. Scoped to #sd-stage; does not redefine the global .sd-* rules. */
+#sd-stage .sd-icon svg { width: 14px; height: 14px; }
+#sd-stage .sd-head .chev svg { display: block; }
+#sd-stage .sd-btn { transition: box-shadow 0.7s ease, transform 0.7s ease, color 0.25s ease, border-color 0.25s ease, background 0.25s ease; }
+#sd-stage .sd-btn svg { width: 14px; height: 14px; display: block; }
+/* Focal discipline (entry 18 §Focal): the FIRST row's ✓ is the privileged object at the one tap;
+   the second row sits a half-step back so the eye lands on row-1. Cosmetic only — no hook/state-gate
+   touched; the bloom + state-3 tint still drive off body.pin #sd-stage[data-state] .sd-row.first. */
+#sd-stage .sd-row:not(.first) { opacity: 0.62; transition: opacity 0.6s ease; }
+body.pin #sd-stage[data-state="3"] .sd-row:not(.first),
+body.pin #sd-stage[data-state="4"] .sd-row:not(.first) { opacity: 0.46; }
+
+/* ═══ swap: learning-curve (entries 19) ═══ */
+/* Entry 19 — learning-curve restyle: stronger, more legible curves + a
+   clear day-one origin (scoped under .lc-graph; tokens only, light register). */
+.lc-graph .lc-origin {
+  fill: var(--lsurf);
+  stroke: var(--ltxt2);
+  stroke-width: 1.4;
+}
+/* Growth gets a touch more weight + a faint same-hue under-glow so the
+   rising line reads first, without out-lighting the suggestion row's teal
+   tick earlier in the stage (one-light-per-scene). Decay thickens slightly
+   and stays a quiet dashed grey. */
+.lc-graph .curve.growth {
+  stroke-width: 3;
+  filter: drop-shadow(0 1px 4px rgba(52, 112, 143, 0.22));
+}
+.lc-graph .curve.decay {
+  stroke-width: 2.2;
+  stroke-dasharray: 6 5;
+}
+
+/* ═══ swap: handover-note (entries 1) ═══ */
+/* Entry 1 — engineer's note row (real NotesSection anatomy, dissected to ONE row). Role is PLAIN muted grey text, NOT a chip — must read as unimportant. */
+.ho-note .note-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+.ho-note .note-author {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--txt);
+}
+.ho-note .note-role {
+  font-weight: 400;
+  color: var(--txt3);
+  margin-left: -4px; /* gap already provides 8px; tuck the role close to the author */
+}
+.ho-note .note-ts {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--txt3);
+}
+
+/* ═══ swap: handover-prompt (entries 2) ═══ */
+/* Entry 2 — Add-to-draft prompt: real AddDraftItemModal dissected into .ho-prompt
+   (header band + compact key strip + collapsed summary + focal '+ Add Draft Item').
+   Scoped under .ho-prompt; the existing .ho-prompt card material (css:590) still mats it.
+   No glyph here — the teal '+' is the component's own teal, not the cryptographic seal. */
+.ho-prompt { padding: 0; overflow: hidden; }
+
+.ho-prompt .adi-hdr {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px 18px 12px;
+}
+.ho-prompt .adi-icon {
+  flex-shrink: 0;
+  width: 32px; height: 32px;
+  display: inline-flex; align-items: center; justify-content: center;
+  border-radius: 7px;
+  background: var(--teal-dim);
+  color: var(--teal);
+}
+.ho-prompt .adi-icon svg { width: 16px; height: 16px; }
+.ho-prompt .adi-titles { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.ho-prompt .adi-title { font-size: 15px; font-weight: 500; color: var(--txt); letter-spacing: -0.005em; }
+.ho-prompt .adi-sub { font-size: 11.5px; line-height: 1.45; color: var(--txt2); }
+
+.ho-prompt .adi-body { padding: 4px 18px 14px; }
+.ho-prompt .adi-label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 9px; font-weight: 600;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--txt3);
+  margin: 4px 0 8px;
+}
+
+/* compact key strip — one quiet ~52px band, never five tall tiles */
+.ho-prompt .adi-keys {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 6px;
+  margin-bottom: 12px;
+}
+.ho-prompt .adi-key {
+  display: flex; flex-direction: column; align-items: center;
+  gap: 6px;
+  padding: 9px 4px 7px;
+  border: 1px solid var(--border-sub);
+  border-radius: 6px;
+  color: var(--txt2);
+}
+.ho-prompt .adi-key svg { width: 17px; height: 17px; color: var(--txt3); }
+.ho-prompt .adi-key span {
+  font-size: 9.5px; font-weight: 500;
+  letter-spacing: 0.01em;
+  color: var(--txt2);
+  text-align: center;
+  line-height: 1.1;
+}
+/* Work Order pre-selected — ties the capture to the held note above */
+.ho-prompt .adi-key.selected { border-color: var(--teal-bd); background: var(--teal-dim); }
+.ho-prompt .adi-key.selected svg { color: var(--teal); }
+.ho-prompt .adi-key.selected span { color: var(--teal); }
+
+/* collapsed summary — pre-filled with the note's own words */
+.ho-prompt .adi-summary {
+  position: relative;
+  min-height: 56px;
+  padding: 11px 14px 22px;
+  background: var(--surface-el);
+  border: 1px solid var(--teal-bd);
+  border-radius: 7px;
+}
+.ho-prompt .adi-summary-text { font-size: 13px; line-height: 1.5; color: var(--txt); }
+.ho-prompt .adi-counter {
+  position: absolute; right: 11px; bottom: 7px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--txt3);
+}
+
+/* footer — the '+ Add Draft Item' primary button is the focal pixel */
+.ho-prompt .adi-foot {
+  display: flex; align-items: center; gap: 10px;
+  padding: 12px 18px;
+  border-top: 1px solid var(--border-ghost);
+}
+.ho-prompt .adi-add {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 12.5px; font-weight: 500;
+  background: var(--teal-dim);
+  border: 1px solid var(--teal-bd);
+  color: var(--teal);
+}
+.ho-prompt .adi-add svg { width: 12px; height: 12px; }
+.ho-prompt .adi-cancel {
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-size: 12.5px; font-weight: 500;
+  border: 1px solid var(--border);
+  color: var(--txt2);
+}
+.ho-prompt .adi-hint {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  color: var(--txt3);
+}
+
+/* relocate the true 'asked once' line as a quiet sub-line under the modal */
+.ho-prompt .foot {
+  margin-top: 0;
+  padding: 10px 18px 14px;
+}
+
+/* ═══ swap: onboarding (entries 24,25,26,27) ═══ */
+/* ─── #ob-stage onboarding — dissected real components (entries 24–27) ─── */
+
+/* Entry 26 · layer-3 = §04 search-bar echo, recessed (~340px / ~88%) and
+   centred = "the same instrument, now theirs". The inline override is removed
+   in the DOM so the unscoped body.pin [data-state="3"] .ds-bar cascade lights
+   it to the full §04 fired look. */
+#ob-stage .ob-searchrow {
+  display: flex;
+  justify-content: center;
+}
+#ob-stage .ob-searchrow .ds-bar {
+  max-width: 340px;
+  width: 100%;
+}
+
+/* ═══ swap: money-finder (entries 20,21,22,23) ═══ */
+/* ═══ MONEY-FINDER — real-component crops (entries 20–23) ═══ */
+/* Scene 1 — real Report-Fault create form, cropped mid-fill */
+.mfv-form { display: flex; flex-direction: column; gap: 13px; }
+.mfv-field { display: flex; flex-direction: column; gap: 5px; }
+.mfv-lbl {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--txt3);
+}
+.mfv-input {
+  padding: 8px 10px;
+  border: 1px solid var(--border-sub);
+  border-radius: 5px;
+  background: var(--bg);
+  color: var(--txt);
+  font-size: 13px;
+  line-height: 1.3;
+}
+.mfv-textarea {
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  background: var(--bg);
+  color: var(--txt2);
+  font-size: 12.5px;
+  line-height: 1.55;
+}
+.mfv-sev { display: flex; gap: 7px; flex-wrap: nowrap; }
+.mfv-sev .sev {
+  font-family: var(--font-body);
+  font-size: 11.5px;
+  font-weight: 500;
+  padding: 5px 12px;
+  border: 1px solid var(--border-sub);
+  border-radius: 14px;
+  color: var(--txt3);
+  white-space: nowrap;
+}
+.mfv-sev .sev.active {
+  color: var(--amber);
+  border-color: var(--teal-bd);
+  border-color: rgba(201,166,107,0.45);
+  background: rgba(201,166,107,0.10);
+}
+/* the lower form sections dissolve into darkness */
+.mfv-fade {
+  position: absolute;
+  left: 0; right: 0;
+  bottom: 56px;
+  height: 64px;
+  background: linear-gradient(to bottom, rgba(12,11,10,0) 0%, var(--bg) 88%);
+  pointer-events: none;
+  z-index: 2;
+}
+.mfv-scene[data-s="1"] .mfv-foot { margin-top: 18px; position: relative; z-index: 3; }
+.mfv-scene[data-s="1"] .mfv-ghost {
+  font-family: var(--font-body); font-size: 12px; font-weight: 500;
+  padding: 9px 16px; background: transparent; color: var(--teal);
+  border: 1px solid var(--teal-bd); border-radius: 4px; cursor: default;
+}
+
+/* Scene 2 — real list-lift fault row (CellStack + dot+text status) */
+.mfv-row {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  padding: 11px 14px;
+  border-top: 1px solid var(--border-sub);
+  border-bottom: 1px solid var(--border-ghost);
+  font-size: 13px;
+}
+.mfv-row .pp-time { font-family: var(--font-mono); font-size: 10px; color: var(--txt3); white-space: nowrap; }
+.mfv-cell { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.mfv-cell-t { color: var(--txt); font-weight: 500; line-height: 1.25; }
+.mfv-cell-s {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.02em;
+  color: var(--txt3);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.mfv-status {
+  margin-left: auto;
+  display: inline-flex; align-items: center; gap: 7px;
+  font-size: 12px; color: var(--txt2);
+  text-transform: capitalize;
+  white-space: nowrap;
+}
+.mfv-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--teal); flex-shrink: 0; }
+/* neutral toast border (Toast.tsx uses surface-border; only the icon is green) */
+.mfv-scene[data-s="2"] .mfv-toast { border-color: var(--border); }
+.mfv-toast .ck svg { width: 14px; height: 14px; display: block; color: var(--green); }
+
+/* Scene 3 — FileWarrantyClaimModal, cropped to header + one prefilled pair + footer */
+.mfv-claim { width: min(330px, 88%); padding: 0; overflow: hidden; }
+.mfv-claim-h { padding: 16px 18px 12px; border-bottom: 1px solid var(--border-sub); }
+.mfv-claim-h .t { font-size: 14px; font-weight: 600; color: var(--txt); margin: 0; }
+.mfv-claim-h .sub {
+  margin-top: 4px;
+  font-size: 11px; line-height: 1.4;
+  color: var(--txt2);
+}
+.mfv-claim-body { position: relative; padding: 14px 18px 10px; display: flex; flex-direction: column; gap: 12px; }
+.mfv-caret {
+  display: inline-block;
+  width: 1px; height: 13px;
+  margin-left: 1px;
+  vertical-align: -2px;
+  background: var(--teal);
+  animation: mfv-blink 1.05s step-end infinite;
+}
+@keyframes mfv-blink { 50% { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .mfv-caret { animation: none; } }
+.mfv-claim-fade {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 22px;
+  background: linear-gradient(to bottom, rgba(24,22,20,0) 0%, var(--surface) 92%);
+  pointer-events: none;
+}
+.mfv-claim .acts { padding: 4px 18px 16px; justify-content: flex-end; gap: 8px; }
+.mfv-claim .mfv-ghost {
+  font-family: var(--font-body); font-size: 12px; font-weight: 500;
+  padding: 9px 16px; background: transparent; color: var(--txt2);
+  border: 1px solid var(--border); border-radius: 4px; cursor: default;
+}
+
+/* Scene 4 — real document viewer .pdf-page crop, re-skinned dark */
+.mfv-doc-title { font-size: 13px; font-weight: 600; color: var(--txt); margin-bottom: 9px; }
+.mfv-doc-head {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--txt3);
+  padding-bottom: 7px;
+  margin-bottom: 9px;
+  border-bottom: 1px solid var(--border-ghost);
+}
+/* micro-glyph on the cite line only (matches ledger sealbar micro pattern) */
+.mfv-cite { display: flex; align-items: center; }
+.mfv-cite .seal-mark { width: 16px; height: 16px; margin-right: 7px; color: var(--txt3); }
+
+/* search: fully fade the intro frame once results/record show (the taller real results were overlapping the dimmed frame) */
+body.pin #datum-stage[data-state="4"] .ds-frame,
+body.pin #datum-stage[data-state="5"] .ds-frame { opacity: 0; }
+
+/* ═══ swap: proof-receipt ═══ */
+/* entry 10 — proof-receipt (layer 2): seal watermark + hash-row micro */
+.pin-layer[data-layer="2"] .pr-card { position: relative; }
+.pin-layer[data-layer="2"] .pr-card > *:not(.pr-watermark) { position: relative; z-index: 1; }
+.pr-watermark {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 150px; height: 150px;
+  z-index: 0;
+  color: var(--txt3);
+  opacity: 0.04;
+  pointer-events: none;
+}
+.pr-watermark > svg.seal-svg { width: 100%; height: 100%; display: block; }
+/* micro seal leading the proof-hash value — monochrome, never lit (glow is scoped to .ho-seal/.lm-confirm) */
+.pr-row .v.hash .pr-hash-seal {
+  width: 14px; height: 14px;
+  color: var(--txt3);
+  margin-right: 7px;
+  vertical-align: -2px;
+  border: none;
+}
+.pr-row .v.hash .pr-hash-seal > svg.seal-svg { width: 100%; height: 100%; display: block; }
+
+/* ═══ swap: proof-verifier ═══ */
+/* ═══ entry 11 — verifier.celeste7.ai result screen (verbatim), dissected to the Verified bar ═══ */
+/* real verifier header — replaces the fake .ob-urlbar browser chrome (page.tsx S.topaccent/header) */
+.pr-vaccent {
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--teal), transparent);
+  opacity: 0.5;
+}
+.pr-vhead {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 18px 0;
+}
+.pr-wordmark {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--teal);
+}
+.pr-vdivider { width: 1px; height: 14px; background: var(--border); flex-shrink: 0; }
+.pr-vsubmark {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: var(--txt3);
+}
+/* crumb — page.tsx S.crumb */
+.pr-crumb {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--txt3);
+  padding: 12px 18px 4px;
+}
+/* the record identity — page.tsx S.rectype/rectitle/recsub (kept muted so only the bar carries light) */
+.pr-rectype {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--txt3);
+  padding: 6px 18px 0;
+}
+.pr-rectitle {
+  font-size: 19px;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  color: var(--txt2);
+  padding: 4px 18px 0;
+}
+.pr-recsub {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--txt3);
+  padding: 4px 18px 12px;
+}
+/* the staggered checks — wrapped so the nth-of-type stagger counts only the 3 real check rows */
+.pr-checks { display: block; }
+/* the Verified bar — two-line layout (badge + sub) + How chip; page.tsx S.vbar/vbadge/vsub/how */
+.pr-verified { align-items: center; gap: 13px; padding: 14px 18px; }
+.pr-verified .key-glyph {
+  display: inline-flex;
+  flex-shrink: 0;
+  color: var(--txt2);            /* the notary ring (currentColor) stays neutral; the key strokes are teal */
+  line-height: 0;
+}
+.pr-verified .key-glyph svg { display: block; }
+.pr-vmsg { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.pr-vbadge {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--green);
+}
+.pr-vsub {
+  font-size: 12.5px;
+  color: var(--txt2);
+  line-height: 1.35;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.pr-how {
+  flex-shrink: 0;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--txt2);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 6px 9px;
+  white-space: nowrap;
+}
+@media (max-width: 480px) {
+  .pr-verified { flex-wrap: wrap; }
+  .pr-vsub { white-space: normal; }
+}
+
+/* ═══ swap: handover-draft ═══ */
+/* ── entry 3: real Handover-Draft panel anatomy (dissected from render-handover-draft.html) ── */
+.ho-draft-head { gap: 10px; align-items: center; }
+.ho-draft .hd-icon {
+  width: 26px; height: 26px; border-radius: 6px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(90,171,204,0.12); border: 1px solid var(--teal-bd);
+}
+.ho-draft .hd-icon svg { width: 13px; height: 13px; color: var(--teal); }
+.ho-draft .hd-titles { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.ho-draft-title { text-transform: none; letter-spacing: 0.01em; font-size: 13px; color: var(--txt); font-family: var(--font-body); font-weight: 500; }
+.ho-draft-sub { font-family: var(--font-mono); font-size: 11px; color: var(--teal); letter-spacing: 0.02em; }
+.ho-draft-sub strong { font-size: 14px; font-weight: 500; }
+.ho-draft .ho-item {
+  display: flex; gap: 10px; align-items: flex-start;
+  padding: 9px 16px; border-top: 1px solid var(--border-ghost);
+  position: relative;
+}
+.ho-draft .ho-item:first-of-type { border-top: none; }
+.ho-draft .hi-icon { width: 14px; height: 14px; flex-shrink: 0; color: var(--txt3); margin-top: 1px; }
+.ho-draft .ho-item.critical .hi-icon { color: var(--red); }
+.ho-draft .ho-item.critical::before {
+  content: ''; position: absolute; left: 0; top: 5px; bottom: 5px;
+  width: 2px; border-radius: 1px; background: var(--red); opacity: 0.7;
+}
+.ho-draft .hi-body { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px; }
+.ho-draft .hi-title {
+  font-size: 13px; font-weight: 300; color: var(--txt2); line-height: 1.45;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+}
+.ho-draft .hi-title .main { color: var(--txt); font-weight: 500; }
+.ho-draft .hi-meta {
+  display: flex; align-items: center; gap: 8px;
+  font-family: var(--font-mono); font-size: 9.5px; letter-spacing: 0.04em;
+}
+.ho-draft .hi-ref { color: var(--txt3); text-transform: uppercase; }
+.ho-draft .ho-cat {
+  font-family: var(--font-body); font-size: 9px; font-weight: 600;
+  letter-spacing: 0.04em; text-transform: uppercase;
+  padding: 1px 6px; border-radius: 3px; white-space: nowrap;
+}
+.ho-draft .ho-cat.crit { background: rgba(192,80,58,0.14); color: var(--red); border: 1px solid rgba(192,80,58,0.30); }
+.ho-draft .ho-cat.std  { background: rgba(255,255,255,0.05); color: var(--txt3); border: 1px solid var(--border-sub); }
+.ho-draft .ho-cat.low  { background: rgba(76,148,104,0.12); color: var(--green); border: 1px solid rgba(76,148,104,0.30); }
+.ho-draft .ho-act {
+  font-family: var(--font-body); font-size: 9px; font-weight: 600;
+  letter-spacing: 0.04em; text-transform: uppercase; white-space: nowrap;
+}
+.ho-draft .ho-item.action  .ho-act { color: var(--amber); }
+.ho-draft .ho-item.monitor .ho-act { color: var(--teal); }
+.ho-draft .ho-item.done    .ho-act { color: var(--green); }
+.ho-draft .ho-item.critical .ho-act { color: var(--red); }
+.ho-draft .hi-ts {
+  font-family: var(--font-mono); font-size: 10px; color: var(--txt3);
+  flex-shrink: 0; white-space: nowrap; margin-top: 1px;
+}
+
+/* ═══ SCROLL-PROGRESS INDICATORS — per-scene (progress-lab.html); --p-driven, replaces the % ═══ */
+.ds-caption .cap-prog.pi { position: relative; width: 100%; height: 14px; flex-shrink: 0; }
+.cap-prog.pi .pit { position: absolute; left: 0; right: 0; top: 50%; height: 1px; transform: translateY(-50%); background: rgba(255,255,255,0.12); }
+.cap-prog.pi::after { content: "scroll ↓"; position: absolute; right: 0; bottom: 16px; font-family: var(--font-mono); font-size: 8.5px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--txt3); opacity: calc(1 - var(--p, 0) * 9); pointer-events: none; white-space: nowrap; }
+.pi-comet .pif { position: absolute; left: 0; top: 50%; height: 1px; transform: translateY(-50%); width: calc(var(--p) * 100%); background: linear-gradient(90deg, rgba(90,171,204,0.25), var(--pic, #5AABCC)); }
+.pi-comet .pit2 { position: absolute; top: 50%; left: calc(var(--p) * 100%); width: 26px; height: 2px; margin-left: -26px; transform: translateY(-50%); background: linear-gradient(90deg, transparent, rgba(90,171,204,0.4)); opacity: calc(0.15 + var(--p) * 0.85); filter: blur(0.4px); }
+.pi-comet .pih { position: absolute; top: 50%; left: calc(var(--p) * 100%); width: 5px; height: 5px; border-radius: 50%; transform: translate(-50%,-50%); background: var(--pic, #7CD0EE); box-shadow: 0 0 7px var(--pic, #5AABCC); }
+.pi-sealdraw .pif { position: absolute; left: 0; top: 50%; height: 1px; transform: translateY(-50%); width: calc(var(--p) * (100% - 20px)); background: linear-gradient(90deg, rgba(90,171,204,0.25), #5AABCC); }
+.pi-sealdraw .pis { position: absolute; right: 0; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; color: #5AABCC; }
+.pi-sealdraw .pis .ring { stroke-dasharray: 88; stroke-dashoffset: calc(88 * (1 - var(--p, 0))); }
+.pi-sealdraw .pis .dot { opacity: calc((var(--p, 0) - 0.82) * 6); }
+.pi-huearc .pif { position: absolute; left: 0; top: 50%; height: 2px; transform: translateY(-50%); width: 100%; background: linear-gradient(90deg, #C0503A 0%, #C9A66B 50%, #4A9468 100%); clip-path: inset(0 calc((1 - var(--p, 0)) * 100%) 0 0); }
+.pi-huearc .pih { position: absolute; top: 50%; left: calc(var(--p) * 100%); width: 5px; height: 5px; border-radius: 50%; transform: translate(-50%,-50%); background: var(--pic, #C0503A); box-shadow: 0 0 7px var(--pic, #C0503A); }
+.pi-centreout .pif { position: absolute; left: 50%; top: 50%; height: 1px; transform: translate(-50%,-50%); width: calc(var(--p) * 100%); background: linear-gradient(90deg, transparent, #5AABCC 30%, #7CD0EE 50%, #5AABCC 70%, transparent); }
+.pi-centreout .pih { position: absolute; top: 50%; left: calc(50% + var(--p) * 50%); width: 4px; height: 4px; border-radius: 50%; transform: translate(-50%,-50%); background: #7CD0EE; box-shadow: 0 0 6px #5AABCC; }
+.pi-centreout .pih2 { position: absolute; top: 50%; left: calc(50% - var(--p) * 50%); width: 4px; height: 4px; border-radius: 50%; transform: translate(-50%,-50%); background: #7CD0EE; box-shadow: 0 0 6px #5AABCC; }
+.pi-segments { display: flex; align-items: center; gap: 5px; }
+.pi-segments .seg { flex: 1; height: 2px; border-radius: 1px; background: rgba(255,255,255,0.12); transition: background 0.25s ease, box-shadow 0.25s ease; }
+.pi-segments .seg.lit { background: #5AABCC; box-shadow: 0 0 6px rgba(90,171,204,0.6); }
+.datum-stage.light .cap-prog.pi .pit { background: rgba(30,28,24,0.16); }
+.datum-stage.light .pi-comet .pif { background: linear-gradient(90deg, rgba(43,123,163,0.25), var(--pic, #2B7BA3)); }
+.datum-stage.light .pi-comet .pih { background: var(--pic, #2B7BA3); box-shadow: 0 0 7px rgba(43,123,163,0.5); }
+.datum-stage.light .cap-prog.pi::after { color: #6E6960; }
+
+/* the body centres the card in the space ABOVE the caption (which now reserves its own space) */
+.ds-body { flex: 1 1 0; display: flex; flex-direction: column; justify-content: center; align-items: center; width: 100%; min-height: 0; }
+.datum-stage.light .ds-body, body.pin .ds-body { min-height: 0; }
+
+/* ═══════════════════════════════════════════════════════════════════════
+   ONBOARDING L1 + L2 REBUILD (entries 24/25) — dissected from the REAL
+   registration source: register/EmailStep.tsx + import/UploadScreen.tsx.
+   L1 = the identify-yourself card (NOT crude platform tiles).
+   L2 = an unmistakable UPLOAD (dashed drop-zone + per-file progress),
+        deliberately distinct from the /discover search-results row list.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* ── L1 · EmailStep registration card ── */
+#ob-stage .reg-card {
+  max-width: 346px;
+  margin: 0 auto;
+  background: var(--surface);
+  border-top: 1px solid rgba(255,255,255,0.11);
+  border-right: 1px solid rgba(255,255,255,0.07);
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+  border-left: 1px solid rgba(255,255,255,0.07);
+  border-radius: 9px;
+  box-shadow: 0 22px 60px -20px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.05);
+  overflow: hidden;
+}
+#ob-stage .reg-head { text-align: center; padding: 26px 30px 0; }
+#ob-stage .reg-pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  margin-bottom: 9px; color: var(--teal);
+}
+#ob-stage .reg-pill span {
+  font-family: var(--font-mono); font-size: 9px; font-weight: 600;
+  letter-spacing: 0.16em; text-transform: uppercase;
+}
+#ob-stage .reg-title { font-size: 19px; font-weight: 600; color: var(--txt); letter-spacing: -0.01em; }
+#ob-stage .reg-sub { font-size: 12.5px; color: var(--txt3); margin-top: 5px; line-height: 1.45; }
+#ob-stage .reg-form { padding: 19px 30px 4px; }
+#ob-stage .reg-label {
+  font-family: var(--font-mono); font-size: 10px; font-weight: 600;
+  letter-spacing: 0.08em; text-transform: uppercase; color: var(--txt3);
+  margin-bottom: 7px;
+}
+#ob-stage .reg-input {
+  height: 42px; padding: 0 13px;
+  display: flex; align-items: center;
+  background: var(--bg);
+  border: 1px solid var(--teal);
+  border-radius: 6px;
+  box-shadow: 0 0 0 3px rgba(90,171,204,0.10);
+  font-size: 14px; color: var(--txt);
+}
+#ob-stage .reg-input .reg-at { color: var(--txt2); }
+#ob-stage .reg-input .ds-caret { height: 17px; margin-left: 2px; }
+#ob-stage .reg-btn {
+  margin-top: 15px; height: 42px; border-radius: 6px;
+  background: var(--teal); color: #fff;
+  font-size: 13px; font-weight: 500;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 0 22px rgba(90,171,204,0.22);
+}
+#ob-stage .reg-back {
+  padding: 14px 30px 18px; text-align: center;
+  font-size: 11px; color: var(--txt3);
+}
+
+/* ── L2 · UploadScreen drop-zone + uploading file cards ── */
+#ob-stage .up-card { max-width: 364px; margin: 0 auto; }
+#ob-stage .up-drop {
+  border: 1.5px dashed rgba(255,255,255,0.15);
+  border-radius: 9px;
+  padding: 20px 20px 17px;
+  text-align: center;
+  background: rgba(90,171,204,0.045);
+}
+#ob-stage .up-drop-ic { color: var(--teal); display: block; margin: 0 auto 8px; }
+#ob-stage .up-drop-h { font-size: 13.5px; font-weight: 500; color: var(--txt); }
+#ob-stage .up-drop-types {
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.04em;
+  color: var(--txt3); margin-top: 6px;
+}
+#ob-stage .up-files { display: flex; flex-direction: column; gap: 8px; margin-top: 11px; }
+#ob-stage .up-file {
+  background: var(--bg);
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 7px;
+  padding: 9px 12px;
+}
+#ob-stage .up-file-row { display: flex; align-items: center; gap: 10px; }
+#ob-stage .up-badge {
+  width: 26px; height: 26px; border-radius: 6px; flex-shrink: 0;
+  background: rgba(90,171,204,0.12); color: var(--teal);
+  display: flex; align-items: center; justify-content: center;
+}
+#ob-stage .up-name {
+  font-size: 12.5px; color: var(--txt); font-weight: 500;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0;
+}
+#ob-stage .up-pct {
+  font-family: var(--font-mono); font-size: 10.5px; color: var(--txt3);
+  margin-left: auto; flex-shrink: 0;
+}
+#ob-stage .up-check { color: var(--green); margin-left: auto; flex-shrink: 0; display: flex; }
+#ob-stage .up-bar {
+  height: 3px; border-radius: 2px; background: rgba(255,255,255,0.07);
+  overflow: hidden; margin-top: 9px;
+}
+#ob-stage .up-bar-fill { height: 100%; border-radius: 2px; background: var(--teal); width: var(--w); }
+#ob-stage .up-btn {
+  margin-top: 12px; height: 40px; border-radius: 6px;
+  background: var(--teal); color: #fff;
+  font-size: 12.5px; font-weight: 500;
+  display: flex; align-items: center; justify-content: center;
+}
+/* progress fills animate 0 → target as L2 becomes active under the pin */
+body.pin #ob-stage .up-bar-fill { width: 0; transition: width 1.5s cubic-bezier(0.3,0.6,0.2,1) 0.25s; }
+body.pin #ob-stage[data-state="2"] .up-bar-fill,
+body.pin #ob-stage[data-state="3"] .up-bar-fill,
+body.pin #ob-stage[data-state="4"] .up-bar-fill { width: var(--w); }
+
+
+/* ═══════════════════════════════════════════════════════════════════════
+   LOCK-SCROLL MOTION ARCHETYPES (2026-06-11, workflow wf_dfc0edcb + adversarial verify)
+   Each scene gets a DISTINCT, meaning-matched camera motion driven by the
+   continuous per-stage --p (set in pinController). Kills the "every lock-scroll
+   feels the same" staleness. Scene-scoped, additive, rest-state-neutral,
+   reduced-motion-safe. Verifiers fixed :nth-of-type→:nth-child selector bugs,
+   a search DOM miscount, and a proof curtain-timing crush before integration.
+     handover→assemble · ledger→accumulate · proof→splitreveal · search→datastream
+     show-related→focuspull · suggested→dolly · money→hyperzoom · onboarding→spotlight
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* ─── handover ─── */
+/* ═══════════════════════════════════════════════════════════════════════════
+   HANDOVER · "assemble" archetype  (scene-scoped to #ho-stage)
+   The sign-off layer (.pin-layer[data-layer="4"] -> .ho-seal) ASSEMBLES: the
+   four fragments (seal header line, the two Caveat signatures, the meta foot)
+   converge inward + de-blur in a staggered sequence, a teal seam draws across
+   the top of the card, and a single green ring pulses out of the seal mark —
+   all UNDER the EXISTING green-ignite climax (css:2655/2686-2695), which is
+   left untouched (it drives color / border / box-shadow only; we drive
+   transform / opacity / filter on DIFFERENT elements + pseudo-elements).
+
+   Driver: the stage's continuous --p (whole-scene 0->1, written on #ho-stage at
+   index.html:1383). Bands = [0.16,0.36,0.60,0.80] -> the seal layer is ACTIVE
+   only during state 4, i.e. --p in [0.60, 0.80). A LOCAL assemble progress
+   --ho-a SATURATES to 1 at --p=0.78 (≈2.5% of scroll before the layer-4 window
+   closes) so every transform reaches its neutral identity well before handoff.
+   At final data-state 5 (--p>=0.80) layer-4 becomes .past (opacity:0;
+   translateY(-16px)) per css:565 — the fragments are not even visible at rest.
+
+   No element here carries a JS-driven inline transform (the pinController only
+   classes .pin-layer .active/.past — css transform; .ho-seal + children get no
+   inline style). Constraint 2 satisfied.
+   ───────────────────────────────────────────────────────────────────────── */
+
+/* local assemble progress: 0 at --p=0.60, reaches 1 at --p=0.78 */
+body.pin #ho-stage .ho-seal {
+  --ho-a: clamp(0, calc((var(--p, 0) - 0.60) / 0.18), 1);
+}
+
+/* per-fragment arrival sub-windows of --ho-a (staggered: header, then sig 1,
+   then sig 2, then foot). Each resolves to --f=1 at its window end.
+   NOTE: real DOM order inside .ho-seal = div.seal-line, div.sig-row (A. Short),
+   div.sig-row (D. Reyes), div.foot — all <div>. We MUST use :nth-child, NOT
+   :nth-of-type: nth-of-type counts among same-tag siblings, so
+   .sig-row:nth-of-type(1) would require the 1st div to be a .sig-row (it is the
+   seal-line) and match nothing. :nth-child(2)/(3) select the two signatures. */
+body.pin #ho-stage .ho-seal .seal-line {
+  --f: clamp(0, calc((var(--ho-a, 0) - 0.00) / 0.50), 1);   /* header drops from top */
+}
+body.pin #ho-stage .ho-seal .sig-row:nth-child(2) {
+  --f: clamp(0, calc((var(--ho-a, 0) - 0.16) / 0.52), 1);   /* sig 1 (A. Short) flies from far-left */
+}
+body.pin #ho-stage .ho-seal .sig-row:nth-child(3) {
+  --f: clamp(0, calc((var(--ho-a, 0) - 0.30) / 0.54), 1);   /* sig 2 (D. Reyes) flies from far-right */
+}
+body.pin #ho-stage .ho-seal .foot {
+  --f: clamp(0, calc((var(--ho-a, 0) - 0.44) / 0.52), 1);   /* foot rises from below */
+}
+
+/* shared fragment treatment: de-blur + fade slightly ahead of arrival (1.6x,
+   capped). will-change only on these moving elements. var(--f,0) fallback so a
+   future DOM reshuffle can never leave a fragment stuck at the invalid-calc
+   opacity-1 default. */
+body.pin #ho-stage .ho-seal .seal-line,
+body.pin #ho-stage .ho-seal .sig-row,
+body.pin #ho-stage .ho-seal .foot {
+  opacity: clamp(0, calc(var(--f, 0) * 1.6), 1);
+  filter: blur(calc((1 - var(--f, 0)) * 6px));
+  will-change: transform, opacity, filter;
+  /* per-frame smoothing so 60fps --p steps don't look stepped (lab's .1s linear);
+     transform / opacity / filter only — compositor-friendly. */
+  transition: transform 0.10s linear, opacity 0.10s linear, filter 0.10s linear;
+}
+
+/* directional convergence — each fragment carries ONLY this transform; at --f=1
+   every value resolves to translate(0,0) / scale(1) / rotate(0) = the EXISTING
+   natural layout. None of these has a pre-existing or JS transform. */
+body.pin #ho-stage .ho-seal .seal-line {
+  /* drops from -22px, settles to scale(1) */
+  transform: translateY(calc((var(--f, 0) - 1) * 22px)) scale(calc(0.96 + 0.04 * var(--f, 0)));
+  transform-origin: left center;
+}
+body.pin #ho-stage .ho-seal .sig-row:nth-child(2) {
+  /* in from the left (-34px) with a faint counter-rotate -> 0 (A. Short) */
+  transform: translateX(calc((var(--f, 0) - 1) * 34px)) rotate(calc((1 - var(--f, 0)) * -2deg));
+  transform-origin: left center;
+}
+body.pin #ho-stage .ho-seal .sig-row:nth-child(3) {
+  /* in from the right (+34px) -> 0 (D. Reyes) */
+  transform: translateX(calc((1 - var(--f, 0)) * 34px)) rotate(calc((1 - var(--f, 0)) * 2deg));
+  transform-origin: right center;
+}
+body.pin #ho-stage .ho-seal .foot {
+  /* rises from +20px, settles to scale(1) */
+  transform: translateY(calc((1 - var(--f, 0)) * 20px)) scale(calc(0.97 + 0.03 * var(--f, 0)));
+  transform-origin: center;
+}
+
+/* ── the climax seam: a teal hairline draws across the top of the card as the
+   last fragments snap home. Drawn on ::before so no DOM/transform clash. ────── */
+body.pin #ho-stage .ho-seal {
+  position: relative;   /* base rule (css:751) sets no position; .ho-seal is the sole
+                           block child of the absolute .pin-layer, so relative does
+                           not move it in flow — only anchors the pseudo-elements. */
+}
+body.pin #ho-stage .ho-seal::before {
+  content: "";
+  position: absolute;
+  left: 24px; right: 24px; top: 0;
+  height: 1px;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent, rgba(124,208,238,0.6), transparent);
+  --seam: clamp(0, calc((var(--ho-a, 0) - 0.45) / 0.47), 1);   /* draws over --ho-a [0.45,0.92] */
+  transform: scaleX(var(--seam));
+  transform-origin: center;
+  opacity: calc(var(--seam) * 0.85);
+  will-change: transform, opacity;
+  transition: transform 0.10s linear, opacity 0.10s linear;
+}
+
+/* ── the ring pulse: ONE non-looping ring expands out of the seal mark at
+   ignition, peaks mid-window, and is fully gone (opacity 0) at --ho-a=1 so REST
+   is clean. Anchored over the .seal-mark (top-left of the card). ───────────── */
+body.pin #ho-stage .ho-seal::after {
+  content: "";
+  position: absolute;
+  left: 38px; top: 36px;          /* over the .seal-mark in .seal-line */
+  width: 30px; height: 30px;
+  margin: -15px 0 0 -15px;
+  border-radius: 50%;
+  border: 1px solid rgba(74,148,104,0.55);   /* green — rhymes with the ignite */
+  pointer-events: none;
+  --rp: clamp(0, calc((var(--ho-a, 0) - 0.55) / 0.45), 1);   /* the ignite phase */
+  transform: scale(calc(0.4 + 2.8 * var(--rp)));
+  opacity: calc(2.4 * var(--rp) * (1 - var(--rp)));   /* 0 at both ends, ~0.6 peak */
+  transition: transform 0.10s linear, opacity 0.10s linear;
+  will-change: transform, opacity;
+}
+
+/* REDUCED MOTION — neutralise converge/seam/ring; leave a quiet fade so the
+   sealed card still reveals. --ho-a inherits onto these children from .ho-seal. */
+@media (prefers-reduced-motion: reduce) {
+  body.pin #ho-stage .ho-seal .seal-line,
+  body.pin #ho-stage .ho-seal .sig-row,
+  body.pin #ho-stage .ho-seal .foot {
+    transform: none !important;
+    filter: none !important;
+    opacity: clamp(0, calc(var(--ho-a, 0) * 1.4), 1);
+    transition: opacity 0.2s linear;
+    will-change: auto;
+  }
+  body.pin #ho-stage .ho-seal::before {
+    transform: none;
+    opacity: calc(var(--ho-a, 0) * 0.6);
+  }
+  body.pin #ho-stage .ho-seal::after { display: none; }
+}
+
+/* ─── ledger ─── */
+/* ═══════════════════════════════════════════════════════════════════
+   LEDGER · ACCUMULATE — "the record building"  (scene-scoped, additive)
+   Driven by the stage's continuous --p (0→1) set every frame by
+   pinController on #lg-stage (index.html:1383, t clamped 0..1). Audit
+   rows + bucket headers land one-by-one top→bottom in clamped --p
+   sub-windows (the lab .ls-accumulate mechanism: each row owns [t0,t1],
+   eased ease-out for a settled landing); a dot-spine draws downward.
+
+   COMPOSE, do not clobber: the existing state machine
+   (css:1927-1944, body.pin #lg-stage[data-state=N] .lg-away/.lg-fix/.lg-seal)
+   still owns the GROUP-level opacity/transform/max-height reveal on the
+   WRAPPERS. This block animates only the INDIVIDUAL .pp-row / .pp-bucket
+   CHILDREN (no existing or JS-driven transform) plus a .crop::before
+   pseudo. #lg-stage runs NO recenter (verified: only #datum-stage writes
+   inline transform on .datum-inner; #ledger-how's lhStrip is a separate
+   scene) so animating .pp-row here is safe. Props: transform + opacity +
+   box-shadow + border-color only.
+
+   ⚠ SELECTOR FIX vs the proposal: :nth-of-type counts by TAG(div), and
+   the first div in .crop / .lg-away / .lg-fix is a .pp-bucket — so the
+   proposal's :nth-of-type(1..) missed most rows. Indices below are
+   assigned with class-robust selectors (:first-of-type/:last-of-type and
+   .pp-bucket+.pp-row adjacency) that actually match the real DOM.
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* Sub-window helpers. acc-last 0.86 leaves headroom so EVERYTHING is
+   landed before --p hits 1 → rest is neutral. acc-first 0.06 gives a beat
+   after the intro starts collapsing. 8 cadence slots, step 0.10, win
+   finishes just before the next starts. */
+body.pin #lg-stage .crop {
+  --acc-first: 0.06;
+  --acc-step:  0.10;   /* span(0.80)/8 */
+  --acc-win:   0.085;  /* step * ~0.85 */
+}
+
+/* Shared per-row recipe. t0 = first + step*ri ; raw = (p - t0)/win ;
+   local = clamp(0,raw,1) ; ease-out o = 1 - (1-local)^2. At --p→1 every
+   raw is large → local=1 → o=1 → opacity:1, translateY(0) = NEUTRAL. */
+body.pin #lg-stage .crop .pp-row,
+body.pin #lg-stage .crop .pp-bucket {
+  --t0:    calc(var(--acc-first) + var(--acc-step) * var(--ri, 0));
+  --raw:   calc((var(--p, 1) - var(--t0)) / var(--acc-win));
+  --local: clamp(0, var(--raw), 1);
+  --inv:   calc(1 - var(--local));
+  --o:     calc(1 - var(--inv) * var(--inv));
+  opacity: var(--o);
+  transform: translateY(calc(12px * (1 - var(--o))));
+  will-change: transform, opacity;
+  transition: opacity 0.14s linear, transform 0.14s linear;
+}
+
+/* Row indices, top→bottom, with selectors that MATCH the real DOM
+   (index.html:335-347). Buckets count as cadence slots so the section
+   labels drop in ahead of their rows = record forms in reading order.
+
+   .crop direct structure:  .pp-bucket(Tuesday) → 3×.pp-row.mine →
+   .lg-away{.pp-bucket,2×.pp-row} → .lg-fix{.pp-bucket,2×.pp-row} →
+   .pp-sealbar.lg-seal  */
+
+/* Tuesday header = slot 0 (top-level .pp-bucket, the only direct .pp-bucket of .crop) */
+body.pin #lg-stage .crop > .pp-bucket { --ri: 0; }
+/* 3 .mine rows = slots 1,2,3 — class-true ordering via nth-of-type AMONG .mine
+   is unsafe (tag-based); use sibling chaining from the bucket instead. */
+body.pin #lg-stage .crop > .pp-bucket + .pp-row.mine            { --ri: 1; }
+body.pin #lg-stage .crop > .pp-bucket + .pp-row.mine + .pp-row.mine { --ri: 2; }
+body.pin #lg-stage .crop > .pp-bucket + .pp-row.mine + .pp-row.mine + .pp-row.mine { --ri: 3; }
+/* away group: bucket=4, its two rows=5,6 (first/last-of-type are class-safe here:
+   only div children are 1 bucket + 2 rows, and .pp-row:first/last-of-type
+   resolves among the .pp-row matches reliably across browsers via :first-of-type
+   on the element type — but to stay class-true we chain off the group bucket) */
+body.pin #lg-stage .crop .lg-away .pp-bucket                  { --ri: 4; }
+body.pin #lg-stage .crop .lg-away .pp-bucket + .pp-row        { --ri: 5; }
+body.pin #lg-stage .crop .lg-away .pp-bucket + .pp-row + .pp-row { --ri: 6; }
+/* fix group: bucket=5, rows=6,7 (overlaps away tail slightly = a smooth
+   continuous cascade, intentional; no duplicate WITHIN a group) */
+body.pin #lg-stage .crop .lg-fix .pp-bucket                   { --ri: 5; }
+body.pin #lg-stage .crop .lg-fix .pp-bucket + .pp-row         { --ri: 6; }
+body.pin #lg-stage .crop .lg-fix .pp-bucket + .pp-row + .pp-row { --ri: 7; }
+
+/* Dot-spine: a 1px teal→ghost vertical line drawn downward (scaleY) as
+   --p climbs (the lab .acc-spine). Lives as .crop::before (no DOM add),
+   absolutely positioned so it NEVER affects flow/layout height. Fully
+   drawn by --p≈0.86 so it is complete at rest. Ignites brighter as it
+   finishes. .crop has overflow:hidden so the line is clipped to the card. */
+body.pin #lg-stage .crop { position: relative; }
+body.pin #lg-stage .crop::before {
+  content: "";
+  position: absolute;
+  left: 7px;
+  top: 86px;     /* below the Tuesday header; render-tune if structure shifts */
+  bottom: 64px;  /* above the sealbar */
+  width: 1px;
+  transform-origin: top center;
+  --spine: clamp(0, calc((var(--p, 1) - 0.06) / 0.80), 1);
+  transform: scaleY(var(--spine));
+  background: linear-gradient(180deg,
+    rgba(90,171,204, calc(0.20 + var(--spine) * 0.35)),
+    rgba(255,255,255,0.07));
+  box-shadow: 0 0 calc(var(--spine) * 6px) rgba(90,171,204, calc(var(--spine) * 0.30));
+  pointer-events: none;
+  z-index: 0;
+  transition: transform 0.14s linear, box-shadow 0.14s linear;
+}
+
+/* The card warms its border toward green as the record completes — echoes
+   the handover-seal ignition. Pure --p, static COLOR (not a transform) at
+   rest. Softened to 22% (was 28%) to stay quiet vs the existing teal-ish
+   state-4 settle; no existing #lg-stage[data-state] rule sets .crop's
+   border, so this is additive, not a clobber. */
+body.pin #lg-stage .crop {
+  --acc-warm: clamp(0, calc((var(--p, 1) - 0.58) / 0.42), 1);
+  border-color: color-mix(in srgb,
+    var(--green) calc(var(--acc-warm) * 22%),
+    var(--border));
+  transition: border-color 0.2s linear;
+}
+
+/* Sealbar ignition: a quiet green glow on the sealed row's mark + a faint
+   box-shadow on the whole sealbar at the very end (window 0.82→1), rhyming
+   the lab .acc-seal. box-shadow/filter only → composes over the existing
+   state-4 reveal of .lg-seal. Neutral until the record is sealed. */
+body.pin #lg-stage .lg-seal .seal-mark {
+  --acc-seal: clamp(0, calc((var(--p, 1) - 0.82) / 0.18), 1);
+  filter: drop-shadow(0 0 calc(var(--acc-seal) * 7px)
+    rgba(74,148,104, calc(var(--acc-seal) * 0.65)));
+  transition: filter 0.16s linear;
+}
+body.pin #lg-stage .pp-sealbar.lg-seal {
+  --acc-seal: clamp(0, calc((var(--p, 1) - 0.82) / 0.18), 1);
+  box-shadow: inset 2px 0 0 -1px
+    color-mix(in srgb, var(--green) calc(var(--acc-seal) * 60%), transparent);
+  transition: box-shadow 0.16s linear;
+}
+
+/* ── REST-STATE GUARANTEE ──────────────────────────────────────────
+   At --p → 1 (and final data-state 4): every --raw → large → --local=1
+   → --o=1 → opacity:1, translateY(0). --spine=1 (fully drawn, absolute
+   pseudo, no flow impact). --acc-warm=1 → static 22% green border COLOR
+   (not a transform, no size growth). --acc-seal=1 → static glow. NO
+   element gains residual downward translate, scale>1, or size growth, so
+   the card cannot grow into the flow .ds-caption. This holds even on rows
+   that fall back to --ri:0 (still resolve to o=1 at p=1). The group
+   wrappers' own [data-state=4] rule (css:1940-1943) already resolves to
+   transform:none / max-height:260px; these child rules add only a 0px
+   translate on top. ──────────────────────────────────────────────── */
+
+/* ── REDUCED MOTION ──────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  body.pin #lg-stage .crop .pp-row,
+  body.pin #lg-stage .crop .pp-bucket {
+    transform: none !important;
+    transition: opacity 0.2s linear;
+  }
+  body.pin #lg-stage .crop::before {
+    transform: scaleY(1);
+    box-shadow: none;
+    transition: none;
+  }
+  body.pin #lg-stage .lg-seal .seal-mark { filter: none; }
+  body.pin #lg-stage .pp-sealbar.lg-seal { box-shadow: none; }
+}
+
+/* ─── proof ─── */
+/* ═══════════════════════════════════════════════════════════════════════
+   PROOF · splitreveal — "the verdict curtain"  (REVISED, adversarial pass)
+   Archetype lift from lock-scroll-lab .ls-splitreveal: two opaque halves of
+   a curtain tear apart (opposing translateX + clip-path + slight rotate), a
+   teal seam glows on the cut, and the VERDICT behind it (the whole receipt
+   + the Verified bar) un-blurs and scales into focus; the seal ignites.
+
+   Driven by the stage's continuous --p (0->1). Built ENTIRELY from
+   ::before/::after on .pr-verified + transform/filter on existing elements
+   (.pr-receipt, .pr-verified, .key-glyph) — NO new DOM, NO transform on
+   .datum-inner or any JS-written element. The proof pinController.onState
+   only toggles .active/.past classes (verified) — it writes no inline
+   transform on any #pr-stage element.
+
+   WINDOW: the Verified bar's reveal is gated to DISCRETE [data-state="4"]
+   (max-height:0->96px, overflow:hidden) which fires at --p>=0.75
+   (bands=[0.25,0.50,0.75]). Before 0.75 the bar is clipped to zero height,
+   so the curtain is physically invisible there. We therefore map the tear
+   onto the window where the verdict is actually visible: 0.75 -> 0.96,
+   smoothstepped (slow tear-start, fast release), with a clean neutral hold
+   0.96 -> 1.0. The receipt un-blur leads slightly (0.66) so the focus pull
+   begins as state 3->4 settles.
+   ───────────────────────────────────────────────────────────────────── */
+body.pin #pr-stage {
+  /* curtain/tear window — maps onto the post-state-4 visible scroll */
+  --sr-raw: clamp(0, calc((var(--p) - 0.75) / 0.21), 1);
+  --srp: calc(var(--sr-raw) * var(--sr-raw) * (3 - 2 * var(--sr-raw)));
+  /* receipt focus-pull window — leads the tear a touch (anticipation) */
+  --rv-raw: clamp(0, calc((var(--p) - 0.66) / 0.26), 1);
+  --rvp: calc(var(--rv-raw) * var(--rv-raw) * (3 - 2 * var(--rv-raw)));
+}
+
+/* ── THE VERDICT (the whole receipt) snaps into focus as the curtain parts.
+      .pr-receipt carries NO JS transform (onState only toggles classes) and
+      NO base transform/filter rule, so this composes cleanly. Resolves to
+      EXACT neutral at --rvp = 1: scale(1), blur(0). Scale never exceeds 1
+      (0.985 -> 1.0) and is centre-origin, so the receipt footprint never
+      grows beyond natural -> zero risk of pushing the flow .ds-caption. ── */
+body.pin #pr-stage .pr-receipt {
+  transform: scale(calc(0.985 + 0.015 * var(--rvp)));
+  transform-origin: center center;
+  filter: blur(calc((1 - var(--rvp)) * 1.6px));
+  will-change: transform, filter;
+}
+
+/* the Verified bar is the focal cut. position:relative + isolation establish
+   a local stacking context for the curtain halves; neither changes the bar's
+   final visible state (that stays owned by the untouched
+   body.pin #pr-stage[data-state="4"] .pr-verified opacity/max-height rule).
+   A hair of scale (0.975 -> 1.0, never >1, centre origin) + un-blur, both
+   exactly neutral at --srp = 1. No will-change here: the bar is
+   opacity:0/max-height:0 for states 1-3 and barely moves — no layer needed. */
+body.pin #pr-stage .pr-verified {
+  position: relative;
+  isolation: isolate;
+  transform: scale(calc(0.975 + 0.025 * var(--srp)));
+  transform-origin: center center;
+  filter: blur(calc((1 - var(--srp)) * 1.2px));
+}
+
+/* the bar's real content rides above the parting curtain */
+body.pin #pr-stage .pr-verified > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* ── THE CURTAIN HALVES — two opaque panels in the receipt surface colour,
+      torn apart left/right. Each is clipped to its own half so the cut sits
+      dead-centre; they swing out with a slight rotate. The base
+      body.pin #pr-stage .pr-verified rule keeps overflow:hidden, which
+      CONTAINS the horizontal slide (intentional — the bar never grows
+      vertically from this, so it cannot reach .ds-caption). At rest
+      (--srp = 1) both are off-frame (±115%) AND opacity 0, pointer-events
+      none, all glow terms -> transparent. ── */
+body.pin #pr-stage .pr-verified::before,
+body.pin #pr-stage .pr-verified::after {
+  content: "";
+  position: absolute;
+  top: 0; bottom: 0;
+  left: 0; right: 0;
+  z-index: 3;
+  pointer-events: none;
+  background: linear-gradient(180deg,
+    color-mix(in srgb, var(--surface) 96%, var(--green)),
+    color-mix(in srgb, var(--bg) 92%, var(--green)));
+  opacity: calc(1 - var(--srp));
+  will-change: transform, opacity;
+  transition: opacity 0.12s linear, transform 0.12s linear;
+}
+/* LEFT half: covers the left of the bar; swings left + up-tilt */
+body.pin #pr-stage .pr-verified::before {
+  clip-path: inset(0 50% 0 0);
+  transform: translateX(calc(var(--srp) * -115%)) rotate(calc(var(--srp) * -1.1deg));
+  transform-origin: right center;
+  box-shadow:
+    inset -1px 0 0 0 color-mix(in srgb, var(--teal) calc(60% * (1 - var(--srp))), transparent),
+    -1px 0 calc(14px * (1 - var(--srp)) + 2px) color-mix(in srgb, var(--teal) calc(45% * (1 - var(--srp))), transparent);
+}
+/* RIGHT half: covers the right; swings right + down-tilt */
+body.pin #pr-stage .pr-verified::after {
+  clip-path: inset(0 0 0 50%);
+  transform: translateX(calc(var(--srp) * 115%)) rotate(calc(var(--srp) * 1.1deg));
+  transform-origin: left center;
+  box-shadow:
+    inset 1px 0 0 0 color-mix(in srgb, var(--teal) calc(60% * (1 - var(--srp))), transparent),
+    1px 0 calc(14px * (1 - var(--srp)) + 2px) color-mix(in srgb, var(--teal) calc(45% * (1 - var(--srp))), transparent);
+}
+
+/* ── SEAL IGNITION — the KeyGlyph lands as the verdict clears. Composes on
+      its OWN transform/filter (base .pr-verified .key-glyph sets only
+      box-shadow/display/color/line-height — no transform). Neutral at
+      --srp = 1 (scale 1; extra drop-shadow term resolves over the existing
+      scoped green glow). Scale never exceeds 1 (0.78 -> 1.0). ── */
+body.pin #pr-stage .pr-verified .key-glyph {
+  transform: scale(calc(0.78 + 0.22 * var(--srp)));
+  transform-origin: center center;
+  filter: drop-shadow(0 0 calc(var(--srp) * 10px) color-mix(in srgb, var(--green) calc(55% * var(--srp)), transparent));
+  will-change: transform, filter;
+}
+
+/* ── REDUCED MOTION — neutralise tear/scale/blur; leave a plain fade of the
+      curtain panels only (no translate, no rotate, no blur, no receipt pull). ── */
+@media (prefers-reduced-motion: reduce) {
+  body.pin #pr-stage .pr-receipt {
+    transform: none;
+    filter: none;
+  }
+  body.pin #pr-stage .pr-verified {
+    transform: none;
+    filter: none;
+  }
+  body.pin #pr-stage .pr-verified::before,
+  body.pin #pr-stage .pr-verified::after {
+    transform: none;
+    box-shadow: none;
+    clip-path: none;
+    opacity: calc(1 - var(--srp));
+    transition: opacity 0.2s linear;
+  }
+  body.pin #pr-stage .pr-verified .key-glyph {
+    transform: none;
+    filter: none;
+  }
+}
+
+/* ─── search ─── */
+/* ═══════════════════════════════════════════════════════════════════════
+   SCENE "search" (#datum-stage) — archetype: DATASTREAM  [REVIEWED + CORRECTED]
+   Result rows STREAM/CASCADE in one-by-one as the query resolves, each row
+   lifting + de-blurring behind a thin teal leading-edge that wipes down and
+   glows mid-populate — the lab's .ls-datastream mechanism, ported onto the
+   REAL .ds-* rows. Driven purely by var(--p) (continuous) via clamped
+   sub-windows that live INSIDE the existing state-4 reveal band [0.54 → 0.80].
+
+   CORRECTION vs proposal: the real .ds-results has 3 .ds-hit rows at
+   nth-child 2,3,5 (NOT four at 2,3,5,7) and the .ds-resfoot is nth-child 6.
+   Windows below are re-cut for exactly those three rows; the dead nth-child(7)
+   rule is dropped. will-change trimmed to the properties actually animated.
+
+   CONSTRAINT COMPLIANCE:
+   · Never touches .datum-inner (recenter writes its inline transform / frame).
+   · Composes with the [data-state] opacity/transform reveals on .ds-results /
+     .ds-record — adds motion on DIFFERENT elements (.ds-hit, .ds-group,
+     .ds-resfoot) + a ::before pseudo-element (no DOM add).
+   · Every window COMPLETES by --p ≈ 0.73 (rows) / 0.78 (footer) — all well
+     before state 5 @ 0.80; the record de-blur completes by --p = 0.93. So at
+     --p = 1 every value is fully neutral (translateY 0, blur 0, edge opacity 0,
+     scale 1) → zero residual transform at rest, no overlap with .ds-caption.
+   · Only transform / opacity / filter animated. will-change on the 3 rows only.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* Per-row stream progress --r (0→1), staggered window per real row.
+   Three .ds-hit rows: nth-child(2)=F-2847 [base], nth-child(3)=F-2591,
+   nth-child(5)=E-PORT. Each window opens ~0.045 after the previous, 0.10 wide,
+   all complete (--r=1) by --p ≤ 0.73 — the classic datastream stagger. */
+body.pin #datum-stage .ds-results .ds-hit {
+  /* row 0 — Faults · F-2847 (nth-child 2, the un-overridden base) */
+  --r: clamp(0, calc((var(--p) - 0.540) / 0.100), 1);
+  position: relative;                 /* context for the leading-edge ::before; no inline transform here */
+  will-change: transform, filter;
+  transform: translateY(calc((1 - var(--r)) * 12px));
+  filter: blur(calc((1 - var(--r)) * 2.4px));
+  transition: transform 0.12s cubic-bezier(0.22,0.61,0.36,1), filter 0.12s linear;
+}
+body.pin #datum-stage .ds-results .ds-hit:nth-child(3) { /* row 1 — F-2591 */
+  --r: clamp(0, calc((var(--p) - 0.585) / 0.100), 1);
+}
+body.pin #datum-stage .ds-results .ds-hit:nth-child(5) { /* row 2 — E-PORT maintenance */
+  --r: clamp(0, calc((var(--p) - 0.630) / 0.100), 1);
+}
+
+/* SIGNATURE LEADING-EDGE — a thin teal bar wipes top→bottom as each row
+   populates, glowing brightest at mid-populate then vanishing once settled.
+   Pure pseudo-element (no DOM change). .ds-hit has no inline transform, so
+   position:relative above is safe. The edge sits in the row's left gutter. */
+body.pin #datum-stage .ds-results .ds-hit::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 2px;
+  background: linear-gradient(180deg, var(--teal), rgba(90,171,204,0.4));
+  transform-origin: top;
+  transform: scaleY(var(--r, 0));
+  /* glows during populate (peaks at r=0.5), fades to nothing once settled */
+  opacity: calc(var(--r, 0) * (1 - var(--r, 0)) * 3.6);
+  pointer-events: none;
+  transition: transform 0.12s cubic-bezier(0.22,0.61,0.36,1), opacity 0.12s linear;
+}
+
+/* GROUP LABELS lead their cluster — each fades + lifts in just before its
+   first row. Labels are nth-child 1 (Faults) and 4 (Maintenance); neither has
+   an existing transform/opacity of its own (the container owns macro opacity). */
+body.pin #datum-stage .ds-results .ds-group {
+  --gr: clamp(0, calc((var(--p) - 0.515) / 0.080), 1);   /* leads row 0 */
+  opacity: var(--gr);
+  transform: translateY(calc((1 - var(--gr)) * 5px));
+  transition: opacity 0.12s linear, transform 0.12s cubic-bezier(0.22,0.61,0.36,1);
+}
+body.pin #datum-stage .ds-results .ds-group:nth-child(4) {  /* Maintenance group, leads E-PORT */
+  --gr: clamp(0, calc((var(--p) - 0.605) / 0.080), 1);
+}
+
+/* the immutable footer resolves LAST — the count "settling" beat (nth-child 6) */
+body.pin #datum-stage .ds-results .ds-resfoot {
+  --fr: clamp(0, calc((var(--p) - 0.700) / 0.080), 1);
+  opacity: calc(0.4 + 0.6 * var(--fr));
+  transform: translateY(calc((1 - var(--fr)) * 4px));
+  transition: opacity 0.12s linear, transform 0.12s cubic-bezier(0.22,0.61,0.36,1);
+}
+
+/* THE RECORD ARRIVES (state 5, --p ≥ 0.80) — the final datum lands with a
+   short de-blur/settle so it reads as "the answer resolving", not a hard cut.
+   .ds-record has NO inline transform (recenter targets .datum-inner only) and
+   is position:absolute in pin mode, so filter changes its paint only — never
+   its box → recenter measurement unaffected. We add ONLY filter on a fresh
+   sub-window that COMPLETES by --p = 0.93; opacity/transform stay owned by the
+   [data-state="5"] rule (we only re-state their transitions, not their values). */
+body.pin #datum-stage[data-state="5"] .ds-record {
+  --dr: clamp(0, calc((var(--p) - 0.800) / 0.130), 1);
+  filter: blur(calc((1 - var(--dr)) * 2px));
+  transition: filter 0.18s linear, opacity 0.7s ease, transform 0.7s ease;
+}
+
+/* REDUCED MOTION — neutralise the stream: rows just appear, no lift / blur /
+   leading-edge wipe; group + footer settled; record never blurs. */
+@media (prefers-reduced-motion: reduce) {
+  body.pin #datum-stage .ds-results .ds-hit,
+  body.pin #datum-stage .ds-results .ds-hit:nth-child(3),
+  body.pin #datum-stage .ds-results .ds-hit:nth-child(5) {
+    transform: none;
+    filter: none;
+    will-change: auto;
+  }
+  body.pin #datum-stage .ds-results .ds-hit::before { display: none; }
+  body.pin #datum-stage .ds-results .ds-group,
+  body.pin #datum-stage .ds-results .ds-group:nth-child(4),
+  body.pin #datum-stage .ds-results .ds-resfoot {
+    transform: none;
+    opacity: 1;
+  }
+  body.pin #datum-stage[data-state="5"] .ds-record { filter: none; }
+}
+
+/* ─── show-related ─── */
+/* ════════════════════════════════════════════════════════════════════
+   SHOW-RELATED · FOCUS-PULL  (scene-scoped, additive, --p-driven)
+   REWRITE of the proposed motion. Lab archetype .ls-focuspull, adapted to
+   the REAL constraint the proposal missed: .sr-drawer is nested inside
+   `.crop { overflow:hidden }` (css:1167) AND .crop owns the gradient bg,
+   so any OUTER glow / drop-shadow / z-index:-1 pseudo is clipped or
+   occluded. Therefore EVERY tell here is INSET (survives clip) or a
+   transform/blur on the rows (no box growth).
+
+   Mechanism: as --p resolves, a sharp focal plane LOCKS onto the focal
+   .sr-note (the first/punchline row) — it pulls razor-sharp while the 3
+   context rows recede in scale and defocus. To recover the lab's
+   "travelling plane" read (not a flat uniform blur), the context rows
+   sharpen-then-soften in a STAGGER (each row has its own --p sub-window),
+   so the pull visibly sweeps the rack before settling. The focal tell is
+   an INSET teal focal rail (.sr-note::before, echoing the lab's
+   .fp-body::before) + an INSET focal ring (.sr-note::after) that ignite
+   with the pull. Both inset → unaffected by .crop overflow:hidden.
+
+   REST (--p=1 / data-state 4): focal blur=0, focal scale=1 (zero residual
+   growth — cannot push toward the flow .ds-caption), context rows settle
+   to a LIGHT 1.6px defocus + scale<1 (shrink inward only), rail+ring at
+   their lit value. We never touch .pp-row opacity (existing state-4 0.28
+   rule stands) nor .sr-note background (existing state-4 rule stands) nor
+   .datum-inner (no inline transform in #sr-stage; recenter targets
+   #datum-stage only — verified in pinController).
+   ──────────────────────────────────────────────────────────────────── */
+
+/* drivers, off the stage's continuous --p */
+body.pin #sr-stage {
+  /* overall pull: 0 until the drawer is arriving (~0.50), then 0->1 across
+     the back half as the plane tightens onto the focal note. */
+  --sr-pull: clamp(0, calc((var(--p) - 0.50) / 0.50), 1);
+  /* per-row sweep windows for the 3 context rows: each rises (sharpens)
+     then falls (re-softens) so the sharp plane visibly travels the rack
+     before locking on the focal note. All return to a settled soft at p=1. */
+  --sr-r1: calc(clamp(0, calc((var(--p) - 0.50) / 0.12), 1) - clamp(0, calc((var(--p) - 0.62) / 0.12), 1)); /* peak ~.62 */
+  --sr-r2: calc(clamp(0, calc((var(--p) - 0.60) / 0.12), 1) - clamp(0, calc((var(--p) - 0.72) / 0.12), 1)); /* peak ~.72 */
+  --sr-r3: calc(clamp(0, calc((var(--p) - 0.70) / 0.12), 1) - clamp(0, calc((var(--p) - 0.82) / 0.12), 1)); /* peak ~.82 */
+}
+
+/* smooth the per-frame --p reads on the rows so the sweep glides */
+body.pin #sr-stage[data-state="3"] .sr-drawer .pp-row,
+body.pin #sr-stage[data-state="4"] .sr-drawer .pp-row {
+  transition: filter 0.16s linear, transform 0.16s linear;
+}
+
+/* CONTEXT rows (everything but the focal note): recede in scale toward the
+   left origin and defocus as the pull resolves. The per-row "rise" window
+   momentarily SHARPENS each (sweep travelling through), then they settle
+   to a light 1.6px rest blur. scale stays <1 (shrink inward, never grow).
+   Opacity stays owned by the existing state-4 rule. */
+body.pin #sr-stage[data-state="3"] .sr-drawer .pp-row:not(.sr-note),
+body.pin #sr-stage[data-state="4"] .sr-drawer .pp-row:not(.sr-note) {
+  transform-origin: left center;
+  transform: scale(calc(1 - 0.013 * var(--sr-pull)));
+  will-change: filter, transform;
+}
+/* base context defocus (settles ~1.6px), momentarily relieved by each row's
+   own sweep window so the sharp plane reads as travelling down the rack. */
+/* context defocus — robust sibling chains from the focal .sr-note. Real DOM:
+   .pp-bucket, .pp-row.sr-note, then 3 context .pp-row. The prior
+   :nth-of-type(2..4) was TAG-indexed → landed on the bucket/note and left the
+   deepest row unblurred (proven live: [1px,0px,none]). Sibling chains are
+   class-true: all context rows blur, graduated by depth = travelling-plane
+   rack-focus. blur ∝ --sr-pull → context recedes as the focal sharpens. */
+body.pin #sr-stage[data-state="3"] .sr-drawer .sr-note ~ .pp-row,
+body.pin #sr-stage[data-state="4"] .sr-drawer .sr-note ~ .pp-row {
+  filter: blur(calc(var(--sr-pull) * 1.0px));
+}
+body.pin #sr-stage[data-state="3"] .sr-drawer .sr-note + .pp-row + .pp-row,
+body.pin #sr-stage[data-state="4"] .sr-drawer .sr-note + .pp-row + .pp-row {
+  filter: blur(calc(var(--sr-pull) * 1.5px));
+}
+body.pin #sr-stage[data-state="3"] .sr-drawer .sr-note + .pp-row + .pp-row + .pp-row,
+body.pin #sr-stage[data-state="4"] .sr-drawer .sr-note + .pp-row + .pp-row + .pp-row {
+  filter: blur(calc(var(--sr-pull) * 2.0px));
+}
+
+/* FOCAL note: pulls to razor-sharp as --sr-pull -> 1 (blur 0 at rest).
+   No scale pulse — rests at the natural size; .sr-note is the TOP row, but
+   we keep scale(1) so there is provably zero growth toward the caption. */
+body.pin #sr-stage[data-state="3"] .sr-drawer .sr-note,
+body.pin #sr-stage[data-state="4"] .sr-drawer .sr-note {
+  position: relative;                 /* anchor focal rail + ring */
+  transform-origin: left center;
+  filter: blur(calc((1 - var(--sr-pull)) * 1.4px));   /* 1.4px -> 0 sharp */
+  will-change: filter;
+}
+
+/* FOCAL RAIL — the lab's travelling teal rail, here LOCKED on the focal
+   note as the punchline. INSET vertical bar at the row's left edge; ignites
+   with the pull. Pure inset → survives .crop overflow:hidden. */
+body.pin #sr-stage[data-state="3"] .sr-drawer .sr-note::before,
+body.pin #sr-stage[data-state="4"] .sr-drawer .sr-note::before {
+  content: "";
+  position: absolute;
+  left: -2px; top: 14%; bottom: 14%;
+  width: 2px;
+  border-radius: 2px;
+  pointer-events: none;
+  background: linear-gradient(180deg, transparent, var(--teal), transparent);
+  opacity: var(--sr-pull);
+  box-shadow: 0 0 8px 0 rgba(90,171,204, calc(0.55 * var(--sr-pull)));
+  transition: opacity 0.16s linear;
+}
+
+/* FOCAL RING — the "in focus" tell. INSET teal ring only (no outer bloom:
+   it would be clipped by .crop). Ignites with the pull, rests lit. */
+body.pin #sr-stage[data-state="3"] .sr-drawer .sr-note::after,
+body.pin #sr-stage[data-state="4"] .sr-drawer .sr-note::after {
+  content: "";
+  position: absolute;
+  inset: -1px 0;
+  border-radius: 6px;
+  pointer-events: none;
+  opacity: var(--sr-pull);
+  box-shadow:
+    inset 0 0 0 1px rgba(124,208,238, calc(0.40 * var(--sr-pull))),
+    inset 0 0 18px -4px rgba(124,208,238, calc(0.34 * var(--sr-pull)));
+  transition: opacity 0.16s linear, box-shadow 0.16s linear;
+}
+
+/* ── reduced motion: no blur, no scale, no sweep. Keep only the calm lit
+      focal rail + a static inset ring so the focus TELL survives as a quiet
+      highlight, no rack motion. ── */
+@media (prefers-reduced-motion: reduce) {
+  body.pin #sr-stage[data-state="3"] .sr-drawer .pp-row,
+  body.pin #sr-stage[data-state="4"] .sr-drawer .pp-row,
+  body.pin #sr-stage[data-state="3"] .sr-drawer .pp-row:not(.sr-note),
+  body.pin #sr-stage[data-state="4"] .sr-drawer .pp-row:not(.sr-note),
+  body.pin #sr-stage[data-state="3"] .sr-drawer .pp-row:not(.sr-note):nth-of-type(2),
+  body.pin #sr-stage[data-state="4"] .sr-drawer .pp-row:not(.sr-note):nth-of-type(2),
+  body.pin #sr-stage[data-state="3"] .sr-drawer .pp-row:not(.sr-note):nth-of-type(3),
+  body.pin #sr-stage[data-state="4"] .sr-drawer .pp-row:not(.sr-note):nth-of-type(3),
+  body.pin #sr-stage[data-state="3"] .sr-drawer .pp-row:not(.sr-note):nth-of-type(4),
+  body.pin #sr-stage[data-state="4"] .sr-drawer .pp-row:not(.sr-note):nth-of-type(4),
+  body.pin #sr-stage[data-state="3"] .sr-drawer .sr-note,
+  body.pin #sr-stage[data-state="4"] .sr-drawer .sr-note {
+    filter: none;
+    transform: none;
+    will-change: auto;
+  }
+  body.pin #sr-stage[data-state="3"] .sr-drawer .sr-note::before,
+  body.pin #sr-stage[data-state="4"] .sr-drawer .sr-note::before { opacity: 1; box-shadow: none; }
+  body.pin #sr-stage[data-state="3"] .sr-drawer .sr-note::after,
+  body.pin #sr-stage[data-state="4"] .sr-drawer .sr-note::after {
+    box-shadow: inset 0 0 0 1px rgba(124,208,238,0.40);
+  }
+}
+
+/* ─── suggested ─── */
+/* ═══════════════════════════════════════════════════════════════════════
+   SUGGESTED · DOLLY ARCHETYPE (corrected) — 2.5D depth-push / rack-focus.
+   ───────────────────────────────────────────────────────────────────────
+   WHY NOT translateZ/preserve-3d: every moving plane in this scene lives
+   inside an overflow:hidden reveal wrapper (.sd-anim css:3108, .cascade
+   css:1665, .lc-block css:1675). overflow != visible FLATTENS a preserve-3d
+   context at that boundary, so a translateZ dolly is silently cancelled.
+   We therefore build the dolly in 2.5D: scale + translateY + filter:blur
+   (depth-of-field) + opacity, driven off --p. This is immune to the
+   overflow-flatten trap, reads as a real camera push + rack-focus, and
+   resolves to scale(1)/translateY(0)/blur(0) at every window close = rest.
+
+   REST PROOF: --sd-push ends at p0.46, --sd-rush at p0.68, --sd-deep at
+   p0.92. At --p->1 all three = 1 -> every transform below is the neutral
+   identity. The hump factors (rush*(1-rush), (1-x)) all return to 0 at
+   both ends. The explicit [data-state="4"] REST PINS force the identity
+   regardless of residual --p rounding. No residual downward translate, no
+   scale>1 at rest -> the .ds-body centred card never reaches the flow
+   .ds-caption below it. Scale-ups mid-flight are inside overflow:hidden
+   wrappers (.sd-anim/.cascade), so they CANNOT bleed into the caption.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* eased sub-progress windows on the stage (children inherit) */
+#sd-stage {
+  --sd-push: clamp(0, calc((var(--p, 0) - 0.0)  / 0.46), 1);  /* camera travel-in   */
+  --sd-rush: clamp(0, calc((var(--p, 0) - 0.30) / 0.38), 1);  /* cascade/toast surface */
+  --sd-deep: clamp(0, calc((var(--p, 0) - 0.62) / 0.30), 1);  /* learning curve rise */
+}
+
+/* LAYER · MID — the suggestion card is the plane the camera pushes through.
+   As --sd-push rises the card eases very slightly larger + up and softens a
+   hair (rack-focus toward the focal row). Resolves to scale(1)/translateY(0)/
+   blur(0) by push=1 (~state 3). opacity untouched -> the [data-state] reveals
+   on its children are never clobbered. .sd-card carries NO existing transform
+   (state-2 bloom/state-3 tint target .sd-btn.ok / .sd-row.first background). */
+body.pin #sd-stage .sd-card {
+  will-change: transform, filter;
+  transform:
+    translateY(calc(var(--sd-push) * -7px))
+    scale(calc(1 + var(--sd-push) * 0.012));
+  filter: blur(calc((1 - var(--sd-push)) * var(--sd-push) * 1.6px));
+  transition: transform 0.12s linear, filter 0.12s linear;
+}
+
+/* LAYER · FRONT (focal) — the accepted row lifts off the card plane on the
+   late/snappy --sd-rush window as a one-way hump (0 at both ends) so it ALWAYS
+   lands flat, and gains a teal depth-glow as it becomes the accepted link.
+   Composes with the existing state-2 .sd-btn.ok bloom + state-3 .sd-row.first
+   tint (different property/element). Box-shadow gated to states 2/3 only (the
+   card is opacity:0 at state 4 anyway). */
+body.pin #sd-stage .sd-row.first {
+  will-change: transform;
+  transform: translateY(calc(var(--sd-rush) * (1 - var(--sd-rush)) * 4 * -10px));
+  transition: transform 0.12s linear, box-shadow 0.5s ease;
+}
+body.pin #sd-stage[data-state="2"] .sd-row.first,
+body.pin #sd-stage[data-state="3"] .sd-row.first {
+  box-shadow: 0 14px 38px -24px rgba(52,112,143,0.55);
+}
+
+/* LAYER · CASCADE — the fan surfaces from depth as a staggered rack-focus +
+   rise. Each row starts lower, smaller and blurred (deep), and snaps to its
+   plane as --sd-rush completes. Stagger via :nth-child (exactly 4 rows). 2.5D
+   only -> immune to the overflow:hidden flatten on .cascade. The reveal
+   (opacity/transform/max-height) is owned by the PARENT .cascade rule
+   (css:1660-1669); here we move only the CHILD rows on different timing.
+   All resolve to translateY(0)/scale(1)/blur(0) at rush=1. */
+body.pin #sd-stage .cascade-row {
+  will-change: transform, filter;
+  transform:
+    translateY(calc((1 - var(--sd-rush)) * var(--sd-row-rise, 0px)))
+    scale(calc(1 - (1 - var(--sd-rush)) * 0.06));
+  filter: blur(calc((1 - var(--sd-rush)) * 2.2px));
+  transition: transform 0.14s linear, filter 0.14s linear;
+}
+body.pin #sd-stage .cascade-row:nth-child(1) { --sd-row-rise: 26px; }
+body.pin #sd-stage .cascade-row:nth-child(2) { --sd-row-rise: 34px; }
+body.pin #sd-stage .cascade-row:nth-child(3) { --sd-row-rise: 42px; }
+body.pin #sd-stage .cascade-row:nth-child(4) { --sd-row-rise: 50px; }
+
+/* LAYER · TOAST — the confirmation leads the cascade in: same approach, a hair
+   ahead, slightly larger settle. Composes with the .sd-toastrow reveal
+   (opacity/translateY on the PARENT row, css:1660); we move the inner pill. */
+body.pin #sd-stage .sd-toast {
+  will-change: transform, filter;
+  transform:
+    translateY(calc((1 - var(--sd-rush)) * 16px))
+    scale(calc(1 - (1 - var(--sd-rush)) * 0.04));
+  filter: blur(calc((1 - var(--sd-rush)) * 1.4px));
+  transition: transform 0.14s linear, filter 0.14s linear;
+}
+
+/* LAYER · FAR — the learning curve dollies UP from deep focus on --sd-deep.
+   Only visible once state 4 reveals .lc-block (p>=0.68); deep runs 0.62..0.92
+   so the graph + text rise out of soft focus into the plane and settle BEFORE
+   --p->1. Their OWN reveal (opacity/transform:none/max-height on .lc-block,
+   css:1671-1678) is preserved; we move only the .lc-graph / .lc-text children.
+   Graph leads, text trails slightly = depth separation within the panel. */
+body.pin #sd-stage .lc-graph,
+body.pin #sd-stage .lc-text {
+  will-change: transform, filter;
+  transform:
+    translateY(calc((1 - var(--sd-deep)) * 26px))
+    scale(calc(1 - (1 - var(--sd-deep)) * 0.05));
+  filter: blur(calc((1 - var(--sd-deep)) * (1 - var(--sd-deep)) * 4px));
+  transition: transform 0.14s linear, filter 0.14s linear;
+}
+body.pin #sd-stage .lc-text {
+  transform:
+    translateY(calc((1 - var(--sd-deep)) * 18px))
+    scale(calc(1 - (1 - var(--sd-deep)) * 0.035));
+  transition-delay: 0.05s;
+}
+
+/* ── REST PINS — sacred neutral end. At the FINAL data-state every dolly layer
+   is forced to identity regardless of any residual --p rounding, so the layout
+   is exactly the existing natural position (the card sits centred in .ds-body,
+   the flow .ds-caption below is never reached). ── */
+body.pin #sd-stage[data-state="4"] .sd-card,
+body.pin #sd-stage[data-state="4"] .sd-row.first,
+body.pin #sd-stage[data-state="4"] .cascade-row,
+body.pin #sd-stage[data-state="4"] .sd-toast,
+body.pin #sd-stage[data-state="4"] .lc-graph,
+body.pin #sd-stage[data-state="4"] .lc-text {
+  transform: none;
+  filter: none;
+}
+
+/* ── REDUCED MOTION — neutralise all depth transforms + blur; the existing
+   [data-state] opacity reveals carry the scene as a simple fade. ── */
+@media (prefers-reduced-motion: reduce) {
+  body.pin #sd-stage .sd-card,
+  body.pin #sd-stage .sd-row.first,
+  body.pin #sd-stage .cascade-row,
+  body.pin #sd-stage .sd-toast,
+  body.pin #sd-stage .lc-graph,
+  body.pin #sd-stage .lc-text {
+    transform: none !important;
+    filter: none !important;
+    will-change: auto;
+  }
+}
+
+/* ─── money ─── */
+/* ═══════════════════════════════════════════════════════════════════
+   MONEY-FINDER · HYPER-ZOOM  (#mf-stage, additive, --p-driven)  [REVISED]
+   Camera dolly that pushes IN onto the recovered verdict — the cited §4.1
+   warranty clause (scene 4) — then LOCKS to a readable, non-clipped frame.
+   Mechanism mirrors lab .ls-hyperzoom: camera scale around a focal origin
+   + deepening edge-vignette + instrument reticle drawing in + teal focal
+   glow on the payoff detail.
+
+   We drive ONLY scale on .mfv-doc / .mfv-cite (no JS inline transform on
+   either; recenter is search-only) and box-shadow/opacity/filter on the
+   periphery + pseudo-elements. We do NOT touch .crop / .datum-inner /
+   .ds-body / .ds-caption, and we do NOT override .mfv-doc's seated material
+   box-shadow nor the mark's canonical resting background.
+
+   Rest proof (--p=1, state 4):
+     --mfz=1 → --mf-push=1, --mf-settle=1 → --dolly=0 (scale 1.000 EXACT,
+     vignette opacity 0, periphery opacity 1 / blur 0). --land=1 → mark glow
+     and reticle resolve to a static lit value (box-shadow/background-additive
+     and a clipped pointer-events:none pseudo — zero geometry, zero flow). No
+     residual translate/scale>1/size-growth → cannot reach the flow .ds-caption.
+   ═══════════════════════════════════════════════════════════════════ */
+
+#mf-stage{
+  /* local progress through state-4 verdict (0 at p≈0.72 → 1 at p=1) */
+  --mfz: clamp(0, calc((var(--p) - 0.72) / 0.28), 1);
+  /* triangular approach: rises to 1 by mfz=0.5, eases to 0 by mfz=1 → lock-on, no residual */
+  --mf-push:   clamp(0, calc(var(--mfz) / 0.5), 1);
+  --mf-settle: clamp(0, calc((var(--mfz) - 0.5) / 0.5), 1);
+  --dolly: clamp(0, calc(var(--mf-push) - var(--mf-settle)), 1);   /* peaks mid-state-4, =0 at rest */
+  /* landed intensity: monotonic, holds at 1 at rest → owns the persistent (static) focal glow */
+  --land: clamp(0, calc((var(--mfz) - 0.18) / 0.6), 1);
+}
+
+/* ── CAMERA DOLLY · the warranty doc pushes forward, origin on the cited clause band ──
+   .mfv-doc carries no JS inline transform; its overflow window (.crop) clips any peak excess. */
+#mf-stage .mfv-scene[data-s="4"] .mfv-doc{
+  transform-origin: 50% 72%;
+  transform: scale(calc(1 + 0.055 * var(--dolly)));     /* 1.000 → ~1.055 → 1.000 (locks at rest) */
+  will-change: transform;
+  /* NOTE: intentionally NO box-shadow here — would clobber the seated material shadow (css:2588). */
+}
+
+/* the cite confirmation rides the same micro-push so doc + verdict move as one block */
+#mf-stage .mfv-scene[data-s="4"] .mfv-cite{
+  transform-origin: 0 50%;
+  transform: scale(calc(1 + 0.030 * var(--dolly)));
+}
+
+/* ── FOCAL PAYOFF · the cited §4.1 clause is the ONE lit detail ──
+   ADDITIVE glow only — we do NOT override the mark's canonical resting
+   background (css:1869) nor its border-bottom; box-shadow is a new property,
+   so the rest state stays exactly the shipped quiet-micro plus a settled glow. */
+#mf-stage .mfv-scene[data-s="4"] .mfv-doc mark{
+  box-shadow: 0 0 0 1px rgba(90,171,204, calc(0.34 * var(--land))) inset,
+              0 calc(6px * var(--land)) calc(20px * var(--land)) calc(-8px * var(--land)) rgba(124,208,238, calc(0.50 * var(--land)));
+  will-change: box-shadow;
+}
+
+/* ── PERIPHERY RACKS OUT ──  context (not the verdict) dims + softens during the
+   approach so the eye is pulled to the clause; resolves to NEUTRAL at rest (--dolly→0). */
+#mf-stage .mfv-scene[data-s="4"] .mfv-doc-head,
+#mf-stage .mfv-scene[data-s="4"] .mfv-doc-title,
+#mf-stage .mfv-scene[data-s="4"] .mfv-doc .dl:not(:has(mark)){
+  opacity: calc(1 - 0.34 * var(--dolly));
+  filter: blur(calc(0.7px * var(--dolly)));
+}
+
+/* ── DEEPENING EDGE-VIGNETTE ──  painted on the crop window; overflow:hidden clips it.
+   Tracks the dolly → world darkens on approach, lifts back to 0 as the frame locks. */
+#mf-stage .mfv-stage::before{
+  content: '';
+  position: absolute; inset: 0;
+  pointer-events: none;
+  z-index: 5;                 /* above scenes, below .mfv-cursor (z6); reticle is z7 */
+  opacity: var(--dolly);
+  background: radial-gradient(
+    circle at 50% 66%,
+    rgba(12,11,10,0) 30%,
+    rgba(12,11,10,0.42) 64%,
+    rgba(12,11,10,0.92) 100%
+  );
+}
+
+/* ── INSTRUMENT RETICLE ──  corner brackets that draw in over the cited clause as it locks.
+   Centred on the doc's lower-third focal band; appears only on the final approach (p ≳ 0.9). */
+#mf-stage .mfv-stage::after{
+  content: '';
+  position: absolute;
+  left: 50%; top: 66%;
+  width: 78%; height: 86px;
+  transform: translate(-50%, -50%) scale(calc(0.9 + 0.1 * var(--land)));
+  border-radius: 9px;
+  z-index: 7;
+  pointer-events: none;
+  opacity: calc(max(0, (var(--mfz) - 0.62) / 0.38));
+  background:
+    linear-gradient(to right,  rgba(124,208,238,0.55) 15px, transparent 15px) 0 0       / 16px 1.4px no-repeat,
+    linear-gradient(to bottom, rgba(124,208,238,0.55) 15px, transparent 15px) 0 0       / 1.4px 16px no-repeat,
+    linear-gradient(to left,   rgba(124,208,238,0.55) 15px, transparent 15px) 100% 100% / 16px 1.4px no-repeat,
+    linear-gradient(to top,    rgba(124,208,238,0.55) 15px, transparent 15px) 100% 100% / 1.4px 16px no-repeat;
+}
+
+/* ── reduced motion: keep the verdict legible, drop the camera move ── */
+@media (prefers-reduced-motion: reduce){
+  #mf-stage .mfv-scene[data-s="4"] .mfv-doc,
+  #mf-stage .mfv-scene[data-s="4"] .mfv-cite{ transform: none; }
+  #mf-stage .mfv-scene[data-s="4"] .mfv-doc-head,
+  #mf-stage .mfv-scene[data-s="4"] .mfv-doc-title,
+  #mf-stage .mfv-scene[data-s="4"] .mfv-doc .dl:not(:has(mark)){ opacity: 1; filter: none; }
+  #mf-stage .mfv-stage::before{ opacity: 0; }
+  #mf-stage .mfv-stage::after{ opacity: calc(0.6 * var(--land)); transform: translate(-50%, -50%); }  /* quiet static frame, no scale anim */
+  /* the focal mark glow still fades up via --land — a calm, geometry-free reveal of the cited clause */
+}
+
+/* ─── onboarding ─── */
+/* ═══════════════════════════════════════════════════════════════════════
+   #ob-stage · SPOTLIGHT SWEEP (light-only, additive, scene-scoped) — REVISED
+   ───────────────────────────────────────────────────────────────────────
+   Archetype .ls-spotlight (lock-scroll-lab.html:735+): a radial light pool
+   whose centre (--ob-sx,--ob-sy) travels diagonally and whose radius
+   (--ob-srad) tightens, as a pure function of var(--p). The whole effect is
+   composited from pseudo-elements that sit BEHIND the card content (z-index 0)
+   so the readable card face/text/KPIs are NEVER dimmed — only the inert card
+   surround reads as a "dark room" the travelling light falls onto.
+
+   FIX vs the proposed version: the over-content NORMAL-blend vignette (z2) is
+   GONE. Both layers are behind content. The "room is dark" read now comes from
+   a faint behind-content floor (::after, z0, normal blend, weak, clears as
+   --p->1) plus the screen-blend teal pool (::before, z0) that lights the
+   region it travels over. No transform on any flow element; no inline-transform
+   target touched (.datum-inner is left alone); REST at --p=1 = fully clear.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* travelling pool — pure function of --p, mirrors the lab's --sx/--sy/--srad.
+   Centre rides top-left -> lower-right; radius tightens as it settles. Declared
+   on the stage so every layer's pseudo reads the same pool. --ob-dark is the
+   "unlit room" weight: full at the start, clears to 0 as --p->1 (1 - p*p,
+   the lab's own end-state, lock-scroll-lab.html:874). */
+#ob-stage {
+  --ob-sx: calc(14% + var(--p, 0) * 64%);
+  --ob-sy: calc(2% + var(--p, 0) * 92%);
+  --ob-srad: calc(330px - var(--p, 0) * 70px);
+  --ob-dark: calc(1 - var(--p, 0) * var(--p, 0));
+}
+
+/* stacking/overflow context on the two light targets. .crop already has
+   overflow:hidden (css:1167); .ob-compare gets it so the pool clips to the
+   card (its content sits inside the padding box; the outset box-shadow at
+   css:2090 is unaffected — overflow clips children, not the element's own
+   shadow). position only — surfaces/borders untouched. */
+#ob-stage .pin-layer .crop { position: relative; }
+#ob-stage .ob-compare { position: relative; overflow: hidden; }
+
+/* ── the warm travelling pool — screen-blend, BEHIND content (z0). Over the
+   near-black card bg this reads as a true light wash; centre + radius track
+   --p exactly like the lab room layer. opacity lifts when the layer is the
+   active focus (the "light arrives" beat) — opacity-only, fully reversible. ── */
+#ob-stage .pin-layer .crop::before,
+#ob-stage .ob-compare::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  background:
+    radial-gradient(var(--ob-srad) calc(var(--ob-srad) * 0.82)
+      at var(--ob-sx) var(--ob-sy),
+      rgba(124,208,238,0.20) 0%,
+      rgba(90,171,204,0.09) 28%,
+      rgba(255,255,255,0.02) 50%,
+      transparent 72%);
+  mix-blend-mode: screen;
+  opacity: 0.34;
+  transition: opacity 0.7s ease;
+  will-change: opacity;
+}
+
+/* ── the dark room — a faint floor that deepens the corners the light has NOT
+   reached. NORMAL blend, but BEHIND content (z0), so it darkens only the inert
+   card surround, never the readable face. Offset off the pool centre; weak by
+   design and CLEARS to nothing as --p->1 (opacity = --ob-dark * 0.42). At rest
+   it is gone entirely → the card is evenly, calmly lit. ── */
+#ob-stage .pin-layer .crop::after,
+#ob-stage .ob-compare::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  background:
+    radial-gradient(calc(var(--ob-srad) * 1.12) calc(var(--ob-srad) * 0.9)
+      at calc(var(--ob-sx) - 9%) calc(var(--ob-sy) - 4%),
+      transparent 0%, transparent 38%,
+      rgba(8,7,6,0.34) 70%, rgba(8,7,6,0.5) 100%);
+  opacity: calc(var(--ob-dark) * 0.42);
+  transition: opacity 0.12s linear;
+  will-change: opacity;
+}
+
+/* ── ignition: as a layer becomes the active focus, its pool brightens (rhymes
+   with the lab per-band "arrival" without moving any copy). Opacity only. ── */
+#ob-stage .pin-layer.active .crop::before,
+#ob-stage[data-state="4"] .ob-compare::before { opacity: 0.82; }
+
+/* keep ALL card content above BOTH light layers (both at z0). The lift reaches
+   nested content too via the card wrappers' own stacking; direct children are
+   raised here and inner elements paint within them. */
+#ob-stage .pin-layer .crop > *,
+#ob-stage .ob-compare > * { position: relative; z-index: 1; }
+
+/* ── REST-STATE GUARANTEE ──────────────────────────────────────────────
+   At --p=1 the scene is at the final data-state ("4", .ob-compare):
+     --ob-dark = 1 - 1*1 = 0  → ::after opacity 0  (no darkening; card clear)
+     the screen-blend pool sits lower-right at 0.82 = a calm teal wash, behind
+     content, so the comparison bars/KPIs read at full contrast.
+   No transform is animated on any flow element. Both pseudos are inset:0 inside
+   overflow:hidden cards → ZERO layout box, so the card's measured height is
+   unchanged and it cannot reach the flow .ds-caption. Throughout state 4 the
+   darkening lives BEHIND content (z0) and is weak (≤0.42·--ob-dark), so the
+   payoff comparison is never dimmed — the defect of the proposed z2 vignette. */
+
+/* ── reduced motion: drop the travelling pool + room; leave a static, calm
+   teal graze so the scene still reads lit but nothing sweeps. ── */
+@media (prefers-reduced-motion: reduce) {
+  #ob-stage {
+    --ob-sx: 50%;
+    --ob-sy: 30%;
+    --ob-srad: 300px;
+    --ob-dark: 0;
+  }
+  #ob-stage .pin-layer .crop::before,
+  #ob-stage .ob-compare::before {
+    opacity: 0.5;
+    transition: none;
+    will-change: auto;
+  }
+  #ob-stage .pin-layer.active .crop::before,
+  #ob-stage[data-state="4"] .ob-compare::before { opacity: 0.55; }
+  #ob-stage .pin-layer .crop::after,
+  #ob-stage .ob-compare::after { opacity: 0; transition: none; will-change: auto; }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   ARRIVAL + DEPTH RAIL (2026-06-11) — the opener and the global descent gauge.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* ── Arrival: black → seal draws → CELESTEOS → fade up to hero (first paint) ── */
+#arrival {
+  position: fixed; inset: 0; z-index: 9999;
+  background: var(--bg);
+  display: flex; align-items: center; justify-content: center;
+  pointer-events: none;            /* purely visual — scroll/clicks pass through */
+  animation: arr-out 0.7s cubic-bezier(0.6,0,0.2,1) 1.9s forwards;
+}
+.arr-mark { display: flex; flex-direction: column; align-items: center; gap: 1.15rem; }
+.arr-seal { width: 46px; height: 46px; color: var(--teal); overflow: visible; }
+.arr-ring { stroke-dasharray: 88; stroke-dashoffset: 88; animation: arr-draw 0.8s cubic-bezier(0.5,0,0.2,1) 0.2s forwards; }
+.arr-notch { opacity: 0; animation: arr-fade 0.4s ease 0.85s forwards; }
+.arr-dot { opacity: 0; transform-box: fill-box; transform-origin: center; transform: scale(0); animation: arr-pop 0.5s cubic-bezier(0.3,1.5,0.5,1) 0.9s forwards; }
+.arr-word {
+  font-family: var(--font-mono); font-size: 0.72rem; font-weight: 500;
+  letter-spacing: 0.55em; text-indent: 0.55em; color: var(--txt);
+  opacity: 0; animation: arr-fade 0.6s ease 1.0s forwards;
+}
+@keyframes arr-draw { to { stroke-dashoffset: 0; } }
+@keyframes arr-fade { to { opacity: 1; } }
+@keyframes arr-pop  { to { opacity: 1; transform: scale(1); } }
+@keyframes arr-out  { to { opacity: 0; visibility: hidden; } }
+
+/* ── Depth rail: a hairline right-edge gauge of descent through the record ── */
+#depthrail {
+  position: fixed; top: 15vh; bottom: 15vh; right: 26px; width: 2px; z-index: 60;
+  opacity: 0; animation: dr-appear 0.8s ease 2.3s forwards;
+}
+#depthrail .dr-track { position: absolute; inset: 0; background: rgba(255,255,255,0.07); border-radius: 2px; }
+#depthrail .dr-fill {
+  position: absolute; top: 0; left: 0; width: 100%;
+  height: calc(var(--scroll, 0) * 1%);
+  background: linear-gradient(180deg, var(--teal), var(--teal-bd));
+  border-radius: 2px;
+}
+#depthrail .dr-dot {
+  position: absolute; left: 50%; top: calc(var(--scroll, 0) * 1%);
+  width: 6px; height: 6px; margin: -3px 0 0 -3px; border-radius: 50%;
+  background: var(--teal); box-shadow: 0 0 9px rgba(90,171,204,0.65);
+}
+@keyframes dr-appear { to { opacity: 1; } }
+
+@media (prefers-reduced-motion: reduce) {
+  #arrival { display: none; }
+  #depthrail { animation: none; opacity: 1; }
+  .arr-ring, .arr-notch, .arr-dot, .arr-word { animation: none; opacity: 1; stroke-dashoffset: 0; transform: none; }
+}
+@media (max-width: 720px) { #depthrail { display: none; } }
+
+/* ── Founder note (section 09b) — Caveat signature, restrained ── */
+.founder-note p.lead + p.lead { margin-top: 1.2rem; }
+.founder-sig { margin-top: 2.6rem; display: flex; flex-direction: column; gap: 0.35rem; }
+.fs-name { font-family: 'Caveat', cursive; font-size: 2.2rem; line-height: 1; color: var(--txt); }
+.fs-role { font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--txt3); }
+
+/* mobile: the adj-block.cel entrance slides VERTICALLY (its desktop translateX(30)
+   converges toward the "+", but stacked on mobile that 30px overflows the viewport
+   pre-reveal → 4px horizontal scroll). Rise instead; .in still resolves to none. */
+@media (prefers-reduced-motion: no-preference) and (max-width: 720px) {
+  body.js .adj-wrap .adj-block.cel { transform: translateY(20px); }
+}
+
+/* Founder section — note + photo, two columns; photo framed & toned for the dark page */
+.founder-note .fn-grid { display: grid; grid-template-columns: 1fr 380px; gap: 3.6rem; align-items: center; max-width: 1060px; }
+.fn-text { max-width: 600px; }
+.fn-photo { margin: 0; position: relative; }
+.fn-photo img {
+  display: block; width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; object-position: center 32%;
+  border-radius: 13px; border: 1px solid rgba(255,255,255,0.10);
+  box-shadow: 0 34px 80px -34px rgba(0,0,0,0.78), inset 0 1px 0 rgba(255,255,255,0.05);
+  filter: saturate(0.96) brightness(0.97);
+}
+.fn-photo::after {
+  content: ''; position: absolute; inset: 0; border-radius: 13px; pointer-events: none;
+  box-shadow: inset 0 0 70px -22px rgba(0,0,0,0.55);
+  background: linear-gradient(180deg, transparent 56%, rgba(12,11,10,0.34) 100%);
+}
+@media (max-width: 860px) {
+  .founder-note .fn-grid { grid-template-columns: 1fr; gap: 2.2rem; max-width: 560px; }
+  .fn-photo { max-width: 320px; margin: 0.4rem 0 0; }
+}
+
+/* founder bio: ship names in restrained italic (proper nouns — NOT the teal Cormorant accent) */
+.fn-text .lead em { font-style: italic; font-family: var(--font-body); color: var(--txt); }
+/* founder pull-quote: his voice, set off with a teal left-rule; one accent word ("normal") in Cormorant */
+.fn-quote {
+  margin: 1.7rem 0 0; padding: 0.15rem 0 0.2rem 1.4rem;
+  border-left: 2px solid var(--teal);
+  font-family: var(--font-body); font-weight: 300;
+  font-size: 1.12rem; line-height: 1.6; color: var(--txt2);
+}
+.fn-quote em { font-family: var(--font-accent); font-style: italic; color: var(--teal); font-weight: 400; }
+
+/* ── Onboarding de-container (founder 2026-06-11): the scenes float on the page,
+   no outer mat, no card box — keep ONLY the teal hue. "Find anything" bar removed. ── */
+#ob-stage .pin-layer .crop { background: transparent; border: none; box-shadow: none; }
+#ob-stage .reg-card { background: transparent; border: none; box-shadow: none; }
+#ob-stage .ob-compare { background: transparent; border: none; box-shadow: none; padding: 0; }
+#ob-stage .ob-foot { border-top: none; }
+
+/* de-boxed indexing layer (3): compose as a centered free-floating moment */
+#ob-stage .pin-layer[data-layer="3"] .crop { text-align: center; max-width: 560px; margin: 0 auto; }
+#ob-stage .pin-layer[data-layer="3"] .mfv-h { padding: 0 0 18px; }
+#ob-stage .ob-prog { margin: 0 auto 16px; max-width: 440px; }
+#ob-stage .ob-count { padding: 0 0 6px; }
+#ob-stage .pin-layer[data-layer="3"] .ob-foot { padding: 10px 0 0; }
+/* de-boxed compare layer (4): centre the block, keep the KPI divider subtle */
+#ob-stage .ob-compare { max-width: 600px; margin: 0 auto; }
+/* short de-boxed layers centre vertically in the pin-stack */
+#ob-stage .pin-layer[data-layer="3"],
+#ob-stage .pin-layer[data-layer="4"] { display: flex; flex-direction: column; justify-content: center; }
