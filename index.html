@@ -1341,13 +1341,38 @@
     function track(name, props) {
       var ev = { e: name, p: props || {}, t: Date.now() };
       window.__celesteDebug.events.push(ev);
+      /* GA4: the page's event taxonomy flows into the existing gtag (G-230QN4JY4P).
+         Consent Mode v2 already gates storage; pre-consent these are cookieless pings. */
+      try { if (typeof gtag === 'function') { gtag('event', name, props || {}); } } catch (err) {}
       if (EVENTS_ENDPOINT && navigator.sendBeacon) {
         try { navigator.sendBeacon(EVENTS_ENDPOINT, JSON.stringify(ev)); } catch (err) {}
       }
     }
+    /* attribution: capture inbound UTMs/referrer once per session; stamped onto leads */
+    (function () {
+      try {
+        if (!sessionStorage.getItem('celeste_attrib')) {
+          var q = new URLSearchParams(location.search), at = {};
+          ['utm_source','utm_medium','utm_campaign','utm_content','utm_term','gclid'].forEach(function (k) {
+            var v = q.get(k); if (v) { at[k] = v.slice(0, 120); }
+          });
+          at.referrer = (document.referrer || 'direct').slice(0, 200);
+          at.landing = location.pathname + (location.search ? location.search.slice(0, 160) : '');
+          sessionStorage.setItem('celeste_attrib', JSON.stringify(at));
+        }
+      } catch (err) {}
+    })();
+    function getAttrib() { try { return JSON.parse(sessionStorage.getItem('celeste_attrib') || '{}'); } catch (e) { return {}; } }
     document.addEventListener('click', function (e) {
-      var a = e.target.closest && e.target.closest('.sec-cta, .pilot-cta, .pr-cta, .ho-cta, .pilot-link');
-      if (a) { track('cta_click', { label: a.textContent.replace(/\s+/g, ' ').trim(), href: a.href }); }
+      if (!e.target.closest) { return; }
+      var sec = e.target.closest('[data-screen-label]');
+      var section = sec ? sec.getAttribute('data-screen-label') : '';
+      var a = e.target.closest('.sec-cta, .pilot-cta, .pr-cta, .ho-cta, .pilot-link, .pm-cta, .lm-btn, .lm-add');
+      if (a) { track('cta_click', { label: (a.textContent || '').replace(/\s+/g, ' ').trim().slice(0, 60), href: a.href || '', section: section }); return; }
+      var n = e.target.closest('.topbar .nav a');
+      if (n) { track('nav_click', { label: (n.textContent || '').trim(), href: n.getAttribute('href') || '' }); return; }
+      var f = e.target.closest('footer a');
+      if (f) { track('footer_click', { label: (f.textContent || '').replace(/\s+/g, ' ').trim().slice(0, 40), href: f.getAttribute('href') || '' }); }
     }, true);
 
     /* ═══ Reveal on scroll ═══ */
@@ -1360,16 +1385,28 @@
       document.querySelectorAll('.reveal').forEach(function (el) { rio.observe(el); });
 
       var seen = {};
+      var deepest = { idx: -1, label: '' };
       var dio = new IntersectionObserver(function (entries) {
         entries.forEach(function (en) {
           var label = en.target.getAttribute('data-screen-label');
           if (en.isIntersecting && label && !seen[label]) {
             seen[label] = true;
+            var idx = Number(en.target.getAttribute('data-sec-idx') || 0);
+            if (idx > deepest.idx) { deepest = { idx: idx, label: label }; }
             track('section_view', { section: label });
           }
         });
       }, { threshold: 0.4 });
-      document.querySelectorAll('[data-screen-label]').forEach(function (el) { dio.observe(el); });
+      document.querySelectorAll('[data-screen-label]').forEach(function (el, i) { el.setAttribute('data-sec-idx', i); dio.observe(el); });
+      var exitSent = false;
+      function sendExit() {
+        if (exitSent) { return; } exitSent = true;
+        var max = document.documentElement.scrollHeight - window.innerHeight;
+        var pct = max > 0 ? Math.round((window.scrollY / max) * 100) : 0;
+        track('page_exit', { deepest_section: deepest.label || 'hero', sections_seen: Object.keys(seen).length, scroll_pct: pct });
+      }
+      window.addEventListener('pagehide', sendExit);
+      document.addEventListener('visibilitychange', function () { if (document.visibilityState === 'hidden') { sendExit(); exitSent = false; } });
     } else {
       document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('in'); });
     }
@@ -1755,7 +1792,7 @@
           fetch(MAGNET_ENDPOINT, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ vessel: vessel, email: email, jobs: jobs, ts: Date.now() })
+            body: JSON.stringify({ vessel: vessel, email: email, jobs: jobs, ts: Date.now(), attribution: getAttrib() })
           }).catch(function () {});
         } catch (err) {}
       }
