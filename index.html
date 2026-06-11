@@ -58,7 +58,7 @@
     gtag('config', 'G-230QN4JY4P');
   </script>
   <script defer src="/js/cookie-consent.js"></script>
-  <link rel="stylesheet" href="landing-v12.css?v=nav1">
+  <link rel="stylesheet" href="landing-v12.css?v=sticky1">
 </head>
 <body>
 
@@ -1809,6 +1809,14 @@
   <!-- depth rail: drive --scroll (0–100) from page scroll progress -->
   <script>
     (function () {
+      /* sticky header: glass treatment once past the hero top */
+      var tb = document.querySelector('.topbar');
+      if (tb) {
+        var tbTick = false;
+        function tbUpd() { tbTick = false; tb.classList.toggle('scrolled', window.scrollY > 40); }
+        window.addEventListener('scroll', function () { if (!tbTick) { tbTick = true; requestAnimationFrame(tbUpd); } }, { passive: true });
+        tbUpd();
+      }
       var dr = document.getElementById('depthrail');
       if (!dr) { return; }
       var ticking = false;

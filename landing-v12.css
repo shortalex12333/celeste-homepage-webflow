@@ -166,12 +166,23 @@ a:hover { text-decoration: underline; }
 /* full-bleed: the hero background + horizon span the viewport; content stays in the 1140 column */
 .hero-inner { width: 100%; max-width: 1140px; margin: 0 auto; padding: 0 2rem; }
 .topbar {
-  position: absolute;
+  position: fixed;
   top: 0; left: 0; right: 0;
+  z-index: 120;                       /* above scenes/depthrail; below #arrival + cookie banner */
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 2.2rem max(2rem, calc((100% - 1140px) / 2 + 2rem));
+  transition: padding 0.35s ease, background 0.35s ease, border-color 0.35s ease;
+  border-bottom: 1px solid transparent;
+}
+.topbar.scrolled {
+  padding-top: 1.05rem;
+  padding-bottom: 1.05rem;
+  background: rgba(12, 11, 10, 0.78);
+  -webkit-backdrop-filter: blur(14px) saturate(1.05);
+  backdrop-filter: blur(14px) saturate(1.05);
+  border-bottom-color: rgba(255, 255, 255, 0.06);
 }
 .wordmark {
   font-family: var(--font-mono);
