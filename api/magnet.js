@@ -28,6 +28,7 @@ export async function POST(request) {
     return Response.json({ error: 'A valid email is required.' }, { status: 400 });
   }
 
+  const at = body.attribution && typeof body.attribution === 'object' ? body.attribution : {};
   const TO = process.env.LEAD_TO || 'contact@celeste7.ai';
   const FROM = process.env.LEAD_FROM || 'CelesteOS <contact@celeste7.ai>';
   const key = process.env.RESEND_API_KEY;
@@ -44,7 +45,12 @@ export async function POST(request) {
       `From:    ${email}\n\n` +
       `Jobs (${jobs.length}):\n` +
       (jobs.length ? jobs.map((j, i) => `  ${i + 1}. ${j}`).join('\n') : '  (none submitted)') +
-      `\n\nReceived: ${new Date().toISOString()}`;
+      `\n\nSource:\n` +
+      `  referrer: ${String(at.referrer || 'unknown').slice(0, 200)}\n` +
+      `  landing:  ${String(at.landing || '/').slice(0, 160)}\n` +
+      (at.utm_source ? `  utm:      ${[at.utm_source, at.utm_medium, at.utm_campaign].filter(Boolean).join(' / ').slice(0, 200)}\n` : '') +
+      (at.gclid ? `  gclid:    ${String(at.gclid).slice(0, 80)}\n` : '') +
+      `\nReceived: ${new Date().toISOString()}`;
     try {
       const r = await fetch('https://api.resend.com/emails', {
         method: 'POST',
