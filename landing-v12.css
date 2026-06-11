@@ -5397,3 +5397,9 @@ body.pin #sd-stage[data-state="4"] .lc-text {
 /* short de-boxed layers centre vertically in the pin-stack */
 #ob-stage .pin-layer[data-layer="3"],
 #ob-stage .pin-layer[data-layer="4"] { display: flex; flex-direction: column; justify-content: center; }
+
+/* topbar: six links wrap cleanly on small screens */
+@media (max-width: 600px) {
+  .topbar .nav { flex-wrap: wrap; gap: 0.7rem 1rem; justify-content: flex-end; }
+  .topbar .nav a { font-size: 0.6rem; }
+}
