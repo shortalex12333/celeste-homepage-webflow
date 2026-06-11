@@ -58,7 +58,7 @@
     gtag('config', 'G-230QN4JY4P');
   </script>
   <script defer src="/js/cookie-consent.js"></script>
-  <link rel="stylesheet" href="landing-v12.css?v=sticky1">
+  <link rel="stylesheet" href="landing-v12.css?v=mobile5">
 </head>
 <body>
 
@@ -1411,8 +1411,10 @@
       document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('in'); });
     }
 
-    var pinOK = window.matchMedia('(min-width: 880px)').matches &&
-                window.matchMedia('(prefers-reduced-motion: no-preference)').matches;
+    /* The pin engine runs at EVERY width — phones and tablets get the same
+       lock-scroll experience as desktop (sticky + IO + rAF are universal).
+       Reduced-motion is the only stacked fallback. */
+    var pinOK = window.matchMedia('(prefers-reduced-motion: no-preference)').matches;
     window.__celesteDebug.pinned = pinOK;
 
     /* ═══ Scroll orchestrator · one listener, IO-gated sections ═══ */
