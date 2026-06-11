@@ -8,7 +8,7 @@
 //   2. Vercel → Project → Settings → Environment Variables:
 //        RESEND_API_KEY = re_xxxxxxxx
 //        LEAD_TO        = contact@celeste7.ai                 (optional, default below)
-//        LEAD_FROM      = CelesteOS <noreply@celeste7.ai>     (optional, must be a verified Resend sender)
+//        LEAD_FROM      = CelesteOS <contact@celeste7.ai>     (optional; domain must be verified in Resend)
 //   3. Deploy. The page form POSTs to /api/magnet automatically.
 // Absent RESEND_API_KEY, it still returns 200 (the page shows its confirmation
 // regardless) so nothing breaks before email is wired up.
@@ -29,7 +29,7 @@ export async function POST(request) {
   }
 
   const TO = process.env.LEAD_TO || 'contact@celeste7.ai';
-  const FROM = process.env.LEAD_FROM || 'CelesteOS <noreply@celeste7.ai>';
+  const FROM = process.env.LEAD_FROM || 'CelesteOS <contact@celeste7.ai>';
   const key = process.env.RESEND_API_KEY;
 
   // observability: non-PII summary (no email/job text) → Vercel Runtime Logs
