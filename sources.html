@@ -34,6 +34,10 @@
     border-bottom: 1px solid rgba(255, 255, 255, 0.06); }
   .c7bar-mark { font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 0.78rem; letter-spacing: 0.16em;
     text-transform: uppercase; color: rgba(255, 255, 255, 0.55); text-decoration: none; }
+  .c7bar-desc { font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 0.6rem; letter-spacing: 0.13em;
+    text-transform: uppercase; color: rgba(255,255,255,0.55); border-left: 1px solid rgba(255,255,255,0.16);
+    padding-left: 14px; margin-left: 14px; margin-right: auto; white-space: nowrap; }
+  @media (max-width: 1180px) { .c7bar-desc { display: none; } }
   .c7bar-nav { display: flex; gap: 2rem; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 0.72rem;
     letter-spacing: 0.12em; text-transform: uppercase; }
   .c7bar-nav a { color: rgba(255, 255, 255, 0.55); text-decoration: none; transition: color 0.2s ease; }
@@ -43,6 +47,7 @@
 </style>
 <header class="c7bar">
   <a class="c7bar-mark" href="/">CelesteOS</a>
+  <span class="c7bar-desc">Engineering &amp; maintenance software for superyachts</span>
   <nav class="c7bar-nav">
     <a href="/#how">How it works</a>
     <a href="/#handover">Product</a>
