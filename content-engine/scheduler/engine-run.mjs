@@ -70,10 +70,10 @@ async function main(){
       `READ content-engine/posts/${item.slug}/brief.md AND content-engine/claims-allowlist.md AND an existing post content-engine/../blogs/knowledge-crisis-superyachts.html for structure.`,
       `WRITE content-engine/posts/${item.slug}/draft.html (a full article BODY: <header class="article-header"> with ONE <h1>=the angle title + a meta line + a lede <p>, then <div class="article-body"> with <h2> sections, accent/stat callouts, {{asset:<id>}} figure placeholders from the registry, a references list if you cite sources, then a <div class="article-cta"> ending at /#pilot) AND content-engine/posts/${item.slug}/meta.json {title (30-65 chars, end "— Celeste"), description (<=155), canonical:"${item.canonical}", slug:"${item.slug}", keyword:"${item.keyword}", chapter:"${item.chapter}"}.`,
       `VOICE: quietly confident, evidence-led, show-don't-claim, name CelesteOS late, "captured as you work" NEVER "writes itself", the system PROPOSES the engineer DECIDES. NO hype lexicon, NO invented metrics, NO pricing. Use ONLY SAFE phrasings from claims-allowlist.md; respect each asset's NEVER lines. ~1200-1400 words, genuinely useful to a chief engineer / superintendent.`,
-      `THEN run: node content-engine/gate.mjs content-engine/posts/${item.slug}/draft.html  AND  node content-engine/gate.mjs content-engine/posts/${item.slug}/meta.json — and FIX every violation with the safe substitute until BOTH exit 0. Do not weaken the gate. When both pass, print exactly: ENGINE_DRAFT_OK`,
+      `THEN run: node content-engine/gate.mjs content-engine/posts/${item.slug}/draft.html  AND  node content-engine/gate.mjs content-engine/posts/${item.slug}/meta.json — and FIX every violation with the safe substitute until BOTH exit 0. Do not weaken the gate. The MOMENT both exit 0, STOP: print exactly ENGINE_DRAFT_OK and END YOUR TURN immediately — do NOT re-read, re-polish, re-gate, or keep working.`,
     ].join('\n');
     log('claude headless drafting …');
-    const c = spawnSync('claude', ['-p', prompt, '--allowedTools', 'Read,Write,Edit,Bash', '--add-dir', dir], { cwd: dir, encoding: 'utf8', timeout: 900000 });
+    const c = spawnSync('claude', ['-p', prompt, '--allowedTools', 'Read,Write,Edit,Bash', '--add-dir', dir, '--max-budget-usd', '3'], { cwd: dir, encoding: 'utf8', timeout: 1200000 });
     log(`claude exit ${c.status}; tail: ${(c.stdout||'').slice(-200).replace(/\n/g,' ')}`);
 
     // 3. independent gate verdict (don't trust the model's word)
