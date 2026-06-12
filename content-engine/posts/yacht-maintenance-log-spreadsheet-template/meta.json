@@ -1,0 +1,62 @@
+{
+  "title": "Yacht Maintenance Log Spreadsheet Template — Celeste",
+  "description": "A free yacht maintenance log spreadsheet template — five linked tabs that work on day one, and the honest day a spreadsheet stops scaling.",
+  "canonical": "https://celeste7.ai/blogs/yacht-maintenance-log-spreadsheet-template",
+  "slug": "yacht-maintenance-log-spreadsheet-template",
+  "keyword": "yacht maintenance log spreadsheet template",
+  "chapter": "search",
+  "updated": "June 2026",
+  "jsonld": {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Article",
+        "headline": "The Free Yacht Maintenance Log Template — and the Day the Spreadsheet Breaks",
+        "description": "A free yacht maintenance log spreadsheet template — five linked tabs that work on day one, and the honest day a spreadsheet stops scaling.",
+        "datePublished": "2026-06-11",
+        "dateModified": "2026-06-11",
+        "image": "https://celeste7.ai/images/blog/search-command-bar-idle.png",
+        "author": { "@type": "Organization", "name": "Celeste", "url": "https://celeste7.ai" },
+        "publisher": { "@type": "Organization", "name": "Celeste", "url": "https://celeste7.ai" },
+        "mainEntityOfPage": "https://celeste7.ai/blogs/yacht-maintenance-log-spreadsheet-template"
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Is a spreadsheet good enough for a yacht maintenance log?",
+            "acceptedAnswer": { "@type": "Answer", "text": "For a single vessel with one engineer who knows it well, yes — it is free, needs no training, and opens at anchor with no connection. A well-built five-tab sheet carries a long way. The limit appears when more than one person edits the file, a second vessel joins, or a survey forces you to reconcile several versions of the same sheet." }
+          },
+          {
+            "@type": "Question",
+            "name": "What columns should a yacht maintenance log include?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Build five linked tabs: an equipment register keyed by a stable Equipment ID; a planned-maintenance schedule with intervals and next-due dates; a work and fault log with a full what-was-found and what-was-done narrative; a parts and inventory tab with location and minimum stock; and a certificates tab with expiry dates and file references." }
+          },
+          {
+            "@type": "Question",
+            "name": "Where do maintenance spreadsheets usually fail?",
+            "acceptedAnswer": { "@type": "Answer", "text": "In four predictable ways: the narrative column nobody fills on a busy day; the file that forks into several edited copies with no single source of truth; the knowledge that leaves when the engineer who built the sheet rotates off; and search that finds only what you typed, not what you meant, with nothing connecting a fault to its work order, parts, and manual." }
+          },
+          {
+            "@type": "Question",
+            "name": "How do I move from a spreadsheet to a planned-maintenance system without losing my data?",
+            "acceptedAnswer": { "@type": "Answer", "text": "You do not have to reformat first. Existing manuals, PDFs, scans, exports, and emails are indexed as they are, and the system runs alongside an existing planned-maintenance system — nothing to replace, nothing to migrate. The aim is to keep the record with the vessel rather than the laptop, so it survives the next crew change. Your data stays yours." }
+          }
+        ]
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://celeste7.ai/" },
+          { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://celeste7.ai/blogs" },
+          { "@type": "ListItem", "position": 3, "name": "Yacht Maintenance Log Spreadsheet Template", "item": "https://celeste7.ai/blogs/yacht-maintenance-log-spreadsheet-template" }
+        ]
+      }
+    ]
+  },
+  "related": [
+    { "href": "/blogs/knowledge-crisis-superyachts", "text": "Crew turnover and knowledge loss on superyachts" },
+    { "href": "/blogs/natural-language-search-yacht", "text": "Natural-language search across a vessel's records" }
+  ]
+}

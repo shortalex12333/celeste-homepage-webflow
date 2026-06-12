@@ -1,0 +1,137 @@
+    <header class="article-header blog-reveal">
+      <div class="article-header__meta blog-stagger">11 June 2026 · 8 min read</div>
+      <h1 class="article-header__title blog-stagger">The Free Yacht Maintenance Log Template — and the Day the Spreadsheet Breaks</h1>
+      <p class="article-header__lede blog-stagger">A spreadsheet is the right first tool for a maintenance log, and a genuinely good one is below. What follows is the structure that works on day one — and an honest account of the day it stops working, so you know the limit before you hit it.</p>
+    </header>
+
+    <div class="article-body">
+
+      <h2>Start with the spreadsheet. It is the correct first move.</h2>
+
+      <p>There is a particular snobbery in marine software circles about the engineer who runs a vessel on a spreadsheet. Ignore it. A maintenance log in Excel or Google Sheets is free, it needs no training, it opens at anchor with no connection at all, and it is fully under your control. For a single vessel with one engineer who knows where everything is, it can carry the load for a long time. Most planned-maintenance deployments start here, and a well-built sheet beats an expensive system nobody opens.</p>
+
+      <p>So before anything else, here is a structure you can copy into a blank workbook today. No download, no sign-up — the value of a template is the columns it forces you to keep, and those are below in plain text.</p>
+
+      <h2>The yacht maintenance log template, tab by tab</h2>
+
+      <p>A maintenance log that survives contact with a real engine room is not one flat list. It is a small set of linked tabs, each answering one question. Build these five and you have covered most of what a basic planned-maintenance system does.</p>
+
+      <h3>Tab 1 — Equipment register</h3>
+      <p>The backbone. One row per item of equipment, each with a stable ID you will reference everywhere else.</p>
+      <ul class="summary-list">
+        <li><strong>Equipment ID</strong> — a short code you invent (e.g. GEN-1, ME-PORT). This is the key everything links back to.</li>
+        <li><strong>Description</strong>, <strong>Manufacturer</strong>, <strong>Model</strong>, <strong>Serial number</strong>.</li>
+        <li><strong>Location on board</strong> — engine room, lazarette, bridge.</li>
+        <li><strong>Running hours source</strong> — where you read the hours (counter, log).</li>
+        <li><strong>Manual reference</strong> — the filename or folder of the OEM manual, so you can find it later.</li>
+      </ul>
+
+      <h3>Tab 2 — Planned maintenance schedule</h3>
+      <p>What is due, and when. One row per recurring task, linked to an Equipment ID.</p>
+      <ul class="summary-list">
+        <li><strong>Equipment ID</strong> (matches Tab 1), <strong>Task description</strong>.</li>
+        <li><strong>Interval</strong> — by running hours or by calendar (e.g. every 500 h, or annually).</li>
+        <li><strong>Last done</strong> (date / hours) and <strong>Next due</strong> (date / hours).</li>
+        <li><strong>Status</strong> — a column you colour by hand: due, overdue, done.</li>
+      </ul>
+
+      <h3>Tab 3 — Work and fault log</h3>
+      <p>What actually happened. One row per completed job or logged fault — the historical record that becomes the most valuable tab over time.</p>
+      <ul class="summary-list">
+        <li><strong>Date</strong>, <strong>Equipment ID</strong>, <strong>Type</strong> (planned, breakdown, inspection).</li>
+        <li><strong>What was found</strong> and <strong>what was done</strong> — the narrative, in full sentences. This is the part you will be glad you wrote.</li>
+        <li><strong>Parts used</strong>, <strong>hours spent</strong>, <strong>who did it</strong>.</li>
+      </ul>
+
+      <h3>Tab 4 — Parts and inventory</h3>
+      <p>What is on board and where. One row per part.</p>
+      <ul class="summary-list">
+        <li><strong>Part number</strong>, <strong>description</strong>, <strong>linked Equipment ID</strong>.</li>
+        <li><strong>Quantity on board</strong>, <strong>minimum stock</strong>, <strong>physical location</strong> (locker, shelf, box).</li>
+        <li><strong>Supplier</strong> and <strong>lead time</strong> — the knowledge that saves a six-week wait.</li>
+      </ul>
+
+      <h3>Tab 5 — Certificates</h3>
+      <p>What expires. One row per certificate, vessel or crew.</p>
+      <ul class="summary-list">
+        <li><strong>Certificate</strong>, <strong>issuing authority</strong>, <strong>issue date</strong>, <strong>expiry date</strong>.</li>
+        <li><strong>Survey window</strong> if applicable, and the <strong>file reference</strong> of the scanned PDF.</li>
+      </ul>
+
+      <p>Two conventions make the difference between a sheet that lasts and one that rots. First, the Equipment ID is sacred — every row in every tab points back to it, so you can filter a year of history for one generator in seconds. Second, write the "what was done" narrative in full sentences, not abbreviations only you understand. The version of you that reads it eighteen months from now is, effectively, a different engineer.</p>
+
+      <div class="accent-callout">The version of you that reads it later is a different engineer.</div>
+
+      <h2>The day the spreadsheet breaks</h2>
+
+      <p>The template above is honest work and it will serve you. It is also fair to tell you where it stops, because the failure is predictable — a slow erosion you only notice once it has already cost you something, not a dramatic crash.</p>
+
+      <p>The first crack is the column nobody fills. The "what was done" narrative is the most valuable field and the first to be skipped on a busy day, because a spreadsheet cannot ask for it. Within months the history is a list of dates with the reasoning missing — exactly the part that mattered.</p>
+
+      <p>The second crack is the fork. A spreadsheet has no single source of truth the moment it is copied. One version lives on the engineer's laptop, another in a shared drive, a third emailed to the management company before a survey. Each gets edited. Nobody can later say which was right, and a record that can be quietly overwritten is no longer evidence.</p>
+
+      <p>The third crack is the one that empties the boat. When the engineer who built and understood the sheet rotates off, the file stays but the index in their head leaves with them. The links between tabs were obvious to its author and opaque to everyone else. <a href="/blogs/knowledge-crisis-superyachts">Operational knowledge walks off the gangway</a> at every crew change <a href="#ref-1">[1]</a>, and a spreadsheet — tied to the person who maintained it — does little to keep it aboard. The industry knows this: yacht-management firms have named high crew turnover and the loss of experienced engineers as a systemic challenge <a href="#ref-2">[2]</a>.</p>
+
+      <div class="accent-callout">The file stays. The person who could read it leaves.</div>
+
+      <p>The fourth crack is search. A spreadsheet finds what you typed, in the cell you typed it. It cannot connect the vibration fault logged last year to the work order that fixed it, the part that was substituted, and the manufacturer bulletin that explained why — because in a spreadsheet those live on four separate tabs, or four separate files, with nothing joining them but the engineer's memory. The information exists. Connecting it to the work in front of you is the labour, and that labour is paid again by every person who inherits the boat.</p>
+
+      <h2>What good looks like after the spreadsheet</h2>
+
+      <p>The point of naming the limit is not to push you off the spreadsheet on day one. It is to recognise the threshold when you reach it: more than one person editing, more than one vessel, or a survey where you had to reconcile three versions of the same file. At that point the question is not "a bigger spreadsheet" but "a record that belongs to the vessel rather than to whoever last edited the file."</p>
+
+      <p>What changes is small to describe and large in effect. The narrative you used to skip is captured as you close each job, not retyped later. The tabs that you linked by hand are connected by default, so opening one record surfaces what's related to it. And instead of scanning a sheet for the word you happened to use, you ask in plain language and land on the actual record.</p>
+
+      {{asset:search-idle}}
+
+      <p>That is the change a tool like CelesteOS is built around, and it is worth being precise about it. It offers natural-language search across the vessel's records and manuals: you type what you'd ask a colleague, and results open the source record itself, scoped to your vessel and role. Your existing manuals, PDFs, scans, exports, and emails are indexed as they are — no reformatting exercise, nothing held hostage. It runs alongside your existing planned-maintenance system, with nothing to replace and nothing to migrate. The judgement stays with the engineer; what moves to the vessel is the record.</p>
+
+      <p>One concrete example of the difference: the parts tab in a spreadsheet is a cell you hope is current. The same information as a live record carries the part's physical location on board, stock against its minimum, the supplier, and a way to raise the purchase order from the same place you found it.</p>
+
+      {{asset:parts}}
+
+      <p>And the certificates tab — a date you have to remember to look at — becomes a record that surfaces the expiry before it surprises you on inspection day, with the source PDF attached to it. None of this is a reason to abandon a working spreadsheet today. It is what the spreadsheet was reaching for, once one vessel becomes two engineers, or two vessels.</p>
+
+      {{asset:certificate}}
+
+      <p>There is one more property worth naming for the engineer who has been burned by a forked file. When a record can be overwritten and re-saved, it cannot serve as proof of what was actually done. A record that is <a href="/blogs/audit-trail-superyacht">append-only — attributed and timestamped, with corrections logged as new entries</a> rather than edits — is the difference between a log and evidence. The ISM Code requires vessels to keep records of maintenance activity <a href="#ref-3">[3]</a>; what it does not require is that those records be searchable, connected, or transferable to the next crew — which is precisely where a spreadsheet runs out. You do not get evidence-grade records from a shared spreadsheet, no matter how disciplined the crew.</p>
+
+      <h2>Frequently asked questions</h2>
+
+      <div class="faq">
+        <h3>Is a spreadsheet good enough for a yacht maintenance log?</h3>
+        <p>For a single vessel with one engineer who knows it well, yes — it is free, needs no training, and opens at anchor with no connection. The structure above will carry you a long way. The limit appears when more than one person edits the file, a second vessel joins, or a survey forces you to reconcile several versions of the same sheet. That is the threshold to plan for, not a flaw in starting with a spreadsheet.</p>
+
+        <h3>What columns should a yacht maintenance log include?</h3>
+        <p>Build five linked tabs: an equipment register keyed by a stable Equipment ID; a planned-maintenance schedule with intervals and next-due dates; a work and fault log with a full "what was found / what was done" narrative; a parts and inventory tab with location and minimum stock; and a certificates tab with expiry dates and file references. The Equipment ID linking every tab is what makes a year of history filterable in seconds.</p>
+
+        <h3>Where do maintenance spreadsheets usually fail?</h3>
+        <p>In four predictable ways: the narrative column nobody fills on a busy day; the file that forks into several edited copies with no single source of truth; the knowledge that leaves when the engineer who built the sheet rotates off; and search that finds only what you typed, not what you meant, with nothing connecting a fault to its work order, parts, and manual.</p>
+
+        <h3>How do I move from a spreadsheet to a planned-maintenance system without losing my data?</h3>
+        <p>You do not have to reformat first. Your existing manuals, PDFs, scans, exports, and emails are indexed as they are, and the system runs alongside an existing planned-maintenance system — nothing to replace, nothing to migrate. The aim is to keep the record with the vessel rather than the laptop, so it survives the next crew change. Your data stays yours.</p>
+      </div>
+
+      <h2>Summary</h2>
+      <ul class="summary-list">
+        <li>A spreadsheet is the correct first maintenance log — free, no training, under your control. Start there.</li>
+        <li>Build five linked tabs (equipment, schedule, work/fault log, parts, certificates), keyed by a stable Equipment ID, with the "what was done" narrative written in full.</li>
+        <li>A spreadsheet breaks predictably: the unfilled narrative column, the forked file, the knowledge that leaves with the engineer, and search that finds only what you typed.</li>
+        <li>The upgrade is not "a bigger spreadsheet" but a record that belongs to the vessel — captured as you work, connected, searchable in plain language, and append-only.</li>
+        <li>It runs alongside your existing system; your manuals and exports are indexed as they are, and your data stays yours.</li>
+      </ul>
+
+      <p><em>CelesteOS keeps a vessel's maintenance record with the vessel — searchable in plain language and connected across faults, work orders, parts, and certificates — so the knowledge does not leave on the next flight home. Records are independently verifiable at <a href="https://verifier.celeste7.ai">verifier.celeste7.ai</a>. You can also <a href="/blogs/natural-language-search-yacht">search the vessel's records and manuals in plain language</a>. <a href="/#pilot">Learn about the pilot</a>.</em></p>
+
+      <div class="article-sources">
+        <p id="ref-1">[1] Seahub, "Superyacht Engineering Handover: Good, Bad or Essential?" — <a href="https://seahubsoftware.com/superyacht-engineering-handover-good-bad-or-essential/">seahubsoftware.com</a></p>
+        <p id="ref-2">[2] Hill Robinson, "Addressing the crew skills shortage in the superyacht industry" — <a href="https://hillrobinson.com/news/2023/addressing-the-crew-skills-shortage-in-the-superyacht-industry">hillrobinson.com</a></p>
+        <p id="ref-3">[3] IMO, International Safety Management (ISM) Code, Section 10 (maintenance of the ship and equipment) — <a href="https://www.marineinsight.com/maritime-law/what-is-international-safety-management-code-or-ism-code-for-ships/">marineinsight.com</a></p>
+      </div>
+
+    </div>
+
+    <div class="article-cta">
+      <p class="article-cta__text blog-stagger">Keep the maintenance record with the vessel, not the laptop.</p>
+      <a href="/#pilot" class="article-cta__button blog-stagger">Learn about the pilot &rarr;</a>
+    </div>

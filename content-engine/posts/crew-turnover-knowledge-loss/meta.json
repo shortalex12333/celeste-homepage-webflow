@@ -1,0 +1,58 @@
+{
+  "title": "Crew Turnover & Knowledge Loss on Superyachts — Celeste",
+  "description": "When your chief engineer leaves, operational knowledge walks off the boat. What crew turnover costs and what a handover must carry to keep it aboard.",
+  "canonical": "https://celeste7.ai/blogs/knowledge-crisis-superyachts",
+  "slug": "knowledge-crisis-superyachts",
+  "keyword": "crew turnover knowledge loss superyacht",
+  "chapter": "handover",
+  "updated": "2026-06-11",
+  "jsonld": {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Article",
+        "headline": "When Your Chief Engineer Leaves, What Walks Off the Boat?",
+        "description": "When your chief engineer leaves, operational knowledge walks off the boat. What crew turnover costs and what a handover must carry to keep it aboard.",
+        "datePublished": "2026-03-30",
+        "dateModified": "2026-06-11",
+        "image": "https://celeste7.ai/images/blog/handover-draft-drawer.png",
+        "author": { "@type": "Organization", "name": "Celeste", "url": "https://celeste7.ai" },
+        "publisher": { "@type": "Organization", "name": "Celeste", "url": "https://celeste7.ai" },
+        "mainEntityOfPage": "https://celeste7.ai/blogs/knowledge-crisis-superyachts"
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "How much operational knowledge is actually lost at a crew change?",
+            "acceptedAnswer": { "@type": "Answer", "text": "With most engineering handovers lasting a week or less, what transfers is mechanical. What does not transfer is fault history, supplier knowledge and maintenance nuance, which live in the departing engineer's head and show up later as repeated diagnostic callouts and denied warranty claims." }
+          },
+          {
+            "@type": "Question",
+            "name": "What should a chief engineer's handover include?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Outstanding defects, parts on order, half-finished jobs, certificate expiry dates that fall after the rotation, and the operational notes that explain why things are done a particular way. Each item should resolve back to its underlying record rather than living as a flat summary." }
+          },
+          {
+            "@type": "Question",
+            "name": "Does the ISM Code require knowledge transfer between crew?",
+            "acceptedAnswer": { "@type": "Answer", "text": "The ISM Code requires vessels to keep records of maintenance activity and inspect equipment at appropriate intervals. That is a documentation minimum, not a knowledge-management standard. It requires that records exist, not that they be searchable, connected, or transferable to the next crew." }
+          },
+          {
+            "@type": "Question",
+            "name": "Can software prevent knowledge from walking off the boat?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Not on its own. What software can do is keep the by-product of normal work with the vessel: capturing records as the engineer closes them, keeping them connected, and making them searchable for whoever inherits the boat. The judgement stays with the engineer; the record stays with the vessel." }
+          }
+        ]
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://celeste7.ai/" },
+          { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://celeste7.ai/blogs" },
+          { "@type": "ListItem", "position": 3, "name": "Crew Turnover and Knowledge Loss on Superyachts", "item": "https://celeste7.ai/blogs/knowledge-crisis-superyachts" }
+        ]
+      }
+    ]
+  }
+}
