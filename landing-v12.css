@@ -5551,3 +5551,41 @@ body.pin #sd-stage[data-state="4"] .lc-text {
 /* anchor landings clear the fixed header; rail jumps are instant under reduced motion */
 html { scroll-padding-top: 76px; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+/* ═══ MOBILE MENU — one navigation idiom below 1000px (hosts "On this page") ═══ */
+.menu-btn {
+  display: none;
+  font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--txt); background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 6px; padding: 8px 14px; cursor: pointer;
+}
+@media (max-width: 999px) {
+  .topbar .nav { display: none; }       /* the menu replaces the wrapped links */
+  .menu-btn { display: inline-block; }
+}
+.site-menu {
+  position: fixed; inset: 0; z-index: 950;
+  background: rgba(10, 9, 8, 0.97);
+  -webkit-backdrop-filter: blur(18px); backdrop-filter: blur(18px);
+  padding: 1.4rem 1.6rem 2.4rem; overflow-y: auto;
+}
+.sm-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 2rem; }
+.sm-mark { font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--txt2); }
+.sm-close {
+  font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--txt); background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 6px; padding: 8px 14px; cursor: pointer;
+}
+.sm-group { margin-bottom: 2.2rem; }
+.sm-h {
+  font-family: var(--font-mono); font-size: 0.6rem; font-weight: 600; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--teal); margin-bottom: 0.9rem;
+}
+.sm-group a {
+  display: block; font-family: var(--font-body); font-weight: 300; font-size: 1.15rem;
+  color: var(--txt); padding: 0.55rem 0; text-decoration: none;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.sm-group a:hover { color: var(--teal); text-decoration: none; }
+@media (min-width: 1000px) { .site-menu { display: none !important; } }
+@media (prefers-reduced-motion: reduce) { .site-menu { -webkit-backdrop-filter: none; backdrop-filter: none; } }

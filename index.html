@@ -58,7 +58,7 @@
     gtag('config', 'G-230QN4JY4P');
   </script>
   <script defer src="/js/cookie-consent.js"></script>
-  <link rel="stylesheet" href="landing-v12.css?v=rail1">
+  <link rel="stylesheet" href="landing-v12.css?v=menu1">
 </head>
 <body>
 
@@ -111,6 +111,34 @@
         <a href="/trust">Trust</a>
         <a href="mailto:contact@celeste7.ai">Contact</a>
       </nav>
+      <button class="menu-btn" id="menu-btn" aria-expanded="false" aria-controls="site-menu">Menu</button>
+    </div>
+
+    <div class="site-menu" id="site-menu" hidden>
+      <div class="sm-head">
+        <span class="sm-mark">CelesteOS</span>
+        <button class="sm-close" id="menu-close" aria-label="Close menu">Close</button>
+      </div>
+      <div class="sm-group">
+        <div class="sm-h">Site</div>
+        <a href="#how">How it works</a>
+        <a href="#handover">Product</a>
+        <a href="#pricing">Pricing</a>
+        <a href="/blogs">Blogs</a>
+        <a href="/trust">Trust</a>
+        <a href="mailto:contact@celeste7.ai">Contact</a>
+      </div>
+      <div class="sm-group">
+        <div class="sm-h">On this page</div>
+        <a href="#how">The problem</a>
+        <a href="#handover">Handover</a>
+        <a href="#ledger">The ledger</a>
+        <a href="#proof">The verifier</a>
+        <a href="#datum">Search</a>
+        <a href="#pricing">The pilot</a>
+        <a href="#beside-pms">Beside your PMS</a>
+        <a href="#pilot">Pricing</a>
+      </div>
     </div>
 
     <div class="hero-inner">
@@ -1822,6 +1850,33 @@
           '<p>The handover for <strong>' + (vessel ? esc(vessel) : 'your vessel') + '</strong> is being assembled.<br>It lands at ' + (email ? esc(email) : 'your inbox') + ' shortly.</p>' +
         '</div>';
     });
+  </script>
+
+  <!-- mobile menu: one navigation idiom below 1000px -->
+  <script>
+    (function () {
+      var btn = document.getElementById('menu-btn');
+      var menu = document.getElementById('site-menu');
+      var closeBtn = document.getElementById('menu-close');
+      if (!btn || !menu) { return; }
+      function setOpen(open) {
+        menu.hidden = !open;
+        btn.setAttribute('aria-expanded', String(open));
+        document.documentElement.style.overflow = open ? 'hidden' : '';
+        if (open) { closeBtn.focus(); if (typeof track === 'function') { track('menu_open', {}); } }
+        else { btn.focus(); }
+      }
+      btn.addEventListener('click', function () { setOpen(menu.hidden); });
+      closeBtn.addEventListener('click', function () { setOpen(false); });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !menu.hidden) { setOpen(false); } });
+      menu.querySelectorAll('a').forEach(function (a) {
+        a.addEventListener('click', function () {
+          if (typeof track === 'function') { track('menu_jump', { stop: a.textContent.trim() }); }
+          menu.hidden = true; btn.setAttribute('aria-expanded', 'false');
+          document.documentElement.style.overflow = '';
+        });
+      });
+    })();
   </script>
 
   <!-- depth rail: drive --scroll (0–100) from page scroll progress -->
