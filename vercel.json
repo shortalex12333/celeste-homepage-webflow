@@ -39,6 +39,15 @@
           "value": "noindex"
         }
       ]
+    },
+    {
+      "source": "/(landing-v.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex"
+        }
+      ]
     }
   ],
   "redirects": [
@@ -48,6 +57,10 @@
       "destination": "https://celeste7.ai/$1",
       "permanent": true
     },
+    { "source": "/handover", "destination": "/#handover", "permanent": true },
+    { "source": "/search", "destination": "/#datum", "permanent": true },
+    { "source": "/records", "destination": "/#ledger", "permanent": true },
+    { "source": "/intelligence", "destination": "/#show-related", "permanent": true },
     { "source": "/faq", "destination": "/410.html", "statusCode": 410 },
     { "source": "/testimonials", "destination": "/410.html", "statusCode": 410 },
     { "source": "/user-settings", "destination": "/410.html", "statusCode": 410 },
