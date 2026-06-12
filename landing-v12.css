@@ -19,7 +19,7 @@
   --teal-bd:      #2A5068;
   --txt:          rgba(255,255,255,0.92);
   --txt2:         rgba(255,255,255,0.55);
-  --txt3:         rgba(255,255,255,0.35);
+  --txt3:         rgba(255,255,255,0.48);   /* AA: 4.9:1 on the dark planes (was .35 = 3.1:1) */
   --green:        #4A9468;
   --amber:        #C9A66B;
   --red:          #C0503A;
@@ -1364,8 +1364,8 @@ body:not(.pin) .pin-layer:first-child { margin-top: 0; }
   --lsurf: #FAF8F4;
   --lborder: rgba(30,28,24,0.10);
   --ltxt: #211F1B;
-  --ltxt2: #6E6960;
-  --lteal: #34708F;
+  --ltxt2: #625D55;   /* AA: 5.0:1 on the light band (was 4.3:1) */
+  --lteal: #2A607E;   /* AA: 4.8:1 on the light band (was 3.96:1) */
 }
 .light-band { background: var(--lbg); color: var(--ltxt); }
 .light-band .eyebrow { color: var(--lteal); }
@@ -2584,7 +2584,7 @@ body.pin #pr-stage[data-state="4"] .ds-frame { opacity: 0; max-height: 0; margin
   background: radial-gradient(120% 110% at 50% 35%, #F7F4EE 0%, #EDE9E1 60%, #E4DfD6 100%);
 }
 .light-band { background: linear-gradient(180deg, #F2EFE9 0%, #EBE7DF 100%); }
-.light-band { --lteal: #2B7BA3; }
+.light-band { --lteal: #2A607E; }  /* AA: 4.8:1 on the paper (was 3.96:1) */
 .ledger-band {
   background: radial-gradient(140% 100% at 50% 0%, #0A0908 0%, #070706 70%);
 }
@@ -3196,7 +3196,7 @@ body.pin #sd-stage[data-state="3"] .ds-frame {
   font-size: 9.5px;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: #8896A6;
+  color: #5B6B7D;   /* AA on the white cover */
   white-space: nowrap;
 }
 .ho-export .doc-summary {
@@ -4101,7 +4101,7 @@ body.pin #datum-stage[data-state="5"] .ds-frame { opacity: 0; }
 #ob-stage .reg-input .ds-caret { height: 17px; margin-left: 2px; }
 #ob-stage .reg-btn {
   margin-top: 15px; height: 42px; border-radius: 6px;
-  background: var(--teal); color: #fff;
+  background: var(--teal); color: var(--bg); font-weight: 600;
   font-size: 13px; font-weight: 500;
   display: flex; align-items: center; justify-content: center;
   box-shadow: 0 0 22px rgba(90,171,204,0.22);
@@ -4155,7 +4155,7 @@ body.pin #datum-stage[data-state="5"] .ds-frame { opacity: 0; }
 #ob-stage .up-bar-fill { height: 100%; border-radius: 2px; background: var(--teal); width: var(--w); }
 #ob-stage .up-btn {
   margin-top: 12px; height: 40px; border-radius: 6px;
-  background: var(--teal); color: #fff;
+  background: var(--teal); color: var(--bg); font-weight: 600;
   font-size: 12.5px; font-weight: 500;
   display: flex; align-items: center; justify-content: center;
 }
@@ -5320,31 +5320,12 @@ body.pin #sd-stage[data-state="4"] .lc-text {
 @keyframes arr-pop  { to { opacity: 1; transform: scale(1); } }
 @keyframes arr-out  { to { opacity: 0; visibility: hidden; } }
 
-/* ── Depth rail: a hairline right-edge gauge of descent through the record ── */
-#depthrail {
-  position: fixed; top: 15vh; bottom: 15vh; right: 26px; width: 2px; z-index: 60;
-  opacity: 0; animation: dr-appear 0.8s ease 2.3s forwards;
-}
-#depthrail .dr-track { position: absolute; inset: 0; background: rgba(255,255,255,0.07); border-radius: 2px; }
-#depthrail .dr-fill {
-  position: absolute; top: 0; left: 0; width: 100%;
-  height: calc(var(--scroll, 0) * 1%);
-  background: linear-gradient(180deg, var(--teal), var(--teal-bd));
-  border-radius: 2px;
-}
-#depthrail .dr-dot {
-  position: absolute; left: 50%; top: calc(var(--scroll, 0) * 1%);
-  width: 6px; height: 6px; margin: -3px 0 0 -3px; border-radius: 50%;
-  background: var(--teal); box-shadow: 0 0 9px rgba(90,171,204,0.65);
-}
-@keyframes dr-appear { to { opacity: 1; } }
+ }
 
 @media (prefers-reduced-motion: reduce) {
   #arrival { display: none; }
-  #depthrail { animation: none; opacity: 1; }
   .arr-ring, .arr-notch, .arr-dot, .arr-word { animation: none; opacity: 1; stroke-dashoffset: 0; transform: none; }
 }
-@media (max-width: 720px) { #depthrail { display: none; } }
 
 /* ── Founder note (section 09b) — Caveat signature, restrained ── */
 .founder-note p.lead + p.lead { margin-top: 1.2rem; }
@@ -5526,3 +5507,47 @@ body.pin #sd-stage[data-state="4"] .lc-text {
   margin-bottom: 1.6rem;
 }
 @media (max-width: 640px) { .hero-eyebrow { font-size: 0.6rem; letter-spacing: 0.13em; } }
+
+/* AA text variants: small red/amber labels on tinted pill backgrounds */
+.ho-draft .ho-cat.crit { color: #E07A60; }
+.ho-draft .ho-item.critical .ho-act { color: #E07A60; }
+.ho-draft .ho-item.action .ho-act { color: #DCBA82; }
+.pl-stamp { color: #E07A60; }
+/* the seal-card timestamp: green-tinted card lightens the bg; .48 lands 4.45 — lift to txt2 */
+.sig-row .when { color: var(--txt2); }
+
+/* ═══ SCENE RAIL — the where-am-I instrument (desktop ≥1000px) ═══ */
+.srail {
+  position: fixed; right: 18px; top: 50%; transform: translateY(-50%);
+  z-index: 80; display: flex; flex-direction: column; gap: 13px; align-items: flex-end;
+}
+.srail-stop { position: relative; display: block; padding: 4px 0; text-decoration: none; }
+.srail-stop i {
+  display: block; width: 18px; height: 2px; border-radius: 2px;
+  background: rgba(255,255,255,0.22); transition: background 0.25s ease, width 0.25s ease;
+}
+.srail-stop span {
+  position: absolute; right: 30px; top: 50%; transform: translate(8px, -50%);
+  font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--txt2); white-space: nowrap; opacity: 0; pointer-events: none;
+  background: rgba(10,9,8,0.88); border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 5px; padding: 5px 10px;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.srail-stop:hover i, .srail-stop:focus-visible i { background: var(--teal); width: 26px; }
+.srail-stop:hover span, .srail-stop:focus-visible span { opacity: 1; transform: translate(0, -50%); }
+.srail-stop[aria-current] i { background: var(--teal); width: 26px; box-shadow: 0 0 8px rgba(90,171,204,0.5); }
+.srail-stop[aria-current] span { color: var(--teal); }
+@media (max-width: 999px) { .srail { display: none; } }
+
+/* mobile: a 2px scroll-progress bar under the sticky header */
+.scrollbar-mobile {
+  position: fixed; top: 0; left: 0; height: 2px; z-index: 130;
+  width: calc(var(--scroll, 0) * 1%);
+  background: linear-gradient(90deg, var(--teal-bd), var(--teal));
+}
+@media (min-width: 1000px) { .scrollbar-mobile { display: none; } }
+
+/* anchor landings clear the fixed header; rail jumps are instant under reduced motion */
+html { scroll-padding-top: 76px; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
