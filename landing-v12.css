@@ -195,11 +195,11 @@ a:hover { text-decoration: underline; }
   display: flex;
   gap: 2rem;
   font-family: var(--font-mono);
-  font-size: 0.66rem;
+  font-size: 0.72rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
-.topbar .nav a { color: var(--txt3); }
+.topbar .nav a { color: var(--txt2); }
 .topbar .nav a:hover { color: var(--teal); text-decoration: none; }
 
 /* line-mask reveal — smooth, slow, authoritative */
@@ -5497,3 +5497,7 @@ body.pin #sd-stage[data-state="4"] .lc-text {
 /* ── the Outlook mark: small, inline, recognizable; the word stays text ── */
 .ol-mark { display: inline-flex; align-items: center; gap: 0.3em; white-space: nowrap; }
 .ol-mark svg { width: 0.9em; height: 0.9em; flex-shrink: 0; transform: translateY(0.06em); }
+
+/* wordmark is a home link (feedback: 'CelesteOS top-left isn't clickable') */
+.topbar .wordmark { text-decoration: none; }
+.topbar .wordmark:hover { color: var(--teal); text-decoration: none; }
