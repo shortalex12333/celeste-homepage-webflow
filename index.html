@@ -58,7 +58,7 @@
     gtag('config', 'G-230QN4JY4P');
   </script>
   <script defer src="/js/cookie-consent.js"></script>
-  <link rel="stylesheet" href="landing-v12.css?v=shelf1">
+  <link rel="stylesheet" href="landing-v12.css?v=rail1">
 </head>
 <body>
 
@@ -77,7 +77,17 @@
   </div>
 
   <!-- ═══ DEPTH RAIL · global descent indicator (how far into the record) ═══ -->
-  <div id="depthrail" aria-hidden="true"><div class="dr-track"></div><div class="dr-fill"></div><div class="dr-dot"></div></div>
+  <nav class="srail" aria-label="On this page">
+    <a class="srail-stop" href="#how"><i></i><span>The problem</span></a>
+    <a class="srail-stop" href="#handover"><i></i><span>Handover</span></a>
+    <a class="srail-stop" href="#ledger"><i></i><span>The ledger</span></a>
+    <a class="srail-stop" href="#proof"><i></i><span>The verifier</span></a>
+    <a class="srail-stop" href="#datum"><i></i><span>Search</span></a>
+    <a class="srail-stop" href="#pricing"><i></i><span>The pilot</span></a>
+    <a class="srail-stop" href="#beside-pms"><i></i><span>Beside your PMS</span></a>
+    <a class="srail-stop" href="#pilot"><i></i><span>Pricing</span></a>
+  </nav>
+  <div class="scrollbar-mobile" aria-hidden="true"></div>
 
   <!-- ═══ The CelesteOS seal · the cryptographic glyph (canonical, from branding) ═══ -->
   <svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute;width:0;height:0;overflow:hidden">
@@ -1188,7 +1198,7 @@
       <h2 class="display">Three to five vessels. <span class="accent">Not open access.</span></h2>
       <p class="lead">A controlled pilot programme: dedicated setup, data import, and a direct line to the engineering team. <strong>You don't start from zero</strong>: we import your equipment register, certificates, and work-order history. And CelesteOS lives <strong>adjacent to your PMS</strong>: it stays exactly where it is, the crew keeps working in it, and the record builds alongside.</p>
     </div>
-    <div class="adj-wrap reveal">
+    <div class="adj-wrap reveal" id="beside-pms">
       <div class="adj-blocks">
         <div class="adj-block pms">
           <div class="an">Your PMS</div>
@@ -1825,14 +1835,26 @@
         window.addEventListener('scroll', function () { if (!tbTick) { tbTick = true; requestAnimationFrame(tbUpd); } }, { passive: true });
         tbUpd();
       }
-      var dr = document.getElementById('depthrail');
-      if (!dr) { return; }
+      var stops = [].slice.call(document.querySelectorAll('.srail-stop'));
+      var targets = stops.map(function (a) { return document.getElementById(a.getAttribute('href').slice(1)); });
+      stops.forEach(function (a) {
+        a.addEventListener('click', function () {
+          if (typeof track === 'function') { track('rail_jump', { stop: a.querySelector('span').textContent }); }
+        });
+      });
       var ticking = false;
       function upd() {
         ticking = false;
         var max = document.documentElement.scrollHeight - window.innerHeight;
         var p = max > 0 ? (window.scrollY / max) * 100 : 0;
-        dr.style.setProperty('--scroll', (p < 0 ? 0 : p > 100 ? 100 : p).toFixed(2));
+        document.documentElement.style.setProperty('--scroll', (p < 0 ? 0 : p > 100 ? 100 : p).toFixed(2));
+        var line = window.scrollY + window.innerHeight * 0.45, cur = -1;
+        for (var i = 0; i < targets.length; i++) {
+          if (targets[i] && targets[i].getBoundingClientRect().top + window.scrollY <= line) { cur = i; }
+        }
+        stops.forEach(function (a, i) {
+          if (i === cur) { a.setAttribute('aria-current', 'true'); } else { a.removeAttribute('aria-current'); }
+        });
       }
       window.addEventListener('scroll', function () {
         if (!ticking) { ticking = true; requestAnimationFrame(upd); }
