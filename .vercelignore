@@ -1,2 +1,5 @@
 # internal content pipeline (scripts, claims rules, strategy) — not for the public site
 content-engine
+
+# content-engine documentation (internal strategy/gate) — not for the public site
+docs/content-engine

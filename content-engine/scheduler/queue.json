@@ -1,0 +1,52 @@
+[
+  {
+    "slug": "organize-yacht-manuals-onboard",
+    "canonicalSlug": "organize-yacht-manuals-onboard",
+    "canonical": "https://celeste7.ai/blogs/organize-yacht-manuals-onboard",
+    "keyword": "how to organize yacht manuals onboard",
+    "chapter": "search",
+    "format": "guide",
+    "angle": "How to Actually Find Anything in Your Yacht Manuals",
+    "note": "The 'scan to iPad / go digital' advice is the manual-labour problem natural-language search solves. Funnels to the search feature."
+  },
+  {
+    "slug": "engine-room-handover-checklist",
+    "canonicalSlug": "engine-room-handover-checklist",
+    "canonical": "https://celeste7.ai/blogs/engine-room-handover-checklist",
+    "keyword": "engine room handover checklist",
+    "chapter": "handover",
+    "format": "guide",
+    "angle": "The Engine Room Handover Checklist (the ICS items people skip)",
+    "note": "Best free interactive/printable checklist; clusters under the handover pillar."
+  },
+  {
+    "slug": "ism-code-yacht-requirements",
+    "canonicalSlug": "ism-code-yacht-requirements",
+    "canonical": "https://celeste7.ai/blogs/ism-code-yacht-requirements",
+    "keyword": "ISM Code yacht requirements",
+    "chapter": "ledger",
+    "format": "pillar",
+    "angle": "ISM Code for Yachts: what the SMS actually demands of your maintenance evidence",
+    "note": "Anchor compliance pillar; an SMS demands maintenance evidence + an audit trail you can produce on demand."
+  },
+  {
+    "slug": "yacht-logbook-digital-records",
+    "canonicalSlug": "yacht-logbook-digital-records",
+    "canonical": "https://celeste7.ai/blogs/yacht-logbook-digital-records",
+    "keyword": "yacht maintenance log book digital records",
+    "chapter": "search",
+    "format": "guide",
+    "angle": "Why Your Logbook Should Be Searchable (so the whole crew sees one record trail)",
+    "note": "MOFU bridge; paper-logbook sellers can't satisfy 'find anything across records'."
+  },
+  {
+    "slug": "manage-maintenance-superyacht",
+    "canonicalSlug": "manage-maintenance-superyacht",
+    "canonical": "https://celeste7.ai/blogs/manage-maintenance-superyacht",
+    "keyword": "how to manage maintenance on a superyacht",
+    "chapter": "search",
+    "format": "pillar",
+    "angle": "The Definitive Superyacht Maintenance Management Guide",
+    "note": "MOFU pillar / internal-link hub; the 'ultimate guides' stop at 'record-keeping is vital' — this one ends on searchable + verifiable history."
+  }
+]
