@@ -126,8 +126,19 @@ if (!existsSync(TEMPLATE_PATH)) {
   process.exit(2);
 }
 let tpl = readFileSync(TEMPLATE_PATH, 'utf8');
-const jsonldBlock = meta.jsonld
-  ? `<script type="application/ld+json">\n${JSON.stringify(meta.jsonld, null, 2)}\n  </script>`
+// The template emits the single, deterministic BreadcrumbList (Home › Blog › Title) on
+// every post. The drafter sometimes ALSO puts one in meta.jsonld's @graph (inconsistently:
+// some posts have it, some don't), which rendered TWO breadcrumb blocks. Strip any
+// BreadcrumbList the drafter added so the page never ships a duplicate — template stays the
+// one source of truth, the Article/FAQPage schema is preserved untouched.
+const stripBreadcrumb = (j) =>
+  (j && typeof j === 'object' && Array.isArray(j['@graph']))
+    ? { ...j, '@graph': j['@graph'].filter((n) => n?.['@type'] !== 'BreadcrumbList') }
+    : (Array.isArray(j) ? j.filter((n) => n?.['@type'] !== 'BreadcrumbList')
+    : (j?.['@type'] === 'BreadcrumbList' ? null : j));
+const cleanJsonld = stripBreadcrumb(meta.jsonld);
+const jsonldBlock = cleanJsonld
+  ? `<script type="application/ld+json">\n${JSON.stringify(cleanJsonld, null, 2)}\n  </script>`
   : '';
 const updatedLabel = meta.updated || monthYear(date);
 const relatedLinks = renderRelatedLinks(meta.related);
