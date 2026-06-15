@@ -8,9 +8,22 @@
   'use strict';
   var KEY = 'celeste_cookie_consent_v1';
 
+  // Contentsquare / Hotjar (session replay + heatmaps). Like GA4 below, it is non-essential
+  // analytics, so it loads ONLY after the visitor accepts — never before consent. Injected
+  // once per page (guarded), on both fresh Accept and a return visit with prior consent.
+  var CS_SRC = 'https://t.contentsquare.net/uxa/9a0fb681c240a.js';
+  var csLoaded = false;
+  function loadContentsquare() {
+    if (csLoaded) return; csLoaded = true;
+    var s = document.createElement('script');
+    s.src = CS_SRC; s.defer = true;
+    document.head.appendChild(s);
+  }
+
   function applyConsent(state) {
-    if (typeof window.gtag !== 'function') return;
     var granted = state === 'granted';
+    if (granted) loadContentsquare();   // Hotjar/Contentsquare — only after consent
+    if (typeof window.gtag !== 'function') return;
     window.gtag('consent', 'update', {
       ad_storage:          granted ? 'granted' : 'denied',
       ad_user_data:        granted ? 'granted' : 'denied',
