@@ -199,7 +199,7 @@ a:hover { text-decoration: underline; }
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
-.topbar .nav a { color: var(--txt2); }
+.topbar .nav a { color: var(--txt2); white-space: nowrap; }
 .topbar .nav a:hover { color: var(--teal); text-decoration: none; }
 
 /* line-mask reveal — smooth, slow, authoritative */
@@ -5491,19 +5491,6 @@ body.pin #sd-stage[data-state="4"] .lc-text {
 .topbar .wordmark:hover { color: var(--teal); text-decoration: none; }
 
 /* ── the shelf noun, persistent (doctrine: category orients, brand seduces) ── */
-.topbar .wm-desc {
-  font-family: var(--font-mono);
-  font-size: 0.62rem;
-  letter-spacing: 0.13em;
-  text-transform: uppercase;
-  color: var(--txt2);
-  border-left: 1px solid rgba(255,255,255,0.16);
-  padding-left: 14px;
-  margin-left: 14px;
-  margin-right: auto;       /* wordmark+desc left, nav right */
-  white-space: nowrap;
-}
-@media (max-width: 1180px) { .topbar .wm-desc { display: none; } }
 .hero-eyebrow {
   font-family: var(--font-mono);
   font-size: 0.72rem;
