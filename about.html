@@ -41,19 +41,17 @@
   /* ── opener: yacht-day image, text on the dark-water (left) side ── */
   .ab-hero { position:relative; min-height:92vh; display:flex; align-items:center; overflow:hidden; isolation:isolate; }
   .ab-photo { position:absolute; inset:0; z-index:-1; }
-  .ab-photo img { width:100%; height:100%; object-fit:cover; object-position:75% center; display:block; }
-  .ab-scrim { position:absolute; inset:0; background:
-    linear-gradient(90deg, rgba(9,8,7,0.82) 0%, rgba(9,8,7,0.46) 34%, rgba(9,8,7,0.12) 56%, transparent 72%),
-    linear-gradient(0deg, var(--bg) 1%, rgba(9,8,7,0) 34%); }
+  .ab-photo img { width:100%; height:100%; object-fit:cover; object-position:72% center; display:block;
+    filter:contrast(1.12) saturate(1.14) brightness(1.03); }
+  /* no left vignette — only a slim bottom fade so the image blends into the page; type rides on text-shadow */
+  .ab-scrim { position:absolute; inset:0; background: linear-gradient(0deg, var(--bg) 0%, rgba(9,8,7,0) 24%); }
   .ab-hero .wrap { width:100%; }
-  .ab-hero h1 { text-shadow:0 1px 22px rgba(0,0,0,0.55); }
-  .ab-hero p { margin-top:1.8rem; color:rgba(255,255,255,0.86); text-shadow:0 1px 14px rgba(0,0,0,0.5); }
+  .ab-hero h1 { text-shadow:0 2px 30px rgba(0,0,0,0.78), 0 1px 6px rgba(0,0,0,0.6); }
+  .ab-hero p { margin-top:1.8rem; color:rgba(255,255,255,0.9); text-shadow:0 2px 22px rgba(0,0,0,0.8), 0 1px 5px rgba(0,0,0,0.6); }
   @media (max-width:720px){
     .ab-hero { min-height:86vh; }
-    .ab-photo img { object-position:62% center; }
-    .ab-scrim { background:
-      linear-gradient(180deg, rgba(9,8,7,0.62) 0%, rgba(9,8,7,0.5) 38%, var(--bg) 100%),
-      linear-gradient(90deg, rgba(9,8,7,0.62), rgba(9,8,7,0.34)); }
+    .ab-photo img { object-position:64% center; }
+    .ab-scrim { background: linear-gradient(180deg, rgba(9,8,7,0.32) 0%, rgba(9,8,7,0.22) 42%, var(--bg) 100%); }
   }
 
   /* ── prose beats ── */
@@ -119,8 +117,8 @@
   <div class="ab-scrim"></div>
   <div class="wrap">
     <div class="eyebrow">What no one writes down</div>
-    <h1>There is a thing every vessel does that no one writes down. It <span class="ac">forgets.</span></h1>
-    <p>Every rotation, a year of fault history, supplier context, and the trick that frees the sticking valve walk down the gangway in one person's head. The next engineer inherits equipment, not context.</p>
+    <h1>Every vessel does one thing no one writes down. It <span class="ac">forgets.</span></h1>
+    <p>Each rotation, a year of hard-won knowledge walks down the gangway in one person's head. The next engineer inherits equipment, not context.</p>
   </div>
 </section>
 
@@ -130,8 +128,8 @@
   <section class="beat">
     <div class="eyebrow">What we stand against</div>
     <h2>The enemy is the forgetting, not the system.</h2>
-    <p>Every vessel already runs a PMS. It schedules the maintenance and holds the class approvals, and it should. None of that is the enemy. The enemy is what the PMS was never built to hold: the reason this fault keeps coming back, the supplier who actually had the part, the half-remembered briefing.</p>
-    <p>CelesteOS runs beside the system you already trust and keeps what would otherwise leave on the <span class="ac">gangway.</span></p>
+    <p>Every vessel runs a PMS. It schedules the work and holds the class approvals, and it should. The enemy is not the system. It is what the system was never built to hold: why this fault keeps returning, which supplier had the part, the briefing no one wrote down.</p>
+    <p>CelesteOS runs beside it and keeps what would otherwise leave on the <span class="ac">gangway.</span></p>
   </section>
 
   <!-- ═══ 2 · THE WITNESS (third person + Alex quote) ═══ -->
@@ -140,9 +138,8 @@
     <h2>Built by someone who inherited the empty handover.</h2>
     <div class="founder">
       <div>
-        <p>Alex Short spent years at sea as an Electro-Technical Officer, then Head of Department, on motor yachts from 70 to 125 metres: M/Y Freedom, Nero, Legend, Maryah, and Whisper. He joined vessels mid-rotation and found a year of hard-won knowledge already gone, distilled into a document written at 1&nbsp;a.m. by someone who was packing to leave.</p>
-        <p class="sub">He did not set out to build software. He set out to stop losing what the last engineer knew.</p>
-        <blockquote class="quote">I built the system I wished had been there at that moment. It holds what the last engineer knew, so the next one doesn't start <span class="ac">blind.</span></blockquote>
+        <p>Alex Short spent years at sea as an Electro-Technical Officer, then Head of Department, on motor yachts from 70 to 125 metres: M/Y Freedom, Nero, Legend, Maryah, Whisper. He joined mid-rotation and found the knowledge already gone, reduced to a document written at 1&nbsp;a.m. by someone packing to leave.</p>
+        <blockquote class="quote">I built the system I wished had been there. It holds what the last engineer knew, so the next one doesn't start <span class="ac">blind.</span></blockquote>
         <div class="sig">
           <svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.6"/><line x1="16" y1="0" x2="16" y2="3.5" stroke="currentColor" stroke-width="1.6"/><circle cx="16" cy="16" r="2.6" fill="currentColor"/></svg>
           <span>Alex Short · Founder · former superyacht engineer</span>
@@ -156,14 +153,13 @@
   <section class="beat">
     <div class="eyebrow">The discipline</div>
     <h2>What we refuse to do.</h2>
-    <p>Three things hold true on every vessel, and they decided what this would be. Knowledge that lives only in a person is knowledge the vessel does not own. A handover written at 1&nbsp;a.m. is not a record, it is a confession. The answer should be one step away, not one rotation away.</p>
-    <p>So the discipline is mostly what we will <span class="ac">not</span> do.</p>
+    <p>A handover written at 1&nbsp;a.m. is not a record, it is a confession. Knowledge that lives only in a person is knowledge the vessel does not own. So the discipline is mostly what we <span class="ac">refuse</span> to do.</p>
     <ul class="refuse">
       <li>We do not claim certification we do not hold.</li>
       <li>We do not show customer logos we do not have.</li>
-      <li>We will not tell you a handover writes itself when an engineer taps once to capture it.</li>
+      <li>We will not say a handover writes itself when an engineer taps once to capture it.</li>
       <li>We do not replace the PMS your class society approved.</li>
-      <li>We will not dress a search bar and a sealed record in language the rest of the category hides behind.</li>
+      <li>We will not dress plain tools in the language the rest of the category hides behind.</li>
     </ul>
   </section>
 
@@ -171,18 +167,18 @@
   <section class="beat">
     <div class="eyebrow">The long view</div>
     <h2>It doesn't reset to zero.</h2>
-    <p>A normal system resets to zero every time the crew turns over. The record we keep does the opposite: it holds more with every rotation, because the vessel finally keeps what its people learned. Not worth more in money. Worth more in <span class="ac">use.</span> The longer it runs, the less you can afford to lose it.</p>
+    <p>Most systems reset to zero every time the crew turns over. This record does the opposite: it holds more with every rotation. Not worth more in money. Worth more in <span class="ac">use.</span> The longer it runs, the less you can afford to lose it.</p>
   </section>
 
   <!-- ═══ 5 · THE DOOR IS OPEN (pilot + one honest voice + close) ═══ -->
   <section class="beat ab-close">
     <div class="eyebrow">If you run a vessel</div>
     <h2>The door is open.</h2>
-    <p>You do not start from zero. We import your equipment register, certificates, and work-order history, you keep working in the PMS you already run, and there is no lock-in. We answer in hours, not days. We can only do that well a few vessels at a time, so the pilot is three to five, by selection.</p>
-    <p class="sub">The most honest thing anyone has said about it so far came from a captain watching a live demo:</p>
+    <p>You do not start from zero. We import your equipment register, certificates, and work-order history; you keep working in the PMS you already run; there is no lock-in. We can only do this well a few vessels at a time, so the pilot is three to five, by selection.</p>
+    <p class="sub">The most honest thing said about it so far came from a captain watching a live demo:</p>
     <p class="demo-quote">"You actually built it. This is the Bitcoin in 2009."</p>
     <div class="demo-who">Captain · live demo · reacting to the drawer</div>
-    <p style="margin-top:2rem;">We would rather prove than claim. The full account of how we earn trust at audit lives on one page. <a class="trust-link" href="/trust">How we earn trust at audit →</a></p>
+    <p style="margin-top:2rem;">We would rather prove than claim. <a class="trust-link" href="/trust">How we earn trust at audit →</a></p>
     <a class="ab-cta" href="mailto:contact@celeste7.ai?subject=CelesteOS%20pilot%20access&body=Hi%20CelesteOS%20team%2C%0A%0AI%20run%20a%20vessel%20and%20would%20like%20to%20understand%20the%20pilot.%0A%0AVessel%20name%3A%0ALength%3A%0AMy%20role%3A%0ACurrent%20PMS%3A%0A%0ASent%20from%20celeste7.ai">Understand the pilot →</a>
   </section>
 
