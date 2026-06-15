@@ -84,13 +84,25 @@
   .ab-close p { font-size:1.12rem; }
   .ab-cta { display:inline-block; margin-top:1.4rem; font-family:var(--body); font-weight:500; font-size:1rem; color:var(--bg); background:var(--teal); padding:0.85rem 1.5rem; border-radius:6px; text-decoration:none; }
   .ab-cta:hover { background:#6FC0DC; }
+  /* centre the close action cluster (founder) */
+  .ab-close .ab-cta { display:block; width:fit-content; margin-left:auto; margin-right:auto; }
+  .ab-close .momentum { justify-content:center; }
   .trust-link { color:var(--teal); text-decoration:none; border-bottom:1px solid rgba(90,171,204,0.4); }
   .trust-link:hover { color:var(--ac); }
   .demo-quote { font-family:var(--accent); font-style:italic; font-size:1.3rem; color:var(--ac); }
   .demo-who { font-family:var(--mono); font-size:0.66rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--txt3); margin-top:0.5rem; }
+  /* momentum: building-in-the-open social proof (LinkedIn) */
+  .momentum { display:flex; align-items:center; gap:1.3rem; flex-wrap:wrap; margin-top:2.4rem; }
+  .momentum .m-line { font-size:1.02rem; color:var(--txt2); margin:0; max-width:none; }
+  .momentum .m-line .n { color:var(--txt); }
+  .libtn { display:inline-flex; align-items:center; background:#fff; color:#0C0B0A; border-radius:5px;
+    padding:0.7rem 1.25rem; font-family:var(--body); font-size:0.96rem; text-decoration:none; transition:background 0.18s ease; }
+  .libtn:hover { background:#eef0f2; }
+  .libtn .lk { font-weight:400; letter-spacing:-0.01em; }
+  .libtn .in { font-weight:700; letter-spacing:-0.01em; }
+  .libtn .arr { margin-left:0.5rem; opacity:0.5; font-weight:400; }
 </style>
-    <script defer src="/js/cookie-consent.js"></script>
-  </head>
+</head>
 <body>
 <!-- ═══ CelesteOS site header (canonical, self-contained) ═══ -->
 <style>
@@ -180,6 +192,10 @@
     <div class="demo-who">The verdict we keep hearing on pilot calls</div>
     <p style="margin-top:2rem;">We would rather prove than claim. <a class="trust-link" href="/trust">How we earn trust at audit →</a></p>
     <a class="ab-cta" href="mailto:contact@celeste7.ai?subject=CelesteOS%20pilot%20access&body=Hi%20CelesteOS%20team%2C%0A%0AI%20run%20a%20vessel%20and%20would%20like%20to%20understand%20the%20pilot.%0A%0AVessel%20name%3A%0ALength%3A%0AMy%20role%3A%0ACurrent%20PMS%3A%0A%0ASent%20from%20celeste7.ai">Understand the pilot →</a>
+    <div class="momentum">
+      <a class="libtn" href="https://www.linkedin.com/company/celesteos/" target="_blank" rel="noopener"><span class="lk">Linked</span><span class="in">In</span><span class="arr">↗</span></a>
+      <p class="m-line"><span class="n">500+</span> from across the fleet follow the build.</p>
+    </div>
   </section>
 
 </main>

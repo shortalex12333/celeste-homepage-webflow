@@ -5676,3 +5676,15 @@ html { scroll-padding-top: 76px; }
   .onboard-band { min-height: 0; display: block; }
   .onboard-photo img { object-fit: cover; object-position: center; }
 }
+
+/* ═══ MOMENTUM · building-in-the-open social proof (LinkedIn), restrained ═══ */
+.momentum { display: flex; align-items: center; gap: 1.3rem; flex-wrap: wrap; }
+.momentum.center { justify-content: center; }
+.momentum .m-line { font-size: 1.02rem; color: var(--txt2); margin: 0; font-weight: 300; }
+.momentum .m-line .n { color: var(--txt); }
+.libtn { display: inline-flex; align-items: center; background: #fff; color: #0C0B0A; border-radius: 5px;
+  padding: 0.7rem 1.25rem; font-family: var(--font-body); font-size: 0.96rem; text-decoration: none; transition: background 0.18s ease; }
+.libtn:hover { background: #eef0f2; text-decoration: none; }
+.libtn .lk { font-weight: 400; letter-spacing: -0.01em; }
+.libtn .in { font-weight: 700; letter-spacing: -0.01em; }
+.libtn .arr { margin-left: 0.5rem; opacity: 0.5; font-weight: 400; }
