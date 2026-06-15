@@ -5491,6 +5491,12 @@ body.pin #sd-stage[data-state="4"] .lc-text {
 .topbar .wordmark:hover { color: var(--teal); text-decoration: none; }
 
 /* ── the shelf noun, persistent (doctrine: category orients, brand seduces) ── */
+.topbar .wm-tag {
+  font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--txt2); border-left: 1px solid rgba(255,255,255,0.18);
+  padding-left: 12px; margin-left: 12px; margin-right: auto; white-space: nowrap;
+}
+@media (max-width: 600px) { .topbar .wm-tag { display: none; } }
 .hero-eyebrow {
   font-family: var(--font-mono);
   font-size: 0.72rem;
