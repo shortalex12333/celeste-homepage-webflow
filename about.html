@@ -39,29 +39,25 @@
   strong { font-weight:500; color:#fff; }
 
   /* ── opener: yacht-day image, text on the dark-water (left) side ── */
-  .ab-hero { position:relative; min-height:90vh; display:flex; align-items:center; overflow:hidden; isolation:isolate; }
-  /* image confined to the RIGHT, left edge masked into the page bg → the left-column text can never overlap it */
-  .ab-photo { position:absolute; top:0; bottom:0; right:0; left:auto; width:48vw; z-index:-1; overflow:hidden;
-    -webkit-mask-image:linear-gradient(90deg, transparent 0, #000 22%, #000 100%);
-            mask-image:linear-gradient(90deg, transparent 0, #000 22%, #000 100%); }
-  .ab-photo img { width:100%; height:100%; object-fit:cover; object-position:60% center; display:block;
-    filter:contrast(1.12) saturate(1.14) brightness(1.03); }
-  .ab-scrim { position:absolute; inset:0; background: linear-gradient(0deg, var(--bg) 0%, rgba(9,8,7,0) 22%); }
-  /* text held to the left ~42vw; image starts at 52vw → a clear 10vw gap at every width */
-  .ab-hero .wrap { max-width:none; width:100%; margin:0; padding:0 5vw; }
-  .ab-hero h1, .ab-hero p { max-width:42vw; }
-  .ab-hero h1 { text-shadow:0 1px 12px rgba(0,0,0,0.4); }
-  .ab-hero p { margin-top:1.8rem; color:rgba(255,255,255,0.9); }
+  /* show the ENTIRE image, uncropped, full-bleed — the yacht sits right, the open water fills the left */
+  .ab-hero { position:relative; width:100%; isolation:isolate; }
+  .ab-photo { display:block; width:100%; line-height:0; }
+  .ab-photo img { display:block; width:100%; height:auto; filter:contrast(1.1) saturate(1.12) brightness(1.02); }
+  /* barely-there vignette: a faint left wash + slim bottom fade; type rides on text-shadow over the dark water */
+  .ab-scrim { position:absolute; inset:0; z-index:1; pointer-events:none;
+    background: linear-gradient(90deg, rgba(9,8,7,0.42) 0%, rgba(9,8,7,0.14) 30%, transparent 50%),
+                linear-gradient(0deg, var(--bg) 0%, transparent 12%); }
+  /* text overlaid on the left, over the open water (yacht is in the right third → never overlaps) */
+  .ab-hero .wrap { position:absolute; inset:0; z-index:2; display:flex; flex-direction:column; justify-content:center;
+    max-width:none; width:100%; margin:0; padding:0 5vw; }
+  .ab-hero h1, .ab-hero p { max-width:min(560px, 46%); }
+  .ab-hero h1 { text-shadow:0 2px 22px rgba(0,0,0,0.62), 0 1px 5px rgba(0,0,0,0.5); }
+  .ab-hero p { margin-top:1.8rem; color:rgba(255,255,255,0.92); text-shadow:0 2px 16px rgba(0,0,0,0.6); }
   @media (max-width:760px){
-    /* STACK: image band on top (fades into bg), text below on solid ground → zero overlap */
-    .ab-hero { flex-direction:column; align-items:stretch; min-height:0; overflow:visible; padding-bottom:1rem; }
-    .ab-photo { position:relative; top:auto; bottom:auto; right:auto; left:auto; width:100%; height:42vh;
-      -webkit-mask-image:linear-gradient(0deg, transparent 0, #000 28%, #000 100%);
-              mask-image:linear-gradient(0deg, transparent 0, #000 28%, #000 100%); }
-    .ab-photo img { object-position:center; }
-    .ab-scrim { display:none; }
-    .ab-hero .wrap { padding:1.6rem 2rem 0; }
+    /* mobile: whole image as a band on top (still uncropped), text below on solid ground */
+    .ab-hero .wrap { position:static; padding:1.6rem 2rem 0; }
     .ab-hero h1, .ab-hero p { max-width:none; text-shadow:none; }
+    .ab-scrim { display:none; }
   }
 
   /* ── prose beats ── */
