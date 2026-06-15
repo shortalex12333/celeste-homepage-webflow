@@ -58,7 +58,7 @@
     gtag('config', 'G-230QN4JY4P');
   </script>
   <script defer src="/js/cookie-consent.js"></script>
-  <link rel="stylesheet" href="landing-v12.css?v=menu1">
+  <link rel="stylesheet" href="landing-v12.css?v=photo8">
 </head>
 <body>
 
@@ -99,7 +99,8 @@
   </svg>
 
   <!-- ═══ HERO · matches celeste7.ai opening ═══ -->
-  <section class="hero" data-screen-label="01 · Hero">
+  <section class="hero has-photo" data-screen-label="01 · Hero">
+    <div class="sec-photo sec-photo--right"><img src="img/hero-2.webp" alt="" aria-hidden="true" fetchpriority="high"><div class="scrim scrim--left"></div></div>
     <div class="topbar">
       <a class="wordmark" href="/">CelesteOS</a>
       <span class="wm-desc">Engineering &amp; maintenance software for superyachts</span>
@@ -153,30 +154,6 @@
     <div class="scroll-cue fade-in d2"><div class="line"></div><span>What the vessel keeps</span></div>
   </section>
 
-  <!-- ═══ TRUST · authority, early ═══ -->
-  <div class="trust-band" data-screen-label="01a · Trust">
-    <section class="section reveal">
-      <div class="eyebrow">Trust</div>
-      <div class="trust-grid">
-        <div class="trust-col">
-          <div class="trust-name">GDPR</div>
-          <div class="trust-status">Aligned</div>
-          <p class="trust-desc">EU data processed in the United States under SCCs and UK IDTA. DPA available on request.</p>
-        </div>
-        <div class="trust-col">
-          <div class="trust-name">SOC-2</div>
-          <div class="trust-status">Aligned with TSC</div>
-          <p class="trust-desc">Controls built against AICPA Trust Services Criteria. Audit not yet commissioned.</p>
-        </div>
-        <div class="trust-col">
-          <div class="trust-name">ISM Code</div>
-          <div class="trust-status">Aligned</div>
-          <p class="trust-desc">Sections 10 and 11. Audit evidence, not class approval.</p>
-        </div>
-      </div>
-      <p class="trust-foot">Full regulatory mapping including MLC 2006 and IMO MSC.428(98) → <a href="https://celeste7.ai/trust" target="_blank" rel="noopener">/trust</a></p>
-    </section>
-  </div>
 
   <!-- ═══ PROBLEM · lays the ground ═══ -->
   <section class="section problem reveal" id="how" data-screen-label="01b · Problem">
@@ -370,7 +347,8 @@
   <!-- handover render slots -->
 
   <!-- ═══ LEAD MAGNET · your vessel's handover ═══ -->
-  <div class="magnet-section" id="magnet" data-screen-label="02c · Lead magnet">
+  <div class="magnet-section has-photo" id="magnet" data-screen-label="02c · Lead magnet">
+    <div class="sec-photo sec-photo--right"><img src="img/head-on.webp" alt="" aria-hidden="true" loading="lazy" decoding="async"><div class="scrim scrim--left"></div></div>
     <section class="section">
       <div class="magnet-grid">
         <div class="reveal">
@@ -456,7 +434,8 @@
 
     <!-- Ledger · How it works · right-to-left strip -->
     <div id="ledger-how" data-screen-label="03b · Ledger · How it works">
-      <div class="lh-stage">
+      <div class="lh-stage has-photo">
+        <div class="sec-photo sec-photo--right"><img src="img/water-texture.webp" alt="" aria-hidden="true" loading="lazy" decoding="async"><div class="scrim scrim--soft"></div></div>
         <div class="lh-head">
           <div class="eyebrow">Ledger · How it works</div>
           <span class="hint">Keep scrolling →</span>
@@ -637,7 +616,7 @@
     <div class="datum-stage" id="datum-stage" data-state="1">
       <div class="ds-body">
           <div class="ds-frame">
-        <p class="big">One bar. Every record on the boat: work orders, faults, documents, parts, and the <span class="ol-mark"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="1" y="3" width="14" height="18" rx="2.4" fill="#0F6CBD"/><circle cx="8" cy="12" r="4.6" fill="none" stroke="#fff" stroke-width="2"/><path d="M15 8.5h7.4v10.2L15 14z" fill="#28A8EA"/></svg>Outlook</span> email where the supplier context actually lives. <em>At 2&nbsp;a.m., nobody opens a dashboard.</em></p>
+        <p class="big">One bar. Every record on the boat: work orders, faults, documents, parts, and the Outlook email where the supplier context actually lives. <em>At 2&nbsp;a.m., nobody opens a dashboard.</em></p>
       </div>
 
       <div class="datum-inner">
@@ -700,7 +679,16 @@
             </span>
             <span class="pill record">Record</span>
           </div>
-          <div class="ds-resfoot"><svg class="ds-seal" viewBox="0 0 32 32" aria-hidden="true"><use href="#celeste-seal"></use></svg><span><strong>3 records · 2 fault history matches</strong> · Sources: fault log, maintenance history · All records immutable</span></div>
+          <div class="ds-group">Email · 1</div>
+          <div class="ds-hit">
+            <img class="ds-ico ds-ico-app" src="img/outlook.svg" alt="" width="15" height="15">
+            <span class="ds-body">
+              <span class="ds-line"><span class="id">MAIL</span><span class="main">RE: <mark>Port Engine</mark> impeller &amp; hose clip order</span></span>
+              <span class="sub">OUTLOOK · MTU MARINE SUPPORT · 28 OCT 2025 · QUOTE ATTACHED</span>
+            </span>
+            <span class="pill email">Email</span>
+          </div>
+          <div class="ds-resfoot"><svg class="ds-seal" viewBox="0 0 32 32" aria-hidden="true"><use href="#celeste-seal"></use></svg><span><strong>4 results · 2 fault history matches</strong> · Sources: fault log, maintenance history, Outlook · All records immutable</span></div>
         </div>
 
         <div class="ds-record">
@@ -734,7 +722,8 @@
     <div class="sec-cta-row reveal"><a class="sec-cta" href="mailto:contact@celeste7.ai?subject=CelesteOS%20pilot%20access&body=Hi%20CelesteOS%20team%2C%0A%0AI%20run%20a%20vessel%20and%20would%20like%20to%20understand%20the%20pilot.%0A%0AVessel%20name%3A%0ALength%3A%0AMy%20role%3A%0ACurrent%20PMS%3A%0A%0ASent%20from%20celeste7.ai" target="_blank" rel="noopener">Search my vessel →</a></div>
   </section>
 
-  <div class="handoff reveal">
+  <div class="handoff reveal has-photo on-photo">
+    <div class="sec-photo sec-photo--right"><img src="img/technical-dark.webp" alt="" aria-hidden="true" loading="lazy" decoding="async"><div class="scrim scrim--center"></div></div>
     <p>Open that record, and the system surfaces <em>what nobody linked.</em></p>
   </div>
 
@@ -824,7 +813,8 @@
 
   <!-- ═══ SECTION 06 · SUGGESTED DOCUMENTS · the breath ═══ -->
   <div class="light-band" data-screen-label="06 · Suggested Documents">
-    <section class="section" style="padding-bottom: 2vh;">
+    <section class="section has-photo" style="padding-bottom: 2vh;">
+      <div class="sec-photo sec-photo--right"><img src="img/hull-light.webp" alt="" aria-hidden="true" loading="lazy" decoding="async"><div class="scrim scrim--paper-left"></div></div>
       <div class="reveal" style="max-width: 720px;">
         <div class="eyebrow">Suggested Documents</div>
         <h2 class="display">The right manual exists. <span class="accent">It finds the work.</span></h2>
@@ -1023,7 +1013,10 @@
     </div>
   </div>
 
-  <div class="handoff reveal">
+  <div class="onboard-band has-photo">
+    <div class="sec-photo sec-photo--right onboard-photo"><img src="img/yacht-night.webp" alt="" aria-hidden="true" loading="lazy" decoding="async"><div class="scrim scrim--onboard"></div></div>
+
+  <div class="handoff reveal on-photo">
     <p>Getting there doesn't take a project plan, <em>either.</em></p>
   </div>
 
@@ -1043,6 +1036,7 @@
       <a class="sec-cta" href="mailto:contact@celeste7.ai?subject=CelesteOS%20pilot%20access&body=Hi%20CelesteOS%20team%2C%0A%0AI%20run%20a%20vessel%20and%20would%20like%20to%20understand%20the%20pilot.%0A%0AVessel%20name%3A%0ALength%3A%0AMy%20role%3A%0ACurrent%20PMS%3A%0A%0ASent%20from%20celeste7.ai" target="_blank" rel="noopener">Start onboarding →</a>
     </div>
   </section>
+  </div>
 
   <div class="datum-wrap" id="onboarding">
     <div class="datum-stage" id="ob-stage" data-state="1">
@@ -1217,6 +1211,32 @@
 
   <div class="handoff reveal">
     <p></p>
+  </div>
+
+  <!-- ═══ TRUST · the last objection, removed right before the ask ═══ -->
+  <div class="trust-band" data-screen-label="09c · Security & trust">
+    <section class="section reveal">
+      <div class="eyebrow">Security &amp; trust</div>
+      <h2 class="display" style="max-width: 16em;">Before you hand it a vessel's record, <span class="accent">the safeguards underneath.</span></h2>
+      <div class="trust-grid">
+        <div class="trust-col">
+          <div class="trust-name">GDPR</div>
+          <div class="trust-status">Aligned</div>
+          <p class="trust-desc">EU data processed in the United States under SCCs and UK IDTA. DPA available on request.</p>
+        </div>
+        <div class="trust-col">
+          <div class="trust-name">SOC-2</div>
+          <div class="trust-status">Aligned with TSC</div>
+          <p class="trust-desc">Controls built against AICPA Trust Services Criteria. Audit not yet commissioned.</p>
+        </div>
+        <div class="trust-col">
+          <div class="trust-name">ISM Code</div>
+          <div class="trust-status">Aligned</div>
+          <p class="trust-desc">Sections 10 and 11. Audit evidence, not class approval.</p>
+        </div>
+      </div>
+      <p class="trust-foot">Full regulatory mapping including MLC 2006 and IMO MSC.428(98) → <a href="https://celeste7.ai/trust" target="_blank" rel="noopener">/trust</a></p>
+    </section>
   </div>
 
   <!-- ═══ SECTION 10 · THE OFFER ═══ -->
@@ -1671,7 +1691,7 @@
           'The bar. Every screen, every device.',
           'Asked the way you\u2019d ask a colleague.',
           'Understood: entities, not keywords.',
-          '3 records \u00b7 2 fault history matches \u00b7 10 seconds.',
+          '4 results \u00b7 2 fault history matches \u00b7 10 seconds.',
           'Always sourced from your documents, no other vessels.'
         ],
         onState: recenter,
