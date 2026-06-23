@@ -1510,7 +1510,7 @@ body:not(.pin) .pin-layer:first-child { margin-top: 0; }
 }
 .cascade-row strong { color: var(--ltxt); font-weight: 500; }
 
-/* ═══ MONEY-FINDER ═══ */
+/* ═══ WARRANTY-FINDER ═══ */
 .mf-flag {
   display: flex;
   align-items: center;
@@ -1763,7 +1763,7 @@ body.pin #sd-stage[data-state="4"] .ds-frame {
 .lc-text p strong { color: var(--ltxt); font-weight: 500; }
 .lc-text p + p { margin-top: 0.9rem; }
 
-/* ═══ MONEY-FINDER — autoplay vignette ═══ */
+/* ═══ WARRANTY-FINDER — autoplay vignette ═══ */
 .mfv-stage { position: relative; overflow: hidden; }
 .mfv-scenes { position: relative; height: 330px; }
 .mfv-scene {
@@ -3062,7 +3062,7 @@ body.pin #pr-stage[data-state="4"] .a-green { opacity: 1; }
 /* Handover: the seal */
 body.pin #ho-stage[data-state="4"] .a-green,
 body.pin #ho-stage[data-state="5"] .a-green { opacity: 1; }
-/* Money-finder: ticking window → vindication */
+/* Warranty-finder: ticking window → vindication */
 body.pin #mf-stage[data-state="3"] .a-amber { opacity: 1; }
 body.pin #mf-stage[data-state="4"] .a-green { opacity: 1; }
 
@@ -3685,8 +3685,8 @@ body.pin #sd-stage[data-state="4"] .sd-row:not(.first) { opacity: 0.46; }
   width: 100%;
 }
 
-/* ═══ swap: money-finder (entries 20,21,22,23) ═══ */
-/* ═══ MONEY-FINDER — real-component crops (entries 20–23) ═══ */
+/* ═══ swap: warranty-finder (entries 20,21,22,23) ═══ */
+/* ═══ WARRANTY-FINDER — real-component crops (entries 20–23) ═══ */
 /* Scene 1 — real Report-Fault create form, cropped mid-fill */
 .mfv-form { display: flex; flex-direction: column; gap: 13px; }
 .mfv-field { display: flex; flex-direction: column; gap: 5px; }
@@ -5050,7 +5050,7 @@ body.pin #sd-stage[data-state="4"] .lc-text {
 
 /* ─── money ─── */
 /* ═══════════════════════════════════════════════════════════════════
-   MONEY-FINDER · HYPER-ZOOM  (#mf-stage, additive, --p-driven)  [REVISED]
+   WARRANTY-FINDER · HYPER-ZOOM  (#mf-stage, additive, --p-driven)  [REVISED]
    Camera dolly that pushes IN onto the recovered verdict — the cited §4.1
    warranty clause (scene 4) — then LOCKS to a readable, non-clipped frame.
    Mechanism mirrors lab .ls-hyperzoom: camera scale around a focal origin

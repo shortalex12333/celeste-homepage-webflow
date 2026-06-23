@@ -908,10 +908,10 @@
     </div>
   </div>
 
-  <!-- ═══ SECTION 07 · MONEY-FINDER ═══ -->
-  <section class="section" style="padding-bottom: 4vh;" data-screen-label="07 · Money-finder">
+  <!-- ═══ SECTION 07 · WARRANTY-FINDER ═══ -->
+  <section class="section" style="padding-bottom: 4vh;" data-screen-label="07 · Warranty-finder">
     <div class="reveal" style="max-width: 720px;">
-      <div class="eyebrow">Money-finder</div>
+      <div class="eyebrow">Warranty-finder</div>
       <h2 class="display">Every fault is checked against <span class="accent">the warranty.</span></h2>
       <p class="lead">Log the fault. If the equipment is still covered, the record says so, <strong>before the purchase order goes out.</strong> One click opens the exact document, clause cited, claim pack assembling from the ledger. You decide whether to claim.</p>
       <div class="how-block">
@@ -1355,7 +1355,7 @@
           <a href="#handover">Handover</a>
           <a href="#datum">Search</a>
           <a href="#show-related">Show Related</a>
-          <a href="#money">Money-finder</a>
+          <a href="#money">Warranty-finder</a>
           <a href="#onboarding">Onboarding</a>
         </div>
         <div class="fcol">
@@ -1740,7 +1740,7 @@
         ]
       });
 
-      /* Money-finder · scroll drives the scenes */
+      /* Warranty-finder · scroll drives the scenes */
       var mfvEl = document.getElementById('mfv');
       pinController({
         wrap: 'money',
@@ -1793,7 +1793,7 @@
 
     track('page_load', { pinned: pinOK, vw: window.innerWidth });
 
-    /* ═══ Money-finder autoplay · only when NOT scroll-driven ═══ */
+    /* ═══ Warranty-finder autoplay · only when NOT scroll-driven ═══ */
     (function () {
       var mfv = document.getElementById('mfv');
       if (!mfv) { return; }
