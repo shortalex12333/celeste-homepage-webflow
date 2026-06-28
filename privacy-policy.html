@@ -76,7 +76,7 @@
 
 
 <h1>Privacy Policy</h1>
-<div class="effective">Effective: 14 May 2026 · Last updated: 01 June 2026</div>
+<div class="effective">Effective: 14 May 2026 · Last updated: 29 June 2026</div>
 
 <p>This Privacy Policy explains how CelesteOS ("we", "our", or "us") collects, uses, stores, and protects personal data when you visit celeste7.ai, request pilot access, sign in via third-party identity providers including LinkedIn, or otherwise interact with our services. It is written to comply with the EU General Data Protection Regulation (GDPR), UK GDPR, the California Consumer Privacy Act (CCPA), and the LinkedIn API Terms of Use.</p>
 
@@ -120,6 +120,7 @@
   <h3>Data from third-party identity providers</h3>
   <ul>
     <li>If you sign in or authenticate via LinkedIn, we receive the specific fields described in section 3.</li>
+    <li>If crew sign in to the CelesteOS application via Microsoft Entra using their own organisation's Microsoft 365 work account, we receive only the user's name, work email, a Microsoft directory identifier, the organisation's tenant identifier, and a transient confirmation that multi-factor authentication was satisfied (not stored). We never receive or store a crew password.</li>
   </ul>
 </section>
 
@@ -149,6 +150,7 @@
     <tbody>
       <tr><td>Respond to pilot-access enquiries and other contact</td><td>Name, email, role, message content</td><td>Legitimate interest (responding to your enquiry); contract steps prior to entering a pilot agreement</td></tr>
       <tr><td>Authenticate you via LinkedIn (if used)</td><td>LinkedIn ID, name, email, profile picture</td><td>Performance of a contract (providing the service); your consent given via LinkedIn</td></tr>
+      <tr><td>Authenticate crew sign-in via Microsoft Entra</td><td>Name, work email, directory identifier, tenant identifier, transient MFA confirmation</td><td>Performance of a contract (providing the service); legitimate interest (securing access)</td></tr>
       <tr><td>Operate and secure the website</td><td>IP, browser, telemetry</td><td>Legitimate interest (security, fraud prevention, service reliability)</td></tr>
       <tr><td>Improve the product</td><td>Aggregated and de-identified analytics</td><td>Legitimate interest; data is not used to identify individuals</td></tr>
       <tr><td>Comply with law</td><td>Any of the above, as required</td><td>Legal obligation</td></tr>
@@ -194,6 +196,7 @@
     <li><strong>Upstash Inc.</strong> (US): cache used for rate limiting and session management.</li>
     <li><strong>OpenAI</strong> (US): AI inference, as described below.</li>
     <li><strong>Microsoft Corporation</strong> (US / global): the Microsoft Graph API &mdash; where you connect your Outlook mailbox, to <strong>read and synchronise your mailbox metadata</strong> (subjects, senders/recipients, dates and a short preview) so vessel-related correspondence is searchable, and to create email <em>drafts</em> in your own mailbox for you to send. CelesteOS does not send email on your behalf, and accesses only your own connected mailbox &mdash; not other mailboxes or organisation-wide files.</li>
+    <li><strong>Microsoft Corporation</strong> (US / global): <strong>Microsoft Entra ID</strong> &mdash; authentication and single sign-on, where crew sign in to the CelesteOS application using their own organisation's Microsoft 365 work account. Microsoft verifies identity and enforces multi-factor authentication; CelesteOS receives only the user's name, work email, a Microsoft directory identifier, the organisation's tenant identifier, and a transient confirmation that MFA was satisfied (not stored), and never receives or stores a crew password. This is a separate, dedicated connection from the Outlook mailbox integration above, with different scopes; one cannot affect the other.</li>
     <li><strong>LinkedIn Corporation</strong>: only where you authorise LinkedIn-based authentication; LinkedIn's own privacy policy applies to data they retain.</li>
     <li><strong>Google LLC</strong> (US): Google Analytics 4 (analytics) and Google Ads (advertising and conversion measurement) &mdash; set only with your consent; see section 9.</li>
     <li><strong>Wise Payments Ltd</strong> (UK): payment processing, acting as an independent controller of payment and KYC data.</li>
