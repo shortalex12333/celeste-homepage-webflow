@@ -82,6 +82,7 @@
     { "source": "/prototypes/lens-work-order.html", "destination": "/410.html", "statusCode": 410 },
     { "source": "/prototypes/show-related", "destination": "/410.html", "statusCode": 410 },
     { "source": "/prototypes/show-related.html", "destination": "/410.html", "statusCode": 410 },
-    { "source": "/privacy", "destination": "/privacy-policy", "permanent": true }
+    { "source": "/privacy", "destination": "/privacy-policy", "permanent": true },
+    { "source": "/dataterms", "destination": "/privacy-policy", "permanent": true }
   ]
 }
