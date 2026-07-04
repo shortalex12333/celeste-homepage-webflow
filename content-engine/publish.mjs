@@ -232,8 +232,11 @@ writeFileSync(outPath, page, 'utf8');
 console.log(`publish: wrote ${outPath} (${page.length} bytes)`);
 console.log(`publish: copied ${toCopy.length} asset(s) → ${IMAGES_BLOG_DIR}/`);
 
-// ─── 6. sitemap upsert (honest lastmod = --date) ─────────────────────────────
-updateSitemap(canonical, date);
+// ─── 6. sitemap: intentionally NOT written here ──────────────────────────────
+// The sitemap is a DERIVED artifact. Hand-editing sitemap.xml inside every PR made any two
+// concurrent engine PRs conflict on it. It is now regenerated deterministically on main by
+// content-engine/gen-sitemap.mjs (run by the engine runner each fire). A PR adds only its
+// blog file — unique per slug, so it never conflicts.
 
 // ─── 7. git / PR next-steps ──────────────────────────────────────────────────
 printNextSteps(slug, canonical, date, toCopy.length);
@@ -271,44 +274,15 @@ function pngDims(path) {
   } catch { return null; }
 }
 
-// Insert or replace the <url> block for `loc` in sitemap.xml, with lastmod=date.
-function updateSitemap(loc, lastmod) {
-  if (!existsSync(SITEMAP_PATH)) {
-    console.warn(`publish: WARN — ${SITEMAP_PATH} not found; skipping sitemap update.`);
-    return;
-  }
-  let xml = readFileSync(SITEMAP_PATH, 'utf8');
-  const locEsc = escapeXml(loc);
-
-  // Does a <url> block with this <loc> already exist?
-  const blockRe = new RegExp(`[ \\t]*<url>\\s*<loc>${escapeRe(locEsc)}</loc>[\\s\\S]*?</url>\\n?`, 'i');
-  const newBlock =
-`  <url>
-    <loc>${locEsc}</loc>
-    <lastmod>${lastmod}</lastmod>
-    <priority>0.9</priority>
-  </url>
-`;
-
-  if (blockRe.test(xml)) {
-    xml = xml.replace(blockRe, newBlock);
-    console.log(`publish: sitemap — updated lastmod=${lastmod} for ${loc}`);
-  } else {
-    // insert before the closing </urlset>
-    const close = xml.lastIndexOf('</urlset>');
-    if (close === -1) { console.warn('publish: WARN — sitemap has no </urlset>; skipping.'); return; }
-    xml = xml.slice(0, close) + newBlock + xml.slice(close);
-    console.log(`publish: sitemap — added ${loc} (lastmod=${lastmod})`);
-  }
-  writeFileSync(SITEMAP_PATH, xml, 'utf8');
-}
+// (sitemap.xml is no longer written by publish — see content-engine/gen-sitemap.mjs, which
+//  regenerates it deterministically on main so concurrent PRs can't conflict on it.)
 
 function printNextSteps(slug, canonical, date, nAssets) {
   const rel = `blogs/${slug}.html`;
   console.log('\n─── next steps (git / PR) ───────────────────────────────────────────');
   console.log(`  The page is written to the served tree. Review it, then ship:`);
   console.log('');
-  console.log(`    git -C ${SITE_ROOT} add ${rel} images/blog/ sitemap.xml`);
+  console.log(`    git -C ${SITE_ROOT} add ${rel} images/blog/   # sitemap regenerated on main, not per-PR`);
   console.log(`    git -C ${SITE_ROOT} commit -m "blog: publish ${slug} (updated ${date})"`);
   console.log(`    git -C ${SITE_ROOT} push -u origin feat/content-engine`);
   console.log(`    gh pr create --fill   # or open the PR in the GitHub UI`);

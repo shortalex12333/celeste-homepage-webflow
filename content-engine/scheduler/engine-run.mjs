@@ -52,9 +52,36 @@ async function main(){
   const CE = join(dir, 'content-engine');
   if (!existsSync(join(CE, 'gate.mjs'))) { log('clone has no content-engine/ — abort'); rmSync(dir, { recursive: true, force: true }); return; }
 
-  // next undone piece = its target blog file does not yet exist on main
-  const item = queue.find(q => !existsSync(join(dir, 'blogs', `${q.canonicalSlug}.html`)));
-  if (!item) { log('queue exhausted — all pieces published. Idle.'); rmSync(dir, { recursive: true, force: true }); return; }
+  // Regenerate the sitemap on main from the live blog set (it is a DERIVED artifact — PRs no
+  // longer touch it, so nothing conflicts). Commit directly to main if it changed. Gracefully
+  // skipped until content-engine/gen-sitemap.mjs exists on main (PR #56).
+  if (!DRY) {
+    try {
+      sh('node', ['content-engine/gen-sitemap.mjs', '--date', TODAY], dir, 30000);
+      const dirty = spawnSync('git', ['status', '--porcelain', 'sitemap.xml'], { cwd: dir, encoding: 'utf8' }).stdout.trim();
+      if (dirty) {
+        sh('git', ['add', 'sitemap.xml'], dir);
+        sh('git', ['-c', 'user.name=CelesteOS Content Engine', '-c', 'user.email=dev@celeste7.ai', 'commit', '-m', 'chore(sitemap): regenerate from live blogs (auto)'], dir);
+        sh('git', ['push', 'origin', 'HEAD:main'], dir, 60000);
+        log('sitemap regenerated + pushed to main');
+      }
+    } catch (e) { log(`sitemap regen skipped: ${e.message}`); }
+  }
+
+  // Slugs that already have an OPEN engine PR — skip them so a duplicate is never drafted.
+  const openPrSlugs = new Set();
+  try {
+    const raw = sh('gh', ['pr', 'list', '--repo', 'shortalex12333/celeste-homepage-webflow', '--state', 'open', '--json', 'headRefName', '--jq', '.[].headRefName'], dir, 30000);
+    for (const b of raw.split('\n')) {
+      const m = b.trim().match(/^engine\/(.+)-\d{4}-\d{2}-\d{2}$/);
+      if (m) openPrSlugs.add(m[1]);
+    }
+  } catch (e) { log(`open-PR dedupe check skipped: ${e.message}`); }
+
+  // next undone piece = blog file not on main AND no open PR already (no dupes)
+  const item = queue.find(q =>
+    !existsSync(join(dir, 'blogs', `${q.canonicalSlug}.html`)) && !openPrSlugs.has(q.canonicalSlug));
+  if (!item) { log('queue idle — every piece is published or already has an open PR.'); rmSync(dir, { recursive: true, force: true }); return; }
   log(`target: ${item.slug}  (keyword "${item.keyword}", chapter ${item.chapter})`);
 
   try {
@@ -93,7 +120,7 @@ async function main(){
     // 5. branch → push → PR (founder merges)
     const branch = `engine/${item.canonicalSlug}-${TODAY}`;
     sh('git', ['checkout', '-b', branch], dir);
-    sh('git', ['add', 'blogs', 'images', 'sitemap.xml'], dir);
+    sh('git', ['add', 'blogs', 'images'], dir);  // sitemap regenerated on main above — never in the PR
     sh('git', ['-c', 'user.name=CelesteOS Content Engine', '-c', 'user.email=dev@celeste7.ai', 'commit', '-m', `content: ${item.canonicalSlug} — "${item.keyword}" (engine, gate-clean)`], dir);
     sh('git', ['push', '-u', 'origin', branch], dir, 60000);
     const pr = sh('gh', ['pr', 'create', '--repo', 'shortalex12333/celeste-homepage-webflow', '--base', 'main', '--head', branch,
