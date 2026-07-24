@@ -50,7 +50,7 @@
       ]
     },
     {
-      "source": "/pilot",
+      "source": "/companion",
       "headers": [
         {
           "key": "X-Robots-Tag",
