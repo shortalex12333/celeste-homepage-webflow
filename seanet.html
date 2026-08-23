@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>CelesteOS — SeaNet Co</title>
+<style>
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0; height: 100%;
+    background: #0C0B0A;
+    font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
+    color: #FFFFFF;
+  }
+  .wrap {
+    min-height: 100%;
+    display: flex; align-items: center; justify-content: center;
+    padding: 2rem;
+  }
+  .card { width: 100%; max-width: 420px; text-align: center; }
+  .wordmark {
+    font-size: 2rem; font-weight: 300; letter-spacing: -0.01em;
+    margin-bottom: 0.5rem;
+  }
+  .wordmark span { font-weight: 600; color: #5AABCC; }
+  .sub {
+    font-size: 0.78rem; letter-spacing: 0.06em; text-transform: uppercase;
+    color: rgba(255,255,255,0.4); margin-bottom: 3rem;
+  }
+  .gate-label {
+    font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase;
+    color: rgba(255,255,255,0.4); margin-bottom: 1rem;
+  }
+  input {
+    width: 100%; box-sizing: border-box;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.12); border-radius: 4px;
+    padding: 0.85rem 1rem; color: #FFFFFF; font-size: 0.95rem;
+    font-family: 'DM Sans', system-ui, sans-serif; text-align: center;
+    letter-spacing: 0.02em; outline: none;
+  }
+  input:focus { border-color: rgba(90,171,204,0.5); }
+  #gate-error {
+    display: none; color: #c85a5a; font-size: 0.75rem; margin-top: 0.75rem;
+  }
+  button {
+    margin-top: 1.25rem; width: 100%;
+    background: #5AABCC; border: none; border-radius: 4px;
+    padding: 0.85rem 1rem; color: #0C0B0A; font-weight: 600;
+    font-size: 0.85rem; letter-spacing: 0.02em; cursor: pointer;
+    font-family: 'DM Sans', system-ui, sans-serif;
+  }
+  button:hover { background: #6dbadb; }
+  .docs { display: none; flex-direction: column; gap: 0.85rem; text-align: left; }
+  .doc-link {
+    display: block; text-decoration: none; color: inherit;
+    border: 1px solid rgba(255,255,255,0.1); border-radius: 6px;
+    padding: 1.25rem 1.4rem; transition: border-color 0.15s, background 0.15s;
+  }
+  .doc-link:hover { border-color: rgba(90,171,204,0.4); background: rgba(255,255,255,0.02); }
+  .doc-title { font-size: 1rem; font-weight: 600; margin-bottom: 0.3rem; }
+  .doc-desc { font-size: 0.82rem; color: rgba(255,255,255,0.5); line-height: 1.4; }
+  .doc-meta {
+    font-size: 0.68rem; letter-spacing: 0.06em; text-transform: uppercase;
+    color: #5AABCC; margin-top: 0.6rem;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="card">
+    <div class="wordmark">Celeste<span>OS</span></div>
+    <div class="sub">Prepared for SeaNet Co</div>
+
+    <div id="gate">
+      <div class="gate-label">Access Code</div>
+      <input id="gate-input" type="text" autocomplete="off" spellcheck="false" />
+      <div id="gate-error">Incorrect code — try again.</div>
+      <button id="gate-submit">Continue</button>
+    </div>
+
+    <div class="docs" id="docs">
+      <a class="doc-link" href="/seanet-overview">
+        <div class="doc-title">Executive Overview</div>
+        <div class="doc-desc">The 7-slide walkthrough — fleet problem, approach, and terms.</div>
+        <div class="doc-meta">2-minute read</div>
+      </a>
+      <a class="doc-link" href="/seanet-proposal">
+        <div class="doc-title">Technical Proposal</div>
+        <div class="doc-desc">The full analysis — every module, workflow, and detail.</div>
+        <div class="doc-meta">Full read</div>
+      </a>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  var KEY = 'seanet_access_granted';
+  var CODE = 'seanetco';
+  var gate = document.getElementById('gate');
+  var docs = document.getElementById('docs');
+  function unlock(){
+    gate.style.display = 'none';
+    docs.style.display = 'flex';
+  }
+  if (localStorage.getItem(KEY) === '1') { unlock(); }
+  var input = document.getElementById('gate-input');
+  var err = document.getElementById('gate-error');
+  var btn = document.getElementById('gate-submit');
+  function tryUnlock(){
+    if (input.value.trim().toLowerCase() === CODE) {
+      localStorage.setItem(KEY, '1');
+      unlock();
+    } else {
+      err.style.display = 'block';
+      input.value = '';
+      input.focus();
+    }
+  }
+  btn.addEventListener('click', tryUnlock);
+  input.addEventListener('keydown', function(e){ if (e.key === 'Enter') tryUnlock(); });
+  setTimeout(function(){ input.focus(); }, 50);
+})();
+</script>
+</body>
+</html>
