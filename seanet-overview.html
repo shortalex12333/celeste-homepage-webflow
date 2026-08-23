@@ -322,13 +322,13 @@
       .nav-buttons { gap: 0.4rem; }
       .nav-btn { font-size: 0.58rem; padding: 0.5rem 0.6rem; min-height: 40px; }
       .top-nav { padding: 0 0.8rem; }
-      .slide { inset: 0.4rem; padding: 0.75rem 0.5rem 1rem; }
+      .slide { inset: 0.4rem; padding: 0.75rem 1rem 1rem; }
 
-      /* SLIDE 3: two-column macro layout -> stacked */
+      /* SLIDE 3: two-column macro layout -> stacked, tightened to fit one screen */
       #slide-4 .slide-content-wrap > div {
         flex-direction: column !important;
         align-items: stretch !important;
-        gap: 1.4rem !important;
+        gap: 0.9rem !important;
       }
       #slide-4 .slide-content-wrap > div > div:first-child {
         width: 100% !important;
@@ -338,7 +338,8 @@
         align-items: stretch !important;
         border-bottom: none !important;
         padding-bottom: 0 !important;
-        gap: 1.2rem !important;
+        gap: 0.6rem !important;
+        margin-top: 0.7rem !important;
       }
       #slide-4 [style*="border-right:2px solid #C0503A"] {
         border-right: none !important;
@@ -346,7 +347,7 @@
         width: 100% !important;
         text-align: left !important;
         padding-right: 0 !important;
-        padding-bottom: 0.9rem !important;
+        padding-bottom: 0.5rem !important;
       }
       #slide-4 [style*="border-right:2px solid #C0503A"] > div:nth-child(3) {
         justify-content: flex-start !important;
@@ -355,18 +356,55 @@
         border-left: none !important;
         border-top: 3px solid var(--teal-accent) !important;
         padding-left: 0 !important;
-        padding-top: 1rem !important;
+        padding-top: 0.6rem !important;
+      }
+      #slide-4 [style*="margin-bottom:1.3rem"] {
+        margin-bottom: 0.55rem !important;
+      }
+      #slide-4 [style*="padding:0.36rem 0"] {
+        padding: 0.12rem 0 !important;
+      }
+      #slide-4 [style*="font-size:0.98rem"] {
+        font-size: 0.84rem !important;
+      }
+      #slide-4 svg[width="24"][height="24"] {
+        width: 16px !important;
+        height: 16px !important;
       }
 
       /* SLIDE 2: split two-column (bullets/credentials + ETO photo) has its own inline
          grid-template-columns that beats the global .grid-2-clean 900px collapse (no !important
-         on that rule), so it never stacked -> force it here */
+         on that rule), so it never stacked -> force it here. Photo shrinks to a small circular
+         avatar (matching the cover's avatar treatment) instead of a large rectangle, to fit
+         the whole slide on one screen without scrolling. */
       #slide-2 .grid-2-clean {
         grid-template-columns: 1fr !important;
-        gap: 1.6rem !important;
+        gap: 0.7rem !important;
+      }
+      #slide-2 [style*="min-height:360px"] {
+        min-height: 0 !important;
+        height: auto !important;
+        justify-content: center !important;
+        margin: 0.2rem 0 0.4rem !important;
+      }
+      #slide-2 img[alt*="Alex Short"] {
+        width: 84px !important;
+        height: 84px !important;
+        max-width: 84px !important;
+        max-height: 84px !important;
+        border-radius: 50% !important;
+        object-fit: cover !important;
+      }
+      #slide-2 [style*="border-top:1px solid var(--teal-accent)"] {
+        gap: 0.7rem !important;
+        margin-bottom: 0.9rem !important;
+      }
+      #slide-2 [style*="margin-bottom:2rem"] {
+        margin-bottom: 0.8rem !important;
       }
 
-      /* SLIDE 5: split image/text layout -> stacked, image becomes a supporting strip below the text */
+      /* SLIDE 5: split image/text layout -> image hidden on mobile so the case study fits
+         one screen without scrolling; text stands alone */
       #slide-5 {
         overflow-y: auto !important;
         overflow-x: hidden !important;
@@ -376,15 +414,13 @@
       }
       #slide-5 .slide-content-wrap > div[style*="display:flex; align-items:stretch; gap:3rem"] {
         flex-direction: column !important;
-        gap: 1.5rem !important;
+        gap: 0.4rem !important;
       }
       #slide-5 [style*="flex:1; min-width:0"] {
         width: 100% !important;
       }
       #slide-5 [style*="width:400px; flex-shrink:0"] {
-        width: 100% !important;
-        flex-shrink: 1 !important;
-        height: 200px !important;
+        display: none !important;
       }
       #slide-5 .slide-footer {
         position: static !important;
@@ -395,10 +431,14 @@
         margin-top: 0.5rem !important;
       }
 
-      /* SLIDE 7: three-column step grid -> stacked */
+      /* SLIDE 7: three-column step grid -> stacked, tightened to fit one screen */
       #slide-7 [style*="grid-template-columns:1fr 1fr 1fr"] {
         grid-template-columns: 1fr !important;
-        gap: 1.4rem !important;
+        gap: 0.7rem !important;
+        margin-bottom: 1.4rem !important;
+      }
+      #slide-7 [style*="margin-bottom:4rem"] {
+        margin-bottom: 1.4rem !important;
       }
     }
 
