@@ -440,6 +440,16 @@
       #slide-7 [style*="margin-bottom:4rem"] {
         margin-bottom: 1.4rem !important;
       }
+
+      /* FOOTERS: hide descriptive wording, leave only the slide-count numbers where one exists */
+      .slide-footer > span:first-child { display: none !important; }
+      .ftr-word { display: none !important; }
+      #slide-1 .slide-footer,
+      #slide-2 .slide-footer,
+      #slide-3 .slide-footer,
+      #slide-5 .slide-footer {
+        display: none !important;
+      }
     }
 
     @media (max-width: 1400px) {
@@ -704,7 +714,7 @@
 
       <div class="slide-footer">
         <span>SEANET CO &middot; UNIFIED FLEET RECORD</span>
-        <span>SLIDE 04 / 07</span>
+        <span><span class="ftr-word">SLIDE </span>04 / 07</span>
       </div>
     </section>
 
@@ -924,7 +934,7 @@
 
       <div class="slide-footer">
         <span>SEANET CO EVALUATION PILOT</span>
-        <span>SLIDE 06 / 07</span>
+        <span><span class="ftr-word">SLIDE </span>06 / 07</span>
       </div>
     </section>
 
@@ -1019,7 +1029,7 @@
 
       <div class="slide-footer">
         <span>NEXT STEPS</span>
-        <span>SLIDE 07 / 07</span>
+        <span><span class="ftr-word">SLIDE </span>07 / 07</span>
       </div>
     </section>
 
