@@ -389,17 +389,8 @@
     }
 
     @media (max-width: 1400px) {
-      /* SLIDE 5: fixed toggle + detail panel -> flow into single column (widened from 640px: the offer-detail-panel's absolute positioning collides with the trigger rows at common laptop widths like 1366px) */
+      /* SLIDE 6: pinned toggle -> flow into single column at narrow widths (offer-detail-panel is always static/centered now, no longer needs its own override here) */
       #slide-6 { padding-top: 4.5rem !important; }
-      #offer-detail-panel {
-        position: static !important;
-        width: 100% !important;
-        right: auto !important;
-        top: auto !important;
-        bottom: auto !important;
-        order: 5;
-        margin-top: 1.2rem !important;
-      }
       #slide-6 > div[style*="position:absolute; top:1.6rem"] {
         position: static !important;
         left: auto !important;
@@ -410,10 +401,6 @@
       }
       #slide-6 .slide-content-wrap { order: 1; }
       #slide-6 .slide-footer { order: 10; margin-top: 1.5rem !important; }
-      #slide-6 .lens-pane > div[style*="grid-template-columns:1fr 1fr"] {
-        grid-template-columns: 1fr !important;
-        gap: 1.6rem !important;
-      }
     }
   
     html[data-view="crew"] .view-fleet { display: none !important; }
@@ -755,9 +742,6 @@
     <section class="slide" id="slide-6">
       <div class="v12-atmo" style="background:linear-gradient(140deg, rgba(176,139,72,0.07) 0%, transparent 50%), radial-gradient(ellipse 65% 75% at 80% 60%, rgba(33,103,139,0.08) 0%, transparent 70%);"></div>
 
-      <!-- SHARED FADE-IN/OUT DETAIL PANEL: matches the annotated right-side zone, no background -->
-      <div id="offer-detail-panel" style="position:absolute; top:8.2rem; right:3.5rem; width:27%; bottom:6.5rem; opacity:0; pointer-events:none; transition:opacity 0.45s ease; overflow-y:auto; text-align:left; background:transparent; z-index:20;"></div>
-
       <!-- TOGGLE PINNED to a fixed position, independent of content-wrap's vertical centering, so it doesn't shift when Fleet/Yacht content heights differ -->
       <div style="position:absolute; top:1.6rem; left:50%; transform:translateX(-50%); z-index:15; display:flex; align-items:center; gap:2px; background:var(--bg-card); border:1px solid var(--border-strong); border-radius:2px; padding:2px;">
         <button id="tab-fleet-btn" onclick="setView('fleet')" style="appearance:none; border:none; cursor:pointer; font-family:'IBM Plex Mono',monospace; font-size:0.68rem; letter-spacing:0.1em; text-transform:uppercase; padding:0.42rem 0.8rem; border-radius:2px; background:transparent; color:var(--tx55); transition:all 0.15s ease;">Fleet</button>
@@ -767,24 +751,14 @@
       <div class="slide-content-wrap" style="width:100%; margin:auto;">
         <div class="slide-eyebrow" style="text-align:center;">06 &middot; TERMS</div>
 
-        <div class="lens-pane" data-lens="fleet" style="display:none; width:100%; max-width:900px; margin:0 auto;">
-          <div style="display:grid; grid-template-columns:1fr 1fr; gap:2.6rem; align-items:start; width:100%; margin-top:1.2rem;">
-            <div style="text-align:left;">
-              <h1 class="slide-headline" style="font-size:clamp(1.9rem,3.4vw,2.7rem); margin-bottom:0.7rem;">Flexible frequency,<br>flexible fleet.</h1>
-              <p class="slide-sub" style="margin-top:0;">A bespoke solution to work with your business,<br>not against it</p>
-            </div>
-            <div style="display:flex; flex-direction:column; width:100%;">
-          <div class="offer-row-trigger" onclick="toggleOfferDetail(this, 'panel-fleet-flexible')" style="cursor:pointer; padding:0.65rem 0; display:flex; align-items:baseline; gap:0.7rem; font-size:0.88rem; font-weight:400; color:var(--tx92); border-top:1px solid var(--tx07);"><span class="offer-row-glyph" style="font-family:'IBM Plex Mono',monospace; color:var(--teal-text); font-size:0.75rem; width:0.7em;">+</span>Flexible by design</div>
-          <div class="offer-row-trigger" onclick="toggleOfferDetail(this, 'panel-fleet-compare')" style="cursor:pointer; padding:0.65rem 0; display:flex; align-items:baseline; gap:0.7rem; font-size:0.88rem; font-weight:400; color:var(--tx92); border-top:1px solid var(--tx07);"><span class="offer-row-glyph" style="font-family:'IBM Plex Mono',monospace; color:var(--teal-text); font-size:0.75rem; width:0.7em;">+</span>Compare with legacy PMS</div>
-        </div>
-          </div>
-          <div style="width:100%; max-width:520px; margin:1.8rem auto 0;">
-            <svg viewBox="0 0 600 130" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto; display:block;">
+        <div class="lens-pane" data-lens="fleet" style="display:none; width:100%; max-width:900px; margin:0 auto; text-align:center;">
+          <div style="width:100%; max-width:560px; margin:1rem auto 2.2rem;">
+<svg viewBox="0 0 600 130" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto; display:block;">
               <g font-family="'Eloquia Display','DM Sans',system-ui,-apple-system,sans-serif" font-size="13" font-weight="600" letter-spacing="0.01em" fill="var(--tx92)">
                 <text x="20" y="24" text-anchor="start" opacity="0.5"><animate attributeName="opacity" values="0.5;0.5;1;1;0.5" keyTimes="0;0.06;0.08;0.94;1" dur="8.1s" repeatCount="indefinite"></animate>Agreement</text>
-                <text x="160" y="24" text-anchor="middle" opacity="0.5"><animate attributeName="opacity" values="0.5;0.5;1;1;0.5" keyTimes="0;0.265;0.285;0.94;1" dur="8.1s" repeatCount="indefinite"></animate>Import</text>
-                <text x="300" y="24" text-anchor="middle" opacity="0.5"><animate attributeName="opacity" values="0.5;0.5;1;1;0.5" keyTimes="0;0.47;0.49;0.94;1" dur="8.1s" repeatCount="indefinite"></animate>Results</text>
-                <text x="440" y="24" text-anchor="middle" opacity="0.5"><animate attributeName="opacity" values="0.5;0.5;1;1;0.5" keyTimes="0;0.675;0.695;0.94;1" dur="8.1s" repeatCount="indefinite"></animate>Fleet Sync</text>
+                <text x="160" y="24" text-anchor="middle" opacity="0.5"><animate attributeName="opacity" values="0.5;0.5;1;1;0.5" keyTimes="0;0.265;0.285;0.94;1" dur="8.1s" repeatCount="indefinite"></animate>Fleet Loaded</text>
+                <text x="300" y="24" text-anchor="middle" opacity="0.5"><animate attributeName="opacity" values="0.5;0.5;1;1;0.5" keyTimes="0;0.47;0.49;0.94;1" dur="8.1s" repeatCount="indefinite"></animate>Fully Synced</text>
+                <text x="440" y="24" text-anchor="middle" opacity="0.5"><animate attributeName="opacity" values="0.5;0.5;1;1;0.5" keyTimes="0;0.675;0.695;0.94;1" dur="8.1s" repeatCount="indefinite"></animate>First Results</text>
                 <text x="580" y="24" text-anchor="end" opacity="0.5"><animate attributeName="opacity" values="0.5;0.5;1;1;0.5" keyTimes="0;0.88;0.9;0.94;1" dur="8.1s" repeatCount="indefinite"></animate>Review</text>
               </g>
               <line x1="20" y1="70" x2="580" y2="70" stroke="var(--tx14)" stroke-width="1"></line>
@@ -798,25 +772,21 @@
               <circle cx="580" cy="70" r="6" fill="var(--teal-accent)" fill-opacity="0.3"><animate attributeName="fill-opacity" values="0.3;0.3;1;1;0.3" keyTimes="0;0.88;0.9;0.94;1" dur="8.1s" repeatCount="indefinite"></animate></circle>
               <line x1="20" y1="50" x2="20" y2="90" stroke="var(--teal-accent)" stroke-width="1.5" stroke-opacity="0"><animate attributeName="x1" values="20;20;580;580;20" keyTimes="0;0.06;0.88;0.94;1" dur="8.1s" repeatCount="indefinite"></animate><animate attributeName="x2" values="20;20;580;580;20" keyTimes="0;0.06;0.88;0.94;1" dur="8.1s" repeatCount="indefinite"></animate><animate attributeName="stroke-opacity" values="0;0.75;0.75;0;0" keyTimes="0;0.06;0.88;0.94;1" dur="8.1s" repeatCount="indefinite"></animate></line>
               <g font-family="'IBM Plex Mono',monospace" font-size="8" fill="var(--tx48)">
-                <text x="20" y="100" text-anchor="start">0D</text><text x="160" y="100" text-anchor="middle">3D</text><text x="300" y="100" text-anchor="middle">7D</text><text x="440" y="100" text-anchor="middle">21D</text><text x="580" y="100" text-anchor="end">30D</text>
+                <text x="20" y="100" text-anchor="start">1W</text><text x="160" y="100" text-anchor="middle">2W</text><text x="300" y="100" text-anchor="middle">3W</text><text x="440" y="100" text-anchor="middle">4W</text><text x="580" y="100" text-anchor="end">5W</text>
               </g>
             </svg>
           </div>
+          <h1 class="slide-headline" style="font-size:clamp(1.9rem,3.4vw,2.7rem); margin-bottom:0.7rem; text-align:center;">Flexible frequency,<br>flexible fleet.</h1>
+          <p class="slide-sub" style="margin-top:0; text-align:center;">A bespoke solution to work with your business,<br>not against it</p>
+          <div style="display:flex; flex-direction:column; width:100%; max-width:460px; margin:1.6rem auto 0; text-align:left;">
+          <div class="offer-row-trigger" onclick="toggleOfferDetail(this, 'panel-fleet-flexible')" style="cursor:pointer; padding:0.65rem 0; display:flex; align-items:baseline; gap:0.7rem; font-size:0.88rem; font-weight:400; color:var(--tx92); border-top:1px solid var(--tx07);"><span class="offer-row-glyph" style="font-family:'IBM Plex Mono',monospace; color:var(--teal-text); font-size:0.75rem; width:0.7em;">+</span>Flexible by design</div>
+          <div class="offer-row-trigger" onclick="toggleOfferDetail(this, 'panel-fleet-compare')" style="cursor:pointer; padding:0.65rem 0; display:flex; align-items:baseline; gap:0.7rem; font-size:0.88rem; font-weight:400; color:var(--tx92); border-top:1px solid var(--tx07);"><span class="offer-row-glyph" style="font-family:'IBM Plex Mono',monospace; color:var(--teal-text); font-size:0.75rem; width:0.7em;">+</span>Compare with legacy PMS</div>
+        </div>
         </div>
 
-        <div class="lens-pane" data-lens="crew" style="width:100%; max-width:900px; margin:0 auto;">
-          <div style="display:grid; grid-template-columns:1fr 1fr; gap:2.6rem; align-items:start; width:100%; margin-top:1.2rem;">
-            <div style="text-align:left;">
-              <div style="font-family:'Eloquia Display','DM Sans',system-ui,sans-serif; font-weight:400; font-size:clamp(3.6rem,7vw,5.6rem); line-height:0.92; letter-spacing:-0.02em; color:var(--tx92);">$995</div>
-              <div style="font-family:'IBM Plex Mono',monospace; font-size:0.68rem; letter-spacing:0.08em; color:var(--tx55); margin-top:1rem;">PER VESSEL, PER MONTH</div>
-            </div>
-            <div style="display:flex; flex-direction:column; width:100%;">
-          <div class="offer-row-trigger" onclick="toggleOfferDetail(this, 'panel-crew-flexible')" style="cursor:pointer; padding:0.65rem 0; display:flex; align-items:baseline; gap:0.7rem; font-size:0.88rem; font-weight:400; color:var(--tx92); border-top:1px solid var(--tx07);"><span class="offer-row-glyph" style="font-family:'IBM Plex Mono',monospace; color:var(--teal-text); font-size:0.75rem; width:0.7em;">+</span><span style="color:var(--green-text); font-weight:500;">$1,990</span> <span style="color:var(--tx92); font-weight:500;">reduction</span></div>
-          <div class="offer-row-trigger" onclick="toggleOfferDetail(this, 'panel-crew-compare')" style="cursor:pointer; padding:0.65rem 0; display:flex; align-items:baseline; gap:0.7rem; font-size:0.88rem; font-weight:400; color:var(--tx92); border-top:1px solid var(--tx07);"><span class="offer-row-glyph" style="font-family:'IBM Plex Mono',monospace; color:var(--teal-text); font-size:0.75rem; width:0.7em;">+</span>Compare with legacy PMS</div>
-        </div>
-          </div>
-          <div style="width:100%; max-width:520px; margin:1.8rem auto 0;">
-            <svg viewBox="0 0 600 130" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto; display:block;">
+        <div class="lens-pane" data-lens="crew" style="width:100%; max-width:900px; margin:0 auto; text-align:center;">
+          <div style="width:100%; max-width:560px; margin:1rem auto 2.2rem;">
+<svg viewBox="0 0 600 130" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto; display:block;">
               <g font-family="'Eloquia Display','DM Sans',system-ui,-apple-system,sans-serif" font-size="13" font-weight="600" letter-spacing="0.01em" fill="var(--tx92)">
                 <text x="20" y="24" text-anchor="start" opacity="0.5"><animate attributeName="opacity" values="0.5;0.5;1;1;0.5" keyTimes="0;0.06;0.08;0.94;1" dur="8.1s" repeatCount="indefinite"></animate>Agreement</text>
                 <text x="160" y="24" text-anchor="middle" opacity="0.5"><animate attributeName="opacity" values="0.5;0.5;1;1;0.5" keyTimes="0;0.265;0.285;0.94;1" dur="8.1s" repeatCount="indefinite"></animate>Import</text>
@@ -835,13 +805,22 @@
               <circle cx="580" cy="70" r="6" fill="var(--teal-accent)" fill-opacity="0.3"><animate attributeName="fill-opacity" values="0.3;0.3;1;1;0.3" keyTimes="0;0.88;0.9;0.94;1" dur="8.1s" repeatCount="indefinite"></animate></circle>
               <line x1="20" y1="50" x2="20" y2="90" stroke="var(--teal-accent)" stroke-width="1.5" stroke-opacity="0"><animate attributeName="x1" values="20;20;580;580;20" keyTimes="0;0.06;0.88;0.94;1" dur="8.1s" repeatCount="indefinite"></animate><animate attributeName="x2" values="20;20;580;580;20" keyTimes="0;0.06;0.88;0.94;1" dur="8.1s" repeatCount="indefinite"></animate><animate attributeName="stroke-opacity" values="0;0.75;0.75;0;0" keyTimes="0;0.06;0.88;0.94;1" dur="8.1s" repeatCount="indefinite"></animate></line>
               <g font-family="'IBM Plex Mono',monospace" font-size="8" fill="var(--tx48)">
-                <text x="20" y="100" text-anchor="start">0D</text><text x="160" y="100" text-anchor="middle">3D</text><text x="300" y="100" text-anchor="middle">7D</text><text x="440" y="100" text-anchor="middle">21D</text><text x="580" y="100" text-anchor="end">30D</text>
+                <text x="20" y="100" text-anchor="start">1W</text><text x="160" y="100" text-anchor="middle">2W</text><text x="300" y="100" text-anchor="middle">3W</text><text x="440" y="100" text-anchor="middle">4W</text><text x="580" y="100" text-anchor="end">5W</text>
               </g>
             </svg>
           </div>
+          <div style="font-family:'Eloquia Display','DM Sans',system-ui,sans-serif; font-weight:400; font-size:clamp(3.6rem,7vw,5.6rem); line-height:0.92; letter-spacing:-0.02em; color:var(--tx92);">$995</div>
+          <div style="font-family:'IBM Plex Mono',monospace; font-size:0.68rem; letter-spacing:0.08em; color:var(--tx55); margin-top:1rem;">PER VESSEL, PER MONTH</div>
+          <div style="display:flex; flex-direction:column; width:100%; max-width:460px; margin:1.6rem auto 0; text-align:left;">
+          <div class="offer-row-trigger" onclick="toggleOfferDetail(this, 'panel-crew-flexible')" style="cursor:pointer; padding:0.65rem 0; display:flex; align-items:baseline; gap:0.7rem; font-size:0.88rem; font-weight:400; color:var(--tx92); border-top:1px solid var(--tx07);"><span class="offer-row-glyph" style="font-family:'IBM Plex Mono',monospace; color:var(--teal-text); font-size:0.75rem; width:0.7em;">+</span><span style="color:var(--green-text); font-weight:500;">$1,990</span> <span style="color:var(--tx92); font-weight:500;">reduction</span></div>
+          <div class="offer-row-trigger" onclick="toggleOfferDetail(this, 'panel-crew-compare')" style="cursor:pointer; padding:0.65rem 0; display:flex; align-items:baseline; gap:0.7rem; font-size:0.88rem; font-weight:400; color:var(--tx92); border-top:1px solid var(--tx07);"><span class="offer-row-glyph" style="font-family:'IBM Plex Mono',monospace; color:var(--teal-text); font-size:0.75rem; width:0.7em;">+</span>Compare with legacy PMS</div>
         </div>
+        </div>
+
+        <!-- SHARED FADE-IN/OUT DETAIL PANEL: normal document flow, centered, grows to fit content (no nested scrollbar) -->
+        <div id="offer-detail-panel" style="width:100%; max-width:460px; margin:1.4rem auto 0; opacity:0; pointer-events:none; transition:opacity 0.45s ease; text-align:left; background:transparent;"></div>
       </div>
-      
+
       <template id="panel-fleet-flexible">
         <div style="font-family:'IBM Plex Mono',monospace; font-size:0.6rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--teal-text); margin-bottom:0.8rem;">Flexible By Design</div>
         <div style="display:flex; flex-direction:column; gap:0.7rem;">
@@ -1043,7 +1022,9 @@
       var panel = document.getElementById('offer-detail-panel');
       if (panel) {
         panel.style.opacity = '0';
+        panel.style.pointerEvents = 'none';
         panel.dataset.activeId = '';
+        panel.innerHTML = '';
         document.querySelectorAll('.offer-row-glyph').forEach(function(g){ g.textContent = '+'; });
       }
     }
@@ -1060,6 +1041,7 @@
         panel.style.opacity = '0';
         panel.style.pointerEvents = 'none';
         panel.dataset.activeId = '';
+        setTimeout(function(){ if (!panel.dataset.activeId) { panel.innerHTML = ''; } }, 450);
         return;
       }
 
