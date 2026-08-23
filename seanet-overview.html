@@ -141,13 +141,19 @@
       display: flex;
       align-items: center;
       gap: 0.6rem;
+      text-decoration: none;
+      transition: opacity 0.2s ease;
     }
+    .brand-title:hover { opacity: 0.75; }
     .brand-tag {
-      font-size: 0.64rem;
+      font-family: 'Eloquia Display', 'DM Sans', system-ui, -apple-system, sans-serif;
+      font-weight: 300;
+      font-size: 1.05rem;
+      letter-spacing: -0.005em;
+      text-transform: none;
       color: var(--teal-text);
       border-left: 1px solid var(--tx14);
       padding-left: 0.6rem;
-      letter-spacing: 0.1em;
     }
     .slide-counter {
       font-family: 'Eloquia Display', 'DM Sans', system-ui, -apple-system, sans-serif;
@@ -486,10 +492,10 @@
   </div>
 
   <header class="top-nav">
-    <div class="brand-title">
-      <span>CELESTEOS</span>
+    <a href="/seanet" class="brand-title" aria-label="Back to SeaNet Co home">
+      <span style="font-family:'Eloquia Display','DM Sans',system-ui,-apple-system,sans-serif; font-weight:300; letter-spacing:-0.005em; text-transform:none; font-size:1.05rem; color:var(--tx92);"><span style="opacity:0.55; margin-right:0.4rem; font-weight:400;">&larr;</span>Celeste<span style="font-weight:600; color:var(--teal-text);">OS</span></span>
       <span class="brand-tag">SeaNet Co</span>
-    </div>
+    </a>
     <div class="slide-counter" id="slide-num-display">SLIDE 01 / 07</div>
     <div class="nav-buttons">
       <button class="nav-btn" onclick="prevSlide()">&larr; PREV</button>
