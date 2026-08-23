@@ -773,7 +773,7 @@ body { background:var(--bg-base); transition:background-color .6s ease; }
  #tab-fleet:focus-visible, #tab-crew:focus-visible{outline:1px solid var(--teal-accent); outline-offset:2px}
 </style>
 <nav class="v12-topbar" style="position:fixed; top:0; left:0; right:0; z-index:40; display:flex; align-items:center; justify-content:space-between; padding:1.15rem 2.2rem; background:linear-gradient(to bottom, var(--nav-grad-92), rgba(12,11,10,0));">
-  <div style="font-family:'IBM Plex Mono',monospace; font-size:0.72rem; font-weight:600; letter-spacing:0.22em; color:var(--tx92);">CELESTEOS</div>
+  <a href="/seanet" aria-label="Back to SeaNet Co home" style="display:flex; align-items:center; text-decoration:none; font-family:'Eloquia Display','DM Sans',system-ui,-apple-system,sans-serif; font-weight:300; letter-spacing:-0.005em; font-size:1.05rem; color:var(--tx92); transition:opacity 0.2s ease;" onmouseover="this.style.opacity='0.75'" onmouseout="this.style.opacity='1'"><span style="opacity:0.55; margin-right:0.4rem; font-weight:400;">&larr;</span>Celeste<span style="font-weight:600; color:var(--teal-text);">OS</span></a>
   <div class="toggle-wrap" id="lens-toggle" style="position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); display:flex; align-items:center; gap:2px; background:var(--toggle-bg); border:1px solid var(--tx11); border-radius:8px; padding:3px; backdrop-filter:blur(10px);" role="tablist" aria-label="Reading view">
     <button type="button" role="tab" id="tab-fleet" aria-pressed="true" aria-selected="true" onclick="setView('fleet'); return false;" ontouchstart="setView('fleet'); return false;" style="appearance:none; border:1px solid rgba(90,171,204,0.4); cursor:pointer; background:rgba(90,171,204,0.28); color:var(--teal-text); font-family:'IBM Plex Mono',monospace; font-size:0.62rem; font-weight:600; letter-spacing:0.16em; text-transform:uppercase; padding:0.5rem 1rem; border-radius:6px;">Fleet</button>
     <button type="button" role="tab" id="tab-crew" aria-pressed="false" aria-selected="false" onclick="setView('crew'); return false;" ontouchstart="setView('crew'); return false;" style="appearance:none; border:1px solid transparent; cursor:pointer; background:transparent; color:var(--tx55); font-family:'IBM Plex Mono',monospace; font-size:0.62rem; letter-spacing:0.16em; text-transform:uppercase; padding:0.5rem 1rem; border-radius:6px;">Yacht</button>
@@ -1368,7 +1368,7 @@ body { background:var(--bg-base); transition:background-color .6s ease; }
       <svg viewBox="0 0 460 300" style="width:100%; height:auto; display:block;">
         <rect x="115" y="14" width="230" height="34" rx="17" fill="rgba(90,171,204,0.06)" stroke="var(--teal-accent)" stroke-width="1"><animate attributeName="stroke-opacity" values="0.5;1;0.5" dur="3.78s" repeatCount="indefinite"></animate></rect>
         <g stroke="var(--teal-accent)" stroke-width="1.3" fill="none"><circle cx="137" cy="29" r="5"></circle><line x1="140.6" y1="32.6" x2="144.6" y2="36.6"></line></g>
-        <text x="154" y="35" font-family="'IBM Plex Mono',monospace" font-size="12" fill="var(--tx85)">port engine running hot</text>
+        <text x="154" y="35" font-family="'IBM Plex Mono',monospace" font-size="12" fill="var(--tx85)">certificates expiring</text>
         <line x1="230" y1="48" x2="230" y2="76" stroke="rgba(90,171,204,0.25)" stroke-width="1.4"></line>
         <line x1="230" y1="48" x2="230" y2="76" stroke="var(--teal-accent)" stroke-width="1.4" stroke-dasharray="3 8"><animate attributeName="stroke-dashoffset" from="11" to="0" dur="0.94s" repeatCount="indefinite"></animate></line>
         <line x1="95" y1="76" x2="365" y2="76" stroke="var(--teal-accent)" stroke-width="1.2"></line>
@@ -1378,7 +1378,7 @@ body { background:var(--bg-base); transition:background-color .6s ease; }
           <line x1="230" y1="76" x2="230" y2="96"><animate attributeName="stroke-dashoffset" from="11" to="0" dur="0.94s" begin="0.34s" repeatCount="indefinite"></animate></line>
           <line x1="365" y1="76" x2="365" y2="96"><animate attributeName="stroke-dashoffset" from="11" to="0" dur="0.94s" begin="0.41s" repeatCount="indefinite"></animate></line>
         </g>
-        <g font-family="'IBM Plex Mono',monospace" font-size="10" fill="var(--tx85)" text-anchor="middle" letter-spacing="0.6"><text x="95" y="106">BRIDGE</text><text x="230" y="106">ENGINE ROOM</text><text x="365" y="106">DECK</text></g>
+        <g font-family="'IBM Plex Mono',monospace" font-size="10" fill="var(--tx85)" text-anchor="middle" letter-spacing="0.6"><text x="95" y="106">M/Y MERIDIAN</text><text x="230" y="106">M/Y SOLENE</text><text x="365" y="106">M/Y CORSAIR</text></g>
         <g stroke="var(--tx1)" stroke-width="1"><line x1="49" y1="120" x2="49" y2="204"></line><line x1="184" y1="120" x2="184" y2="228"></line><line x1="319" y1="120" x2="319" y2="204"></line></g>
         <g stroke="var(--teal-accent)" stroke-width="1" fill="none" stroke-dasharray="3 9">
           <line x1="49" y1="120" x2="49" y2="204"><animate attributeName="stroke-dashoffset" from="12" to="0" dur="1.35s" begin="0.47s" repeatCount="indefinite"></animate></line>
