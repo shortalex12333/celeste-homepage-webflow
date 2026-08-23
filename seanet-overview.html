@@ -348,7 +348,7 @@
         padding-right: 0 !important;
         padding-bottom: 0.9rem !important;
       }
-      #slide-4 [style*="border-right:2px solid #C0503A"] > div:nth-child(2) {
+      #slide-4 [style*="border-right:2px solid #C0503A"] > div:nth-child(3) {
         justify-content: flex-start !important;
       }
       #slide-4 [style*="border-left:3px solid var(--teal-accent)"] {
@@ -358,7 +358,15 @@
         padding-top: 1rem !important;
       }
 
-      /* SLIDE 4: split image/text layout -> stacked, image becomes a top strip */
+      /* SLIDE 2: split two-column (bullets/credentials + ETO photo) has its own inline
+         grid-template-columns that beats the global .grid-2-clean 900px collapse (no !important
+         on that rule), so it never stacked -> force it here */
+      #slide-2 .grid-2-clean {
+        grid-template-columns: 1fr !important;
+        gap: 1.6rem !important;
+      }
+
+      /* SLIDE 5: split image/text layout -> stacked, image becomes a supporting strip below the text */
       #slide-5 {
         overflow-y: auto !important;
         overflow-x: hidden !important;
@@ -366,17 +374,17 @@
         justify-content: flex-start !important;
         gap: 1.2rem !important;
       }
-      #slide-5 > div[style*="width:48%"] {
-        position: static !important;
-        width: 100% !important;
-        height: 200px !important;
-        border-radius: 4px;
+      #slide-5 .slide-content-wrap > div[style*="display:flex; align-items:stretch; gap:3rem"] {
+        flex-direction: column !important;
+        gap: 1.5rem !important;
       }
-      #slide-5 > div[style*="width:52%"] {
-        position: static !important;
+      #slide-5 [style*="flex:1; min-width:0"] {
         width: 100% !important;
-        height: auto !important;
-        padding: 0 !important;
+      }
+      #slide-5 [style*="width:400px; flex-shrink:0"] {
+        width: 100% !important;
+        flex-shrink: 1 !important;
+        height: 200px !important;
       }
       #slide-5 .slide-footer {
         position: static !important;
