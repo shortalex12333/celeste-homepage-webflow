@@ -15,7 +15,7 @@ export default function middleware(request: Request) {
   const { pathname } = new URL(request.url);
   if (!/^\/seanet[^/]*$/i.test(pathname)) return;
 
-  const flag = (process.env.SEANET_VISIBLE ?? process.env.seanet_visible ?? '').trim().toLowerCase();
+  const flag = (process.env.SEANET_VISIBLE ?? '').trim().toLowerCase();
   if (flag === 'true') return;
 
   return new Response(NOT_FOUND, {
