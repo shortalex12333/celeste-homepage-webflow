@@ -59,7 +59,7 @@
       ]
     },
     {
-      "source": "/(seanet|seanet-overview|seanet-proposal)",
+      "source": "/(seanet|seanet-overview|seanet-proposal|seanet-security|seanet-security-companion)",
       "headers": [
         {
           "key": "X-Robots-Tag",
