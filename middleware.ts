@@ -9,21 +9,17 @@ export const config = {
   matcher: ['/:page(seanet[^/]*)'],
 };
 
-export default async function middleware(request: Request) {
+const NOT_FOUND = '<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex"><title>Page not found</title></head><body style="margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;background:#0C0B0A;color:rgba(255,255,255,0.7);font-family:system-ui,-apple-system,sans-serif"><p>Page not found.</p></body></html>';
+
+export default function middleware(request: Request) {
   const { pathname } = new URL(request.url);
   if (!/^\/seanet[^/]*$/i.test(pathname)) return;
 
   const flag = (process.env.SEANET_VISIBLE ?? process.env.seanet_visible ?? '').trim().toLowerCase();
   if (flag === 'true') return;
 
-  let body: BodyInit = 'Not Found';
-  let type = 'text/plain; charset=utf-8';
-  try {
-    const page = await fetch(new URL('/404.html', request.url));
-    if (page.ok) { body = await page.text(); type = 'text/html; charset=utf-8'; }
-  } catch {}
-  return new Response(body, {
+  return new Response(NOT_FOUND, {
     status: 404,
-    headers: { 'content-type': type, 'x-robots-tag': 'noindex, nofollow', 'cache-control': 'no-store' },
+    headers: { 'content-type': 'text/html; charset=utf-8', 'x-robots-tag': 'noindex, nofollow', 'cache-control': 'no-store' },
   });
 }
