@@ -1,0 +1,34 @@
+CELESTEOS EVIDENCE SIGNING: REVOCATION NOTICE
+==============================================
+
+Published:   <PUBLISH_DATE_UTC>
+
+REVOKED CERTIFICATE (key version v1)
+------------------------------------
+Subject:     CN=CelesteOS Evidence Signing, O=CelesteOS Ltd, C=GB
+SHA-256:     B6:DD:D0:AA:E6:E3:AB:7F:BA:BE:20:C5:E2:1A:4B:F7:
+             E7:17:B0:E9:FC:01:DC:8F:AE:BE:C3:19:89:EF:62:CF
+Archived at: https://celeste7.ai/.well-known/verify-v1.pem
+Reason:      Key compromise. The v1 private key was exposed.
+Compromised: not before <LEAK_DATE_UTC>
+
+WHAT THIS MEANS FOR A V1 DOCUMENT
+---------------------------------
+Every CelesteOS seal carries an RFC 3161 timestamp from an independent
+timestamp authority. A document sealed with key version v1 is still
+authentic if its embedded timestamp is earlier than the compromise time
+above. A v1 seal timestamped at or after that time must be treated as
+NOT authentic. To get a current seal, request a re-export from the
+vessel's CelesteOS account.
+
+REPLACEMENT CERTIFICATE (key version v2)
+----------------------------------------
+Subject:     CN=CelesteOS Evidence Signing, OU=Evidence Signing Key v2,
+             O=CelesteOS Ltd, C=GB
+SHA-256:     12:59:FB:1A:DD:0B:0B:E6:F1:A3:12:AE:F3:BA:FF:49:
+             5D:5E:B1:5A:E6:4C:41:CB:75:14:7F:C5:91:C5:82:D5
+Certificate: https://celeste7.ai/.well-known/verify.pem
+In use from: <ROTATION_DATE_UTC>
+Valid until: 26 September 2029
+
+Questions: verify@celeste7.ai

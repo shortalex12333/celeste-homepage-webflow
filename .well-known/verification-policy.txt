@@ -7,7 +7,7 @@ WHAT THIS DOCUMENT IS
 ---------------------
 This file records the cryptographic commitments CelesteOS makes about
 its evidence export system. It is published here so that any third party
-— an insurer, a lawyer, a court-appointed expert, a port state control
+— a lawyer, a court-appointed expert, a port state control
 officer — can independently determine whether a CelesteOS export PDF is
 authentic without contacting CelesteOS.
 
@@ -20,7 +20,13 @@ Algorithm:   RSA-4096
 Digest:      SHA-256
 Subject:     CN=CelesteOS Evidence Signing, O=CelesteOS Ltd, C=GB
 Certificate: https://celeste7.ai/.well-known/verify.pem
+Key version: v2 (receipts record the key_version they were sealed with)
+SHA-256:     12:59:FB:1A:DD:0B:0B:E6:F1:A3:12:AE:F3:BA:FF:49:
+             5D:5E:B1:5A:E6:4C:41:CB:75:14:7F:C5:91:C5:82:D5
+Valid until: 26 September 2029
 Status:      Self-signed (v0.1 staging). CA-issued certificate to follow.
+Previous:    v1 (revoked, see REVOCATION):
+             https://celeste7.ai/.well-known/verify-v1.pem
 
 EXPORT FORMAT
 -------------
@@ -100,5 +106,6 @@ REVOCATION
 If a signing certificate is compromised, CelesteOS will publish a
 revocation notice at https://celeste7.ai/.well-known/revocation.txt
 and notify registered vessel operators directly.
+Current notices: https://celeste7.ai/.well-known/revocation.txt
 
 END OF POLICY
