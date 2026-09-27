@@ -18,7 +18,9 @@ PUBLIC SIGNING CERTIFICATE
 ---------------------------
 Algorithm:   RSA-4096
 Digest:      SHA-256
-Subject:     CN=CelesteOS Evidence Signing, O=CelesteOS Ltd, C=GB
+Subject:     C=GB, ST=England, L=London, O=CelesteOS Ltd,
+             OU=Evidence Signing Key v2, CN=CelesteOS Evidence Signing,
+             emailAddress=verify@celeste7.ai
 Certificate: https://celeste7.ai/.well-known/verify.pem
 Key version: v2 (receipts record the key_version they were sealed with)
 SHA-256:     12:59:FB:1A:DD:0B:0B:E6:F1:A3:12:AE:F3:BA:FF:49:

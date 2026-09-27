@@ -1,16 +1,18 @@
 CELESTEOS EVIDENCE SIGNING: REVOCATION NOTICE
 ==============================================
 
-Published:   <PUBLISH_DATE_UTC>
+Published:   29 September 2026 [PLANNED: set to the merge date at merge]
 
 REVOKED CERTIFICATE (key version v1)
 ------------------------------------
-Subject:     CN=CelesteOS Evidence Signing, O=CelesteOS Ltd, C=GB
+Subject:     C=GB, ST=England, L=London, O=CelesteOS Ltd,
+             CN=CelesteOS Evidence Signing,
+             emailAddress=verify@celeste7.ai
 SHA-256:     B6:DD:D0:AA:E6:E3:AB:7F:BA:BE:20:C5:E2:1A:4B:F7:
              E7:17:B0:E9:FC:01:DC:8F:AE:BE:C3:19:89:EF:62:CF
 Archived at: https://celeste7.ai/.well-known/verify-v1.pem
 Reason:      Key compromise. The v1 private key was exposed.
-Compromised: not before <LEAK_DATE_UTC>
+Compromised: not before 26 September 2026 00:00 UTC [CONFIRM at merge]
 
 WHAT THIS MEANS FOR A V1 DOCUMENT
 ---------------------------------
@@ -21,14 +23,25 @@ above. A v1 seal timestamped at or after that time must be treated as
 NOT authentic. To get a current seal, request a re-export from the
 vessel's CelesteOS account.
 
+SUPERSEDED CERTIFICATE (never a sealing key)
+--------------------------------------------
+Subject:     C=GB, ST=England, L=London, O=CelesteOS Ltd,
+             CN=CelesteOS Evidence Signing,
+             emailAddress=verify@celeste7.ai
+SHA-256:     1C:87:4B:EC:0D:0F:B0:B2:13:22:BB:35:F5:70:D4:D4:
+             67:3A:44:6F:F1:F7:4A:F2:19:D3:C0:28:8A:2E:80:CC
+Note:        Served at /.well-known/verify.pem until 29 September 2026,
+             but it is not the v1 key that sealed exports; do not use it.
+
 REPLACEMENT CERTIFICATE (key version v2)
 ----------------------------------------
-Subject:     CN=CelesteOS Evidence Signing, OU=Evidence Signing Key v2,
-             O=CelesteOS Ltd, C=GB
+Subject:     C=GB, ST=England, L=London, O=CelesteOS Ltd,
+             OU=Evidence Signing Key v2, CN=CelesteOS Evidence Signing,
+             emailAddress=verify@celeste7.ai
 SHA-256:     12:59:FB:1A:DD:0B:0B:E6:F1:A3:12:AE:F3:BA:FF:49:
              5D:5E:B1:5A:E6:4C:41:CB:75:14:7F:C5:91:C5:82:D5
 Certificate: https://celeste7.ai/.well-known/verify.pem
-In use from: <ROTATION_DATE_UTC>
+In use from: 29 September 2026 [PLANNED: set to the rotation time at merge]
 Valid until: 26 September 2029
 
 Questions: verify@celeste7.ai
